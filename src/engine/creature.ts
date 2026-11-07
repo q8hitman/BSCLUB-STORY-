@@ -33,21 +33,25 @@ export function isValidConfig(c: Partial<CreatureConfig> | null | undefined): c 
   return SLOTS.every((s) => { const p = PART_BY_ID[(c as Record<string, string>)[s]]; return !!p && p.slot === s; });
 }
 
-const NAME_A = { en: ['Mega', 'Dr.', 'Captain', 'Lil', 'Professor', 'Sir', 'Turbo', 'Mystic', 'Sergeant', 'Baby'],
-  ar: ['ميقا', 'دكتور', 'كابتن', 'الصغير', 'بروفيسور', 'السيد', 'توربو', 'الغامض', 'الشاويش', 'بيبي'] };
-const NAME_B = { en: ['Fluff', 'Zap', 'Gloop', 'Snoot', 'Scales', 'Wobble', 'Sprocket', 'Noodle', 'Biscuit', 'Quark', 'Mudbug', 'Dune'],
-  ar: ['نفوش', 'زاب', 'قلوب', 'خشوم', 'حراشف', 'دحروج', 'برغي', 'نودلز', 'بسكوت', 'كوارك', 'طينو', 'كثيب'] };
+// Default creature names are plain lab designations ("Octopus Hybrid X-7" / "هجين أخطبوط X-7") so nobody
+// mistakes them for a story character. Players can always type their own name.
+const SHORT: Record<string, { en: string; ar: string }> = {
+  fennec: { en: 'Fennec', ar: 'فنك' }, axolotl: { en: 'Axolotl', ar: 'أكسولوتل' }, gecko: { en: 'Gecko', ar: 'بريص' }, owl: { en: 'Owl', ar: 'بومة' },
+  camel: { en: 'Camel', ar: 'بعير' }, frog: { en: 'Frog', ar: 'ضفدع' }, pangolin: { en: 'Pangolin', ar: 'بنغول' }, octopus: { en: 'Octopus', ar: 'أخطبوط' },
+};
+const CODES = ['A', 'B', 'C', 'D', 'K', 'Q', 'R', 'V', 'X', 'Z'];
 
-export function randomName(rng: Rng, lang: 'ar' | 'en'): string {
-  const i = rng.int(NAME_A.en.length), j = rng.int(NAME_B.en.length);
-  return `${NAME_A[lang][i]} ${NAME_B[lang][j]}`;
+export function randomName(rng: Rng, lang: 'ar' | 'en', base = 'fennec'): string {
+  const code = `${rng.pick(CODES)}-${1 + rng.int(99)}`;
+  const s = SHORT[base] ?? SHORT.fennec;
+  return lang === 'ar' ? `هجين ${s.ar} ${code}` : `${s.en} Hybrid ${code}`;
 }
 
 export function randomCreature(rng: Rng, lang: 'ar' | 'en' = 'en'): CreatureConfig {
   const c: Record<string, unknown> = {};
   for (const slot of SLOTS) c[slot] = rng.pick(partsFor(slot)).id;
   c.hue = rng.int(HUES.length);
-  c.name = randomName(rng, lang);
+  c.name = randomName(rng, lang, c.base as string);
   return c as unknown as CreatureConfig;
 }
 

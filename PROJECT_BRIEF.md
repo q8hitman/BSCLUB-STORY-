@@ -24,7 +24,8 @@
 React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests passing (`npm test`), 1,000-run simulations per mode → `reports/diversity.md`.
 - `src/engine/` deterministic planner + state machine, checks, Ending Composer, anti-repetition history, optional AI client (validated, rate-limited, static fallback), storage.
 - `src/content/` parts, ducks, biomes/facts/NPCs, story beats (classic / marine / common).
-- `src/art/` procedural SVG creature + scene art (cartoony — **to be replaced by painted scene images**).
+- `src/art/painter.ts` painterly canvas renderer (gouache-on-dark-paper look): 16 biomes + every event prop + deep-sea creatures (dragonfish, angler, gulper, jellies, giant squid eye, the legend's giant, bathysphere). Preview offline: `npx tsx scripts/render-scenes.ts <outDir> midnight:angler trench:leviathan`.
+- `src/art/creatureSvg.ts` the player's hybrid (shown as an inked 'specimen' via the `#ink` SVG filter in index.html).
 - `src/share/` 1080×1350 PNG share card with working QR.
 - `worker/` optional Cloudflare Worker (Workers AI) — not deployed.
 - `.github/workflows/deploy.yml` — test, build, deploy to Pages.
@@ -39,5 +40,20 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
 - Personality line per duck (roles currently inferred from the artwork).
 - Scene images: designer chose FREE. Free web generators tested (pollinations free tier = weak model + watermark, 1 img/45 s) → rejected. Current plan: painterly procedural canvas renderer in code; optional upgrade = local Stable Diffusion (Fooocus/ComfyUI on the designer's GPU, free) to pre-render scenes into `public/scenes/`.
 
+## 5b. Decisions made (2026-11-08, session 2)
+- Free scene art: pollinations.ai free tier rejected (watermark, weak model, 1 img/45 s). Built the procedural painter instead. Optional upgrade still open: local Stable Diffusion on the designer's GPU → pre-rendered `public/scenes/*.webp`.
+- VN presentation: full-bleed painting (desktop) / painted band on top (phones), slow drift, film grain, letterbox, glass dialogue box with the duck, 4 numbered choice cards (keys 1–4, Enter continues).
+- Theme: dark, gold + sea-glass accents; fonts Cormorant Garamond (EN display), Reem Kufi (AR display), Tajawal (AR body).
+- Creature names are now epithets ("Ghost of the Dunes" / "شبح الكثبان") with an explanatory hint.
+- Engine shows exactly 4 choices: up to 2 anatomy/state-unlocked + open ones (`pickChoices` in story.ts).
+
+## 5c. Designer feedback round 3 (2026-11-08) — applied
+- Duck catchphrases were "cringe" → removed. Ducks now say short, natural reactions only after outcomes (`MOOD_LINES`), and often stay silent before a choice.
+- Logos must not sit on white boxes → `public/brand/*-light.png` (transparent, light ink for dark UI) and `*-transparent.png` (original colours, for the light share card). Originals in `docs/brand-originals/`.
+- Logo rules: Marine Science Club appears **only in Marine mode** (mode card, a collaboration intro card at the start of a Marine run, the Marine ending, the Marine share card). Title screen = BSC only. Every ending shows our logo (+ theirs in Marine) + the designer credit.
+- Creature default names are lab designations ("Octopus Hybrid X-7" / "هجين أخطبوط X-7"); "شبح الطين" style names were confusing and are gone.
+- Optional "save a picture of your creature" after naming it, and again at the ending (`renderCreaturePortrait` in `src/share/shareCard.ts`).
+
 ## 6. Session log
-- 2026-11-08 — v1 built and tested (not pushed). Designer feedback received (section 2). Logos + references added. Work lives in a temporary session folder — move to a permanent folder before continuing.
+- 2026-11-08 — v1 built and tested, pushed to GitHub `main`, Pages enabled (https://q8hitman.github.io/BSCLUB-STORY-/).
+- 2026-11-08 — v2 started: real duck names, painterly scenes, cinematic VN UI, new menus, logos, 4 choices, deep-sea horror rewrite. Designer feedback received (section 2). Logos + references added. Work lives in a temporary session folder — move to a permanent folder before continuing.

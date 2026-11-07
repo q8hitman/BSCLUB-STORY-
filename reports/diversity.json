@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T22:56:15.208Z",
+  "generatedAt": "2026-11-07T23:35:19.488Z",
   "classic": {
     "mode": "classic",
     "runs": 1000,
@@ -10,54 +10,54 @@
     "uniquePathsPct": 100,
     "distinctEndingArchetypes": 12,
     "distinctEndingTitles": 31,
-    "endingEntropy": 0.92,
+    "endingEntropy": 0.87,
     "endings": {
-      "chaos": 170,
-      "machine": 89,
-      "cryptid": 73,
-      "reunion": 152,
-      "field-team": 53,
-      "guardian": 167,
+      "chaos": 252,
+      "machine": 83,
+      "cryptid": 66,
+      "reunion": 163,
+      "vex-defeated": 55,
       "frenemies": 30,
-      "vex-defeated": 81,
-      "wild": 93,
-      "publish": 48,
-      "unsolved": 25,
-      "nap": 19
+      "guardian": 182,
+      "nap": 18,
+      "wild": 57,
+      "unsolved": 24,
+      "field-team": 38,
+      "publish": 32
     },
     "tones": {
-      "comedic": 292,
-      "bittersweet": 89,
+      "comedic": 366,
+      "bittersweet": 83,
       "wholesome": 189,
-      "heroic": 264,
-      "mysterious": 118,
-      "scientific": 48
+      "heroic": 249,
+      "mysterious": 81,
+      "scientific": 32
     },
     "templateCoverage": "31/31",
     "avgBeatsPerRun": 9.2,
-    "meanConsecutiveSimilarity_withHistory": 0.109,
-    "meanConsecutiveSimilarity_noHistory": 0.123,
+    "meanConsecutiveSimilarity_withHistory": 0.105,
+    "meanConsecutiveSimilarity_noHistory": 0.117,
     "meanMaxPlanSimilarityToLast10_withHistory": 0.26,
     "meanMaxPlanSimilarityToLast10_noHistory": 0.341,
-    "checkSuccessRate": 55,
+    "checkSuccessRate": 54.2,
     "successByBase": {
-      "owl": 60.3,
-      "axolotl": 50,
-      "camel": 51.1,
-      "gecko": 54.6,
+      "owl": 60.9,
+      "axolotl": 50.7,
+      "camel": 48.6,
+      "gecko": 55.4,
       "fennec": 53.7,
-      "octopus": 60,
-      "pangolin": 56.7,
-      "frog": 52.7
+      "octopus": 58.8,
+      "pangolin": 55.5,
+      "frog": 48.8
     },
     "successByDuck": {
-      "petri": 56.1,
-      "quill": 57.6,
-      "pipette": 57.4,
-      "goggles": 50.3,
-      "cherry": 55,
-      "lens": 56,
-      "data": 52.9
+      "petri": 55.1,
+      "quill": 55.9,
+      "pipette": 53.6,
+      "goggles": 54.1,
+      "cherry": 55.1,
+      "lens": 56.8,
+      "data": 48.5
     },
     "biomeAppearances": {
       "lab": 1000,
@@ -87,7 +87,7 @@
       "k-machine": 239,
       "k-vex": 244
     },
-    "anatomyGatedChoicesTakenPct": 9
+    "anatomyGatedChoicesTakenPct": 8.1
   },
   "marine": {
     "mode": "marine",
@@ -98,55 +98,55 @@
     "uniquePaths": 1000,
     "uniquePathsPct": 100,
     "distinctEndingArchetypes": 13,
-    "distinctEndingTitles": 27,
-    "endingEntropy": 0.95,
+    "distinctEndingTitles": 26,
+    "endingEntropy": 0.9,
     "endings": {
-      "publish": 60,
-      "chaos": 119,
-      "proof": 74,
-      "beacon": 71,
-      "glimpse": 120,
-      "peace": 110,
-      "voice-deep": 75,
-      "vent-day": 89,
-      "reef-heroes": 103,
-      "eye-to-eye": 103,
-      "field-team": 22,
-      "blurry": 52,
-      "nap": 2
+      "glimpse": 169,
+      "vent-day": 98,
+      "chaos": 197,
+      "peace": 84,
+      "eye-to-eye": 101,
+      "voice-deep": 57,
+      "proof": 63,
+      "reef-heroes": 87,
+      "field-team": 18,
+      "blurry": 48,
+      "publish": 46,
+      "beacon": 31,
+      "nap": 1
     },
     "tones": {
-      "scientific": 223,
-      "comedic": 173,
-      "heroic": 180,
-      "mysterious": 195,
-      "bittersweet": 110,
-      "wholesome": 119
+      "mysterious": 226,
+      "scientific": 207,
+      "comedic": 246,
+      "bittersweet": 84,
+      "wholesome": 102,
+      "heroic": 135
     },
     "templateCoverage": "28/28",
     "avgBeatsPerRun": 11.2,
-    "meanConsecutiveSimilarity_withHistory": 0.158,
-    "meanConsecutiveSimilarity_noHistory": 0.174,
+    "meanConsecutiveSimilarity_withHistory": 0.145,
+    "meanConsecutiveSimilarity_noHistory": 0.159,
     "meanMaxPlanSimilarityToLast10_withHistory": 0.344,
     "meanMaxPlanSimilarityToLast10_noHistory": 0.421,
-    "checkSuccessRate": 58.3,
+    "checkSuccessRate": 59,
     "successByBase": {
-      "octopus": 66.1,
-      "pangolin": 58.9,
-      "camel": 61.3,
-      "frog": 57.4,
+      "octopus": 67.2,
+      "pangolin": 58.5,
+      "camel": 58.9,
+      "frog": 57.5,
       "gecko": 57.4,
-      "fennec": 51.3,
-      "owl": 57.6,
-      "axolotl": 56.2
+      "fennec": 53.3,
+      "owl": 62,
+      "axolotl": 56.9
     },
     "successByDuck": {
-      "petri": 57,
-      "quill": 63.3,
-      "pipette": 56.6,
-      "goggles": 59.4,
-      "cherry": 57.7,
-      "lens": 54.6,
+      "petri": 59.6,
+      "quill": 61.1,
+      "pipette": 59.9,
+      "goggles": 60.8,
+      "cherry": 57.4,
+      "lens": 54.1,
       "data": 60.2
     },
     "biomeAppearances": {
@@ -176,6 +176,6 @@
       "km-tether": 268
     },
     "legendRunsPct": 47.8,
-    "anatomyGatedChoicesTakenPct": 8.2
+    "anatomyGatedChoicesTakenPct": 7.1
   }
 }

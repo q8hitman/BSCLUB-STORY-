@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { BIOME_INTEGRATED, PROPS } from '../src/art/sceneSvg';
-import { sceneLayers } from '../src/art/sceneSvg';
+import { createCanvas, Path2D } from '@napi-rs/canvas';
+import { INTEGRATED, PAINT_PROPS, PH, PW, paintScene } from '../src/art/painter';
+(globalThis as Record<string, unknown>).Path2D ??= Path2D;
 import { DUCKS, MOOD_LINES } from '../src/content/ducks';
 import { PARTS } from '../src/content/parts';
 import { BIOMES, FACTS, FACT_BY_ID, NPC_BY_ID } from '../src/content/world';
@@ -24,7 +25,7 @@ function allStrings(): { where: string; t: L10n }[] {
   }
   PARTS.forEach((p) => [p.name, p.desc, p.action, p.tradeoff, p.realSource].forEach((t, i) => out.push({ where: `${p.id}#${i}`, t })));
   FACTS.forEach((f) => out.push({ where: f.id, t: f.text }));
-  DUCKS.forEach((d) => [d.name, d.role, d.perk, ...d.catch].forEach((t, i) => out.push({ where: `${d.id}#${i}`, t })));
+  DUCKS.forEach((d) => [d.name, d.role, d.perk].forEach((t, i) => out.push({ where: `${d.id}#${i}`, t })));
   Object.values(MOOD_LINES).flat().forEach((t, i) => out.push({ where: `mood${i}`, t }));
   return out;
 }
@@ -61,31 +62,31 @@ describe('story content integrity', () => {
       }
     }
   });
-  it('every beat always offers at least two choices that need no special anatomy', () => {
-    for (const b of ALL_BEATS) {
-      const open = b.choices.filter((c) => !c.requires || (!c.requires.capAny && !c.requires.statMin && c.requires.evidenceMin === undefined));
-      expect(open.length, b.id).toBeGreaterThanOrEqual(1);
-      expect(b.choices.length, b.id).toBeGreaterThanOrEqual(2);
-    }
+  it('every beat has at least 4 open choices, so the player always gets exactly 4', () => {
+    for (const b of ALL_BEATS) expect(b.choices.filter((c) => !c.requires).length, b.id).toBeGreaterThanOrEqual(4);
   });
   it('every checked choice has a failure outcome (no silent auto-success)', () => {
     for (const b of ALL_BEATS) for (const c of b.choices) if (c.check) expect(c.fail, `${b.id}.${c.id}`).toBeTruthy();
   });
-  it('every biome has scene art and every scene prop has a drawing or a biome that draws it', () => {
+  it('every biome paints a real scene and every prop has painted art (biome-integrated props excepted)', () => {
     for (const id of Object.keys(BIOMES) as BiomeId[]) {
-      const l = sceneLayers(id, [], 1);
-      expect(l.sky.length + l.far.length + l.mid.length + l.near.length, id).toBeGreaterThan(200);
+      const cv = createCanvas(PW, PH); const g = cv.getContext('2d') as unknown as CanvasRenderingContext2D;
+      paintScene(g, id, [], 1);
+      const px = cv.getContext('2d').getImageData(0, 0, PW, PH).data;
+      let sum = 0, sum2 = 0; const n = px.length / 4;
+      for (let i = 0; i < px.length; i += 16) { const l = (px[i] + px[i + 1] + px[i + 2]) / 3; sum += l; sum2 += l * l; }
+      const m = sum / (n / 4), sd = Math.sqrt(sum2 / (n / 4) - m * m);
+      expect(sd, `${id} has visible detail`).toBeGreaterThan(3);
     }
     for (const b of ALL_BEATS) for (const p of b.props) {
-      expect(PROPS[p], `${b.id} prop ${p}`).toBeTruthy();
-      const art = PROPS[p](new Rng(1));
-      if (!art) {
-        const allowed = BIOME_INTEGRATED[p];
-        expect(allowed, `${b.id} prop ${p} draws nothing`).toBeTruthy();
-        if (allowed !== '*') for (const bio of b.biomes) expect(allowed.includes(bio), `${b.id}: ${p} not drawn in ${bio}`).toBe(true);
-      }
+      expect(PAINT_PROPS[p], `${b.id} prop ${p}`).toBeTruthy();
+      if (INTEGRATED.has(p)) continue;
+      const blank = createCanvas(PW, PH), drawn = createCanvas(PW, PH);
+      paintScene(blank.getContext('2d') as unknown as CanvasRenderingContext2D, b.biomes[0], [], 3);
+      paintScene(drawn.getContext('2d') as unknown as CanvasRenderingContext2D, b.biomes[0], [p], 3);
+      expect(blank.toBuffer('image/png').equals(drawn.toBuffer('image/png')), `${b.id}: prop ${p} draws nothing`).toBe(false);
     }
-  });
+  }, 120000);
   it('every outcome fx has a CSS animation or overlay', () => {
     const css = readFileSync('src/styles.css', 'utf8');
     for (const b of ALL_BEATS) for (const c of b.choices) for (const o of [c.success, c.fail]) {

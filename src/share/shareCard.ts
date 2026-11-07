@@ -1,6 +1,8 @@
 // Share card (1080×1350 PNG) drawn on a canvas. Layout is computed separately so it can be unit-tested.
 import QRCode from 'qrcode';
 import { creatureSvg } from '../art/creatureSvg';
+import { paintScene, PW, PH } from '../art/painter';
+import type { CreatureConfig } from '../engine/types';
 import { DUCK_BY_ID } from '../content/ducks';
 import { PART_BY_ID } from '../content/parts';
 import { FACT_BY_ID } from '../content/world';
@@ -65,7 +67,7 @@ export async function qrDataUrl(url: string): Promise<string> {
 
 export async function renderShareCard(s: GameState, e: Ending, lang: Lang, showName: boolean): Promise<Blob> {
   const cc = cardContent(s, e, lang, showName);
-  const font = lang === 'ar' ? 'Tajawal' : 'Fredoka';
+  const font = lang === 'ar' ? 'Tajawal' : 'Segoe UI';
   try { await Promise.all([document.fonts.load(`700 40px ${font}`), document.fonts.load(`400 30px ${font}`)]); } catch { /* fall back to system font */ }
   const cv = document.createElement('canvas'); cv.width = CARD_W; cv.height = CARD_H;
   const g = cv.getContext('2d')!;
@@ -80,12 +82,17 @@ export async function renderShareCard(s: GameState, e: Ending, lang: Lang, showN
   g.fillStyle = '#f7f1e3'; roundRect(g, 40, 40, CARD_W - 80, CARD_H - 80, 36); g.fill();
   g.lineWidth = 6; g.strokeStyle = '#20170f'; g.stroke();
 
-  // header
-  g.fillStyle = '#14221d'; g.font = F(700, 34); g.fillText(cc.brand, tx, 104);
-  g.fillStyle = s.mode === 'marine' ? '#0277bd' : '#2e7d32'; g.font = F(700, 26); g.fillText(cc.modeLabel + (cc.marineCredit ? ` · ${cc.marineCredit}` : ''), tx, 146);
+  // header + club logos (BSC always; Marine Science Club in Marine mode)
+  const logos = [`${import.meta.env?.BASE_URL ?? '/'}brand/bsc-logo-transparent.png`, ...(s.mode === 'marine' ? [`${import.meta.env?.BASE_URL ?? '/'}brand/marine-logo-transparent.png`] : [])];
+  let lx = cc.rtl ? 70 : CARD_W - 70 - 96;
+  for (const src of logos) { try { const im = await loadImage(src); const h = 96, w = h * (im.width / im.height); g.drawImage(im, cc.rtl ? lx : lx - (w - 96), 62, w, h); lx += cc.rtl ? w + 12 : -(w + 12); } catch { /* logo optional */ } }
+  const headW = CARD_W - 140 - 250;
+  g.fillStyle = '#14221d'; g.font = F(700, 34); g.fillText(cc.brand, tx, 104, headW);
+  g.fillStyle = s.mode === 'marine' ? '#0277bd' : '#2e7d32'; g.font = F(700, 26); g.fillText(cc.modeLabel, tx, 146, headW);
+  if (cc.marineCredit) { g.font = F(400, 22); g.fillText(cc.marineCredit, tx, 176, headW); }
 
   // creature panel
-  g.fillStyle = '#e9f5ec'; roundRect(g, 70, 176, CARD_W - 140, 420, 28); g.fill(); g.lineWidth = 4; g.stroke();
+  g.fillStyle = '#e9f5ec'; roundRect(g, 70, 190, CARD_W - 140, 406, 28); g.fill(); g.lineWidth = 4; g.stroke();
   const svg = creatureSvg(s.creature, { width: 600 });
   const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
   try { const img = await loadImage(url); g.drawImage(img, 240, 196, 600, 480 * 0.8); } finally { URL.revokeObjectURL(url); }
@@ -140,4 +147,41 @@ export async function renderShareCard(s: GameState, e: Ending, lang: Lang, showN
 
 function roundRect(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
   g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+}
+
+/** Portrait of the player's creature (1080×1350 PNG): painted backdrop, inked specimen, name and traits. */
+export async function renderCreaturePortrait(c: CreatureConfig, lang: Lang): Promise<Blob> {
+  const font = lang === 'ar' ? 'Tajawal' : 'Segoe UI';
+  try { await document.fonts.load(`700 40px ${font}`); } catch { /* system font */ }
+  const cv = document.createElement('canvas'); cv.width = CARD_W; cv.height = CARD_H;
+  const g = cv.getContext('2d')!;
+  // painted backdrop, cropped to portrait
+  const bg = document.createElement('canvas'); bg.width = PW; bg.height = PH;
+  paintScene(bg.getContext('2d')!, 'lab', [], c.name.length * 97 + c.hue);
+  const scale = CARD_H / PH; g.drawImage(bg, (CARD_W - PW * scale) / 2, 0, PW * scale, CARD_H);
+  const shade = g.createLinearGradient(0, 0, 0, CARD_H); shade.addColorStop(0, 'rgba(6,8,11,.55)'); shade.addColorStop(0.55, 'rgba(6,8,11,.15)'); shade.addColorStop(1, 'rgba(6,8,11,.92)');
+  g.fillStyle = shade; g.fillRect(0, 0, CARD_W, CARD_H);
+  // creature
+  const url = URL.createObjectURL(new Blob([creatureSvg(c, { width: 900 })], { type: 'image/svg+xml' }));
+  try { const img = await loadImage(url); g.save(); g.shadowColor = 'rgba(0,0,0,.6)'; g.shadowBlur = 40; g.drawImage(img, 90, 260, 900, 720); g.restore(); } finally { URL.revokeObjectURL(url); }
+  // logo
+  try { const logo = await loadImage(`${import.meta.env?.BASE_URL ?? '/'}brand/bsc-logo-light.png`); const h = 110; g.drawImage(logo, (CARD_W - h * (logo.width / logo.height)) / 2, 60, h * (logo.width / logo.height), h); } catch { /* optional */ }
+  g.textAlign = 'center'; g.direction = lang === 'ar' ? 'rtl' : 'ltr';
+  g.fillStyle = '#f1d595'; g.font = `700 76px ${font}, sans-serif`; g.fillText(c.name, CARD_W / 2, 1060, CARD_W - 120);
+  g.fillStyle = '#d9d0bc'; g.font = `400 30px ${font}, sans-serif`;
+  const traits = SLOTS.map((k) => PART_BY_ID[(c as unknown as Record<string, string>)[k]].name[lang]).join(' · ');
+  wrap(traits, CARD_W - 160, (t) => g.measureText(t).width, 3).forEach((line, i) => g.fillText(line, CARD_W / 2, 1120 + i * 40));
+  g.direction = 'rtl'; g.fillStyle = '#b9b09c'; g.font = `700 26px Tajawal, sans-serif`; g.fillText(FOOTER, CARD_W / 2, CARD_H - 50);
+  return new Promise((res, rej) => cv.toBlob((b) => (b ? res(b) : rej(new Error('toBlob failed'))), 'image/png'));
+}
+
+/** Triggers a file save (Web Share on phones when available, otherwise a download link). */
+export async function saveBlob(blob: Blob, fileName: string, title: string) {
+  const file = new File([blob], fileName, { type: blob.type });
+  if (navigator.canShare?.({ files: [file] }) && /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    try { await navigator.share({ files: [file], title }); return; } catch { /* fall through to download */ }
+  }
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = fileName; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
 }

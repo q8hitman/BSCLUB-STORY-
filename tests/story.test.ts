@@ -24,6 +24,19 @@ describe('state machine integrity', () => {
       expect(r.state.stage).toBe('ending');
     }
   });
+  it('every scene shows exactly 4 choices, anatomy-unlocked ones included when available', () => {
+    let gatedShown = 0;
+    for (const mode of ['classic', 'marine'] as const) for (let i = 0; i < 300; i++) {
+      let s = startGame({ mode, seed: i, duck: 'petri', player: '', creature: i % 2 ? flyer : swimmer });
+      while (s.stage === 'beat') {
+        const v = currentBeat(s);
+        expect(v.choices.length, `${v.template.id}`).toBe(4);
+        gatedShown += v.choices.filter((c) => c.choice.requires?.capAny).length;
+        s = advance(choose(s, v.choices[i % 4].choice.id));
+      }
+    }
+    expect(gatedShown).toBeGreaterThan(300);
+  });
   it('rejects illegal transitions and unknown choices', () => {
     const s = startGame({ mode: 'classic', seed: 3, duck: 'petri', player: '', creature: flyer });
     expect(() => advance(s)).toThrow();

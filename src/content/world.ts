@@ -87,7 +87,12 @@ export const FACTS: Fact[] = [
   { id: 'trench-pressure', text: L('Water pressure rises by about one atmosphere every 10 metres you go down.', 'ضغط الماي يزيد تقريباً ضغط جوي واحد كل ١٠ أمتار نزول.') },
   { id: 'squid-eye', text: L('Giant and colossal squids have the largest eyes in the animal kingdom.', 'الحبّار العملاق والحبّار الهائل عندهم أكبر عيون بمملكة الحيوان.') },
   { id: 'whalefall', text: L('When a whale dies and sinks, its body can feed deep-sea communities for decades.', 'لما يموت الحوت ويغرق، جسمه ممكن يغذّي مجتمعات الأعماق لعشرات السنين.') },
-  { id: 'pearl-history', text: L('Before oil, pearl diving was central to Kuwait’s economy and seafaring life.', 'قبل النفط، الغوص على اللؤلؤ كان أساس اقتصاد الكويت وحياتها البحرية.') },
+  { id: 'dragonfish-red', text: L('Some deep-sea dragonfish make red light, which most deep-sea animals cannot see — a secret searchlight for hunting.', 'بعض أسماك التنين في الأعماق تُطلق ضوءاً أحمر لا تستطيع أغلب حيوانات الأعماق رؤيته، فتصطاد به ككشّاف سري.') },
+  { id: 'viperfish-teeth', text: L('Sloane’s viperfish has fangs so long that they do not fit inside its closed mouth.', 'سمكة الأفعى «سلون» لها أنياب طويلة جداً لدرجة أنها لا تتّسع داخل فمها المغلق.') },
+  { id: 'angler-lure', text: L('The glowing lure of many deep-sea anglerfish gets its light from bacteria living inside it.', 'الطُّعم المضيء لكثير من أسماك أبي الشص في الأعماق يستمد ضوءه من بكتيريا تعيش داخله.') },
+  { id: 'gulper-mouth', text: L('The gulper eel’s enormous mouth can open wide like a net, letting it scoop up prey in a single gulp.', 'فم ثعبان البلّاع الضخم ينفتح على اتساعه كالشبكة، فيلتقط فرائسه بلقمة واحدة.') },
+  { id: 'bathysphere-1934', text: L('In 1934, William Beebe and Otis Barton dived to 923 metres off Bermuda inside a steel ball called the Bathysphere, watching deep-sea animals alive in their own world.', 'في عام ١٩٣٤ غاص ويليام بيبي وأوتيس بارتون إلى عمق ٩٢٣ متراً قرب برمودا داخل كرة فولاذية اسمها «الباثيسفير»، وشاهدا حيوانات الأعماق حيّة في عالمها.') },
+  { id: 'pearl-history',text: L('Before oil, pearl diving was central to Kuwait’s economy and seafaring life.', 'قبل النفط، الغوص على اللؤلؤ كان أساس اقتصاد الكويت وحياتها البحرية.') },
 ];
 
 export const FACT_BY_ID = Object.fromEntries(FACTS.map((f) => [f.id, f]));

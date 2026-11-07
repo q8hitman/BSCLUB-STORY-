@@ -241,6 +241,22 @@ export function successOdds(s: GameState, c: Choice): number | null {
   return wins / DIE;
 }
 
+export const CHOICES_PER_SCENE = 4;
+const MAX_SPECIAL = 2;
+
+/**
+ * Exactly 4 choices per scene (designer rule). Choices unlocked by the creature's anatomy or by
+ * story state come first (max 2) so the body you built matters; open choices fill the rest.
+ * Deterministic per (seed, beat), displayed in the template's order.
+ */
+export function pickChoices(t: BeatTemplate, s: GameState, d: DerivedCreature, biome: BiomeId): Choice[] {
+  const rng = Rng.from(s.seed, `choices${s.index}`);
+  const special = rng.shuffle(t.choices.filter((c) => c.requires && condHolds(c.requires, d, s, biome))).slice(0, MAX_SPECIAL);
+  const open = rng.shuffle(t.choices.filter((c) => !c.requires)).slice(0, CHOICES_PER_SCENE - special.length);
+  const keep = new Set([...special, ...open]);
+  return t.choices.filter((c) => keep.has(c));
+}
+
 export function currentBeat(s: GameState): BeatView {
   const pb = s.plan.beats[s.index];
   const t = BEAT_BY_ID[pb.template];
@@ -251,7 +267,7 @@ export function currentBeat(s: GameState): BeatView {
   for (const v of t.variants ?? []) {
     if (condHolds(v.when, d, s, pb.biome)) { const vt = fill(v.text, ctx); text = { en: `${text.en} ${vt.en}`, ar: `${text.ar} ${vt.ar}` }; }
   }
-  const choices = t.choices.filter((c) => condHolds(c.requires, d, s, pb.biome))
+  const choices = pickChoices(t, s, d, pb.biome)
     .map((c) => ({ choice: c, label: fill(c.label, ctx), odds: successOdds(s, c) }));
   return { template: t, biome: pb.biome, phase: t.phase, text, choices, ctx };
 }

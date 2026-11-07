@@ -3,14 +3,16 @@ import { PART_BY_ID } from '../content/parts';
 import { SLOTS, type Ending, type GameState, type Lang } from '../engine/types';
 import { renderShareCard } from '../share/shareCard';
 import { t } from '../i18n';
-import { Btn, CreatureArt } from './common';
+import { Btn, CaptureCreature, CreatureArt, Logos } from './common';
+import { PaintedScene } from './Play';
 
 const TONE: Record<Ending['tone'], { en: string; ar: string }> = {
   heroic: { en: 'Heroic', ar: 'بطولية' }, comedic: { en: 'Comedic', ar: 'كوميدية' }, bittersweet: { en: 'Bittersweet', ar: 'حلوة ومُرّة' },
   mysterious: { en: 'Mysterious', ar: 'غامضة' }, scientific: { en: 'Scientific', ar: 'علمية' }, wholesome: { en: 'Wholesome', ar: 'دافية' },
 };
 
-export function EndingScreen({ game, ending, lang, onNew, onReplay }: { game: GameState; ending: Ending; lang: Lang; onNew: () => void; onReplay: () => void }) {
+export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay }: { game: GameState; ending: Ending; lang: Lang; reduced: boolean; onNew: () => void; onReplay: () => void }) {
+  const last = game.plan.beats[game.plan.beats.length - 1];
   const [showName, setShowName] = useState(!!game.player);
   const [busy, setBusy] = useState(false);
   const [png, setPng] = useState<{ url: string; blob: Blob } | null>(null);
@@ -30,26 +32,32 @@ export function EndingScreen({ game, ending, lang, onNew, onReplay }: { game: Ga
 
   return (
     <section className="screen ending">
-      <div className="card ending-card">
+      <PaintedScene biome={last.biome} props={[]} seed={game.seed} reduced={reduced} className="backdrop" />
+      <div className="ending-card">
         <span className="tag">{t('endingTitle', lang)} · {TONE[ending.tone][lang]}</span>
-        <CreatureArt creature={game.creature} className="bob big" />
+        <CreatureArt creature={game.creature} className="specimen big" />
         <h2 className="ending-title">{ending.title[lang]}</h2>
         <p className="ending-name">{game.creature.name}{game.player ? ` · ${game.player}` : ''}</p>
         <p className="summary">{ending.summary[lang]}</p>
         <p className="epilogue">{ending.epilogue[lang]}</p>
         <ul className="chips">{SLOTS.map((s) => <li key={s}>{PART_BY_ID[(game.creature as unknown as Record<string, string>)[s]].name[lang]}</li>)}</ul>
-        <ul className="highlights">{ending.highlights.map((h, i) => <li key={i}>{i < 2 ? '⭐ ' : '🔬 '}{h[lang]}</li>)}</ul>
-        {game.mode === 'marine' && <p className="credit-marine">{lang === 'ar' ? 'بالتعاون مع نادي علوم البحار' : 'In collaboration with the Marine Science Club'}</p>}
+        <ul className="highlights">{ending.highlights.map((h, i) => <li key={i} className={i < 2 ? 'stat' : 'sci'}>{h[lang]}</li>)}</ul>
+        <div className="ending-credits">
+          <Logos marine={game.mode === 'marine'} />
+          {game.mode === 'marine' && <p className="credit-marine">{lang === 'ar' ? 'بالتعاون مع نادي علوم البحار' : 'In collaboration with the Marine Science Club'}</p>}
+          <p className="designer">تصميم اللعبة: عبدالله شويع - نادي العلوم البيولوجية</p>
+        </div>
       </div>
-      <div className="card share">
+      <div className="share">
+        <CaptureCreature creature={game.creature} lang={lang} />
         <label className="check"><input type="checkbox" checked={showName} onChange={(e) => { setShowName(e.target.checked); setPng(null); }} /> {t('showName', lang)}</label>
-        {!png && <Btn onClick={make} disabled={busy}>{busy ? t('generating', lang) : `🖼️ ${t('shareCard', lang)}`}</Btn>}
+        {!png && <Btn onClick={make} disabled={busy}>{busy ? t('generating', lang) : t('shareCard', lang)}</Btn>}
         {err && <p className="err">{err}</p>}
         {png && (
           <>
             <img className="card-preview" src={png.url} alt={ending.title[lang]} />
-            <a className="btn btn-primary" href={png.url} download={fileName}>⬇️ {t('shareCard', lang)}</a>
-            {canShare && <Btn variant="ghost" onClick={() => navigator.share({ files: [new File([png.blob], fileName, { type: 'image/png' })], title: ending.title[lang] }).catch(() => {})}>📤 {t('shareNative', lang)}</Btn>}
+            <a className="btn btn-primary" href={png.url} download={fileName}>{t('shareCard', lang)}</a>
+            {canShare && <Btn variant="ghost" onClick={() => navigator.share({ files: [new File([png.blob], fileName, { type: 'image/png' })], title: ending.title[lang] }).catch(() => {})}>{t('shareNative', lang)}</Btn>}
           </>
         )}
       </div>

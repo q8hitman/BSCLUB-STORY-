@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { renderCreaturePortrait, saveBlob } from '../share/shareCard';
+import type { Lang } from '../engine/types';
 import { creatureSvg } from '../art/creatureSvg';
 import type { CreatureConfig } from '../engine/types';
 
@@ -30,4 +32,30 @@ export function Typewriter({ text, speed, onDone, className = '' }: { text: stri
 export function Btn(props: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'ghost' | 'choice' }) {
   const { variant = 'primary', className = '', ...rest } = props;
   return <button {...rest} className={`btn btn-${variant} ${className}`} />;
+}
+
+/** Club logos (transparent, light ink for dark screens). The Marine Science Club logo only appears in Marine mode. */
+export function Logos({ marine = false, className = '' }: { marine?: boolean; className?: string }) {
+  return (
+    <div className={`logos ${className}`}>
+      <img src={`${import.meta.env.BASE_URL}brand/bsc-logo-light.png`} alt="Biological Sciences Club — Kuwait University" />
+      {marine && <><span className="logo-x" aria-hidden="true">×</span><img src={`${import.meta.env.BASE_URL}brand/marine-logo-light.png`} alt="Marine Science Club" /></>}
+    </div>
+  );
+}
+
+
+/** Optional: save a picture of the player's creature. */
+export function CaptureCreature({ creature, lang }: { creature: CreatureConfig; lang: Lang }) {
+  const [busy, setBusy] = useState(false); const [done, setDone] = useState(false);
+  const go = async () => {
+    setBusy(true);
+    try { await saveBlob(await renderCreaturePortrait(creature, lang), `bsc-biolab-${creature.name.replace(/[^\p{L}\p{N}]+/gu, '-')}.png`, creature.name); setDone(true); }
+    finally { setBusy(false); }
+  };
+  return (
+    <button className="btn btn-ghost capture" onClick={go} disabled={busy}>
+      {busy ? (lang === 'ar' ? 'قاعدين نرسمه…' : 'Drawing…') : done ? (lang === 'ar' ? 'انحفظت ✓ — احفظ مرة ثانية' : 'Saved ✓ — save again') : (lang === 'ar' ? 'احفظ صورة مخلوقك (اختياري)' : 'Save a picture of your creature (optional)')}
+    </button>
+  );
 }
