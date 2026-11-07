@@ -34,12 +34,12 @@ export function Btn(props: React.ButtonHTMLAttributes<HTMLButtonElement> & { var
   return <button {...rest} className={`btn btn-${variant} ${className}`} />;
 }
 
-/** Club logos (original colours incl. black, transparent, soft light halo for dark screens). The Marine Science Club logo only appears in Marine mode. */
+/** Club logos (original colours incl. black, white background removed, no glow — designer choice). The Marine Science Club logo only appears in Marine mode. */
 export function Logos({ marine = false, className = '' }: { marine?: boolean; className?: string }) {
   return (
     <div className={`logos ${className}`}>
-      <img src={`${import.meta.env.BASE_URL}brand/bsc-logo-halo.png`} alt="Biological Sciences Club — Kuwait University" />
-      {marine && <><span className="logo-x" aria-hidden="true">×</span><img src={`${import.meta.env.BASE_URL}brand/marine-logo-halo.png`} alt="Marine Science Club" /></>}
+      <img src={`${import.meta.env.BASE_URL}brand/bsc-logo-transparent.png`} alt="Biological Sciences Club — Kuwait University" />
+      {marine && <><span className="logo-x" aria-hidden="true">×</span><img src={`${import.meta.env.BASE_URL}brand/marine-logo-transparent.png`} alt="Marine Science Club" /></>}
     </div>
   );
 }

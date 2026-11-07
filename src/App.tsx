@@ -68,7 +68,7 @@ export default function App() {
     <div className={`app lang-${lang} screen-${screen}`}>
       <div className="topbar">
         <button className="brand" onClick={() => setScreen('title')} aria-label={t('subtitle', lang)}>
-          <img src={`${BASE}brand/bsc-logo-halo.png`} alt="" /> <span>BioLab</span>
+          <img src={`${BASE}brand/bsc-logo-transparent.png`} alt="" /> <span>BioLab</span>
         </button>
         <div className="top-actions">
           <button className="ghost-icon" onClick={() => setSettings({ lang: lang === 'ar' ? 'en' : 'ar' })} aria-label={t('language', lang)}>{lang === 'ar' ? 'EN' : 'ع'}</button>
@@ -150,7 +150,7 @@ export default function App() {
               <button className="mode-card marine" onClick={() => begin('marine')}>
                 <PaintedScene biome="midnight" props={['angler']} seed={12} reduced />
                 <div className="mode-text">
-                  <img className="collab-logo" src={`${BASE}brand/marine-logo-halo.png`} alt="Marine Science Club" />
+                  <img className="collab-logo" src={`${BASE}brand/marine-logo-transparent.png`} alt="Marine Science Club" />
                   <strong>{t('marine', lang)}</strong><span>{t('marineDesc', lang)}</span>
                 </div>
               </button>

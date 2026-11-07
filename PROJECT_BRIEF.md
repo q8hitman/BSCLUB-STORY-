@@ -49,7 +49,7 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
 
 ## 5c. Designer feedback round 3 (2026-11-08) — applied
 - Duck catchphrases were "cringe" → removed. Ducks now say short, natural reactions only after outcomes (`MOOD_LINES`), and often stay silent before a choice.
-- Logos: keep the ORIGINAL colours incl. black (designer rejected recolouring), no white box → `public/brand/*-halo.png` (transparent + soft light halo for dark UI) and `*-transparent.png` (original colours, for the light share card). Originals in `docs/brand-originals/`.
+- Logos: keep the ORIGINAL colours incl. black (designer rejected recolouring), no white box → use `public/brand/*-transparent.png` everywhere: original colours, white removed, NO glow/halo (designer said they read fine without it). Originals in `docs/brand-originals/`.
 - Logo rules: Marine Science Club appears **only in Marine mode** (mode card, a collaboration intro card at the start of a Marine run, the Marine ending, the Marine share card). Title screen = BSC only. Every ending shows our logo (+ theirs in Marine) + the designer credit.
 - Creature default names are lab designations ("Octopus Hybrid X-7" / "هجين أخطبوط X-7"); "شبح الطين" style names were confusing and are gone.
 - Optional "save a picture of your creature" after naming it, and again at the ending (`renderCreaturePortrait` in `src/share/shareCard.ts`).
