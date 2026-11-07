@@ -165,7 +165,7 @@ export async function renderCreaturePortrait(c: CreatureConfig, lang: Lang): Pro
   const url = URL.createObjectURL(new Blob([creatureSvg(c, { width: 900 })], { type: 'image/svg+xml' }));
   try { const img = await loadImage(url); g.save(); g.shadowColor = 'rgba(0,0,0,.6)'; g.shadowBlur = 40; g.drawImage(img, 90, 260, 900, 720); g.restore(); } finally { URL.revokeObjectURL(url); }
   // logo
-  try { const logo = await loadImage(`${import.meta.env?.BASE_URL ?? '/'}brand/bsc-logo-light.png`); const h = 110; g.drawImage(logo, (CARD_W - h * (logo.width / logo.height)) / 2, 60, h * (logo.width / logo.height), h); } catch { /* optional */ }
+  try { const logo = await loadImage(`${import.meta.env?.BASE_URL ?? '/'}brand/bsc-logo-halo.png`); const h = 110; g.drawImage(logo, (CARD_W - h * (logo.width / logo.height)) / 2, 60, h * (logo.width / logo.height), h); } catch { /* optional */ }
   g.textAlign = 'center'; g.direction = lang === 'ar' ? 'rtl' : 'ltr';
   g.fillStyle = '#f1d595'; g.font = `700 76px ${font}, sans-serif`; g.fillText(c.name, CARD_W / 2, 1060, CARD_W - 120);
   g.fillStyle = '#d9d0bc'; g.font = `400 30px ${font}, sans-serif`;
