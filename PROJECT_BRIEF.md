@@ -54,6 +54,8 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
 - Creature default names are lab designations ("Octopus Hybrid X-7" / "هجين أخطبوط X-7"); "شبح الطين" style names were confusing and are gone.
 - Optional "save a picture of your creature" after naming it, and again at the ending (`renderCreaturePortrait` in `src/share/shareCard.ts`).
 
+- Technical review for the ChatGPT discussion: `docs/TECHNICAL_REVIEW.md` (verified free-tier limits, recommended architecture, decisions to settle).
+
 ## 6. Session log
 - 2026-11-08 — v1 built and tested, pushed to GitHub `main`, Pages enabled (https://q8hitman.github.io/BSCLUB-STORY-/).
 - 2026-11-08 — v2 started: real duck names, painterly scenes, cinematic VN UI, new menus, logos, 4 choices, deep-sea horror rewrite. Designer feedback received (section 2). Logos + references added. Work lives in a temporary session folder — move to a permanent folder before continuing.
