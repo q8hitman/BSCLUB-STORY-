@@ -1,0 +1,10 @@
+name = "bsc-biolab-narrator"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+[ai]
+binding = "AI"
+
+[vars]
+ALLOWED_ORIGIN = "https://q8hitman.github.io"
+# MODEL = "@cf/meta/llama-3.1-8b-instruct"

@@ -1,0 +1,181 @@
+{
+  "generatedAt": "2026-11-07T22:56:15.208Z",
+  "classic": {
+    "mode": "classic",
+    "runs": 1000,
+    "invariantErrors": 0,
+    "uniquePlans": 999,
+    "uniquePlansPct": 99.9,
+    "uniquePaths": 1000,
+    "uniquePathsPct": 100,
+    "distinctEndingArchetypes": 12,
+    "distinctEndingTitles": 31,
+    "endingEntropy": 0.92,
+    "endings": {
+      "chaos": 170,
+      "machine": 89,
+      "cryptid": 73,
+      "reunion": 152,
+      "field-team": 53,
+      "guardian": 167,
+      "frenemies": 30,
+      "vex-defeated": 81,
+      "wild": 93,
+      "publish": 48,
+      "unsolved": 25,
+      "nap": 19
+    },
+    "tones": {
+      "comedic": 292,
+      "bittersweet": 89,
+      "wholesome": 189,
+      "heroic": 264,
+      "mysterious": 118,
+      "scientific": 48
+    },
+    "templateCoverage": "31/31",
+    "avgBeatsPerRun": 9.2,
+    "meanConsecutiveSimilarity_withHistory": 0.109,
+    "meanConsecutiveSimilarity_noHistory": 0.123,
+    "meanMaxPlanSimilarityToLast10_withHistory": 0.26,
+    "meanMaxPlanSimilarityToLast10_noHistory": 0.341,
+    "checkSuccessRate": 55,
+    "successByBase": {
+      "owl": 60.3,
+      "axolotl": 50,
+      "camel": 51.1,
+      "gecko": 54.6,
+      "fennec": 53.7,
+      "octopus": 60,
+      "pangolin": 56.7,
+      "frog": 52.7
+    },
+    "successByDuck": {
+      "petri": 56.1,
+      "quill": 57.6,
+      "pipette": 57.4,
+      "goggles": 50.3,
+      "cherry": 55,
+      "lens": 56,
+      "data": 52.9
+    },
+    "biomeAppearances": {
+      "lab": 1000,
+      "cave": 456,
+      "mountain": 475,
+      "swamp": 452,
+      "snow": 454,
+      "forest": 479,
+      "ruins": 345,
+      "desert": 428
+    },
+    "hooks": {
+      "h-signal": 257,
+      "h-escape": 253,
+      "h-contest": 246,
+      "h-prof": 244
+    },
+    "twists": {
+      "t-signal-self": 215,
+      "t-escapees": 204,
+      "t-legend": 176,
+      "t-prof-alive": 185,
+      "t-clone": 220
+    },
+    "climaxes": {
+      "k-collapse": 517,
+      "k-machine": 239,
+      "k-vex": 244
+    },
+    "anatomyGatedChoicesTakenPct": 9
+  },
+  "marine": {
+    "mode": "marine",
+    "runs": 1000,
+    "invariantErrors": 0,
+    "uniquePlans": 999,
+    "uniquePlansPct": 99.9,
+    "uniquePaths": 1000,
+    "uniquePathsPct": 100,
+    "distinctEndingArchetypes": 13,
+    "distinctEndingTitles": 27,
+    "endingEntropy": 0.95,
+    "endings": {
+      "publish": 60,
+      "chaos": 119,
+      "proof": 74,
+      "beacon": 71,
+      "glimpse": 120,
+      "peace": 110,
+      "voice-deep": 75,
+      "vent-day": 89,
+      "reef-heroes": 103,
+      "eye-to-eye": 103,
+      "field-team": 22,
+      "blurry": 52,
+      "nap": 2
+    },
+    "tones": {
+      "scientific": 223,
+      "comedic": 173,
+      "heroic": 180,
+      "mysterious": 195,
+      "bittersweet": 110,
+      "wholesome": 119
+    },
+    "templateCoverage": "28/28",
+    "avgBeatsPerRun": 11.2,
+    "meanConsecutiveSimilarity_withHistory": 0.158,
+    "meanConsecutiveSimilarity_noHistory": 0.174,
+    "meanMaxPlanSimilarityToLast10_withHistory": 0.344,
+    "meanMaxPlanSimilarityToLast10_noHistory": 0.421,
+    "checkSuccessRate": 58.3,
+    "successByBase": {
+      "octopus": 66.1,
+      "pangolin": 58.9,
+      "camel": 61.3,
+      "frog": 57.4,
+      "gecko": 57.4,
+      "fennec": 51.3,
+      "owl": 57.6,
+      "axolotl": 56.2
+    },
+    "successByDuck": {
+      "petri": 57,
+      "quill": 63.3,
+      "pipette": 56.6,
+      "goggles": 59.4,
+      "cherry": 57.7,
+      "lens": 54.6,
+      "data": 60.2
+    },
+    "biomeAppearances": {
+      "lab": 1000,
+      "mudflat": 673,
+      "seagrass": 667,
+      "openSea": 1000,
+      "vents": 491,
+      "midnight": 610,
+      "twilight": 552,
+      "reef": 660,
+      "trench": 432
+    },
+    "hooks": {
+      "hm-reef": 343,
+      "hm-nets": 331,
+      "hm-sound": 326
+    },
+    "twists": {
+      "tm-probe": 458,
+      "tm-whalefall": 292,
+      "tm-squid": 250
+    },
+    "climaxes": {
+      "km-leviathan": 478,
+      "km-eruption": 254,
+      "km-tether": 268
+    },
+    "legendRunsPct": 47.8,
+    "anatomyGatedChoicesTakenPct": 8.2
+  }
+}
