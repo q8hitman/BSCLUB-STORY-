@@ -26,7 +26,7 @@ export function catalog(mode: Mode) {
   const biomes = mode === 'classic' ? CLASSIC_BIOMES : [...MARINE_SURFACE, ...MARINE_DEEP];
   const props = Object.keys(PAINT_PROPS).filter((p) => !INTEGRATED.has(p));
   return {
-    biomes: biomes.map((b) => ({ id: b, name: BIOMES[b].name.en, animals: [...BIOMES[b].predators, ...BIOMES[b].critters].map((x) => x.en) })),
+    biomes: biomes.map((b) => ({ id: b, name: BIOMES[b].name.en, name_ar: BIOMES[b].name.ar, animals: [...BIOMES[b].predators, ...BIOMES[b].critters].map((x) => x.en) })),
     sceneProps: props,
     npcs: NPCS.map((n) => ({ id: n.id, name: n.name.en, role: n.role.en })),
     facts: FACTS.map((f) => ({ id: f.id, text: f.text.en })),
@@ -42,7 +42,7 @@ export function creatureBrief(c: CreatureConfig) {
   const d = derive(c);
   return {
     name: '{CREATURE}', // real names never leave the device
-    parts: Object.fromEntries(Object.entries(d.parts).map(([slot, p]) => [slot, `${p.name.en} (${p.desc.en}; cost: ${p.tradeoff.en})`])),
+    parts: Object.fromEntries(Object.entries(d.parts).map(([slot, p]) => [slot, `${p.name.en} | Arabic name: ${p.name.ar} (${p.desc.en}; cost: ${p.tradeoff.en})`])),
     stats: d.stats, capabilities: [...d.caps],
   };
 }

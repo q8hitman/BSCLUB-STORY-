@@ -1,0 +1,3362 @@
+[
+ {
+  "i": 0,
+  "mode": "classic",
+  "creature": "camel/wings/camo/ink",
+  "tone": "mysterious",
+  "outline": {
+   "title": {
+    "en": "The Echoes of Mitribah",
+    "ar": "أصداء متربة"
+   },
+   "premise": {
+    "en": "Deep in the scorching desert, glowing thermal signatures and strange acoustic vibrations urge {CREATURE} to uncover a forgotten subterranean lab.",
+    "ar": "في أعماق الصحراء الحارقة، تدفع البصمات الحرارية المتوهجة والاهتزازات الصوتية الغريبة {CREATURE} إلى كشف نقاب المختبر السري المنسي تحت الأرض."
+   },
+   "premise_tag": "heat_wave_vibrations",
+   "tone": "mysterious",
+   "twist_tag": "ancient_microbial_colony",
+   "acts": [
+    {
+     "id": "act_1",
+     "biome": "desert",
+     "props": [
+      "heatwave",
+      "clue"
+     ],
+     "purpose": "discovery",
+     "npc": null,
+     "plants_clue": "clue_heat_pattern",
+     "pays_off": null
+    },
+    {
+     "id": "act_2",
+     "biome": "desert",
+     "props": [
+      "oasis",
+      "critter"
+     ],
+     "purpose": "investigation",
+     "npc": "kid",
+     "plants_clue": "clue_vibrating_jar",
+     "pays_off": null
+    },
+    {
+     "id": "act_3",
+     "biome": "cave",
+     "props": [
+      "darkness",
+      "obstacle"
+     ],
+     "purpose": "entry",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_heat_pattern"
+    },
+    {
+     "id": "act_4",
+     "biome": "cave",
+     "props": [
+      "wisps",
+      "critter"
+     ],
+     "purpose": "exploration",
+     "npc": null,
+     "plants_clue": "clue_glowing_residue",
+     "pays_off": null
+    },
+    {
+     "id": "act_5",
+     "biome": "ruins",
+     "props": [
+      "vents",
+      "machine"
+     ],
+     "purpose": "revelation",
+     "npc": "rival",
+     "plants_clue": null,
+     "pays_off": "clue_vibrating_jar"
+    },
+    {
+     "id": "act_6",
+     "biome": "ruins",
+     "props": [
+      "chip",
+      "escapees"
+     ],
+     "purpose": "confrontation",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_glowing_residue"
+    },
+    {
+     "id": "act_7",
+     "biome": "cave",
+     "props": [
+      "disaster",
+      "obstacle"
+     ],
+     "purpose": "escape",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": null
+    },
+    {
+     "id": "act_8",
+     "biome": "desert",
+     "props": [
+      "radio",
+      "postcard"
+     ],
+     "purpose": "resolution",
+     "npc": "ranger",
+     "plants_clue": null,
+     "pays_off": null
+    }
+   ],
+   "mysteries": [
+    {
+     "id": "mystery_heat_microbes",
+     "setup": {
+      "en": "Why are the subterranean vibrations pulsing at exact thermal intervals?",
+      "ar": "لماذا تنبض الاهتزازات تحت الأرض في فترات حرارية منتظمة؟"
+     },
+     "payoff": {
+      "en": "An ancient extremophile bacterial colony feeds on the extreme desert surface heat transferred downwards.",
+      "ar": "تتغذى مستعمرة بكتيرية محبة للظروف القاسية على حرارة سطح الصحراء الشديدة المنقولة للأسفل."
+     }
+    }
+   ],
+   "ending_options": [
+    {
+     "id": "end_seal",
+     "title": {
+      "en": "Seal the Vault",
+      "ar": "إغلاق القبو"
+     },
+     "summary": {
+      "en": "Protect the ancient microbial ecosystem from outside interference.",
+      "ar": "حماية النظام البيئي الميكروبي القديم من التدخل الخارجي."
+     }
+    },
+    {
+     "id": "end_sample",
+     "title": {
+      "en": "Collect Samples Safely",
+      "ar": "جمع العينات بأمان"
+     },
+     "summary": {
+      "en": "Study the extremophiles under strict BSL protocols with Dr. Zahra.",
+      "ar": "دراسة الكائنات المحبة للظروف القاسية وفق بروتوكولات السلامة الحيوية المشددة مع الدكتورة زهراء."
+     }
+    }
+   ]
+  },
+  "beats": [
+   {
+    "act_id": "act_1",
+    "text": {
+     "en": "Under the blistering sun of Mitribah, shimmering heatwaves distort the horizon. {CREATURE} uses its massive Radiator Ears to dissipate the extreme desert heat while scanning the glowing terrain. Acoustic vibrations hum beneath the burning sand, pointing toward a buried structure beneath the dunes.",
+     "ar": "تحت شمس المطربة الحارقة، تشوه الموجات الحرارية المتوهجة الأفق. يستعين {CREATURE} بأذنيه الشعاعيتين الضخمتين لتبديد الحرارة العالية بينما يمسح الأرضية المتوهجة. تهتز طنينات صوتية غريبة تحت الرمال الملتهبة، مشيرة إلى هيكل مدفون تحت الكثبان."
+    },
+    "duck_line": {
+     "en": "Look! The heat here is no joke! It feels like the air itself is melting, but those vibrations mean something is down there!",
+     "ar": "شوفوا! الحرارة هني مو غشمرة! نحس كان الهواء قعد يذوب، بس هالإهتزازات معناه اكو شي تحت!"
+    },
+    "fact_id": "desert-heat",
+    "choices": [
+     {
+      "id": "choice_radiator_scan",
+      "label": {
+       "en": "Listen closely to the acoustic vibration patterns with your giant ears",
+       "ar": "الاستماع بتركيز لنماذج الاهتزازات الصوتية باستخدام الأذنين الكبيرة"
+      },
+      "style": "clever",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "The giant ears pick up the exact rhythmic frequency of subterranean machinery beneath the sand, pinpointing a hidden entry hatch.",
+        "ar": "التقطت الأذنان الكبيرتان التردد الإيقاعي الدقيق للآلات الموجودة تحت الرمال، مما حدد موقع مدخل مخفي بدقة."
+       },
+       "duck_mood": "thinking",
+       "creature_state": "curious",
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_heat_pattern"
+        },
+        {
+         "t": "discovery",
+         "id": "desert-heat"
+        }
+       ]
+      },
+      "fail": {
+       "text": {
+        "en": "The howling desert wind creates static in your sensitive ears, making the hum difficult to isolate.",
+        "ar": "تسببت رياح الصحراء العاتية في تشويش داخل الأذنين الحساستين، مما جعل التمييز صعباً."
+       },
+       "duck_mood": "worried",
+       "creature_state": "exhausted",
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ]
+      }
+     },
+     {
+      "id": "choice_fly_over",
+      "label": {
+       "en": "Soar above the dunes using Bat Wings to spot shimmering heat anomalies",
+       "ar": "التحليق فوق الكثبان بفضل أجنحة الخفاش لرصد التشوهات الحرارية"
+      },
+      "style": "bold",
+      "uses_capability": "fly",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} catches a thermal updraft and catches sight of a buried solar array sticking out of the shifting sand.",
+        "ar": "استغل {CREATURE} التيار الهوائي الصاعد ورصد ألواحاً شمسية مدفونة تبرز من بين الرمال المتحركة."
+       },
+       "duck_mood": "proud",
+       "creature_state": "confident",
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_heat_pattern"
+        },
+        {
+         "t": "mark",
+         "id": "sand"
+        }
+       ]
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_camouflage_approach",
+      "label": {
+       "en": "Blend into the sand with Camouflage Skin and crawl closer to the hum",
+       "ar": "الاندماج مع الرمال بجانب جلد التمويه والاقتراب ببطء نحو مصدر الطنين"
+      },
+      "style": "careful",
+      "uses_capability": "camouflage",
+      "check": {
+       "stat": "stealth",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "Changing colors to match the sun-bleached dunes, {CREATURE} creeps right up to a vent releasing pressurized thermal gas.",
+        "ar": "بفضل تغير ألوانه لتطابق الكثبان الشمسية، تسلل {CREATURE} مباشرة نحو منفذ يطلق غازات حرارية مضغوطة."
+       },
+       "duck_mood": "happy",
+       "creature_state": "calm",
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_heat_pattern"
+        }
+       ]
+      },
+      "fail": {
+       "text": {
+        "en": "The shifting sand grains scrub against the skin, disturbing the camouflage and drawing unwanted heat friction.",
+        "ar": "احتكت حبيبات الرمال الجلد، مما أفسد التمويه وزاد من الإجهاد الحراري."
+       },
+       "duck_mood": "worried",
+       "creature_state": "exhausted",
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ]
+      }
+     },
+     {
+      "id": "choice_glow_signal",
+      "label": {
+       "en": "Flash the Glow Lure into the cracks of the sand to illuminate subterranean openings",
+       "ar": "إضاءة الطعم المتوهج داخل شقوق الرمال لكشف الفتحات السفلية"
+      },
+      "style": "silly",
+      "uses_capability": "glow",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "The brilliant light shines down a narrow shaft, revealing old metal steps leading down into darkness.",
+        "ar": "أضاء النور الساطع عموداً ضيقاً، كاشفاً عن درجات معدنية قديمة تنحدر نحو الظلام."
+       },
+       "duck_mood": "shocked",
+       "creature_state": "excited",
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_heat_pattern"
+        }
+       ]
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "act_id": "act_2",
+    "text": {
+     "en": "Near a shimmering desert oasis, {CREATURE} encounters a young kid holding a humming glass jar near the palm trees. The strange vibration matches the subterranean signal detected earlier, but the scorching heat of Mitribah makes every step across the dunes exhausting.",
+     "ar": "بالقرب من واحة صحراوية متلألئة، يلمح {CREATURE} طفلاً يمسك بجرارة زجاجية تصدر طنيناً مكتوماً بين أشجار النخيل. يهتز هذا الطنين بالنغمة ذاتها التي رُصدت سابقاً، لكن حرارة المطربة الحارقة تجعل كل خطوة فوق الكثبان مجهدة."
+    },
+    "duck_line": {
+     "en": "Look at that jar! The hum is coming directly from whatever is trapped inside it, team!",
+     "ar": "انتبهوا يا فريق! الطنين قاعد يطلع من الشغلة المخشوشة داخل الجرة، شوفوا!"
+    },
+    "fact_id": "desert-heat",
+    "choices": [
+     {
+      "id": "choice_glow_lure",
+      "label": {
+       "en": "Flash your Glow Lure to fascinate the kid and examine the jar safely",
+       "ar": "استخدم طُعمك المضيء لإبهار الطفل وفحص الجرة بأمان"
+      },
+      "style": "clever",
+      "uses_capability": "glow",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} pulses a soft light from its glow lure. Delighted, the kid leans in, letting {CREATURE} inspect the vibrating liquid inside the jar.",
+        "ar": "يطلق {CREATURE} ضوءاً دافئاً من طُعمه المضيء. ينبهر الطفل وينحني مقترباً، مما يتيح لـ {CREATURE} فحص السائل المهتز داخل الجرة."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_vibrating_jar"
+        },
+        {
+         "t": "rel",
+         "npc": "kid",
+         "d": 1
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "curious"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_charm_kid",
+      "label": {
+       "en": "Use friendly gestures to convince the kid to share what they found",
+       "ar": "استخدم إشارات ودودة لإقناع الطفل بتمكينك من مشاهدة الاكتشاف"
+      },
+      "style": "kind",
+      "uses_capability": null,
+      "check": {
+       "stat": "charm",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "The kid smiles at {CREATURE}'s gentle posture and tilts the jar, showing microscopic glowing threads pulsing in rhythm.",
+        "ar": "يبتسم الطفل ويهدئ من روع نفسه أمام لطف {CREATURE}، ثم يميل الجرة ليريه خيوطاً دقيقة متوهجة تنبض بإيقاع منتظم."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_vibrating_jar"
+        },
+        {
+         "t": "trust",
+         "d": 1
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "Uncertain of the strange creature, the kid clutches the jar tightly and steps back into the oasis shade.",
+        "ar": "يشعر الطفل بالتردد أمام هذا الكائن الغريب، فيمسك بالجرة بقوة ويتراجع نحو ظلال الواحة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     },
+     {
+      "id": "choice_heat_endure",
+      "label": {
+       "en": "Endure the blazing thermal heat to reach the oasis spring source",
+       "ar": "تحمّل حرارة الصحراء الحارقة للوصول إلى نبع الواحة"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "heat",
+       "dc": 3
+      },
+      "success": {
+       "text": {
+        "en": "Shrugging off the extreme temperature of Mitribah, {CREATURE} tracks the hum down to a submerged subterranean pipe opening near the spring.",
+        "ar": "يتجاوز {CREATURE} درجات الحرارة القياسية في المطربة بثبات، ويتتبع مصدر الطنين وصولاً إلى فوهة أنبوب تحت الأرض قرب النبع."
+       },
+       "effects": [
+        {
+         "t": "discovery",
+         "id": "desert-heat"
+        },
+        {
+         "t": "mark",
+         "id": "sand"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The unrelenting heat wears down {CREATURE}, forcing it to rest briefly under a date palm.",
+        "ar": "تنهك الحرارة الشديدة قوى {CREATURE}، مما يضطره للاستراحة قليلاً تحت ظل نخيلة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_camouflaged_approach",
+      "label": {
+       "en": "Blend into the sand with Camouflage Skin to inspect the jar from up close",
+       "ar": "اختفِ بين الرماك باستخدام جلد التمويه لفحص الجرة عن قرب"
+      },
+      "style": "bold",
+      "uses_capability": "camouflage",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "Matching the pale sand flawlessly, {CREATURE} creeps close enough to hear the jar's high-frequency hum clearly without startling anyone.",
+        "ar": "يتخذ {CREATURE} لون الرمل بدقة متناهية، ويزحف بهدوء ليسمع صفير الجرة عالي التردد دون إخافة أحد."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_vibrating_jar"
+        }
+       ],
+       "duck_mood": "laughing",
+       "creature_state": "calm"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "act_id": "act_3",
+    "text": {
+     "en": "{CREATURE} steps into the gloom of the cave beneath Mitribah. Deep underground, total darkness clings to the jagged limestone rocks, blocking the way forward. Remembering the strange heat patterns detected earlier, a hidden breach seems concealed just beyond a collapsed wall.",
+     "ar": "يتقدم {CREATURE} إلى ظلام الكهف الواقع تحت منطقة المطربة. في الأعماق السحيقة، يلف الظلام التام الصخور الجيرية المسننة التي تسد الطريق. وتذكرًا لأنماط الحرارة الغريبة التي رُصدت سابقًا، يبدو أن هناك ممراً مخفياً وراء الجدار المنهار."
+    },
+    "duck_line": {
+     "en": "Look at these tight rocks! It's super dark in here, so be careful where you tread!",
+     "ar": "شوفوا الصخور الضيقة! المكان وايد مظلم اهني، ديروا بالكم وين تمشون!"
+    },
+    "fact_id": "cave-troglo",
+    "choices": [
+     {
+      "id": "choice_glow_illuminate",
+      "label": {
+       "en": "Illuminate the cave with your Glow Lure to navigate the obstacle",
+       "ar": "أنِر الكهف باستخدام طُعم الإضاءة لتجاوز العقبة"
+      },
+      "style": "clever",
+      "uses_capability": "glow",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} flares its glowing lure, casting vibrant light across the cave wall and revealing a narrow fissure.",
+        "ar": "يشعل {CREATURE} طُعم الإضاءة الخاص به، فيرسل نورا ساطعاً كشف عن شق ضيق في جدار الكهف."
+       },
+       "effects": [
+        {
+         "t": "discovery",
+         "id": "cave-troglo"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "confident"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_force_through",
+      "label": {
+       "en": "Use raw strength to shove the fallen limestone boulders aside",
+       "ar": "استخدم القوة الغاشمة لدفع الصخور الجيرية المتساقطة جانباً"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "strength",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} leans into the heavy rubble and shoves it clear, opening a dusty passageway into the subterranean complex.",
+        "ar": "يتكئ {CREATURE} على الركام الثقيل ويدفعه بعيداً، فيفتح ممراً مغبراً يؤدي إلى المجمع التحت أرضي."
+       },
+       "effects": [],
+       "duck_mood": "proud",
+       "creature_state": "excited"
+      },
+      "fail": {
+       "text": {
+        "en": "The rocks are too heavy and sharp, bruising {CREATURE} as they refuse to budge.",
+        "ar": "الصخور ثقيلة جداً وحادة، مما تسبب في إصابة {CREATURE} برضوض بينما رفضت الصخور أن تتحرك."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        },
+        {
+         "t": "mark",
+         "id": "scratches"
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "hurt"
+      }
+     },
+     {
+      "id": "choice_analyze_thermal",
+      "label": {
+       "en": "Analyze the thermal pattern from earlier to locate the exact weak seam in the wall",
+       "ar": "حلل النمط الحراري السابق لتحديد موضع الفجوة الضعيفة في الجدار بدقة"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "By matching the faint heat vibrations to the rock face, {CREATURE} finds a hollow panel left behind by old lab excavations.",
+        "ar": "من خلال مطابقة الاهتزازات الحرارية الخافتة بمركز الجدار، يجد {CREATURE} لوحاً مجوفاً تركته حفريات المختبر القديمة."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_ancient_breach"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "calm"
+      },
+      "fail": {
+       "text": {
+        "en": "The heat signature is confusing in the cold damp air, wasting precious time.",
+        "ar": "البصمة الحرارية مربكة في الهواء البارد الرطب، مما أدى إلى إضاعة وقت ثمين."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_fly_over",
+      "label": {
+       "en": "Flap your bat wings to hop over the unstable rockpile",
+       "ar": "رفرف بجناحي الخفاش للقفز فوق كومة الصخور غير المستقرة"
+      },
+      "style": "silly",
+      "uses_capability": "fly",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} leaps and flaps its leathery wings, awkwardly skimming over the top of the obstacle.",
+        "ar": "يقفز {CREATURE} ويرفرف بجناحيه الجلديين، متجاوزاً أعلى العقبة بحركة غير متناسقة ولكن ناجحة."
+       },
+       "effects": [],
+       "duck_mood": "laughing",
+       "creature_state": "curious"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "act_id": "act_4",
+    "text": {
+     "en": "Descending deeper into the cavern, {CREATURE} discovers ancient, glowing mineral formations hanging from the ceiling. A strange blue gel drips down the walls, vibrating softly in rhythm with the mysterious jar found earlier.",
+     "ar": "عند التعمق في الكهف، يكتشف {CREATURE} تشكيلات معدنية قديمة ومضيئة تتدلى من السقف. يقطر هلام أزرق غريب على الجدران، ويهتز بهدوء على إيقاع الوعاء المهتز الذي تم العثور عليه سابقًا."
+    },
+    "duck_line": {
+     "en": "Look at that weird blue goo! It's pulsing just like the jar back there. Be careful!",
+     "ar": "شوفوا هذا اللزوجة الزرقاء الغريبة! قاعد ينبض نفس القنينة اللي ورا. انتبهوا وايد!"
+    },
+    "fact_id": "cave-troglo",
+    "choices": [
+     {
+      "id": "choice_examine_gel",
+      "label": {
+       "en": "Use your Intellect to analyze the glowing blue gel on the cave walls",
+       "ar": "استخدم ذكاءك لتحليل الهلام الأزرق المضيء على جدران الكهف"
+      },
+      "style": "clever",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} carefully analyzes the blue gel, identifying it as an ancient microbial colony that reacts to sonic frequencies.",
+        "ar": "يحلل {CREATURE} الهلام الأزرق بعناية، ويكتشف أنه مستعمرة ميكروبية قديمة تتفاعل مع الترددات الصوتية."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_glowing_residue"
+        },
+        {
+         "t": "energy",
+         "d": 1
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The complex patterns of the glowing gel confuse {CREATURE}, leading to a sudden dizzy spell.",
+        "ar": "الأنماط المعقدة للهلام المضيء تربك {CREATURE}، مما يؤدي إلى دوار مفاجئ."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_glow_lure",
+      "label": {
+       "en": "Pulse your Glow Lure to communicate with the luminescent cave flora",
+       "ar": "أطلق نبضات من طعمك المضيء للتواصل مع نباتات الكهف المضيئة"
+      },
+      "style": "careful",
+      "uses_capability": "glow",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} pulses light from its lure. The cavern ceiling responds by illuminating a hidden passageway deeper into the mountain.",
+        "ar": "ينبض {CREATURE} بالنور من طعمه المضيء. يستجيب سقف الكهف من خلال إضاءة ممر مخفي في عمق الجبل."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_glowing_residue"
+        },
+        {
+         "t": "mark",
+         "id": "glowing-algae"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "excited"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_camouflaged_sneak",
+      "label": {
+       "en": "Activate Camouflage Skin to slip past the territorial cave critters",
+       "ar": "فعّل جلد التمويه للتسلل متجاوزًا كائنات الكهف الشرسة"
+      },
+      "style": "bold",
+      "uses_capability": "camouflage",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "Blending seamlessly into the damp rock walls, {CREATURE} glides past the nesting critters without causing alarm.",
+        "ar": "يمتزج {CREATURE} بسلاسة مع صخور الكهف الرطبة، وينزلق متجاوزًا الكائنات دون إثارة ذعرها."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "snuck_past_critters"
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "calm"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_scare_with_ink",
+      "label": {
+       "en": "Release an Ink Cloud to distract the cave critters blocking the tunnel",
+       "ar": "أطلق سحابة حبر لإلهاء كائنات الكهف التي تسد النفق"
+      },
+      "style": "silly",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} bursts a cloud of dark ink. The confused critters scatter, but the ink splatters all over the research notes!",
+        "ar": "يطلق {CREATURE} سحابة من الحبر الداكن. تتشتت الكائنات الارتباك، لكن الحبر يلطخ مذكرات البحث بالكامل!"
+       },
+       "effects": [
+        {
+         "t": "mark",
+         "id": "ink"
+        },
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "laughing",
+       "creature_state": "curious"
+      },
+      "fail": null
+     }
+    ]
+   }
+  ],
+  "ending": {
+   "title": {
+    "en": "The Echoes of Mitribah Revealed",
+    "ar": "صدى مطربة المنكشف"
+   },
+   "summary": {
+    "en": "Navigating the extreme heat of Mitribah with its radiator ears and using its glowing lure in the pitch-black cave, {CREATURE} decoded the mysterious subterranean vibrations.",
+    "ar": "باستخدام أذنيه المشعتين للتغلب على حرارة مطربة الشديدة ومجسمه المضيء في ظلمة الكهف الدامسة، تمكن {CREATURE} من فك أسرار الاهتزازات الجوفية الغامضة."
+   },
+   "epilogue": {
+    "en": "The subterranean chambers now hum softly in harmony with the surface, a testament to the strange research forgotten beneath the desert sands.",
+    "ar": "باتت الغرف الجوفية تئز الآن بهدوء وانسجام مع السطح، شاهدةً على الأبحاث الغريبة التي نُسيت تحت رمال الصحراء."
+   },
+   "tone": "scientific"
+  },
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 6128,
+    "usage": {
+     "inTok": 3522,
+     "outTok": 1234
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 7923,
+    "usage": {
+     "inTok": 2033,
+     "outTok": 1629
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": [
+      "beat.duck_line: possible iraqi dialect"
+     ]
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 10580,
+    "usage": {
+     "inTok": 2072,
+     "outTok": 2171
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 8169,
+    "usage": {
+     "inTok": 2136,
+     "outTok": 1763
+    },
+    "status": 200,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "beat.text: missing en/ar",
+      "beat.duck_line: missing en/ar",
+      "choices: undefined (need 4)"
+     ],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 8641,
+    "usage": {
+     "inTok": 2169,
+     "outTok": 1860
+    },
+    "status": 200,
+    "valid": true,
+    "retried": true,
+    "issues": {
+     "errors": [],
+     "warnings": [
+      "choice 3: no consequences"
+     ]
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 6965,
+    "usage": {
+     "inTok": 2180,
+     "outTok": 1489
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 340,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 429,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (429): "
+     ],
+     "warnings": []
+    },
+    "raw": ""
+   },
+   {
+    "kind": "ending",
+    "ms": 2249,
+    "usage": {
+     "inTok": 1005,
+     "outTok": 254
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   }
+  ]
+ },
+ {
+  "i": 1,
+  "mode": "marine",
+  "creature": "frog/wings/hump/ink",
+  "tone": "suspenseful",
+  "outline": {
+   "title": {
+    "en": "The Phantom Trench Frequency",
+    "ar": "تردد الأخدود الأشباح"
+   },
+   "premise": {
+    "en": "Deep aquatic acoustic signals are disrupting Kuwait's coastal waters, urging {CREATURE} and the BSC team to dive from surface reefs into the dark abyss.",
+    "ar": "إشارات صوتية مائية عميقة تسبب اضطراباً في المياه الساحلية للكويت، مما يدفع {CREATURE} وفريق النادي الحيوي للغوص من الشعاب السطحية إلى الأعماق المظلمة."
+   },
+   "premise_tag": "trench_acoustic_anomaly",
+   "tone": "suspenseful",
+   "twist_tag": "submerged_ancient_hydrophone_array",
+   "acts": [
+    {
+     "id": "act_1",
+     "biome": "reef",
+     "props": [
+      "hydrophone",
+      "critter"
+     ],
+     "purpose": "surface start and signal detection",
+     "npc": "diver",
+     "plants_clue": "clue_metallic_hum",
+     "pays_off": null
+    },
+    {
+     "id": "act_2",
+     "biome": "seagrass",
+     "props": [
+      "net",
+      "obstacle"
+     ],
+     "purpose": "navigate coastal disturbance",
+     "npc": null,
+     "plants_clue": "clue_shattered_sensor",
+     "pays_off": null
+    },
+    {
+     "id": "act_3",
+     "biome": "openSea",
+     "props": [
+      "boat",
+      "predator"
+     ],
+     "purpose": "confront surface predator near open waters",
+     "npc": "sailor",
+     "plants_clue": null,
+     "pays_off": "clue_metallic_hum"
+    },
+    {
+     "id": "act_4",
+     "biome": "twilight",
+     "props": [
+      "darkness",
+      "jelly"
+     ],
+     "purpose": "enter the twilight zone and trace the pulse",
+     "npc": null,
+     "plants_clue": "clue_encrusted_cable",
+     "pays_off": null
+    },
+    {
+     "id": "act_5",
+     "biome": "midnight",
+     "props": [
+      "angler",
+      "pressure"
+     ],
+     "purpose": "face deep abyssal darkness",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_shattered_sensor"
+    },
+    {
+     "id": "act_6",
+     "biome": "vents",
+     "props": [
+      "vents",
+      "tubeworms"
+     ],
+     "purpose": "investigate thermal vent interference",
+     "npc": null,
+     "plants_clue": "clue_frequency_map",
+     "pays_off": null
+    },
+    {
+     "id": "act_7",
+     "biome": "trench",
+     "props": [
+      "probe",
+      "leviathan"
+     ],
+     "purpose": "reach the absolute ocean floor",
+     "npc": "rival",
+     "plants_clue": null,
+     "pays_off": "clue_encrusted_cable"
+    },
+    {
+     "id": "act_8",
+     "biome": "trench",
+     "props": [
+      "machine",
+      "clue"
+     ],
+     "purpose": "climax - disable or re-calibrate the ancient acoustic array",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_frequency_map"
+    }
+   ],
+   "mysteries": [
+    {
+     "id": "mystery_signal_origin",
+     "name": {
+      "en": "Source of the Oceanic Pulse",
+      "ar": "مصدر النبض المحيطي"
+     },
+     "description": {
+      "en": "Uncover what is generating the massive low-frequency sound disrupting marine life.",
+      "ar": "اكتشاف ما يولد الصوت ضخم المنخفض التردد الذي يربك الحياة البحرية."
+     },
+     "solved_by": "act_8"
+    }
+   ],
+   "ending_options": [
+    {
+     "id": "ending_recalibrate",
+     "title": {
+      "en": "Harmonize the Deep Array",
+      "ar": "إعادة ضبط المنظومة العميقة"
+     },
+     "summary": {
+      "en": "{CREATURE} uses high intelligence to safely recalibrate the acoustic array, restoring peace to the trench.",
+      "ar": "يستخدم {CREATURE} ذكاءه العالي لإعادة ضبط المنظومة الصوتية بأمان، وإعادة الهدوء إلى الأخدود."
+     }
+    },
+    {
+     "id": "ending_ink_override",
+     "title": {
+      "en": "Blinding Ink Emergency Shutoff",
+      "ar": "إغلاق الطوارئ بالحبر"
+     },
+     "summary": {
+      "en": "{CREATURE} floods the array mechanisms with ink to trigger a complete shutdown.",
+      "ar": "يغمر {CREATURE} آليات المنظومة بالحبر لتحفيز الإغلاق التام."
+     }
+    }
+   ]
+  },
+  "beats": [
+   {
+    "act_id": "act_1",
+    "text": {
+     "en": "Near the vibrant coral reefs of Kuwait, a strange acoustic signal pulses through the water. {CREATURE} listens as the hydrophone picks up a metallic hum echoing from the dark depths beyond. A local diver floats nearby, motioning toward the deep blue abyss.",
+     "ar": "بالقرب من الشعاب المرجانية الزاهية في الكويت، تتصاعد إشارة صوتية غريبة عبر المياه. يستمع {CREATURE} بينما يلتقط الميكروفون المائي رنيناً معدنياً يتردد من الأعماق المظلمة. يطفو غواص محلي بالقرب من المكان، مشيراً نحو زرقة البحر العميقة."
+    },
+    "duck_line": {
+     "en": "Listen to that rhythmic hum, team! It's clear as day on the hydrophone. Look, we need to find out what's causing it!",
+     "ar": "انتبهوا حق هذا الطنين، يا فريق! الصوت وايد واضح بالجهاز. شوفوا، لازم نعرف شنو مصدره!"
+    },
+    "fact_id": "pearl-history",
+    "choices": [
+     {
+      "id": "c1_listen_deep",
+      "label": {
+       "en": "Use Radiator Ears to analyze the sound frequency",
+       "ar": "استخدام الأذنين الإشعاعيتين لتحليل تردد الصوت"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} catches the exact pulse rhythm. It feels deliberate, almost like an automated signal, and logs the metallic hum as a clue.",
+        "ar": "يلتقط {CREATURE} إيقاع النبض بدقة. يبدو الإيقاع متعمداً وكأنه إشارة آلية، ويسجل الرنين المعدني كدليل."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_metallic_hum"
+        },
+        {
+         "t": "discovery",
+         "id": "pearl-history"
+        },
+        {
+         "t": "energy",
+         "d": 0
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The high volume rattles {CREATURE}'s sensitive ears, making it hard to focus on the signal's direction.",
+        "ar": "تتسبب شدة الصوت في إزعاج أذني {CREATURE} الحساستين، مما يجعل التحديد الصحيح لاتجاه الإشارة أمراً صعباً."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     },
+     {
+      "id": "c2_swim_down",
+      "label": {
+       "en": "Dive alongside the diver toward the reef edge",
+       "ar": "الغيص بجانب الغواص نحو حافة الشعاب المرجانية"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "swim",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} glides gracefully through the upper reef current, keeping up with the diver and spotting odd vibrations below.",
+        "ar": "ينزلق {CREATURE} برشاقة عبر التيار العلوي للشعاب، موازياً حركة الغواص وملاحظاً اهتزازات غريبة في الأسفل."
+       },
+       "effects": [
+        {
+         "t": "rel",
+         "npc": "diver",
+         "d": 1
+        },
+        {
+         "t": "mark",
+         "id": "wet"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "excited"
+      },
+      "fail": {
+       "text": {
+        "en": "The current drags {CREATURE} sideways, forcing extra effort to regain balance near the shallow coral.",
+        "ar": "يجرف التيار {CREATURE} إلى الجانب، مما يتطلب منه جهداً إضافياً لاستعادة توازنه قرب الشعاب الضحلة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "curious"
+      }
+     },
+     {
+      "id": "c3_ink_distraction",
+      "label": {
+       "en": "Release an Ink Cloud to shield the team from startling local sea life",
+       "ar": "إطلاق سحابة حبر لحماية الفريق من إخافة الكائنات البحرية"
+      },
+      "style": "clever",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "A dark puff of ink hides the team's descent, allowing {CREATURE} to move smoothly past skittish reef critters.",
+        "ar": "تخفي سحابة حبر داكنة نزول الفريق، مما يسمح لـ {CREATURE} بالتحرك بسلاسة دون إخافة كائنات الشعاب."
+       },
+       "effects": [
+        {
+         "t": "mark",
+         "id": "ink"
+        },
+        {
+         "t": "flag",
+         "id": "flag_ink_used_act1"
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "calm"
+      },
+      "fail": null
+     },
+     {
+      "id": "c4_talk_diver",
+      "label": {
+       "en": "Signal to the diver for assistance with the hydrophone",
+       "ar": "الإشارة إلى الغواص للمساعدة في ضبط جهاز الميكروفون المائي"
+      },
+      "style": "kind",
+      "uses_capability": null,
+      "check": null,
+      "success": {
+       "text": {
+        "en": "The diver nods warmly and adjusts the equipment, pointing out that the hum originates from a far deeper trench.",
+        "ar": "يومئ الغواص بود ويعدل المعدات، مشيراً إلى أن الطنين ينبعث من أخدود أعمق بكثير."
+       },
+       "effects": [
+        {
+         "t": "rel",
+         "npc": "diver",
+         "d": 1
+        },
+        {
+         "t": "evidence",
+         "id": "clue_metallic_hum"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "curious"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "act_id": "act_2",
+    "text": {
+     "en": "Descending into the lush seagrass beds, {CREATURE} encounters a tangled fishing net swept against a submerged acoustic relay station. The vibrating noise from deeper down is shaking the structure loose, scattering debris across the seabed.",
+     "ar": "عند الهبوط إلى أسرّة الأعشاب البحرية الكثيفة، يصادف {CREATURE} شباك صيد متشابكة اندفعت نحو محطة ترحيل صوتية مغمورة. الضوضاء المهتزة الآتية من الأعماق تزعزع هيكل المحطة وتنثر الحطام عبر قاع البحر."
+    },
+    "duck_line": {
+     "en": "Look out, team! That net is swinging wildly—don't get caught in the mesh while we check those sensors!",
+     "ar": "شوفوا يا فريق! تلك الشبكة تتحرك بقوة—انتبهوا لا تتدبسون فيها وإحنا نفحص أجهزة الاستشعار!"
+    },
+    "fact_id": "seagrass-dugong",
+    "choices": [
+     {
+      "id": "choice_ink_burst",
+      "label": {
+       "en": "Deploy an Ink Cloud to obscure {CREATURE} while slipped through the net tension",
+       "ar": "إطلاق سحابة حبر لإخفاء {CREATURE} أثناء التسلل عبر شبكة الصيد"
+      },
+      "style": "clever",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} bursts a cloud of thick ink into the current, masking its retreat as it easily glides past the twisting ropes and inspects a broken sensor piece.",
+        "ar": "يطلق {CREATURE} سحابة من الحبر الكثيف في التيار، مما يحجب حركته وهو ينزلق بسهولة بين الحبال الملتوية ويفحص قطعة استشعار مكسورة."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_shattered_sensor"
+        },
+        {
+         "t": "mark",
+         "id": "ink"
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_agility_swim",
+      "label": {
+       "en": "Weave swiftly through the drifting net mesh using quick maneuvers",
+       "ar": "السباحة ببراعة بين فتحات الشبكة العائمة باستعمال مناورات سريعة"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "agility",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "With precise turns, {CREATURE} dodges the sharp edges of the net and recovers a glowing cracked transmitter component.",
+        "ar": "بدورانات دقيقة، يتفادى {CREATURE} حواف الشبكة الحادة ويستعيد جزءاً متوهجاً ومتصدعاً من جهاز الإرسال."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_shattered_sensor"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "calm"
+      },
+      "fail": {
+       "text": {
+        "en": "The shifting current pushes the net onto {CREATURE}, snagging its radiator ears temporarily before it manages to wriggle free empty-handed.",
+        "ar": "يدفع التيار المتغير الشبكة نحو {CREATURE}، لتعلق أذناه المبردتان مؤقتاً قبل أن يتمكن من التملص بصعوبة دون العثور على شيء."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_analyze_relay",
+      "label": {
+       "en": "Examine the vibrating relay structure to decipher the acoustic distortion",
+       "ar": "فحص هيكل الترحيل المهتز لفك شفرة التشويش الصوتي"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} studies the pulse rate of the damaged unit, identifying a shattered sensor that was overwhelmed by an ultra-low frequency from the trench below.",
+        "ar": "يدرس {CREATURE} معدل نبض الوحدة التالفة، ويتعرف على مستشعر محطم تعرض لضغط تردد منخفض للغاية قادم من الخندق الأسفل."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_shattered_sensor"
+        },
+        {
+         "t": "discovery",
+         "id": "seagrass-dugong"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "curious"
+      },
+      "fail": {
+       "text": {
+        "en": "The harsh metallic hum disorients {CREATURE}, making it difficult to read the relay logs clearly.",
+        "ar": "يتسبب الطنين المعدني الحاد في إرباك {CREATURE}، مما يجعل قراءة سجلات محطة الترحيل أمراً صعباً."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "afraid"
+      }
+     },
+     {
+      "id": "choice_night_vision_scan",
+      "label": {
+       "en": "Use Night Eyes to spot hidden debris beneath the shaded seagrass canopy",
+       "ar": "استخدام العينين الليلتين لرصد الحطام المختفي تحت غطاء الأعشاب البحرية"
+      },
+      "style": "kind",
+      "uses_capability": "nightVision",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "Piercing through the murky shadows beneath the tall leaves, {CREATURE} easily locates a discarded sensor housing jammed under a rock.",
+        "ar": "يخترق {CREATURE} الظلال المعتمة تحت الأوراق الطويلة، ويكتشف بسهولة غلاف مستشعر ملقى تحت صخرة."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_shattered_sensor"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "confident"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "id": "act_3",
+    "text": {
+     "en": "Cruising aboard the old wooden dhow alongside an experienced sailor, {CREATURE} feels the rolling sea swells. Suddenly, a massive shadow circles beneath the vessel, drawn toward the hull by the sharp metallic hum echoing from the depths. The sailor grips the wheel, anxious as the sea predator threatens to capsize their small boat.",
+     "ar": "أثناء الإبحار على متن المركب الخشبي القديم برفقة بحار خبير، يشعر {CREATURE} بأمواج البحر المترامية. وفجأة، تدور ظلال عملاقة تحت السفينة، حيث جذبها الطنين المعدني الحاد المتصاعد من الأعماق. يمسك البحار بالدفة بقلق بينما يهدد المفترس البحري بقلب مركبهم الصغير."
+    },
+    "duck_line": {
+     "en": "Look out team! That giant marine hunter is reacting to the strange frequency!",
+     "ar": "شوفوا يا فريق! هذا المفترس البحري الكبير قاعد يتأثر بالتردد الغريب!"
+    },
+    "fact_id": "pearl-history",
+    "choices": [
+     {
+      "id": "c1",
+      "label": {
+       "en": "Use Scorpion Stinger venom to ward off the creature",
+       "ar": "استخدام سم لدغة العقرب لإبعاد الكائن"
+      },
+      "style": "bold",
+      "uses_capability": "venom",
+      "check": {
+       "stat": "strength",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} strikes the water with its venomous tail tip, releasing a localized chemical signal that sends the predator swimming back into the deep.",
+        "ar": "يضرب {CREATURE} الماء بطرف ذيله السام، ملقياً إشارة كيميائية تجعل المفترس يتراجع إلى الأعماق."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_predator_deflected"
+        },
+        {
+         "t": "energy",
+         "d": -1
+        },
+        {
+         "t": "rel",
+         "npc": "sailor",
+         "d": 1
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The sting barely grazes the tough hide of the ocean predator, tiring {CREATURE} out as the boat lurches violently.",
+        "ar": "لم تكد اللدغة تمس الجلد السميك للمفترس البحري، مما أجهد {CREATURE} بينما يترنح القارب بشدة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -2
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "c2",
+      "label": {
+       "en": "Divert the hum using Radiator Ears to pinpoint the exact frequency source",
+       "ar": "توجيه الطنين باستخدام أذني المشاع الحراري لتحديد مصدر التردد بدقة"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "By analyzing the acoustic pulse paid off from the metallic hum, {CREATURE} helps the sailor steer the dhow away from the predator's feeding circuit.",
+        "ar": "عن طريق تحليل النبض الصوتي القادم من الطنين المعدني، يساعد {CREATURE} البحار في توجيه المركب بعيداً عن مسار المفترس."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_trench_coordinates"
+        },
+        {
+         "t": "trust",
+         "d": 1
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "calm"
+      },
+      "fail": {
+       "text": {
+        "en": "The loud resonance overwhelms the delicate radiator ears, disorienting {CREATURE} for a brief moment.",
+        "ar": "يطغى الرنين العالي على الأذنين الحساستين، مما يسبب ارتباكاً مؤقتاً لـ {CREATURE}."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     },
+     {
+      "id": "c3",
+      "label": {
+       "en": "Flap Bat Wings to create a startling shadow on the surface",
+       "ar": "رفرفة أجنحة الخفاش لإحداث ظل مفاجئ على السطح"
+      },
+      "style": "clever",
+      "uses_capability": "fly",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} leaps upward and expands its broad leathery wings. The broad shadow on the illuminated water startles the surface beast into veering away.",
+        "ar": "يقفز {CREATURE} إلى الأعلى ويبسط أجنحته الجلدية العريضة. يروع الظل الكثيف على الماء المغطى بالنور الكائن البحري فيبتعد."
+       },
+       "effects": [
+        {
+         "t": "mark",
+         "id": "wet"
+        },
+        {
+         "t": "rel",
+         "npc": "sailor",
+         "d": 1
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "excited"
+      },
+      "fail": null
+     },
+     {
+      "id": "c4",
+      "label": {
+       "en": "Consult the sailor on local sea lore and hydrophone signals",
+       "ar": "استشارة البحار حول التراث البحري المحلي وإشارات الهيدروفون"
+      },
+      "style": "kind",
+      "uses_capability": null,
+      "check": {
+       "stat": "charm",
+       "dc": 3
+      },
+      "success": {
+       "text": {
+        "en": "The sailor shares ancient pearl-diving stories, explaining how deep sound channels behave around the coastal trenches and helping calm the waters.",
+        "ar": "يشارك البحار قصص غوص اللؤلؤ القديمة، موضحاً كيف تتصرف القنوات الصوتية العميقة حول الأخاديد الساحلية."
+       },
+       "effects": [
+        {
+         "t": "discovery",
+         "id": "pearl-history"
+        },
+        {
+         "t": "trust",
+         "d": 2
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The sailor is too panicked by the predator to give clear advice amidst the crashing waves.",
+        "ar": "يعتري البحار الخوف من المفترس فلا يستطيع تقديم نصيحة واضحة وسط الأمواج المتلاطمة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "calm"
+      }
+     }
+    ]
+   },
+   {
+    "id": "act_4",
+    "text": {
+     "en": "Descent into the twilight zone turns the blue sea into a murky indigo realm. Giant comb jellies float past like ghostly lanterns, while the pulsing acoustic hum grows stronger near a metallic cable coiled around a ridge. {CREATURE}'s huge Night Eyes cut through the dim shadows, catching the gleam of rusted iron deep below.",
+     "ar": "تحول الهبوط إلى منطقة الغسق المياه الزرقاء إلى عالم داكن من الكحلي العميق. تطفو قناديل البحر المشعة كأنها قناديل أشباح، بينما تزداد الذبذبة الصوتية قوة بالقرب من كابل معدني ملتف حول حافة صخرية. تضيء عينا {CREATURE} الكبيرتان المصممتان للظلام الرؤية وسط الظلال الخافتة، لتلتقط بريق الحديد الصدئ في الأعماق."
+    },
+    "duck_line": {
+     "en": "Look at all these glowing jellies! Keep your eyes open, team—that hum is coming from right underneath that cable!",
+     "ar": "شوفوا قناديل البحر المضيئة! خليكم منتبهين يا فريق، الصوت الضابط ياي من تحت الكابل بالضبط!"
+    },
+    "fact_id": "twilight-dvm",
+    "choices": [
+     {
+      "id": "act_4_choice_1",
+      "label": {
+       "en": "Use Night Eyes to examine the murky path and follow the encrusted cable",
+       "ar": "استخدام عين الليل لمسح الطريق المظلم وتتبع الكابل المغطى بالترسبات"
+      },
+      "style": "careful",
+      "uses_capability": "nightVision",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} leverages its wide Night Eyes to scan the indigo gloom without stumbling into venomous jelly tentacles, tracing the ancient cable to its anchor point.",
+        "ar": "يستغل {CREATURE} عينيه الكبيرتين المخصصتين للظلام ليمسح الظلمة الكحلية دون الاصطدام بالمجسات السامة، متتبعاً الكابل القديم حتى نقطة تثبيته."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_encrusted_cable"
+        },
+        {
+         "t": "discovery",
+         "id": "twilight-dvm"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "curious"
+      },
+      "fail": null
+     },
+     {
+      "id": "act_4_choice_2",
+      "label": {
+       "en": "Swim forcefully against the deep pressure current to reach the cable base",
+       "ar": "السباحة بقوة ضد تيار الضغط العميق للوصول إلى قاعدة الكابل"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "swim",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "Pushing through the cold oceanic pressure, {CREATURE} swims directly against the undercurrent and secures a steady spot beside the pulsating cable.",
+        "ar": "يدفع {CREATURE} جسده عبر ضغط المحيط البارد، ويسابح مباشرة ضد التيار السفلي ليتخذ موقعاً ثابتاً بجانب الكابل النابض."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_encrusted_cable"
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The sudden chilly current overwhelms {CREATURE}'s weak cold tolerance, forcing it to retreat to a safer ledge while shaking off the freeze.",
+        "ar": "يتغلب التيار البارد المفاجئ على حساسية {CREATURE} للبرودة، مما يضطره للتراجع إلى رف صخري أكثر أماناً بينما ينفض عنه البرد."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "act_4_choice_3",
+      "label": {
+       "en": "Analyze the frequency pattern of the sound echoing off the ocean ridge",
+       "ar": "تحليل نمط تردد الصوت المتردد عبر الحافة البحرية"
+      },
+      "style": "clever",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 3
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} studies the acoustic rhythmic intervals, determining that the pulse is an automated signal rather than a marine creature's call.",
+        "ar": "يدرس {CREATURE} الفواصل الزمنية للإيقاع الصوتي، ويكتشف أن النبض عبارة عن إشارة آلية منتظمة وليس نداء كائن بحري."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_encrusted_cable"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The echoing hum confuses the sensors, leaving {CREATURE} uncertain of the exact origin of the sound.",
+        "ar": "تتسبب الأصداء المتكررة في إرباك التقدير، مما يجعل {CREATURE} غير متأكد من مصدر الصوت الدقيق."
+       },
+       "effects": [],
+       "duck_mood": "thinking",
+       "creature_state": "curious"
+      }
+     },
+     {
+      "id": "act_4_choice_4",
+      "label": {
+       "en": "Nudge the giant comb jellies aside using small venomous tail twitches",
+       "ar": "إبعاد قناديل البحر العملاقة بحركات خفيفة من الذيل السام"
+      },
+      "style": "silly",
+      "uses_capability": "venom",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} gently waves its stinger, causing the delicate jellies to dart away safely and clear a wide path toward the cable.",
+        "ar": "يلوح {CREATURE} بشوكته السامة برفق، مما يبتعد قناديل البحر الرقيقة بأمان ويفسح طريقاً واسعاً نحو الكابل."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_encrusted_cable"
+        }
+       ],
+       "duck_mood": "laughing",
+       "creature_state": "calm"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "act_id": "act_5",
+    "text": {
+     "en": "Descending into the midnight zone, extreme hydrostatic pressure presses against the submersible. Amidst the pitch-black abyss, glowing anglerfish drift past ancient structural ruins, where a pulsing hydrophone array rests. {CREATURE} spots the broken sensor piece identified earlier, embedded near a deep-sea signal node.",
+     "ar": "عند الهبوط إلى منطقة منتصف الليل، يضغط الضغط الهيدروستاتيكي الهائل على الغواصة. وسط الظلام الدامس، تطفو أسماك الصياد المضيئة بجانب أنقاض هيكلية قديمة حيث تستقر مصفوفة سماعات مائية نابضة. يلمح {CREATURE} قطعة الحساس المكسورة التي تم تحديدها سابقاً، وهي مغروسة بالقرب من عقدة إشارات الأعماق."
+    },
+    "duck_line": {
+     "en": "Look at that extreme depth! The pressure down here is incredible—be careful, team!",
+     "ar": "شوفوا هالأعماق الخيالية! الضغط اهني وايد قوي—انتبهوا يا الفريق!"
+    },
+    "fact_id": "trench-pressure",
+    "choices": [
+     {
+      "id": "choice_night_vision_scan",
+      "label": {
+       "en": "Scan the dark abyssal ruins using Night Eyes to pinpoint the array's main control power line",
+       "ar": "مسح أنقاض الأعماق المظلمة باستخدام عيني الليل لتحديد خط الطاقة الرئيسي لمصفوفة التحكم"
+      },
+      "style": "clever",
+      "uses_capability": "nightVision",
+      "check": {
+       "stat": "intellect",
+       "dc": 6
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} uses its massive eyes to pierce the ink-black trench, instantly spotting the primary power conduit running beneath the array.",
+        "ar": "يستخدم {CREATURE} عينيه الضخمتين ليخترق ظلام الخندق الدامس، ويكتشف على الفور أنبوب الطاقة الرئيسي الذي يمر تحت المصفوفة."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_array_conduit"
+        },
+        {
+         "t": "trust",
+         "d": 1
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The bioluminescent flashes from passing organisms dazzle {CREATURE}'s sensitive vision, obscuring the conduit.",
+        "ar": "تسبب الومضات المضيئة حيوياً من الكائنات المارة في إبهار رؤية {CREATURE} الحساسة، مما يحجب رؤية الأنبوب."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     },
+     {
+      "id": "choice_stinger_align",
+      "label": {
+       "en": "Use the Scorpion Stinger to carefully clear encrusted debris around the shattered sensor slot",
+       "ar": "استخدام إبرة العقرب لإزالة الحطام المتراكم بحذر من حول فتحة الحساس المكسور"
+      },
+      "style": "careful",
+      "uses_capability": "venom",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "With precise precision, {CREATURE} picks away the calcified deposits with its tail tip, matching the shattered sensor piece perfectly.",
+        "ar": "بدقة متناهية، يزيل {CREATURE} الترسبات المتكلسة بطرف ذيله، مما يتيح تركيب قطعة الحساس المكسورة بشكل مثالي."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_hydrophone_core"
+        },
+        {
+         "t": "discovery",
+         "id": "trench-pressure"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "curious"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_swim_around_pressure",
+      "label": {
+       "en": "Swim against the heavy abyssal currents to realign the submerged transmitter housing",
+       "ar": "السباحة ضد تيارات الأعماق الثقيلة لإعادة محاذاة هيكل جهاز الإرسال المغمور"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "swim",
+       "dc": 7
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} muscles through the dense deep-water currents, successfully shoving the heavy transmitter node back into its alignment frame.",
+        "ar": "يدفع {CREATURE} عضلاته بقوة عبر تيارات المياه العميقة الكثيفة، وينجح في إعلاء عقدة الإرسال الثقيلة وإعادتها إلى إطارها الصحيح."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "array_realigned"
+        },
+        {
+         "t": "trust",
+         "d": 1
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The immense pressure and crushing currents overwhelm {CREATURE}, forcing it to fall back exhausted.",
+        "ar": "يتغلب الضغط الهائل والتيارات الساحقة على {CREATURE}، مما يجبره على التراجع وهو مرهق."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -2
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_ink_distraction",
+      "label": {
+       "en": "Release a cloud of ink to blind territorial deep-sea creatures guarding the central hub",
+       "ar": "إطلاق سحابة من الحبر لإعماء كائنات الأعماق المفترسة التي تحرس المحور المركزي"
+      },
+      "style": "silly",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} expels a dark cloud of abyssal ink; the confusion allows the team to access the control panel uninterrupted, though the station log gets smudged.",
+        "ar": "يطلق {CREATURE} سحابة داكنة من حبر الأعماق؛ ويثير هذا الارتباك مما يتيح للفريق الوصول إلى لوحة التحكم دون إزعاج، رغم تلطخ سجل المحطة."
+       },
+       "effects": [
+        {
+         "t": "mark",
+         "id": "ink"
+        },
+        {
+         "t": "evidence",
+         "id": "clue_ancient_frequency_log"
+        }
+       ],
+       "duck_mood": "laughing",
+       "creature_state": "calm"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "id": "act_6",
+    "text": {
+     "en": "Deep near the hydrothermal vents, scalding fluids erupt beside dense clusters of giant tubeworms. The ocean floor hums violently as tectonic cracks channel volcanic warmth into the abyss. Amidst the shifting currents, {CREATURE} locates the source of the thermal vent acoustic interference, finding a crude frequency map etched into the volcanic crust beside old array housings.",
+     "ar": "بالقرب من المنفسات الحرارية المائية العميقة، تتفجر السوائل الحارقة بجانب تجمعات كثيفة من ديدان الأنابيب العملاقة. يهتز قاع المحيط بقوة بينما تنقل الصدوع التكتونية الدفء البركاني إلى الأعماق. وسط التيارات المتغيرة، يحدد {CREATURE} مصدر التداخل الصوتي، ليكتشف خريطة ترددات بدائية محفورة على القشرة البركانية."
+    },
+    "duck_line": {
+     "en": "Look at those thermal clouds! It's boiling hot down here, so stay clear of the main vent jets!",
+     "ar": "شوفوا سحب الحرارة هذه! الوضع وايد حار هني، انتبهوا ولا تقربون من فتحات البركان!"
+    },
+    "fact_id": "vents-chemo",
+    "plants_clue": "clue_frequency_map",
+    "pays_off": null,
+    "choices": [
+     {
+      "id": "choice_heat_shed",
+      "label": {
+       "en": "Use Radiator Ears to dissipate the vent heat while analyzing the frequency map",
+       "ar": "استخدام أذني التبريد لتبديد حرارة المنفس أثناء تحليل خريطة الترددات"
+      },
+      "style": "clever",
+      "uses_capability": "heatShed",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} uses its radiator ears to vent excess heat efficiently, allowing it to inspect the volcanic map closely without taking thermal damage.",
+        "ar": "يستخدم {CREATURE} أذنيه لتبديد الحرارة الزائدة بكفاءة، مما يسمح له بفحص الخريطة البركانية عن قرب دون التعرض لأذى."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_frequency_map"
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_swim_check",
+      "label": {
+       "en": "Navigate carefully through the superheated water currents to read the map",
+       "ar": "التنقل بحذر عبر تيارات المياه شديدة السخونة لقراءة الخريطة"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "swim",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "With steady strokes, {CREATURE} weaves past the boiling plumes and transcribes the ancient acoustic frequencies safely.",
+        "ar": "بضربات زعانف متزنة، يمر {CREATURE} من بين أعمدة المياه المغليّة ويدوّن الترددات الصوتية القديمة بسلام."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_frequency_map"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "curious"
+      },
+      "fail": {
+       "text": {
+        "en": "A sudden surge of heated water catches {CREATURE}, forcing a quick retreat and scorching its outer skin.",
+        "ar": "يدفع تيار ماء ساخن مفاجئ {CREATURE}، مما يجبره على التراجع السريع مع لفح بشرته الخارجية."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "hurt"
+      }
+     },
+     {
+      "id": "choice_ink_cloud",
+      "label": {
+       "en": "Deploy an Ink Cloud to shield the team from scalding water bursts",
+       "ar": "إطلاق سحابة حبر لحماية الفريق من اندفاعات المياه الحارقة"
+      },
+      "style": "bold",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} blasts a dense plume of ink that absorbs the immediate heat turbulence, though the dark residue obscures some ambient details.",
+        "ar": "يطلق {CREATURE} سحابة حبر كثيفة تمتص اضطراب الحرارة المباشر، رغم أن البقايا الداكنة تحجب بعض التفاصيل."
+       },
+       "effects": [
+        {
+         "t": "mark",
+         "id": "ink"
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "calm"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_intellect_analyze",
+      "label": {
+       "en": "Study the chemical signatures in the tubeworm cluster to trace the array signal",
+       "ar": "دراسة البصمات الكيميائية في مستعمرة ديدان الأنابيب لتتبع إشارة المصفوفة"
+      },
+      "style": "clever",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} calculates how the chemosynthetic ecosystem interacts with the electrical signals, unlocking the final frequency key.",
+        "ar": "يحسب {CREATURE} كيفية تفاعل النظام البيئي الكيميائي مع الإشارات الكهربائية، مفككاً رمز التردد الأخير."
+       },
+       "effects": [
+        {
+         "t": "discovery",
+         "id": "vents-chemo"
+        },
+        {
+         "t": "evidence",
+         "id": "clue_frequency_map"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The complex signals prove confusing amid the vent turbulence, delaying the team's analysis.",
+        "ar": "تثبت الإشارات المعقدة أنها مربكة وسط اضطراب المنفس، مما يؤخر تحليل الفريق."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     }
+    ]
+   },
+   {
+    "act_id": "act_7",
+    "text": {
+     "en": "{CREATURE} descends into the deepest zone of the trench, where extreme hydrostatic pressure crushes down on the water column. Below, near an ancient submerged array probe, the rival researcher's sub hovers erratically as a massive shadow glides through the abyss.",
+     "ar": "يغوص {CREATURE} في أعمق منطقة من الأخدود، حيث يضغط الضغط الهيدروستاتيكي الهائل على عمود الماء. وفي الأسفل، بالقرب من مسبار المصفوفة المغمورة القديمة، تحوم غواصة الباحث المنافس بشكل غير مستقر بينما تلمح ظلال عملاقة تتحرك في الأعماق."
+    },
+    "duck_line": {
+     "en": "Look at that pressure meter! We reached the absolute bottom. Watch out for the rival's sub!",
+     "ar": "شوفوا مقياس الضغط! وصلنا القاع بالكامل. انتبهوا من غواصة المنافس!"
+    },
+    "fact_id": "trench-pressure",
+    "choices": [
+     {
+      "id": "choice_ink_distraction",
+      "label": {
+       "en": "Deploy a massive ink cloud to obscure the rival sub's sensors while approaching the probe",
+       "ar": "إطلاق سحابة حبر ضخمة لتشويش مجسات غواصة المنافس أثناء الاقتراب من المسبار"
+      },
+      "style": "clever",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} releases a thick plume of abyssal ink, blinding the rival's camera sensors and creating a safe corridor to reach the trench floor probe.",
+        "ar": "يطلق {CREATURE} سحابة كثيفة من الحبر البحري، مما يعمي مجسات كاميرا المنافس ويوفر ممراً آمناً للوصول إلى مسبار قاع الأخدود."
+       },
+       "effects": [
+        {
+         "t": "mark",
+         "id": "ink"
+        },
+        {
+         "t": "rel",
+         "npc": "rival",
+         "d": -1
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_intellect_array_override",
+      "label": {
+       "en": "Analyze the array pulse to send a counter-frequency from the probe control panel",
+       "ar": "تحليل نبضات المصفوفة لإرسال تردد مضاد من لوحة تحكم المسبار"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 5
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} decodes the acoustic feedback from the encrusted cable, overriding the array signal and stabilizing the ocean floor transmissions.",
+        "ar": "يفك {CREATURE} شفرة التغذية الراجعة الصوتية من الكابل المغطى بالقشور، ملغياً إشارة المصفوفة ومثبتاً عمليات البث في قاع المحيط."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_array_core_frequency"
+        },
+        {
+         "t": "discovery",
+         "id": "trench-pressure"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "excited"
+      },
+      "fail": {
+       "text": {
+        "en": "The intense pressure makes reading the small display panels difficult, delaying the override attempt.",
+        "ar": "يصعّب الضغط الشديد قراءة لوحات العرض الصغيرة، مما يؤخر محاولة إلغاء الإشارة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_swim_blitz",
+      "label": {
+       "en": "Swim rapidly past the giant aquatic shadow to manually lock the array probe",
+       "ar": "السباحة بسرعة لتجاوز الظل المائي العملاق وإغلاق مسبار المصفوفة يدويًا"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "swim",
+       "dc": 6
+      },
+      "success": {
+       "text": {
+        "en": "Darting through the crushing deep currents, {CREATURE} reaches the core probe latch just before the ancient mechanisms lock into place.",
+        "ar": "مندفعاً عبر التيار العميق الضارب، يصل {CREATURE} إلى مزلاج المسبار الرئيسي قبل أن تنغلق الآليات القديمة في مكانها."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "trench_floor_reached"
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The extreme depth slows {CREATURE}'s propulsion, causing a hard bump against the metal housing.",
+        "ar": "تبطئ الأعماق السحيقة حركة {CREATURE}، مما يسبب اصطداماً بقوة مع الهيكل المعدني."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "hurt"
+      }
+     },
+     {
+      "id": "choice_night_eyes_survey",
+      "label": {
+       "en": "Use large eyes to scan the pitch-black trench floor for hidden power relays",
+       "ar": "استخدام العينين الكبيرتين لمسح قاع الأخدود المظلم بحثاً عن مرحلات الطاقة الخفية"
+      },
+      "style": "clever",
+      "uses_capability": "nightVision",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} catches faint bioluminescent reflections along the seabed, pinpointing the primary power line connecting the hydrophones.",
+        "ar": "يرصد {CREATURE} انعكاسات ضوئية حيوية خافتة على طول قاع البحر، محدداً مكان خط الطاقة الرئيسي الذي يربط الهيدروفونات."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_hydrophone_power_relay"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "curious"
+      },
+      "fail": null
+     }
+    ]
+   },
+   {
+    "act_id": "act_8",
+    "text": {
+     "en": "Deep within the silent trench, the ancient hydrophone array looms like a drowned titan. Emitting a pulse that shakes the seabed, the mechanical core hums with lost energy. Having mapped the frequency, {CREATURE} reaches the heart of the submerged machinery to finally silence the acoustic disruption.",
+     "ar": "في أعماق الأخدود السحيق، تبرز مصفوفة أجهزة رصد الصوت القديمة كعملاق غارق. يُصدر قلبه الميكانيكي ذبذبات ترج قاع البحر، نابضاً بالطاقة القديمة. بعد تحديد خريطة الترددات، يتقدم {CREATURE} نحو قلب الآلة المغمورة لإيقاف هذا الاضطراب الصوتي."
+    },
+    "duck_line": {
+     "en": "Look! The array's main core is right there! Calm down, take your time, and let's turn this thing off!",
+     "ar": "شوفوا! هذا هو قلب المصفوفة الرئيسي! انتبهوا وخلونا نطفي هالآلة بحذر!"
+    },
+    "fact_id": "trench-pressure",
+    "choices": [
+     {
+      "id": "choice_recalibrate_frequency",
+      "label": {
+       "en": "Re-calibrate the array's ancient frequency dials using precise intellect",
+       "ar": "إعادة ضبط أقراص التردد القديمة باستخدام الذكاء والدقة"
+      },
+      "style": "clever",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 6
+      },
+      "success": {
+       "text": {
+        "en": "Analyzing the hydrophone schematics, {CREATURE} carefully shifts the resonant frequency, converting the deafening pulse into a gentle, harmless hum.",
+        "ar": "بتحليل مخططات جهاز رصد الصوت، يغير {CREATURE} التردد بحذر، محولاً النبضات المدوية إلى رنين لطيف وآمن."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "array_deactivated"
+        },
+        {
+         "t": "evidence",
+         "id": "clue_calibrated_core"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The complex dials resist adjustment, causing an acoustic feedback blast that dazes the team before stabilizing.",
+        "ar": "تقاوم الأقراص المعقدة الضبط، مما يتسبب في ارتداد صوتي قوي يربك الفريق قبل أن يستقر الجهاز."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_ink_blind_array",
+      "label": {
+       "en": "Release a thick Ink Cloud to coat the optical sensor matrix",
+       "ar": "إطلاق سحابة حبر كثيفة لتغطية مصفوفة المستشعرات البصرية"
+      },
+      "style": "careful",
+      "uses_capability": "ink",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "Expanding its ink sac, {CREATURE} envelops the optical control receptors in black silt. Blinded, the ancient safety relays trip, powering down the array.",
+        "ar": "بإطلاق سحابة حبر داكنة، يغطي {CREATURE} مستقبلات التحكم البصرية. ولأن الأجهزة عميت، تتوقف المرحلات التلقائية وتطفئ المصفوفة."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "array_inked_off"
+        },
+        {
+         "t": "mark",
+         "id": "ink"
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_force_lever",
+      "label": {
+       "en": "Prise the rusted main power breaker down by raw physical force",
+       "ar": "سحب قاطع الطاقة الرئيسي الصدئ بالقوة البدنية"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "swim",
+       "dc": 8
+      },
+      "success": {
+       "text": {
+        "en": "Fighting against immense abyssal water pressure, {CREATURE} drives its body into the main lever, snapping the old connection shut.",
+        "ar": "مقاوماً ضغط المياه الهائل، يدفع {CREATURE} جسده نحو المقبض الرئيسي، ليقطع الاتصال القديم تماماً."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "array_breaker_broken"
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "proud"
+      },
+      "fail": {
+       "text": {
+        "en": "The rusted lever refuses to budge under heavy pressure, straining {CREATURE}'s muscles in the icy water.",
+        "ar": "يرفض المقبض الصدئ التحرك تحت الضغط العالي، مما يجهد عضلات {CREATURE} في الماء البارد."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -2
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_night_eyes_scan_wiring",
+      "label": {
+       "en": "Use Night Eyes to spot the array's fragile primary fuse line",
+       "ar": "استخدام العينين الليلتين لرؤية خط الصمام الرئيسي الهش"
+      },
+      "style": "careful",
+      "uses_capability": "nightVision",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "In total darkness, {CREATURE} spots a hair-thin glowing fuse cable behind the array, severing it cleanly to restore peace to the abyss.",
+        "ar": "في الظلام التام، يلمح {CREATURE} كابل صمام مضيء بدقة متناهية خلف المصفوفة، فيقطعه بنظافة ليعيد الهدوء إلى الأعماق."
+       },
+       "effects": [
+        {
+         "t": "flag",
+         "id": "array_fuse_cut"
+        },
+        {
+         "t": "discovery",
+         "id": "midnight-light"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "calm"
+      },
+      "fail": null
+     }
+    ]
+   }
+  ],
+  "ending": {
+   "title": {
+    "en": "Echoes of the Abyss Silent",
+    "ar": "أصداء الأغوار الصامتة"
+   },
+   "summary": {
+    "en": "{CREATURE} uses its night vision and agility to navigate the final pressure pulse of the deep trench, deploying an ink cloud to mute the erratic frequency array.",
+    "ar": "يستخدم {CREATURE} رؤيته الليلية ورشاقته للتنقل خلال نبرة الضغط الأخيرة في الخندق السحيق، نافثاً سحابة حبر لإخماد مصفوفة الترددات المضللة."
+   },
+   "epilogue": {
+    "en": "With the acoustic signal neutralized, the coastal waters of Kuwait return to serene silence. The BSC team records the final oceanographic telemetry, celebrating {CREATURE}'s brave deep-sea venture.",
+    "ar": "مع تحييد الإشارة الصوتية، تسترخي مياه الكويت الساحلية في صمت تام. يسجل فريق النادي العلمي التليمتريات البحرية الأخيرة، محتفلين بمسعى {CREATURE} الجريء في الأعماق."
+   },
+   "tone": "scientific"
+  },
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 6739,
+    "usage": {
+     "inTok": 3816,
+     "outTok": 1245
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 9261,
+    "usage": {
+     "inTok": 2044,
+     "outTok": 1692
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 9188,
+    "usage": {
+     "inTok": 2087,
+     "outTok": 1870
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 8999,
+    "usage": {
+     "inTok": 2161,
+     "outTok": 1629
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 8717,
+    "usage": {
+     "inTok": 2207,
+     "outTok": 1449
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 9975,
+    "usage": {
+     "inTok": 2222,
+     "outTok": 1779
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 10224,
+    "usage": {
+     "inTok": 2215,
+     "outTok": 1666
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 13745,
+    "usage": {
+     "inTok": 2226,
+     "outTok": 2100
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 9602,
+    "usage": {
+     "inTok": 2238,
+     "outTok": 1946
+    },
+    "status": 200,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "beat.duck_line: missing en/ar",
+      "choice 2.fail: effect creature_state"
+     ],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 8407,
+    "usage": {
+     "inTok": 2264,
+     "outTok": 1688
+    },
+    "status": 200,
+    "valid": true,
+    "retried": true,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "ending",
+    "ms": 2519,
+    "usage": {
+     "inTok": 1132,
+     "outTok": 271
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   }
+  ]
+ },
+ {
+  "i": 2,
+  "mode": "classic",
+  "creature": "gecko/webbed/shell/mimicry",
+  "tone": "eerie",
+  "outline": {
+   "title": {
+    "en": "The Echoes in the Dark",
+    "ar": "أصداء في الظلام"
+   },
+   "premise": {
+    "en": "An eerie frequency reverberates through the lab's drainage network, drawing {CREATURE} into silent, shadowy caverns.",
+    "ar": "تردد غريب يتردد عبر شبكة تصريف المختبر، جاذباً {CREATURE} نحو كهوف مظلمة وهادئة."
+   },
+   "premise_tag": "drainage_subharmonic_echoes",
+   "tone": "eerie",
+   "twist_tag": "bioluminescent_fungal_bioreactor",
+   "acts": [
+    {
+     "id": "act_1",
+     "biome": "lab",
+     "props": [
+      "vents",
+      "darkness"
+     ],
+     "purpose": "discovery",
+     "npc": null,
+     "plants_clue": "clue_metallic_hum",
+     "pays_off": null
+    },
+    {
+     "id": "act_2",
+     "biome": "swamp",
+     "props": [
+      "wisps",
+      "obstacle"
+     ],
+     "purpose": "investigation",
+     "npc": null,
+     "plants_clue": "clue_glowing_residue",
+     "pays_off": null
+    },
+    {
+     "id": "act_3",
+     "biome": "swamp",
+     "props": [
+      "predator",
+      "darkness"
+     ],
+     "purpose": "confrontation",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_metallic_hum"
+    },
+    {
+     "id": "act_4",
+     "biome": "cave",
+     "props": [
+      "darkness",
+      "clue"
+     ],
+     "purpose": "descent",
+     "npc": null,
+     "plants_clue": "clue_spore_pattern",
+     "pays_off": null
+    },
+    {
+     "id": "act_5",
+     "biome": "cave",
+     "props": [
+      "critter",
+      "pressure"
+     ],
+     "purpose": "trial",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_glowing_residue"
+    },
+    {
+     "id": "act_6",
+     "biome": "ruins",
+     "props": [
+      "machine",
+      "radio"
+     ],
+     "purpose": "revelation",
+     "npc": "rival",
+     "plants_clue": null,
+     "pays_off": "clue_spore_pattern"
+    },
+    {
+     "id": "act_7",
+     "biome": "ruins",
+     "props": [
+      "disaster",
+      "escapees"
+     ],
+     "purpose": "climax",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": null
+    },
+    {
+     "id": "act_8",
+     "biome": "lab",
+     "props": [
+      "trophy",
+      "vents"
+     ],
+     "purpose": "resolution",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": null
+    }
+   ],
+   "mysteries": [
+    {
+     "id": "mystery_subharmonic_source",
+     "name": {
+      "en": "Source of the Whispering Echoes",
+      "ar": "مصدر الأصداء الهمسية"
+     },
+     "description": {
+      "en": "Determining what produces the strange low frequencies beneath the facility.",
+      "ar": "تحديد مصدر الترددات المنخفضة الغريبة تحت المنشأة."
+     }
+    }
+   ],
+   "ending_options": [
+    {
+     "id": "end_seal",
+     "title": {
+      "en": "Contain the Echoes",
+      "ar": "احتواء الأصداء"
+     },
+     "description": {
+      "en": "Seal the subterranean vents to prevent the strange frequencies from spreading.",
+      "ar": "إغلاق المنافذ الأرضية لمنع انتشار الترددات الغريبة."
+     }
+    },
+    {
+     "id": "end_study",
+     "title": {
+      "en": "Harness the Bio-Network",
+      "ar": "استغلال الشبكة الحيوية"
+     },
+     "description": {
+      "en": "Integrate the microbial signal into the lab's research monitoring system.",
+      "ar": "دمج الإشارة الميكروبية في نظام مراقبة أبحاث المختبر."
+     }
+    }
+   ]
+  },
+  "beats": [
+   {
+    "act_id": "act_1",
+    "text": {
+     "en": "Deep beneath the main research floor, an uncanny mechanical hum vibrates through the dark ventilation shaft. {CREATURE} crawls near the metallic grating, peering into the pitch-black abyss below.",
+     "ar": "في أعماق الكلية تحت مستوى أرضية الأبحاث الرئيسية، تتردد ذبذبة ميكانيكية غريبة عبر فتحة التهوية المظلمة. يتقدم {CREATURE} حثيثاً نحو الشبكة المعدنية مستكشفاً الظلام الدامس في الأسفل."
+    },
+    "duck_line": {
+     "en": "Listen to that frequency... watch out team, it's way too quiet down there!",
+     "ar": "سمعوا الصوت... انتبهوا يا فريق، الهدوء تحت يخوف وايد!"
+    },
+    "fact_id": "lab-bsl",
+    "choices": [
+     {
+      "id": "c1_mimic_hum",
+      "label": {
+       "en": "Echo the strange frequency using Voice Mimicry",
+       "ar": "محاكاة التردد الغريب باستخدام ميزة تقليد الصوت"
+      },
+      "style": "clever",
+      "uses_capability": "mimic",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} replicates the precise acoustic pitch. The hum shifts in response, unlocking a sealed maintenance hatch with a soft click.",
+        "ar": "يقلد {CREATURE} النغمة الصوتية بدقة متناهية. يستجيب الصوت الغريب للصدى، فتفتح بوابات الصيانة المغلقة بضغطة خفيفة."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_metallic_hum"
+        },
+        {
+         "t": "energy",
+         "d": 0
+        }
+       ],
+       "duck_mood": "shocked",
+       "creature_state": "excited"
+      },
+      "fail": null
+     },
+     {
+      "id": "c2_examine_vents",
+      "label": {
+       "en": "Analyze the air ducts carefully for biohazard marks",
+       "ar": "فحص أنابيب التهوية بعناية للبحث عن علامات الخطر البيولوجي"
+      },
+      "style": "careful",
+      "uses_capability": null,
+      "check": {
+       "stat": "intellect",
+       "dc": 3
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} notices BSL warning placards taped near the vent casing, discovering a low-level containment protocol was breached.",
+        "ar": "يلاحظ {CREATURE} ملصقات تحذيرية لمستويات السلامة البيولوجية بالقرب من الهيكل، ويكتشف اختراقاً لقواعد الاحتواء."
+       },
+       "effects": [
+        {
+         "t": "discovery",
+         "id": "lab-bsl"
+        },
+        {
+         "t": "evidence",
+         "id": "clue_metallic_hum"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "curious"
+      },
+      "fail": {
+       "text": {
+        "en": "The darkness hides the fine details, but the vibration grows stronger and more disorienting.",
+        "ar": "يخفي الظلام التفاصيل الدقيقة، لكن الاهتزاز يزداد قوة ويسبب الدوار."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     },
+     {
+      "id": "c3_smash_grate",
+      "label": {
+       "en": "Force open the vent grating with brute strength",
+       "ar": "فتح شبكة التهوية بالقوة الجسدية"
+      },
+      "style": "bold",
+      "uses_capability": null,
+      "check": {
+       "stat": "strength",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "With a powerful shove, {CREATURE} breaks the latch open, clearing a path downward into the shadowy tunnel.",
+        "ar": "بدفعة قوية، يكسر {CREATURE} المزلاج المعدني، مفسحاً الطريق نحو النفق المظلم في الأسفل."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_metallic_hum"
+        },
+        {
+         "t": "mark",
+         "id": "soot"
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": {
+       "text": {
+        "en": "The thick metal grate barely bulges, sending a painful jolt back through {CREATURE}'s limbs.",
+        "ar": "لم تتزحزح الشبكة المعدنية السميكة، مما تسبب في صدمة مؤلمة لأطراف {CREATURE}."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "hurt"
+      }
+     },
+     {
+      "id": "c4_charm_ducks",
+      "label": {
+       "en": "Reassure the ducks and lead the way inside",
+       "ar": "طمأنة البط والتقدم في المقدمة"
+      },
+      "style": "kind",
+      "uses_capability": null,
+      "check": {
+       "stat": "charm",
+       "dc": 3
+      },
+      "success": {
+       "text": {
+        "en": "{CREATURE} strikes a reassuring posture, giving the research ducks the confidence to light the way.",
+        "ar": "يتخذ {CREATURE} موقفاً مطمئناً، مما يمنح بط الأبحاث الثقة لإضاءة الطريق."
+       },
+       "effects": [
+        {
+         "t": "trust",
+         "d": 1
+        },
+        {
+         "t": "evidence",
+         "id": "clue_metallic_hum"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "calm"
+      },
+      "fail": {
+       "text": {
+        "en": "The ducks remain nervous, quacking nervously in the echoing darkness.",
+        "ar": "يبقى البط متوتراً، ويصدر أصواتاً قلقة في الظلام المتصاعد."
+       },
+       "effects": [
+        {
+         "t": "trust",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     }
+    ]
+   },
+   {
+    "act_id": "act_2",
+    "text": {
+     "en": "The murky water of the drainage swamp ripples with unnatural green sparks. Soft wisps of light float over tangled roots, obscuring a heavy submerged obstacle that blocks the passage deeper into the caverns.",
+     "ar": "تتموج المياه المعكرة في مستنقع التصريف بشرارات خضراء غير طبيعية. تطوف أطياف ضوئية خفيفة فوق الجذور المتشابكة، حاجبة عائقاً ثقيلاً مغموراً يمنع التقدم نحو الأعماق."
+    },
+    "duck_line": {
+     "en": "Look out! That green glow isn't normal bioluminescence. Watch your step, team!",
+     "ar": "انتبهوا! هذا التوهج الأخضر مو ضوء طبيعي. تديروا بالكم يا فريق!"
+    },
+    "fact_id": "swamp-carbon",
+    "choices": [
+     {
+      "id": "choice_swim_under",
+      "label": {
+       "en": "Use Webbed Feet to dive under the submerged obstacle",
+       "ar": "استخدام الأقدام الغشائية للغوص تحت العائق المغمور"
+      },
+      "style": "bold",
+      "uses_capability": "swim",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} glides beneath the tangled roots effortlessly, leaving glowing residue clinging to its skin as it finds a clear pathway.",
+        "ar": "ينزلق {CREATURE} تحت الجذور المتشابكة بسهولة، ليتشبث بقايا وهاجة بجلده أثناء العثور على ممر خالي."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_glowing_residue"
+        },
+        {
+         "t": "mark",
+         "id": "glowing-algae"
+        }
+       ],
+       "duck_mood": "proud",
+       "creature_state": "confident"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_smash_obstacle",
+      "label": {
+       "en": "Smash the blocking debris with Club Tail",
+       "ar": "تحطيم الحطام المعترض باستخدام الذيل الهراوي"
+      },
+      "style": "clever",
+      "uses_capability": null,
+      "check": {
+       "stat": "strength",
+       "dc": 4
+      },
+      "success": {
+       "text": {
+        "en": "With a powerful swing, {CREATURE} shatters the barrier, clearing the path through the murky water.",
+        "ar": "ضربة قوية من {CREATURE} تحطم الحجز وتنظف الطريق عبر المياه المعكرة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "excited"
+      },
+      "fail": {
+       "text": {
+        "en": "The heavy armor plates weigh {CREATURE} down, making the swing sluggish and jarring its tail against hard rock.",
+        "ar": "الدروع الثقيلة تزيد وزنه، مما يجعل الضربة بطيئة وتسبب ارتطام ذيله بالصخور الصلبة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -2
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "exhausted"
+      }
+     },
+     {
+      "id": "choice_mimic_wisps",
+      "label": {
+       "en": "Mimic the pulsing frequency of the wisps to clear them",
+       "ar": "محاكاة تردد الأطياف المتوهجة لإبعادها"
+      },
+      "style": "careful",
+      "uses_capability": "mimic",
+      "check": null,
+      "success": {
+       "text": {
+        "en": "{CREATURE} hums at the exact acoustic pitch. The floating wisps disperse, revealing traces of vibrant fungal spores.",
+        "ar": "يصدر {CREATURE} رنيناً بنفس النبرة تماماً. تتشتت الأطياف العائمة لتكشف عن آثار أبواغ فطرية زاهية."
+       },
+       "effects": [
+        {
+         "t": "evidence",
+         "id": "clue_glowing_residue"
+        }
+       ],
+       "duck_mood": "thinking",
+       "creature_state": "curious"
+      },
+      "fail": null
+     },
+     {
+      "id": "choice_inspect_gills",
+      "label": {
+       "en": "Submerge Gill Frills to analyze the chemical makeup of the water",
+       "ar": "غمر الخياشيم الريشية لتحليل التركيب الكيميائي للماء"
+      },
+      "style": "kind",
+      "uses_capability": "breatheWater",
+      "check": {
+       "stat": "intellect",
+       "dc": 3
+      },
+      "success": {
+       "text": {
+        "en": "Filtering the water, {CREATURE} detects rich nutrients supporting an artificial ecosystem.",
+        "ar": "عبر تصفية المياه، يكتشف {CREATURE} مغذيات غنية تغذي نظاماً بيئياً اصطناعياً."
+       },
+       "effects": [
+        {
+         "t": "discovery",
+         "id": "swamp-carbon"
+        }
+       ],
+       "duck_mood": "happy",
+       "creature_state": "calm"
+      },
+      "fail": {
+       "text": {
+        "en": "The strange sludge irritates the sensitive frills, forcing {CREATURE} to retract them quickly.",
+        "ar": "السبخة الغريبة تسبب تهيج الخياشيم الحساسة، مما يجبر {CREATURE} على سحبها بسرعة."
+       },
+       "effects": [
+        {
+         "t": "energy",
+         "d": -1
+        }
+       ],
+       "duck_mood": "worried",
+       "creature_state": "afraid"
+      }
+     }
+    ]
+   }
+  ],
+  "ending": {
+   "title": {
+    "en": "The Master of Submerged Harmonies",
+    "en_US": "The Master of Submerged Harmonies",
+    "ar": "سيد الألحان المغمورة"
+   },
+   "summary": {
+    "en": "{CREATURE} used its feathery frills and voice mimicry to harmonize with the deep subterranean hum, settling into the watery depths where its heavy armor and webbed feet found a true home.",
+    "en_US": "{CREATURE} used its feathery frills and voice mimicry to harmonize with the deep subterranean hum, settling into the watery depths where its heavy armor and webbed feet found a true home.",
+    "ar": "استخدم {CREATURE} خياشيمه الريشية ومحاكاة الأصوات ليتناغم مع الطنين التحت أرضي، ليستقر في الأعماق المائية حيث وجدت صفائحه المدرعة وأقدامه الغشائية موطنها الحقيقي."
+   },
+   "epilogue": {
+    "en": "The scientists at BSC BioLab recorded a new acoustic pattern echoing from the drainage caverns. Far below the research floors, {CREATURE} remains the unseen guardian of the flooded tunnels, humming back to the dark.",
+    "en_US": "The scientists at BSC BioLab recorded a new acoustic pattern echoing from the drainage caverns. Far below the research floors, {CREATURE} remains the unseen guardian of the flooded tunnels, humming back to the dark.",
+    "ar": "سجل علماء مختبر الكويكب الحيوي نمطًا صوتيًا جديدًا يتردد صداه من كهوف الصرف. بعيدًا أسفل طوابق الأبحاث، يظل {CREATURE} الحارس الخفي للأنفاق المغمورة، يرادد الصدى في الظلام."
+   },
+   "tone": "mysterious"
+  },
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 7428,
+    "usage": {
+     "inTok": 3621,
+     "outTok": 1497
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 9944,
+    "usage": {
+     "inTok": 2037,
+     "outTok": 2046
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 7229,
+    "usage": {
+     "inTok": 2090,
+     "outTok": 1512
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 318,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 429,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (429): "
+     ],
+     "warnings": []
+    },
+    "raw": ""
+   },
+   {
+    "kind": "ending",
+    "ms": 3525,
+    "usage": {
+     "inTok": 936,
+     "outTok": 413
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   }
+  ]
+ },
+ {
+  "i": 3,
+  "mode": "marine",
+  "creature": "owl/wings/spikes/smell",
+  "tone": "adventurous",
+  "outline": null,
+  "beats": [],
+  "ending": null,
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 375,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 429,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (429): "
+     ],
+     "warnings": []
+    },
+    "raw": ""
+   }
+  ]
+ },
+ {
+  "i": 4,
+  "mode": "classic",
+  "creature": "axolotl/digClaws/camo/pressure",
+  "tone": "scientific",
+  "outline": {
+   "title": {
+    "en": "The Fungal Signal Mystery",
+    "ar": "لغز الإشارة الفطرية"
+   },
+   "premise": {
+    "en": "A mysterious electrical decay is traveling through forest mycorrhizal networks toward an abandoned research bunker.",
+    "ar": "اضمحلال كهربائي غامض ينتقل عبر شبكات الفطريات الحيوية في الغابة متجهاً نحو ملجأ أبحاث مهجور."
+   },
+   "premise_tag": "mycelial_signal_decay",
+   "twist_tag": "synthetic_dna_spore_dispersal",
+   "tone": "scientific",
+   "acts": [
+    {
+     "id": "act_1",
+     "biome": "forest",
+     "props": [
+      "obstacle",
+      "clue"
+     ],
+     "purpose": "investigate initial underground pulses",
+     "npc": "ranger",
+     "plants_clue": "clue_spore_residue",
+     "pays_off": null
+    },
+    {
+     "id": "act_2",
+     "biome": "forest",
+     "props": [
+      "critter",
+      "darkness"
+     ],
+     "purpose": "follow root pathways into dense brush",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": null
+    },
+    {
+     "id": "act_3",
+     "biome": "swamp",
+     "props": [
+      "mudskipper",
+      "heatwave"
+     ],
+     "purpose": "cross peatlands where the signal intensifies",
+     "npc": null,
+     "plants_clue": "clue_chemical_scent",
+     "pays_off": null
+    },
+    {
+     "id": "act_4",
+     "biome": "swamp",
+     "props": [
+      "disaster",
+      "radio"
+     ],
+     "purpose": "confront rival sensors disrupting local fauna",
+     "npc": "rival",
+     "plants_clue": null,
+     "pays_off": "clue_spore_residue"
+    },
+    {
+     "id": "act_5",
+     "biome": "cave",
+     "props": [
+      "darkness",
+      "pressure"
+     ],
+     "purpose": "descend into subterraneous root caverns",
+     "npc": null,
+     "plants_clue": "clue_glowing_spores",
+     "pays_off": null
+    },
+    {
+     "id": "act_6",
+     "biome": "cave",
+     "props": [
+      "wisps",
+      "obstacle"
+     ],
+     "purpose": "seek knowledge from an isolated researcher",
+     "npc": "hermit",
+     "plants_clue": null,
+     "pays_off": "clue_chemical_scent"
+    },
+    {
+     "id": "act_7",
+     "biome": "ruins",
+     "props": [
+      "chip",
+      "machine"
+     ],
+     "purpose": "penetrate the derelict bioreactor facility",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": "clue_glowing_spores"
+    },
+    {
+     "id": "act_8",
+     "biome": "ruins",
+     "props": [
+      "escapees",
+      "disaster"
+     ],
+     "purpose": "stabilize the automated spore transmitter",
+     "npc": null,
+     "plants_clue": null,
+     "pays_off": null
+    }
+   ],
+   "mysteries": [
+    {
+     "id": "mycelial_pulse",
+     "name": {
+      "en": "Subterranean Network Pulses",
+      "ar": "نبضات الشبكة تحت الأرض"
+     },
+     "description": {
+      "en": "Rhythmic biochemical pulses travel along fungal threads across biomes.",
+      "ar": "نبضات كيميائية حيوية منتظمة تنتقل عبر الخيوط الفطرية عبر المناطق الحيوية."
+     }
+    }
+   ],
+   "ending_options": [
+    {
+     "id": "end_recalibrate",
+     "text": {
+      "en": "Recalibrate the ancient bioreactor array to restore natural fungal balance.",
+      "ar": "إعادة معايرة مصفوفة المفاعل الحيوي القديم لاستعادة التوازن الفطري الطبيعي."
+     }
+    },
+    {
+     "id": "end_contain",
+     "text": {
+      "en": "Seal the lower ruins vault to contain synthetic biological outputs.",
+      "ar": "إغلاق قبو الأنقاض السفلي لاحتواء المخرجات البيولوجية الاصطناعية."
+     }
+    }
+   ]
+  },
+  "beats": [],
+  "ending": null,
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 10618,
+    "usage": {
+     "inTok": 3677,
+     "outTok": 2043
+    },
+    "status": 200,
+    "valid": true,
+    "retried": false,
+    "issues": {
+     "errors": [],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "beat",
+    "ms": 310,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 429,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (429): "
+     ],
+     "warnings": []
+    },
+    "raw": ""
+   },
+   {
+    "kind": "ending",
+    "ms": 511,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 429,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (429): "
+     ],
+     "warnings": []
+    },
+    "raw": ""
+   }
+  ]
+ },
+ {
+  "i": 5,
+  "mode": "marine",
+  "creature": "gecko/digClaws/hump/echo",
+  "tone": "emotional",
+  "outline": null,
+  "beats": [],
+  "ending": null,
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 626,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 429,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (429): "
+     ],
+     "warnings": []
+    },
+    "raw": ""
+   }
+  ]
+ }
+]

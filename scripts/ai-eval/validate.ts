@@ -10,7 +10,7 @@ const AR = /[؀-ۿ]/;
 const OTHER_DIALECTS: [string, RegExp][] = [
   ['egyptian', /(^|\s)(عايز|عاوز|ازاي|إزاي|دلوقتي|كده|كدا|بتاع|ليه كده|اوي|أوي)(\s|$|[.،!؟])/],
   ['levantine', /(^|\s)(هلق|هلأ|هيك|كتير منيح|شو بدك|منيح|بدّي|عم ب)(\s|$|[.،!؟])/],
-  ['iraqi', /(^|\s)(شكو|ماكو|هواية|اكو|أكو|ديروح|شلون جان|كلش)(\s|$|[.،!؟])/],
+  ['iraqi', /(^|\s)(شكو|ماكو|هواية|اكو|أكو|ديروح|شلون جان|كلش|يابه)(\s|$|[.،!؟])/],
 ];
 
 const okL = (x: unknown): x is L => !!x && typeof (x as L).en === 'string' && typeof (x as L).ar === 'string' && (x as L).en.trim().length > 1 && (x as L).ar.trim().length > 1;
@@ -74,8 +74,9 @@ export function validateBeat(b: AiBeat, caps: Set<Capability>, knownEvidence: Se
     for (const [k, o] of [['success', c.success], ['fail', c.fail]] as const) {
       if (!o) continue;
       checkText(`${w}.${k}`, o.text, out);
-      if (!MOODS.includes(o.duck_mood)) out.errors.push(`${w}.${k}: mood ${o.duck_mood}`);
-      if (!CREATURE_STATES.includes(o.creature_state)) out.errors.push(`${w}.${k}: creature_state ${o.creature_state}`);
+      // Cosmetic enums only pick an expression/pose: normalise to a safe default (as the Worker will) and warn.
+      if (!MOODS.includes(o.duck_mood)) { out.warnings.push(`${w}.${k}: mood ${o.duck_mood} → thinking`); o.duck_mood = 'thinking'; }
+      if (!CREATURE_STATES.includes(o.creature_state)) { out.warnings.push(`${w}.${k}: creature_state ${o.creature_state} → curious`); o.creature_state = 'curious'; }
       for (const e of o.effects ?? []) {
         if (!EFFECT_TYPES.includes(e.t)) out.errors.push(`${w}.${k}: effect ${e.t}`);
         if (e.t === 'discovery' && !FACT_BY_ID[e.id ?? '']) out.errors.push(`${w}.${k}: discovery ${e.id} not a real fact id`);
@@ -97,6 +98,6 @@ export function validateBeat(b: AiBeat, caps: Set<Capability>, knownEvidence: Se
 export function validateEnding(e: AiEnding): Issues {
   const out = issues();
   checkText('ending.title', e?.title, out, 90); checkText('ending.summary', e?.summary, out, 1200); checkText('ending.epilogue', e?.epilogue, out);
-  if (!TONES.includes(e?.tone)) out.errors.push(`ending tone ${e?.tone}`);
+  if (e && !TONES.includes(e.tone)) { out.warnings.push(`ending tone ${e.tone} → heroic`); e.tone = 'heroic'; }
   return out;
 }

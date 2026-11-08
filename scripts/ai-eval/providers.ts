@@ -1,3 +1,6 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 // Free-tier text providers used by the evaluation. Keys come from environment variables only
 // (never committed, never shipped to the browser). In production these calls live in the Cloudflare Worker.
 export interface Usage { inTok: number; outTok: number }
@@ -23,8 +26,10 @@ export function cloudflare(model = '@cf/qwen/qwen3-30b-a3b-fp8'): Provider {
   };
 }
 
-export function gemini(model = 'gemini-2.5-flash-lite'): Provider {
-  const key = process.env.GEMINI_API_KEY;
+export function gemini(model = 'gemini-3.5-flash-lite'): Provider {
+  // Key comes from the environment, or from a private file outside the repo (~/.bsc/gemini.key). Never commit it.
+  const keyFile = join(homedir(), '.bsc', 'gemini.key');
+  const key = process.env.GEMINI_API_KEY || (existsSync(keyFile) ? readFileSync(keyFile, 'utf8').replace(/^﻿/, '').trim() : '');
   if (!key) throw new Error('Set GEMINI_API_KEY (Google AI Studio key, no billing account linked).');
   return {
     name: 'gemini', model,
@@ -35,7 +40,7 @@ export function gemini(model = 'gemini-2.5-flash-lite'): Provider {
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: system }] },
           contents: [{ role: 'user', parts: [{ text: user }] }],
-          generationConfig: { responseMimeType: 'application/json', temperature: 1.0, maxOutputTokens: maxTokens },
+          generationConfig: { responseMimeType: 'application/json', temperature: 1.0, maxOutputTokens: maxTokens, ...(model.startsWith('gemini-3') ? { thinkingConfig: { thinkingLevel: 'low' } } : {}) },
         }),
       });
       const j = (await res.json().catch(() => ({}))) as { candidates?: { content?: { parts?: { text?: string }[] } }[]; usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number; thoughtsTokenCount?: number } };

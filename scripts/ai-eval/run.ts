@@ -24,6 +24,13 @@ HARD RULES:
 - Real science appears ONLY by citing a fact id from the catalog. Never state other scientific claims as fact.
 - The player's creature is called {CREATURE}; keep that token verbatim. Never use the player's name.
 - The creature may only use capabilities listed in its brief. Its trade-offs should matter.
+- Arabic grammar: {CREATURE} is always grammatically masculine (يتقدم {CREATURE}، يكتشف). Narration is third person about {CREATURE} — never "you"/"عيناك"/"عيونك". Check spelling carefully (الأعماق not الأعمار, أعمى not عمي).
+- Duck lines in Arabic: light Kuwaiti or MSA only. Forbidden words (other dialects): كلش، ماكو، أكو، شكو، يابه، هواية (meaning "a lot"), هيك، كده، عايز. Use وايد for "a lot".
+- In Arabic, name the creature's body parts and the places EXACTLY by the Arabic names given in the brief/catalog — never translate them yourself.
+- Ducks speak to the team in plural (شوفوا، انتبهوا).
+- EVERY player-facing text field (title, premise, text, label, duck_line, summary, epilogue, outcome text) is an object {"en": "...", "ar": "..."} — never a plain string.
+- The ducks (catalog.ducks) are the player's companions. They are NEVER an act's "npc"; "npc" is an id from catalog.npcs or null.
+- Clues: "plants_clue" is a short clue id you invent (e.g. "clue_scratched_shell"); "pays_off" must repeat a clue id planted in an EARLIER act, or be null. Never use act ids there.
 - Respond with a single JSON object, no markdown.`;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -33,20 +40,31 @@ async function call(user: object, maxTokens: number) {
   lastCall = Date.now();
   return prov.call(SYSTEM, JSON.stringify(user), maxTokens);
 }
+/** Syntax-only repair for a known lite-model slip: a property name missing its quotes (`_creature_state:` / `label":`).
+ *  Content is never changed; repaired replies are counted in the report. */
+export function repairKeys(text: string): string {
+  return text.replace(/^(\s*)"?_?([A-Za-z][A-Za-z0-9_]*)"?\s*:(?=\s)/gm, '$1"$2":');
+}
+let repaired = 0;
 function parse<T>(text: string): T | null {
-  try { return JSON.parse(text) as T; } catch { const m = text.match(/\{[\s\S]*\}/); try { return m ? (JSON.parse(m[0]) as T) : null; } catch { return null; } }
+  const tryParse = (t: string) => { try { return JSON.parse(t) as T; } catch { const m = t.match(/\{[\s\S]*\}/); try { return m ? (JSON.parse(m[0]) as T) : null; } catch { return null; } } };
+  const x = tryParse(text); if (x) return x;
+  const y = tryParse(repairKeys(text)); if (y) repaired++;
+  return y;
 }
 
-interface CallLog { kind: string; ms: number; usage: Usage; status: number; valid: boolean; retried: boolean; issues: Issues }
+interface CallLog { raw?: string; kind: string; ms: number; usage: Usage; status: number; valid: boolean; retried: boolean; issues: Issues }
 interface RunLog { i: number; mode: Mode; creature: string; tone: string; outline: Outline | null; beats: AiBeat[]; ending: AiEnding | null; calls: CallLog[] }
 
 async function generate<T>(kind: string, req: object, max: number, check: (x: T) => Issues, calls: CallLog[]): Promise<T | null> {
   let feedback = '';
   for (let attempt = 0; attempt < 2; attempt++) {
-    const r = await call(feedback ? { ...req, previous_errors: feedback } : req, max);
+    let r = await call(feedback ? { ...req, previous_errors: feedback } : req, max);
+    for (let k = 0; k < 3 && r.status >= 500; k++) { await sleep(4000 * (k + 1)); r = await call(feedback ? { ...req, previous_errors: feedback } : req, max); } // transient overload, not a content failure
     const x = parse<T>(r.text);
-    const iss: Issues = x ? check(x) : { errors: [`unparseable (${r.status}): ${r.text.slice(0, 120)}`], warnings: [] };
-    calls.push({ kind, ms: r.ms, usage: r.usage, status: r.status, valid: iss.errors.length === 0, retried: attempt > 0, issues: iss });
+    let iss: Issues;
+    try { iss = x ? check(x) : { errors: [`unparseable (${r.status}): ${r.text.slice(0, 120)}`], warnings: [] }; } catch (e) { iss = { errors: [`wrong shape: ${(e as Error).message}`], warnings: [] }; }
+    calls.push({ kind, ms: r.ms, usage: r.usage, status: r.status, valid: iss.errors.length === 0, retried: attempt > 0, issues: iss, ...(x ? {} : { raw: r.text.slice(0, 6000) }) });
     if (iss.errors.length === 0) return x;
     if (r.status === 429) { console.log('  quota/rate limit hit (429)'); return null; }
     feedback = iss.errors.slice(0, 6).join('; ');
@@ -69,27 +87,29 @@ async function main() {
     const outline = await generate<Outline>('outline', {
       task: 'outline', mode, tone_target: tone, creature: creatureBrief(creature), catalog: catalog(mode),
       avoid_recent: history.slice(-8),
-      instructions: `Invent a NEW adventure structure (8-10 acts). Marine: start at the surface (Surface Waters), then descend to The Deep; the sailor legend is optional. Plant clues before paying them off. Return {title,premise,premise_tag,tone,twist_tag,acts:[{id,biome,props,purpose,npc,plants_clue,pays_off}],mysteries,ending_options}.`,
+      instructions: `Invent a NEW adventure structure. "acts" MUST contain 8, 9 or 10 acts — never fewer. premise_tag and twist_tag are short plain English snake_case strings (not objects). Scene props only from catalog.sceneProps. Marine: start at the surface (Surface Waters), then descend to The Deep; the sailor legend is optional. Plant clues before paying them off. Return {title,premise,premise_tag,tone,twist_tag,acts:[{id,biome,props,purpose,npc,plants_clue,pays_off}],mysteries,ending_options}.`,
     }, 2200, (o) => validateOutline(o, mode), log.calls);
     log.outline = outline;
     if (outline) {
       history.push({ premise_tag: outline.premise_tag, twist_tag: outline.twist_tag, biomes: outline.acts.map((a) => a.biome).join('>') });
       if (i < FULL) {
+        const cat = catalog(mode);
+        const beatCatalog = { facts: cat.facts, styles: cat.styles, duck_moods: cat.moods, creature_states: cat.creatureStates, marks: cat.marks, stats: cat.stats, check_dc_range: [2, 9], npcs: cat.npcs.map((n) => n.id) };
         const state = { evidence: [] as string[], flags: [] as string[], energy: 5, marks: [] as string[], recent: [] as string[] };
         for (const act of outline.acts) {
           const beat = await generate<AiBeat>('beat', {
-            task: 'beat', mode, creature: creatureBrief(creature), outline: { title: outline.title.en, premise: outline.premise.en, twist: outline.twist_tag }, act, state,
-            instructions: 'Write this act: {act_id,text,duck_line,fact_id,choices:[exactly 4 {id,label,style,uses_capability,check:{stat,dc}|null,success:{text,effects,duck_mood,creature_state},fail}]}. Choices must be genuinely different strategies with different consequences; at least one should use a creature capability or exploit a trade-off.',
-          }, 2600, (b) => validateBeat(b, d.caps, new Set(state.evidence)), log.calls);
+            task: 'beat', mode, creature: creatureBrief(creature), outline: { title: outline.title.en, premise: outline.premise.en, twist: outline.twist_tag }, act, state, allowed: beatCatalog,
+            instructions: 'Use ONLY the ids in "allowed" (fact_id from allowed.facts or null; style, duck_mood, creature_state, stat from their lists; dc an integer in check_dc_range). Write this act: {act_id,text,duck_line,fact_id,choices:[exactly 4 {id,label,style,uses_capability,check:{stat,dc}|null,success:{text,effects,duck_mood,creature_state},fail}]}. "effects" is ALWAYS an array (possibly empty) of {t,id?,npc?,d?} with t from: flag, evidence, discovery, rel, energy, trust, mark. Rules: discovery.id MUST be an id from allowed.facts; story clues go in evidence.id (any short id); mark.id from allowed.marks; energy and trust need an integer d (-2..2); rel needs npc (from allowed.npcs) and d. duck_line is an {en,ar} object. "fail" has the same shape as success, or null when there is no check. Choices must be genuinely different strategies with different consequences; at least one should use a creature capability or exploit a trade-off.',
+          }, 4000, (b) => validateBeat(b, d.caps, new Set(state.evidence)), log.calls);
           if (!beat) break;
           log.beats.push(beat);
           const ch = beat.choices[r.int(beat.choices.length)];
           const ok = !ch.check || r.chance(0.6);
           const o = ok || !ch.fail ? ch.success : ch.fail;
-          for (const e of o.effects ?? []) { if (e.t === 'evidence' && e.id) state.evidence.push(e.id); if (e.t === 'flag' && e.id) state.flags.push(e.id); if (e.t === 'mark' && e.id) state.marks.push(e.id); if (e.t === 'energy') state.energy += e.d ?? 0; }
+          for (const e of Array.isArray(o.effects) ? o.effects : []) { if (e.t === 'evidence' && e.id) state.evidence.push(e.id); if (e.t === 'flag' && e.id) state.flags.push(e.id); if (e.t === 'mark' && e.id) state.marks.push(e.id); if (e.t === 'energy') state.energy += e.d ?? 0; }
           state.recent = [...state.recent, `${act.id}: chose "${ch.label.en}" → ${o.text.en}`].slice(-3);
         }
-        log.ending = await generate<AiEnding>('ending', { task: 'ending', mode, creature: creatureBrief(creature), outline: { title: outline.title.en, premise: outline.premise.en }, state: {}, journey: log.beats.map((b) => b.text.en.slice(0, 160)), instructions: 'Write a personalised ending {title,summary,epilogue,tone} that pays off the clues and reflects the creature body.' }, 1400, validateEnding, log.calls);
+        log.ending = await generate<AiEnding>('ending', { task: 'ending', mode, creature: creatureBrief(creature), outline: { title: outline.title.en, premise: outline.premise.en }, state: {}, journey: log.beats.map((b) => b.text.en.slice(0, 160)), allowed_tones: TONES, instructions: 'Write a personalised ending {title,summary,epilogue,tone} (tone is one of allowed_tones) that pays off the clues and reflects the creature body.' }, 1400, validateEnding, log.calls);
       }
     }
     runs.push(log);
@@ -128,7 +148,7 @@ function summary(runs: RunLog[]) {
     `| Distinct place sequences | ${new Set(outlines.map((o) => o.acts.map((a) => a.biome).join('>'))).size}/${outlines.length} |`,
     `| Outline text similarity (bigram Jaccard) mean / max | ${pairs ? (sum / pairs).toFixed(3) : '-'} / ${max.toFixed(3)} |`,
     `| Possible wrong-dialect flags (Arabic) | ${dialect} |`,
-    `| Validation errors (all attempts) | ${errors.length} |`, '',
+    `| Validation errors (all attempts) | ${errors.length} |`, `| Replies needing a JSON syntax repair | ${repaired} |`, '',
     `Most common errors: ${top(errors.map((e) => e.replace(/\d+/g, '#').slice(0, 70)))}`, '',
     `Premise tags: ${outlines.map((o) => o.premise_tag).join(', ')}`, '', `Twist tags: ${outlines.map((o) => o.twist_tag).join(', ')}`, ''].join('\n');
 }

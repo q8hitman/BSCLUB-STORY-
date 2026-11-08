@@ -1,0 +1,47 @@
+[
+ {
+  "i": 0,
+  "mode": "classic",
+  "creature": "camel/wings/camo/ink",
+  "tone": "mysterious",
+  "outline": null,
+  "beats": [],
+  "ending": null,
+  "calls": [
+   {
+    "kind": "outline",
+    "ms": 769,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 404,
+    "valid": false,
+    "retried": false,
+    "issues": {
+     "errors": [
+      "unparseable (404): "
+     ],
+     "warnings": []
+    }
+   },
+   {
+    "kind": "outline",
+    "ms": 615,
+    "usage": {
+     "inTok": 0,
+     "outTok": 0
+    },
+    "status": 404,
+    "valid": false,
+    "retried": true,
+    "issues": {
+     "errors": [
+      "unparseable (404): "
+     ],
+     "warnings": []
+    }
+   }
+  ]
+ }
+]
