@@ -76,3 +76,4 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
 ## 6. Session log
 - 2026-11-08 — v1 built and tested, pushed to GitHub `main`, Pages enabled (https://q8hitman.github.io/BSCLUB-STORY-/).
 - 2026-11-08 — v2 started: real duck names, painterly scenes, cinematic VN UI, new menus, logos, 4 choices, deep-sea horror rewrite. Designer feedback received (section 2). Logos + references added. Work lives in a temporary session folder — move to a permanent folder before continuing.
+- 2026-11-08 — Ducks are companions only (no perks). Adaptive Duck Radio: engine-computed hints when struggling, praise/real facts when thriving. Duck lines rewritten for consistency: approach hints are full imperative phrases (no awkward noun slots like «روحوا على الحذر»), team always addressed in plural, chat lines never assume the chosen approach. API keys: never in the client or chat — stored only as Cloudflare Worker secrets set by the designer.

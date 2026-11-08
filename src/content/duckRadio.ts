@@ -1,5 +1,5 @@
 // BSC Duck Radio — the ducks are story companions with distinct voices, not gameplay powers.
-// They speak occasionally, react to context, sometimes disagree, and never reveal the right choice.
+// They speak occasionally, react to context and sometimes disagree. Chat lines never assume which approach the player chose.
 import type { L10n } from '../engine/types';
 
 const L = (en: string, ar: string): L10n => ({ en, ar });
@@ -10,24 +10,30 @@ export type RadioCue = 'arrive' | 'danger' | 'deep' | 'success' | 'fail' | 'disc
  *  These are filled from the engine's real odds, so a hint always points at a genuinely good option. */
 export interface DuckHelp { hintPart: L10n; hintApproach: L10n; praise: L10n[]; fact: L10n }
 
+/** {approach} is a complete instruction (imperative, addressed to the whole team), so every template stays grammatical
+ *  in Arabic whatever approach is inserted. Templates never use a pronoun that would have to agree with {part}. */
 export const APPROACH: Record<string, L10n> = {
-  bold: L('boldness', 'الجرأة'), careful: L('caution', 'الحذر'), clever: L('cleverness', 'الذكاء'), kind: L('kindness', 'اللطف'), silly: L('a little chaos', 'شوية عفوية'),
+  bold: L('go in boldly', 'ادخلوا بجرأة'),
+  careful: L('take it slow and careful', 'خذوها على مهل وبحذر'),
+  clever: L('think it through before you move', 'فكّروا فيها قبل لا تتحركون'),
+  kind: L('be gentle', 'خلّوكم لطيفين'),
+  silly: L('try something nobody expects', 'جرّبوا شي محد يتوقعه'),
 };
 
 export const HELP: Record<string, DuckHelp> = {
-  abdullah: { hintPart: L('Bro — your {part}. This is its moment.', 'يا ريال، هذا وقت {part}!'), hintApproach: L('Honestly? {approach} might save us here.', 'بصراحة؟ {approach} يمكن تنقذنا هني.'),
+  abdullah: { hintPart: L('Guys — this is the moment for your {part}!', 'يا جماعة، هذا وقت {part}!'), hintApproach: L('Honestly? My gut says: {approach}.', 'بصراحة؟ إحساسي يقول: {approach}.'),
     praise: [L('You’re on fire today!', 'اليوم ولّعتوها!'), L('That’s the energy I’m talking about!', 'هذي هي الطاقة اللي أبيها!')], fact: L('Okay, science moment:', 'أوكي، لحظة علمية:') },
-  ahmed: { hintPart: L('Out in the field, I’d rely on your {part}.', 'بالميدان، أنا أعتمد على {part}.'), hintApproach: L('Places like this reward {approach}.', 'أماكن مثل هذي تكافئ {approach}.'),
+  ahmed: { hintPart: L('If I were out here alone, I’d rely on your {part}.', 'لو أنا بروحي بالميدان، كنت بعتمد على {part}.'), hintApproach: L('From field experience: {approach}.', 'من خبرتي بالميدان: {approach}.'),
     praise: [L('Textbook field work!', 'شغل ميداني مثل الكتاب!'), L('Keep that pace!', 'خلّكم على هالريتم!')], fact: L('Field note:', 'ملاحظة ميدانية:') },
-  camel: { hintPart: L('Hypothesis: the key variable here is your {part}.', 'فرضية: المتغيّر المهم هني هو {part}.'), hintApproach: L('If I model this, {approach} has the best odds.', 'لو حسبتها، {approach} فرصتها أعلى.'),
+  camel: { hintPart: L('Hypothesis: the key variable here is your {part}.', 'فرضية: المتغيّر المهم هني هو {part}.'), hintApproach: L('I ran the model. Best move: {approach}.', 'حسبتها بالنموذج… أحسن حركة: {approach}.'),
     praise: [L('Elegant work. Truly.', 'شغل أنيق… صج.'), L('The data agrees with you.', 'البيانات معاكم.')], fact: L('Did you know?', 'تدرون؟') },
-  bassam: { hintPart: L('Use your {part}. Safest bet.', 'استخدموا {part}… أضمن شي.'), hintApproach: L('Go with {approach}. Trust me on this one.', 'روحوا على {approach}… ثقوا فيني.'),
+  bassam: { hintPart: L('Use your {part}. Safest bet.', 'استخدموا {part}… أضمن شي.'), hintApproach: L('Listen to me: {approach}. Trust me.', 'اسمعوني: {approach}… ثقوا فيني.'),
     praise: [L('Smooth. Nobody got hurt.', 'سلسة… ومحد تعوّر.'), L('I’d sign off on that.', 'هذي أوقّع عليها.')], fact: L('Safety briefing, but make it science:', 'إيجاز سلامة… بس علمي:') },
-  kiraz: { hintPart: L('Darling, it would be a waste not to use your {part}.', 'حبيبي، خسارة ما تستخدمون {part}.'), hintApproach: L('Try {approach}. The chaos can wait.', 'جرّبوا {approach}… الفوضى تقدر تنتظر.'),
-    praise: [L('Look at you. Terrifyingly competent.', 'شوفوا روحكم… كفاءة مخيفة.'), L('Delicious success.', 'نجاح لذيذ.')], fact: L('A creepy fact, just for you:', 'حقيقة مخيفة… لكم بس:') },
-  roaa: { hintPart: L('I noticed your {part} — there’s a use for it here.', 'لاحظت {part}… وهني بالضبط مكان الاستفادة.'), hintApproach: L('Gently. {approach} feels right.', 'بهدوء… {approach} أحسّها صح.'),
-    praise: [L('That was so careful. Thank you.', 'كانت دقيقة وايد… شكراً.'), L('You’re doing beautifully.', 'قاعدين تسوونها بشكل حلو.')], fact: L('Look closer — something real:', 'قرّبوا… هذي حقيقة علمية:') },
-  zahra: { hintPart: L('With your {part}, the odds here are clearly better.', 'مع {part}، الاحتمالات هني أعلى بوضوح.'), hintApproach: L('The numbers favour {approach}.', 'الأرقام في صالح {approach}.'),
+  kiraz: { hintPart: L('It would be a crime not to use your {part} here.', 'حرام ما تستخدمون {part} هني.'), hintApproach: L('Just this once: {approach}. The chaos can wait.', 'مرة وحدة بس: {approach}… والفوضى تنتظر.'),
+    praise: [L('Look at you. Terrifyingly competent.', 'شوفوا روحكم… كفاءة مخيفة.'), L('Delicious success.', 'نجاح لذيذ.')], fact: L('A weird fact, just for you:', 'حقيقة غريبة… لكم بس:') },
+  roaa: { hintPart: L('I noticed something — this place calls for your {part}.', 'لاحظت شي… هالمكان يبيله {part}.'), hintApproach: L('Gently… {approach}. That feels right to me.', 'بهدوء… {approach}. أحسّ هذا الصح.'),
+    praise: [L('That was lovely work. Thank you.', 'شغل حلو وايد… شكراً.'), L('You’re doing beautifully.', 'قاعدين تسوونها بشكل حلو.')], fact: L('Look closer — something real:', 'قرّبوا… هذي حقيقة علمية:') },
+  zahra: { hintPart: L('With your {part}, the odds here are clearly better.', 'مع {part}، الاحتمالات هني أعلى بوضوح.'), hintApproach: L('The numbers are clear: {approach}.', 'الأرقام واضحة: {approach}.'),
     praise: [L('Consistent results. I like it.', 'نتايج ثابتة… تعجبني.'), L('That’s above the expected curve.', 'هذا فوق المنحنى المتوقع.')], fact: L('A data point worth keeping:', 'معلومة تستاهل تنحفظ:') },
 };
 
@@ -79,9 +85,9 @@ export const RADIO: Record<string, Partial<Record<RadioCue, L10n[]>>> = {
   },
   kiraz: {
     arrive: [L('Ooh. This place has a mood. I love it.', 'أوه… هالمكان له جو. عاجبني.'), L('Smells like something toxic. Promising.', 'ريحته شي سام… مبشّرة.')],
-    danger: [L('If it bites, I want a venom sample.', 'إذا عضّ، أبي عيّنة من سمّه.'), L('Darling, that’s a lot of teeth.', 'حبيبي… هذي أسنان وايد.')],
+    danger: [L('If it bites, I want a venom sample.', 'إذا عضّ، أبي عيّنة من سمّه.'), L('That’s a lot of teeth, everyone.', 'يا جماعة… هذي أسنان وايد.')],
     deep: [L('Pitch black, crushing pressure, glowing teeth. Finally, my kind of place.', 'ظلام دامس، ضغط ساحق، أسنان تضوي… أخيراً مكان على ذوقي.')],
-    success: [L('Beautiful chaos.', 'فوضى جميلة.'), L('See? Bold works.', 'شفتوا؟ الجرأة تزبط.')],
+    success: [L('Beautiful chaos.', 'فوضى جميلة.'), L('See? It works.', 'شفتوا؟ زبطت.')],
     fail: [L('Well, that was dramatic.', 'طيب… كانت درامية.'), L('It’s fine. Nothing exploded. Yet.', 'عادي… ما شي انفجر… للحين.')],
     discovery: [L('Bottle it. Label it. Keep it away from Bassam.', 'عبّوه، حطوا عليه ليبل، وبعّدوه عن بسام.')],
     theory: [L('Bright colours usually mean poison. Usually.', 'الألوان الصارخة عادةً معناها سم… عادةً.')],
@@ -92,7 +98,7 @@ export const RADIO: Record<string, Partial<Record<RadioCue, L10n[]>>> = {
     arrive: [L('Wait — look at the edges. Something was here.', 'لحظة… طالعوا الأطراف. كان فيه شي هني.'), L('So many tiny details here.', 'تفاصيل صغيرة وايد هني.')],
     danger: [L('It’s scared too, I think.', 'أحس إنه خايف بعد.'), L('Don’t make sudden moves near it.', 'لا تتحركون فجأة قريب منه.')],
     deep: [L('Every little light down here is someone.', 'كل ضوء صغير هني… هو كائن عايش.')],
-    success: [L('Gently done. Thank you.', 'برقّة… شكراً.'), L('Did you see how careful that was? Lovely.', 'شفتوا شكثر كانت دقيقة؟ حلوة.')],
+    success: [L('Nicely done. Thank you.', 'تسلم إيدكم… شكراً.'), L('Did you see how well that went? Lovely.', 'شفتوا شلون ضبطت؟ حلوة.')],
     fail: [L('Oh no… is everyone alright?', 'لا… الكل بخير؟'), L('We’ll be more careful next time.', 'بنكون أحذر المرة الجاية.')],
     discovery: [L('Under a microscope this would be stunning.', 'تحت المجهر هذا بيكون شي خيالي.'), L('Look closer — there are patterns on it.', 'قرّبوا… عليه نقشات.')],
     theory: [L('These marks are too regular to be random.', 'هالعلامات منتظمة زيادة عشان تكون صدفة.')],
