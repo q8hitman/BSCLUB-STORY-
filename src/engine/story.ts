@@ -188,6 +188,8 @@ export interface BeatView {
   text: L10n;
   choices: { choice: Choice; label: L10n; odds: number | null }[];
   ctx: Ctx;
+  /** Bestiary id of the important creature this beat talks about (must be shown visually), or null. */
+  featured?: string | null;
 }
 
 export interface Ctx { name: string; player: string; duck: L10n; duckG: 'm' | 'f'; place: L10n; obstacle: L10n; predator: L10n; critter: L10n; npc: L10n }
