@@ -25,7 +25,7 @@ function allStrings(): { where: string; t: L10n }[] {
   }
   PARTS.forEach((p) => [p.name, p.desc, p.action, p.tradeoff, p.realSource].forEach((t, i) => out.push({ where: `${p.id}#${i}`, t })));
   FACTS.forEach((f) => out.push({ where: f.id, t: f.text }));
-  DUCKS.forEach((d) => [d.name, d.role, d.perk].forEach((t, i) => out.push({ where: `${d.id}#${i}`, t })));
+  DUCKS.forEach((d) => [d.name, d.role].forEach((t, i) => out.push({ where: `${d.id}#${i}`, t })));
   Object.values(MOOD_LINES).flat().forEach((t, i) => out.push({ where: `mood${i}`, t }));
   return out;
 }

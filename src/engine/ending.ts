@@ -194,7 +194,7 @@ export function composeEnding(s: GameState, recentEndings: string[] = []): Endin
 
   const duck = DUCK_BY_ID[s.duck];
   let tone = top.tone;
-  if (tone === 'wholesome' && duck?.favStyle === 'bold' && dominantStyle(s) === 'bold') tone = 'heroic';
+  if (tone === 'wholesome' && dominantStyle(s) === 'bold') tone = 'heroic';
   const highlights: L10n[] = [
     L(`${s.evidence.length} pieces of evidence`, `${s.evidence.length} دليل`),
     L(`${s.discoveries.length} real-science discoveries`, `${s.discoveries.length} اكتشاف علمي حقيقي`),

@@ -9,15 +9,15 @@ Each mode: 1000 complete runs with random creatures, ducks and choices, carrying
 | Unique full paths (plan + choices + results) | 1000 (100%) | 1000 (100%) |
 | Distinct ending archetypes | 12 | 13 |
 | Distinct ending titles | 31 | 26 |
-| Ending entropy (0–1) | 0.87 | 0.9 |
+| Ending entropy (0–1) | 0.86 | 0.9 |
 | Story templates reached | 31/31 | 28/28 |
 | Avg beats per run | 9.2 | 11.2 |
 | Consecutive-run similarity (with history) | 0.105 | 0.145 |
 | Consecutive-run similarity (no history) | 0.117 | 0.159 |
 | Max plan similarity to last 10 runs (with history) | 0.26 | 0.344 |
 | Max plan similarity to last 10 runs (no history) | 0.341 | 0.421 |
-| Check success rate | 54.3% | 58.9% |
-| Success by base animal | owl 61.2%, axolotl 51%, camel 48.7%, gecko 56%, fennec 54%, octopus 58.1%, pangolin 55.8%, frog 48.8% | octopus 67.2%, pangolin 58.6%, camel 58.9%, frog 57.6%, gecko 56.9%, fennec 53.2%, owl 61.4%, axolotl 57.2% |
+| Check success rate | 53.1% | 57.7% |
+| Success by base animal | owl 60.4%, axolotl 49.5%, camel 46.9%, gecko 54.4%, fennec 52.7%, octopus 57%, pangolin 55%, frog 47.8% | octopus 65.8%, pangolin 57.2%, camel 57.9%, frog 56.5%, gecko 56.1%, fennec 51.6%, owl 60.1%, axolotl 55.8% |
 | Anatomy-gated choices taken | 8.1% | 7.1% |
 | Sailor legend runs | — | 47.8% |
 
@@ -26,32 +26,32 @@ Each mode: 1000 complete runs with random creatures, ducks and choices, carrying
 ```json
 {
  "classic": {
-  "chaos": 252,
-  "machine": 83,
-  "cryptid": 65,
-  "reunion": 165,
-  "vex-defeated": 54,
-  "frenemies": 30,
-  "guardian": 183,
+  "chaos": 260,
+  "machine": 82,
+  "cryptid": 63,
+  "reunion": 166,
+  "vex-defeated": 53,
+  "frenemies": 29,
+  "guardian": 181,
   "nap": 18,
-  "wild": 58,
+  "wild": 56,
   "unsolved": 24,
   "field-team": 38,
   "publish": 30
  },
  "marine": {
-  "glimpse": 169,
+  "glimpse": 170,
   "vent-day": 96,
-  "chaos": 198,
+  "chaos": 203,
   "peace": 84,
-  "eye-to-eye": 101,
-  "voice-deep": 57,
-  "proof": 65,
-  "reef-heroes": 87,
+  "eye-to-eye": 102,
+  "voice-deep": 55,
+  "proof": 64,
+  "reef-heroes": 85,
   "field-team": 18,
-  "blurry": 47,
-  "publish": 46,
-  "beacon": 31,
+  "blurry": 48,
+  "publish": 42,
+  "beacon": 32,
   "nap": 1
  }
 }

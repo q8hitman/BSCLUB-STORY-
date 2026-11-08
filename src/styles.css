@@ -331,6 +331,9 @@ html[lang='ar'] .cp-name { font-family: var(--display-ar); }
 .duck-radio { display: flex; flex-direction: column; gap: 6px; animation: rise .5s ease .2s both; }
 .radio-line { display: flex; align-items: center; gap: 10px; background: rgba(9, 13, 17, .7); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 14px; padding: 6px 12px 6px 6px; max-width: 560px; }
 .radio-line.reply { margin-inline-start: 36px; }
+.radio-line.kind-hint { border-color: rgba(127, 210, 224, .6); box-shadow: 0 0 0 1px rgba(127, 210, 224, .15), 0 6px 24px rgba(127, 210, 224, .12); }
+.radio-line.kind-fact { border-color: rgba(143, 207, 154, .5); }
+.radio-line.kind-praise { border-color: rgba(216, 180, 106, .55); }
 .radio-line img { width: 52px; height: 60px; object-fit: cover; object-position: top; border-radius: 10px; flex: none; }
 .radio-line div { display: flex; flex-direction: column; line-height: 1.35; }
 .radio-line b { color: var(--gold-2); font-size: .85rem; }

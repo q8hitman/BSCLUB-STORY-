@@ -118,7 +118,6 @@ export default function App() {
                 <div className="duck-hero-text">
                   <h3>{selectedDuck.name[lang]}</h3>
                   <p className="role">{selectedDuck.role[lang]}</p>
-                  <p className="perk">{selectedDuck.perk[lang]}</p>
                 </div>
               </div>
               <div className="duck-grid" role="radiogroup" aria-label={t('chooseDuck', lang)}>

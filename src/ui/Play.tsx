@@ -95,7 +95,6 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const descendIdx = game.plan.beats.findIndex((b) => b.template === 'pm-descend');
   const isDeep = descendIdx >= 0 && game.index >= descendIdx;
   const phaseLabel = game.mode === 'marine' ? t(isDeep ? 'deep' : 'surface', lang) : null;
-  const showOdds = resolveDuckId(game.duck) === 'zahra';
   const total = game.plan.beats.length;
 
   return (
@@ -148,7 +147,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         {lines.length > 0 && (
           <div className="duck-radio" aria-label="BSC Duck Radio">
             {lines.map((l, i) => { const d = DUCK_BY_ID[l.duck]; return d && (
-              <div key={i} className={`radio-line ${i ? 'reply' : ''}`}>
+              <div key={i} className={`radio-line kind-${l.kind} ${i ? 'reply' : ''}`}>
                 <img src={`${import.meta.env.BASE_URL}ducks/${d.expressions[l.expression]}`} alt="" width={56} height={64} />
                 <div><b>{d.name[lang]}</b><span>{l.text[lang]}</span></div>
               </div>
@@ -158,14 +157,13 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
 
         {!isOutcome ? (
           <div className={`choices ${typed ? 'ready' : ''}`}>
-            {view.choices.map(({ choice, label, odds }, i) => (
+            {view.choices.map(({ choice, label }, i) => (
               <button key={choice.id} className={`btn-choice style-${choice.style}`} onClick={() => onChoose(choice.id)} disabled={!typed}>
                 <span className="num">{i + 1}</span>
                 <span className="lbl">{label[lang]}</span>
                 <span className="meta">
                   {choice.requires?.capAny && <em className="anat">{lang === 'ar' ? 'قدرة مخلوقك' : 'Your anatomy'}</em>}
                   <em className="sty">{STYLE_LABEL[choice.style][lang]}</em>
-                  {showOdds && odds !== null && <em className="odds">{Math.round(odds * 100)}%</em>}
                 </span>
               </button>
             ))}

@@ -120,6 +120,12 @@ any failure / quota / offline ─▶ seamless switch to the procedural engine fo
 
 **Free multiplier — a "living story bank":** every AI adventure that passes validation (and contains no personal data) is saved in Cloudflare KV (free tier). When the quota runs out, players receive a stored AI adventure they haven't seen, chosen by fingerprint distance from the device history. Variety grows every day at zero cost.
 
+### C3b. Duck Radio with live AI (designer decision, 2026-11-08)
+- Ducks are **companions only**: no perks or stat bonuses. They react, encourage, and help adaptively.
+- **Hints are never written by the AI.** The engine computes them from real odds and the creature's anatomy (`hintFor` in `src/engine/radio.ts`), so they are always correct.
+- **Every AI-generated duck line is saved** in the story bank, tagged by duck, cue (arrive, danger, deep, success, fail, discovery, theory, comic, disagree, praise) and context (biome, tone).
+- **When Gemini is unavailable**, ducks speak lines drawn at random from the authored set plus banked AI lines **with the same cue and context**, so they stay relevant and never contradict the scene.
+
 ### C4. Zero-charge safeguards
 - Cloudflare Workers **Free plan**, no payment method: overage is blocked, not billed.
 - Gemini: **never link billing**; the key is stored only as a Worker secret.

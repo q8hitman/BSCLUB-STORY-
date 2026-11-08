@@ -219,18 +219,10 @@ export function fill(t: L10n, c: Ctx): L10n {
 
 const capStr = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export function duckBonus(duckId: string, stat: string): number {
-  const duck = DUCK_BY_ID[duckId];
-  if (!duck) return 0;
-  if (duck.bonusStat === stat) return 1;
-  if (duck.id === 'goggles' && stat === 'heat') return 1;
-  return 0;
-}
-
 const DIE = 6;
 function checkScore(s: GameState, d: DerivedCreature, c: Choice): number {
   const k = c.check!;
-  let base = d.stats[k.stat] + duckBonus(s.duck, k.stat);
+  let base = d.stats[k.stat];
   if (k.caps?.some((cap) => d.caps.has(cap))) base += 2;
   if (s.energy <= 1) base -= 1;
   return base;

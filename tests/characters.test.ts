@@ -135,3 +135,47 @@ describe('legends', () => {
     expect(n / runs).toBeLessThan(0.4);
   });
 });
+
+describe('Duck Radio help (no perks)', () => {
+  it('ducks give no gameplay bonus', async () => {
+    const d = (await import('../src/content/ducks')).DUCKS[0] as unknown as Record<string, unknown>;
+    expect(d.bonusStat).toBeUndefined(); expect(d.perk).toBeUndefined();
+  });
+  it('every hint points at a choice with the best real odds', async () => {
+    const { hintFor } = await import('../src/engine/radio');
+    let hints = 0;
+    for (let i = 0; i < 300; i++) {
+      let s = startGame({ mode: i % 2 ? 'marine' : 'classic', seed: i, duck: 'camel', player: '', creature: simulateRun(i, 'classic').state.creature });
+      while (s.stage !== 'ending') {
+        const v = currentBeat(s);
+        for (const duck of ['abdullah', 'camel', 'roaa', 'zahra']) {
+          const h = hintFor(s, duck);
+          if (!h) continue;
+          hints++;
+          const best = Math.max(...v.choices.map((c) => c.odds ?? 1));
+          const hinted = v.choices.find((c) => c.choice.id === h.choice)!;
+          expect(hinted.odds ?? 1, `${v.template.id}`).toBeCloseTo(best, 9);
+          expect(h.text.en + h.text.ar).not.toMatch(/[{}]/);
+        }
+        s = advance(choose(s, v.choices[i % v.choices.length].choice.id));
+      }
+    }
+    expect(hints).toBeGreaterThan(200);
+  });
+  it('struggling players get hints; thriving players get praise or real facts', async () => {
+    const { radio, struggling, thriving } = await import('../src/engine/radio');
+    let strugglingBeats = 0, helped = 0, thrivingOutcomes = 0, cheered = 0;
+    for (let i = 0; i < 300; i++) {
+      let s = startGame({ mode: i % 2 ? 'marine' : 'classic', seed: i, duck: 'kiraz', player: '', creature: simulateRun(i, 'classic').state.creature });
+      while (s.stage !== 'ending') {
+        const v = currentBeat(s);
+        if (struggling(s)) { strugglingBeats++; if (radio(s, v.template.kind, v.biome).some((l) => l.kind === 'hint')) helped++; }
+        s = choose(s, v.choices[(i + s.index) % v.choices.length].choice.id);
+        if (thriving(s)) { thrivingOutcomes++; if (radio(s, v.template.kind, v.biome).some((l) => l.kind === 'praise' || l.kind === 'fact')) cheered++; }
+        s = advance(s);
+      }
+    }
+    expect(helped / strugglingBeats).toBeGreaterThan(0.4);
+    expect(cheered / thrivingOutcomes).toBeGreaterThan(0.5);
+  });
+});

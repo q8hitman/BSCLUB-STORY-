@@ -6,6 +6,32 @@ const L = (en: string, ar: string): L10n => ({ en, ar });
 
 export type RadioCue = 'arrive' | 'danger' | 'deep' | 'success' | 'fail' | 'discovery' | 'theory' | 'comic' | 'disagree';
 
+/** Help & encouragement. {part} = a body part of the player's creature, {approach} = a way of acting.
+ *  These are filled from the engine's real odds, so a hint always points at a genuinely good option. */
+export interface DuckHelp { hintPart: L10n; hintApproach: L10n; praise: L10n[]; fact: L10n }
+
+export const APPROACH: Record<string, L10n> = {
+  bold: L('boldness', 'الجرأة'), careful: L('caution', 'الحذر'), clever: L('cleverness', 'الذكاء'), kind: L('kindness', 'اللطف'), silly: L('a little chaos', 'شوية عفوية'),
+};
+
+export const HELP: Record<string, DuckHelp> = {
+  abdullah: { hintPart: L('Bro — your {part}. This is its moment.', 'يا ريال، هذا وقت {part}!'), hintApproach: L('Honestly? {approach} might save us here.', 'بصراحة؟ {approach} يمكن تنقذنا هني.'),
+    praise: [L('You’re on fire today!', 'اليوم ولّعتوها!'), L('That’s the energy I’m talking about!', 'هذي هي الطاقة اللي أبيها!')], fact: L('Okay, science moment:', 'أوكي، لحظة علمية:') },
+  ahmed: { hintPart: L('Out in the field, I’d rely on your {part}.', 'بالميدان، أنا أعتمد على {part}.'), hintApproach: L('Places like this reward {approach}.', 'أماكن مثل هذي تكافئ {approach}.'),
+    praise: [L('Textbook field work!', 'شغل ميداني مثل الكتاب!'), L('Keep that pace!', 'خلّكم على هالريتم!')], fact: L('Field note:', 'ملاحظة ميدانية:') },
+  camel: { hintPart: L('Hypothesis: the key variable here is your {part}.', 'فرضية: المتغيّر المهم هني هو {part}.'), hintApproach: L('If I model this, {approach} has the best odds.', 'لو حسبتها، {approach} فرصتها أعلى.'),
+    praise: [L('Elegant work. Truly.', 'شغل أنيق… صج.'), L('The data agrees with you.', 'البيانات معاكم.')], fact: L('Did you know?', 'تدرون؟') },
+  bassam: { hintPart: L('Use your {part}. Safest bet.', 'استخدموا {part}… أضمن شي.'), hintApproach: L('Go with {approach}. Trust me on this one.', 'روحوا على {approach}… ثقوا فيني.'),
+    praise: [L('Smooth. Nobody got hurt.', 'سلسة… ومحد تعوّر.'), L('I’d sign off on that.', 'هذي أوقّع عليها.')], fact: L('Safety briefing, but make it science:', 'إيجاز سلامة… بس علمي:') },
+  kiraz: { hintPart: L('Darling, it would be a waste not to use your {part}.', 'حبيبي، خسارة ما تستخدمون {part}.'), hintApproach: L('Try {approach}. The chaos can wait.', 'جرّبوا {approach}… الفوضى تقدر تنتظر.'),
+    praise: [L('Look at you. Terrifyingly competent.', 'شوفوا روحكم… كفاءة مخيفة.'), L('Delicious success.', 'نجاح لذيذ.')], fact: L('A creepy fact, just for you:', 'حقيقة مخيفة… لكم بس:') },
+  roaa: { hintPart: L('I noticed your {part} — there’s a use for it here.', 'لاحظت {part}… وهني بالضبط مكان الاستفادة.'), hintApproach: L('Gently. {approach} feels right.', 'بهدوء… {approach} أحسّها صح.'),
+    praise: [L('That was so careful. Thank you.', 'كانت دقيقة وايد… شكراً.'), L('You’re doing beautifully.', 'قاعدين تسوونها بشكل حلو.')], fact: L('Look closer — something real:', 'قرّبوا… هذي حقيقة علمية:') },
+  zahra: { hintPart: L('With your {part}, the odds here are clearly better.', 'مع {part}، الاحتمالات هني أعلى بوضوح.'), hintApproach: L('The numbers favour {approach}.', 'الأرقام في صالح {approach}.'),
+    praise: [L('Consistent results. I like it.', 'نتايج ثابتة… تعجبني.'), L('That’s above the expected curve.', 'هذا فوق المنحنى المتوقع.')], fact: L('A data point worth keeping:', 'معلومة تستاهل تنحفظ:') },
+};
+
+
 export const RADIO: Record<string, Partial<Record<RadioCue, L10n[]>>> = {
   abdullah: {
     arrive: [L('New place, new microbes. I can feel it.', 'مكان جديد، ميكروبات جديدة. أحسّها.'), L('Okay, everyone — eyes open, gloves on.', 'يلا يا جماعة، عيونكم مفتوحة والقفازات بإيدكم.')],
