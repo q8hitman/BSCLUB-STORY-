@@ -58,6 +58,15 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
 
 - v3 proposal (visual upgrade + live AI storytelling): `docs/V3_PROPOSAL.md`. AI eval harness: `scripts/ai-eval/` (needs GEMINI_API_KEY and/or CF_ACCOUNT_ID + CF_API_TOKEN; never commit keys). 20-adventure test still PENDING.
 
+## 5d. Final characters, Duck Radio, plates (2026-11-08, session 3)
+- **Final character sheets** (designer-approved, never redraw): originals in `art-source/ducks-final/` (abdullah, ahmed, camel, bassam, kiraz, roaa, zahra). Sliced (no redraw/masking) by `scripts/art/slice-ducks.py` into `public/ducks/<id>/expr-{happy,curious,shocked,worried,laughing,sly}.webp` + `pose-*.webp`; registry `src/content/duck-assets.json` → `src/content/ducks.ts`.
+- **Ali → Camel (الجمل)**: Ali retired (old art archived in `art-source/ducks-v1-archive/`). Legacy save ids map via `DUCK_ALIASES` (pipette→camel, petri→abdullah, quill→ahmed, goggles→bassam, cherry→kiraz, lens→roaa, data→zahra).
+- **Duck Radio** (`src/content/duckRadio.ts`, `src/engine/radio.ts`): per-duck voices, context cues (arrive/danger/deep/success/fail/discovery/theory/comic/disagree), a 3-duck crew per run, speaks ~1/3–1/2 of moments, never reveals the right choice.
+- **Creature status panel** (`src/ui/CreaturePanel.tsx`, `src/engine/condition.ts`): feeling, energy, marks (mud/frost/dust/wet/glow/soot/scratches/fatigue) masked onto the creature's silhouette, highlighted trait, reaction line.
+- **Scene plates**: 57 curated SDXL plates in `public/scenes/` + tags `src/content/plates.json`; strict event matching (`src/art/plates.ts`), else the procedural canvas painter. Coverage report: `npx tsx scripts/art/coverage.ts` (74% of beat×biome slots).
+- **Bestiary**: `src/content/bestiary.ts` (35 animals/creatures, each linked to existing art); exposed to the AI catalog.
+- **Designer constraint (latest)**: no dependence on the designer's PC for future art → new art should come from the in-browser canvas painter; the existing 57 SDXL plates are static files already in the repo (decision to keep them is pending with the designer).
+
 ## 6. Session log
 - 2026-11-08 — v1 built and tested, pushed to GitHub `main`, Pages enabled (https://q8hitman.github.io/BSCLUB-STORY-/).
 - 2026-11-08 — v2 started: real duck names, painterly scenes, cinematic VN UI, new menus, logos, 4 choices, deep-sea horror rewrite. Designer feedback received (section 2). Logos + references added. Work lives in a temporary session folder — move to a permanent folder before continuing.

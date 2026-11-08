@@ -16,8 +16,8 @@ Each mode: 1000 complete runs with random creatures, ducks and choices, carrying
 | Consecutive-run similarity (no history) | 0.117 | 0.159 |
 | Max plan similarity to last 10 runs (with history) | 0.26 | 0.344 |
 | Max plan similarity to last 10 runs (no history) | 0.341 | 0.421 |
-| Check success rate | 54.2% | 59% |
-| Success by base animal | owl 60.9%, axolotl 50.7%, camel 48.6%, gecko 55.4%, fennec 53.7%, octopus 58.8%, pangolin 55.5%, frog 48.8% | octopus 67.2%, pangolin 58.5%, camel 58.9%, frog 57.5%, gecko 57.4%, fennec 53.3%, owl 62%, axolotl 56.9% |
+| Check success rate | 54.3% | 58.9% |
+| Success by base animal | owl 61.2%, axolotl 51%, camel 48.7%, gecko 56%, fennec 54%, octopus 58.1%, pangolin 55.8%, frog 48.8% | octopus 67.2%, pangolin 58.6%, camel 58.9%, frog 57.6%, gecko 56.9%, fennec 53.2%, owl 61.4%, axolotl 57.2% |
 | Anatomy-gated choices taken | 8.1% | 7.1% |
 | Sailor legend runs | — | 47.8% |
 
@@ -28,28 +28,28 @@ Each mode: 1000 complete runs with random creatures, ducks and choices, carrying
  "classic": {
   "chaos": 252,
   "machine": 83,
-  "cryptid": 66,
-  "reunion": 163,
-  "vex-defeated": 55,
+  "cryptid": 65,
+  "reunion": 165,
+  "vex-defeated": 54,
   "frenemies": 30,
-  "guardian": 182,
+  "guardian": 183,
   "nap": 18,
-  "wild": 57,
+  "wild": 58,
   "unsolved": 24,
   "field-team": 38,
-  "publish": 32
+  "publish": 30
  },
  "marine": {
   "glimpse": 169,
-  "vent-day": 98,
-  "chaos": 197,
+  "vent-day": 96,
+  "chaos": 198,
   "peace": 84,
   "eye-to-eye": 101,
   "voice-deep": 57,
-  "proof": 63,
+  "proof": 65,
   "reef-heroes": 87,
   "field-team": 18,
-  "blurry": 48,
+  "blurry": 47,
   "publish": 46,
   "beacon": 31,
   "nap": 1

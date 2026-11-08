@@ -1,0 +1,458 @@
+[
+ {
+  "id": "forest-signal-tree",
+  "biome": "forest",
+  "event": "signal",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "forest-bone-circle",
+  "biome": "forest",
+  "event": "discovery",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "ink"
+ },
+ {
+  "id": "forest-lynx-watch",
+  "biome": "forest",
+  "event": "encounter",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "forest-comic-owl",
+  "biome": "forest",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "forest-hermit-hives",
+  "biome": "forest",
+  "event": "encounter",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "storybook"
+ },
+ {
+  "id": "desert-spiral-ruins",
+  "biome": "desert",
+  "event": "discovery",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "desert-mirage-oasis",
+  "biome": "desert",
+  "event": "discovery",
+  "tone": "surprising",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "desert-dhub-standoff",
+  "biome": "desert",
+  "event": "encounter",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "desert-buried-box",
+  "biome": "desert",
+  "event": "evidence",
+  "tone": "scientific",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "mountain-cave-light",
+  "biome": "mountain",
+  "event": "signal",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "mountain-rope-bridge",
+  "biome": "mountain",
+  "event": "challenge",
+  "tone": "adventurous",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "mountain-giant-footprint",
+  "biome": "mountain",
+  "event": "evidence",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "mountain-ibex-comic",
+  "biome": "mountain",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "cave-pool-eyes",
+  "biome": "cave",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "cave-crystal-passage",
+  "biome": "cave",
+  "event": "discovery",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "cave-blind-fish",
+  "biome": "cave",
+  "event": "discovery",
+  "tone": "scientific",
+  "mystery": 1,
+  "style": "specimen"
+ },
+ {
+  "id": "cave-wall-carving",
+  "biome": "cave",
+  "event": "evidence",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "snow-station-window",
+  "biome": "snow",
+  "event": "signal",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "snow-frozen-frog",
+  "biome": "snow",
+  "event": "discovery",
+  "tone": "scientific",
+  "mystery": 1,
+  "style": "specimen"
+ },
+ {
+  "id": "snow-polar-bear",
+  "biome": "snow",
+  "event": "encounter",
+  "tone": "suspenseful",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "snow-comic-slide",
+  "biome": "snow",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "swamp-wisps",
+  "biome": "swamp",
+  "event": "signal",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "swamp-tagged-nest",
+  "biome": "swamp",
+  "event": "evidence",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "swamp-croc-log",
+  "biome": "swamp",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "swamp-comic-turtle",
+  "biome": "swamp",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "ruins-machine-ring",
+  "biome": "ruins",
+  "event": "finale",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "ruins-specimen-drawers",
+  "biome": "ruins",
+  "event": "evidence",
+  "tone": "scientific",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "ruins-drone-hall",
+  "biome": "ruins",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "ruins-whiteboard",
+  "biome": "ruins",
+  "event": "discovery",
+  "tone": "surprising",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "lab-midnight-spark",
+  "biome": "lab",
+  "event": "hook",
+  "tone": "surprising",
+  "mystery": 2,
+  "style": "storybook"
+ },
+ {
+  "id": "lab-escaped-samples",
+  "biome": "lab",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 1,
+  "style": "storybook"
+ },
+ {
+  "id": "lab-postcard-map",
+  "biome": "lab",
+  "event": "hook",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "reef-bleach-shadow",
+  "biome": "reef",
+  "event": "signal",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "reef-ghost-net",
+  "biome": "reef",
+  "event": "challenge",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "reef-comic-clownfish",
+  "biome": "reef",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "mudflat-ring",
+  "biome": "mudflat",
+  "event": "discovery",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "mudflat-mudskipper-duel",
+  "biome": "mudflat",
+  "event": "comic",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "seagrass-dugong",
+  "biome": "seagrass",
+  "event": "encounter",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "opensea-research-ship",
+  "biome": "openSea",
+  "event": "phase",
+  "tone": "adventurous",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "opensea-sailor-tale",
+  "biome": "openSea",
+  "event": "legend",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "twilight-lanternfish",
+  "biome": "twilight",
+  "event": "discovery",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "twilight-siphonophore",
+  "biome": "twilight",
+  "event": "discovery",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "twilight-squid-eye",
+  "biome": "twilight",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "midnight-angler",
+  "biome": "midnight",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "midnight-gulper",
+  "biome": "midnight",
+  "event": "encounter",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "midnight-party",
+  "biome": "midnight",
+  "event": "comic",
+  "tone": "absurd",
+  "mystery": 1,
+  "style": "abyss"
+ },
+ {
+  "id": "vents-chimneys",
+  "biome": "vents",
+  "event": "discovery",
+  "tone": "scientific",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "vents-eruption",
+  "biome": "vents",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "vents-iron-snail",
+  "biome": "vents",
+  "event": "discovery",
+  "tone": "scientific",
+  "mystery": 1,
+  "style": "specimen"
+ },
+ {
+  "id": "trench-snailfish",
+  "biome": "trench",
+  "event": "discovery",
+  "tone": "scientific",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "trench-whalefall",
+  "biome": "trench",
+  "event": "discovery",
+  "tone": "emotional",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "specimen-dragonfish",
+  "biome": "midnight",
+  "event": "bestiary",
+  "tone": "eerie",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-viperfish",
+  "biome": "midnight",
+  "event": "bestiary",
+  "tone": "eerie",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-jerboa",
+  "biome": "desert",
+  "event": "bestiary",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-fennec",
+  "biome": "desert",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-axolotl",
+  "biome": "lab",
+  "event": "bestiary",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-pangolin",
+  "biome": "forest",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen"
+ }
+]

@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { sceneImage } from '../art/painter';
+import { platesForRun, plateUrl } from '../art/plates';
+import { BEAT_BY_ID } from '../engine/story';
 import { ambient } from '../audio';
-import { DUCK_BY_ID, MOOD_LINES } from '../content/ducks';
+import { DUCK_BY_ID, resolveDuckId } from '../content/ducks';
+import { radio } from '../engine/radio';
+import { CreaturePanel } from './CreaturePanel';
 import { BIOMES, FACT_BY_ID } from '../content/world';
 import { aiAvailable, narrate } from '../engine/ai';
 import { Rng } from '../engine/rng';
@@ -17,15 +21,18 @@ const STYLE_LABEL: Record<Style, { en: string; ar: string }> = {
 };
 
 /** Full-bleed painted scene with slow camera drift and a cross-fade between scenes. */
-export function PaintedScene({ biome, props, seed, reduced, className = '' }: { biome: BiomeId; props: string[]; seed: number; reduced: boolean; className?: string }) {
-  const src = useMemo(() => sceneImage(biome, props, seed), [biome, props, seed]);
+export function PaintedScene({ biome, props, seed, reduced, className = '', plate }: { biome: BiomeId; props: string[]; seed: number; reduced: boolean; className?: string; plate?: string | null }) {
+  // A painted plate (SDXL, offline) when one exists; otherwise the procedural painter. Broken plate → painter.
+  const [failed, setFailed] = useState<string | null>(null);
+  const usePlate = !!plate && failed !== plate;
+  const src = useMemo(() => (usePlate ? plate! : sceneImage(biome, props, seed)), [usePlate, plate, biome, props, seed]);
   const [prev, setPrev] = useState<string | null>(null);
   const last = useRef<string | null>(null);
   useEffect(() => { setPrev(last.current); last.current = src; const id = setTimeout(() => setPrev(null), 1200); return () => clearTimeout(id); }, [src]);
   return (
     <div className={`painted ${reduced ? 'still' : ''} ${className}`} role="img" aria-label={BIOMES[biome].name.en}>
       {prev && prev !== src && <img className="painted-img old" src={prev} alt="" />}
-      {src && <img key={src} className="painted-img" src={src} alt="" />}
+      {src && <img key={src} className="painted-img" src={src} alt="" onError={() => { if (usePlate) setFailed(plate!); }} />}
       <div className="painted-grain" aria-hidden="true" />
     </div>
   );
@@ -37,7 +44,6 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
   const [aiText, setAiText] = useState<string | null>(null);
   const [newFacts, setNewFacts] = useState<string[]>([]);
   const [confirmQuit, setConfirmQuit] = useState(false);
-  const [showCreature, setShowCreature] = useState(false);
   const [collab, setCollab] = useState(game.mode === 'marine' && game.index === 0 && game.stage === 'beat');
   useEffect(() => { if (!collab) return; const id = setTimeout(() => setCollab(false), 4200); return () => clearTimeout(id); }, [collab]);
   const recent = useRef<string[]>([]);
@@ -47,16 +53,6 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
   useEffect(() => { setTyped(false); }, [game.index, game.stage]);
   useEffect(() => { if (!settings.muted && view) ambient.play(view.biome); else ambient.stop(); }, [view?.biome, settings.muted]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => ambient.stop(), []);
-
-  const duck = DUCK_BY_ID[game.duck];
-  const duckLine = useMemo(() => {
-    const r = Rng.from(game.seed, `duck${game.index}${game.stage}`);
-    if (game.stage === 'outcome' && game.lastOutcome) {
-      return { mood: game.lastOutcome.mood, line: r.pick(MOOD_LINES[game.lastOutcome.mood])[lang] as string | null };
-    }
-    // Before a choice the duck stays quiet most of the time; silence builds tension.
-    return { mood: 'thinking' as DuckMood, line: r.chance(0.35) ? r.pick(MOOD_LINES.thinking)[lang] : null };
-  }, [game.seed, game.index, game.stage, game.lastOutcome, lang]);
 
   const onChoose = useCallback((id: string) => {
     const before = new Set(game.discoveries);
@@ -84,18 +80,22 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, [view, game.stage, typed, confirmQuit, onChoose, onContinue]);
 
+  const plate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const lines = useMemo(() => (view ? radio(game, view.template.kind, view.biome) : []), [game, view]);
+
   if (!view) return null;
   const isOutcome = game.stage === 'outcome' && game.lastOutcome;
   const o = game.lastOutcome;
   const descendIdx = game.plan.beats.findIndex((b) => b.template === 'pm-descend');
   const isDeep = descendIdx >= 0 && game.index >= descendIdx;
   const phaseLabel = game.mode === 'marine' ? t(isDeep ? 'deep' : 'surface', lang) : null;
-  const showOdds = game.duck === 'data';
+  const showOdds = resolveDuckId(game.duck) === 'zahra';
   const total = game.plan.beats.length;
 
   return (
     <section className={`screen play vn ${isDeep ? 'is-deep' : ''}`}>
-      <PaintedScene biome={view.biome} props={view.template.props} seed={game.seed + game.index} reduced={reduced} />
+      <PaintedScene biome={view.biome} props={view.template.props} seed={game.seed + game.index} reduced={reduced} plate={plate ? plateUrl(plate.id) : null} />
       <div className="letterbox top" aria-hidden="true" /><div className="letterbox bottom" aria-hidden="true" />
 
       <header className="vn-hud" role="status">
@@ -109,18 +109,11 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
           <span className="pips" title={t('energy', lang)} aria-label={`${t('energy', lang)} ${game.energy}/${MAX_ENERGY}`}>{Array.from({ length: MAX_ENERGY }, (_, i) => <i key={i} className={i < game.energy ? 'on' : ''} />)}</span>
           <span className="stat" title={t('evidence', lang)}>◆ {game.evidence.length}</span>
           <span className="stat" title={t('discoveries', lang)}>✦ {game.discoveries.length}</span>
-          <button className="ghost-icon specimen-btn" onClick={() => setShowCreature((v) => !v)} aria-label={game.creature.name}><CreatureArt creature={game.creature} className="specimen" /></button>
           <button className="ghost-icon" aria-label={t('quit', lang)} onClick={() => setConfirmQuit(true)}>✕</button>
         </div>
       </header>
 
-      {showCreature && (
-        <div className="specimen-card" onClick={() => setShowCreature(false)}>
-          <CreatureArt creature={game.creature} className="specimen" />
-          <b>{game.creature.name}</b>
-          <small>{lang === 'ar' ? 'تخيّل مخلوقك داخل المشهد' : 'Picture your creature in the scene'}</small>
-        </div>
-      )}
+      <CreaturePanel game={game} lang={lang} />
 
       {collab && (
         <div className="collab-intro" onClick={() => setCollab(false)} role="dialog" aria-label={t('collab', lang)}>
@@ -141,17 +134,22 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
 
       <div className="vn-panel">
         <div className={`vn-box ${isOutcome ? (o!.success ? 'outcome good' : 'outcome bad') : 'narration'}`}>
-          {duck && (
-            <div className={`vn-speaker mood-${duckLine.mood}`}>
-              <img src={`${import.meta.env.BASE_URL}ducks/${duck.img}`} alt={duck.name[lang]} className="duck-img" width={72} height={78} />
-              <div className="vn-aside"><b>{duck.name[lang]}</b>{duckLine.line ? <span>«{duckLine.line}»</span> : <span className="role">{duck.role[lang]}</span>}</div>
-            </div>
-          )}
           {isOutcome && <span className={`tag ${o!.success ? 'ok' : 'no'}`}>{o!.success ? t('success', lang) : t('setback', lang)}</span>}
           {aiText && <span className="tag ai">{t('aiBadge', lang)}</span>}
           <Typewriter key={`${game.index}${game.stage}`} text={isOutcome ? (aiText ?? o!.text[lang]) : view.text[lang]} speed={speed} onDone={() => setTyped(true)} />
           {isOutcome && o!.partLine && <p className="part-line">{o!.partLine[lang]}</p>}
         </div>
+
+        {lines.length > 0 && (
+          <div className="duck-radio" aria-label="BSC Duck Radio">
+            {lines.map((l, i) => { const d = DUCK_BY_ID[l.duck]; return d && (
+              <div key={i} className={`radio-line ${i ? 'reply' : ''}`}>
+                <img src={`${import.meta.env.BASE_URL}ducks/${d.expressions[l.expression]}`} alt="" width={56} height={64} />
+                <div><b>{d.name[lang]}</b><span>{l.text[lang]}</span></div>
+              </div>
+            ); })}
+          </div>
+        )}
 
         {!isOutcome ? (
           <div className={`choices ${typed ? 'ready' : ''}`}>

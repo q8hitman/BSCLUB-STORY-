@@ -436,6 +436,8 @@ export const PAINT_PROPS: Record<string, PropFn> = {
   sub: (g) => bathysphere(g, 980, 330, 1.05, Math.PI * 1.08),
   jelly: (g, r) => { for (let i = 0; i < 4; i++) jelly(g, r, 150 + r.float() * 980, 120 + r.float() * 300, 0.6 + r.float() * 0.7, r.pick(['#f2b8d0', '#b8d8f2', '#d8c4ff'])); },
   angler: (g, r) => angler(g, r, 880, 380, 1.25, true),
+  dragonfish: (g, r) => dragonfish(g, r, 1180, 320, 1.15, true, -0.12),
+  gulper: (g, r) => gulper(g, r, 900, 380, 0.9),
   tubeworms: (g, r) => tubeField(g, r, 700, 520, 40),
   squid: (g, r) => { wash(g, 760, 330, 520, '#000000', 0.7); g.fillStyle = 'rgba(70,40,40,0.55)'; g.beginPath(); g.ellipse(760, 330, 420, 300, 0, 0, Math.PI * 2); g.fill(); strokes(g, r, 400, (q) => [400 + q.float() * 720, 80 + q.float() * 500], ['#6a3a36', '#3a201e', '#8a5048'], { w: [2, 6], len: [10, 30], a: [0.08, 0.25] }); eye(g, 760, 330, 120, '#b8b0a0'); },
   probe: (g) => { g.save(); g.translate(960, 600); g.rotate(-0.25); g.fillStyle = '#5a2a14'; g.fillRect(-90, -30, 180, 60); g.restore(); glow(g, 930, 590, 4, 'rgba(120,255,120,0.95)', 20); wash(g, 960, 600, 200, '#ffffff', 0.08); },

@@ -1,0 +1,96 @@
+import { existsSync } from 'node:fs';
+import { describe, expect, it } from 'vitest';
+import { PLATE_LIST, platesForRun } from '../src/art/plates';
+import { DUCKS, DUCK_BY_ID, resolveDuckId } from '../src/content/ducks';
+import { RADIO } from '../src/content/duckRadio';
+import { condition } from '../src/engine/condition';
+import { crew, radio } from '../src/engine/radio';
+import { simulateRun } from '../src/engine/sim';
+import { BEAT_BY_ID, advance, choose, currentBeat, startGame } from '../src/engine/story';
+
+describe('BSC characters', () => {
+  it('roster is the final approved cast; Ali is gone and Camel took his slot', () => {
+    expect(DUCKS.map((d) => d.id)).toEqual(['abdullah', 'ahmed', 'camel', 'bassam', 'kiraz', 'roaa', 'zahra']);
+    expect(DUCKS.some((d) => /ali|علي/i.test(d.name.en + d.name.ar))).toBe(false);
+    const camel = DUCK_BY_ID.camel;
+    expect(camel.name).toEqual({ en: 'Camel', ar: 'الجمل' });
+    expect(camel.img).toBe('camel/pose-front.webp');
+    expect(resolveDuckId('pipette')).toBe('camel'); // Ali's old slot in saved games
+  });
+  it('every expression and pose file exists, and originals are archived', () => {
+    for (const d of DUCKS) {
+      expect(Object.keys(d.expressions).sort()).toEqual(['curious', 'happy', 'laughing', 'shocked', 'sly', 'worried']);
+      for (const f of [...Object.values(d.expressions), ...Object.values(d.poses)]) expect(existsSync(`public/ducks/${f}`), f).toBe(true);
+      expect(existsSync(`art-source/ducks-final/${d.id}.png`)).toBe(true);
+    }
+  });
+  it('legacy saves with old duck ids still play', () => {
+    for (const old of ['petri', 'quill', 'pipette', 'goggles', 'cherry', 'lens', 'data']) {
+      expect(DUCK_BY_ID[old], old).toBeTruthy();
+      let s = startGame({ mode: 'classic', seed: 4, duck: old, player: '', creature: simulateRun(1, 'classic').state.creature });
+      s = advance(choose(s, currentBeat(s).choices[0].choice.id));
+      expect(s.stage).not.toBe('ending');
+    }
+  });
+});
+
+describe('Duck Radio', () => {
+  it('every duck has lines for every cue, in both languages', () => {
+    for (const d of DUCKS) for (const cue of ['arrive', 'danger', 'deep', 'success', 'fail', 'discovery', 'theory', 'comic', 'disagree'] as const) {
+      const pool = RADIO[d.id]?.[cue];
+      expect(pool?.length, `${d.id}.${cue}`).toBeGreaterThan(0);
+      pool!.forEach((l) => { expect(l.en.length).toBeGreaterThan(3); expect(/[؀-ۿ]/.test(l.ar)).toBe(true); });
+    }
+  });
+  it('speaks sometimes, not every scene; uses the run crew and valid expressions', () => {
+    let beats = 0, spoken = 0;
+    for (let i = 0; i < 200; i++) {
+      let s = startGame({ mode: i % 2 ? 'marine' : 'classic', seed: i, duck: 'camel', player: '', creature: simulateRun(i, 'classic').state.creature });
+      const team = crew(s);
+      expect(team[0]).toBe('camel'); expect(new Set(team).size).toBe(3);
+      while (s.stage !== 'ending') {
+        const v = currentBeat(s); beats++;
+        const ls = radio(s, v.template.kind, v.biome);
+        if (ls.length) spoken++;
+        ls.forEach((l) => { expect(team).toContain(l.duck); expect(DUCK_BY_ID[l.duck].expressions[l.expression]).toBeTruthy(); });
+        s = choose(s, v.choices[0].choice.id); radio(s, v.template.kind, v.biome); s = advance(s);
+      }
+    }
+    expect(spoken / beats).toBeGreaterThan(0.25);
+    expect(spoken / beats).toBeLessThan(0.75);
+  });
+});
+
+describe('creature condition & plates', () => {
+  it('marks follow the places visited and stay bounded', () => {
+    const r = simulateRun(42, 'marine');
+    const c = condition({ ...r.state, stage: 'outcome', index: r.state.plan.beats.length - 1, lastOutcome: { text: { en: 'x', ar: 'س' }, mood: 'happy', success: true } });
+    expect(c.marks.length).toBeLessThanOrEqual(5);
+    expect(c.marks.some((m) => m === 'glow' || m === 'soot')).toBe(true); // ended in The Deep
+  });
+  it('every plate in the manifest exists and is never shown twice in one run', () => {
+    for (const p of PLATE_LIST) expect(existsSync(`public/scenes/${p.id}.webp`), p.id).toBe(true);
+    for (let i = 0; i < 100; i++) {
+      const s = simulateRun(i, i % 2 ? 'marine' : 'classic').state;
+      const used = (platesForRun(s, (k: number) => BEAT_BY_ID[s.plan.beats[k].template]?.kind ?? null, s.plan.beats.length - 1) as ({ id: string } | null)[]).filter(Boolean).map((p) => p!.id);
+      expect(new Set(used).size).toBe(used.length);
+    }
+  });
+});
+
+describe('bestiary', () => {
+  it('every animal has real artwork that exists, and valid facts', async () => {
+    const { BESTIARY } = await import('../src/content/bestiary');
+    const { PAINT_PROPS } = await import('../src/art/painter');
+    const { FACT_BY_ID } = await import('../src/content/world');
+    const plateIds = new Set(PLATE_LIST.map((p) => p.id));
+    expect(BESTIARY.length).toBeGreaterThanOrEqual(30);
+    for (const a of BESTIARY) {
+      const art = [...a.art.plates, ...(a.art.specimen ? [a.art.specimen] : [])];
+      expect(art.length + (a.art.painter ? 1 : 0), a.id).toBeGreaterThan(0);
+      art.forEach((id) => expect(plateIds.has(id), `${a.id} → ${id}`).toBe(true));
+      if (a.art.painter) expect(PAINT_PROPS[a.art.painter], `${a.id} painter`).toBeTruthy();
+      if (a.fact) expect(FACT_BY_ID[a.fact], `${a.id} fact`).toBeTruthy();
+    }
+  });
+});

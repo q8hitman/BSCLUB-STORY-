@@ -1,0 +1,112 @@
+[
+ {
+  "id": "desert-sandstorm-wall",
+  "biome": "desert",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "ink",
+  "seed": 3604,
+  "prompt": "a gigantic rolling wall of brown sand and dust about to swallow a small desert camp of tents, dramatic orange sky, desert ground, a falcon flying away from the storm",
+  "negative": "ufo, spaceship, flying saucer, aircraft"
+ },
+ {
+  "id": "mountain-giant-footprint",
+  "biome": "mountain",
+  "event": "evidence",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne",
+  "seed": 3703,
+  "prompt": "close-up of one enormous three-toed footprint pressed deep into fresh snow on a mountain path, much larger than a human boot beside it for scale, lantern light, dark peaks and falling snow behind",
+  "negative": ""
+ },
+ {
+  "id": "cave-pool-eyes",
+  "biome": "cave",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne",
+  "seed": 3801,
+  "prompt": "dark cave interior, black still water, dozens of pairs of small glowing white eyes reflecting just above the water surface in the darkness, stalactites, a lantern on a rock in the foreground",
+  "negative": "people, person"
+ },
+ {
+  "id": "swamp-croc-log",
+  "biome": "swamp",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 1,
+  "style": "nocturne",
+  "seed": 4003,
+  "prompt": "a dark swamp channel at night, a crocodile half submerged among lily pads, only its eyes and snout above the water, lantern reflections on the water, eerie",
+  "negative": ""
+ },
+ {
+  "id": "opensea-research-ship",
+  "biome": "openSea",
+  "event": "phase",
+  "tone": "adventurous",
+  "mystery": 2,
+  "style": "ink",
+  "seed": 4601,
+  "prompt": "side view of a small white research ship at night on the open sea, a round blue steel diving sphere with portholes hanging from a crane over the black water, deck lamps, calm swells",
+  "negative": "glass dome, airship, balloon"
+ },
+ {
+  "id": "opensea-sailor-tale",
+  "biome": "openSea",
+  "event": "legend",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne",
+  "seed": 4602,
+  "prompt": "an old wooden dhow boat at night on calm sea under a huge moon, beneath the boat in the dark water a single enormous glowing eye and the outline of a vast creature",
+  "negative": ""
+ },
+ {
+  "id": "midnight-bathysphere",
+  "biome": "midnight",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 3,
+  "style": "abyss",
+  "seed": 4802,
+  "prompt": "a round blue steel diving sphere with three portholes and a cable going up, hanging in pitch black ocean, a bright searchlight beam from one porthole, long eel-like dragonfish with rows of glowing blue dots and fangs swimming around it",
+  "negative": "fish shaped sphere"
+ },
+ {
+  "id": "vents-iron-snail",
+  "biome": "vents",
+  "event": "discovery",
+  "tone": "scientific",
+  "mystery": 1,
+  "style": "specimen",
+  "seed": 4903,
+  "prompt": "a deep sea snail with dark metallic iron scales covering its foot, on dark volcanic rock near a hydrothermal vent, small shrimp around",
+  "negative": "plate, dish, table, studio photo"
+ },
+ {
+  "id": "trench-giant",
+  "biome": "trench",
+  "event": "finale",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss",
+  "seed": 5001,
+  "prompt": "pitch black deep ocean, a tiny yellow submersible with its searchlight, and looming behind it the gigantic dark scaly side of an unknown sea creature with one huge eye, the creature fills the frame and disappears into darkness",
+  "negative": "submarine shaped creature, ship"
+ },
+ {
+  "id": "specimen-pangolin",
+  "biome": "forest",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen",
+  "seed": 5106,
+  "prompt": "a whole pangolin standing on its hind legs, full body visible with head, tail and overlapping brown scales",
+  "negative": "abstract pattern"
+ }
+]

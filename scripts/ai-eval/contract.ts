@@ -3,6 +3,7 @@
 // and only proposes effects; the engine validates and applies them.
 import { PAINT_PROPS, INTEGRATED } from '../../src/art/painter';
 import { DUCKS } from '../../src/content/ducks';
+import { BESTIARY } from '../../src/content/bestiary';
 import { PARTS } from '../../src/content/parts';
 import { BIOMES, FACTS, NPCS } from '../../src/content/world';
 import { derive } from '../../src/engine/creature';
@@ -28,7 +29,8 @@ export function catalog(mode: Mode) {
     sceneProps: props,
     npcs: NPCS.map((n) => ({ id: n.id, name: n.name.en, role: n.role.en })),
     facts: FACTS.map((f) => ({ id: f.id, text: f.text.en })),
-    ducks: DUCKS.map((d) => ({ id: d.id, name: d.name.en, role: d.role.en })),
+    ducks: DUCKS.map((d) => ({ id: d.id, name: d.name.en, role: d.role.en, voice: d.voice })),
+    bestiary: BESTIARY.filter((a) => a.biomes.some((b) => biomes.includes(b))).map((a) => ({ id: a.id, name: a.name.en, biomes: a.biomes, roles: a.roles, kind: a.kind })),
     tones: TONES, styles: STYLES, moods: MOODS, creatureStates: CREATURE_STATES, marks: MARKS, stats: STATS,
     ...(mode === 'marine' ? { phases: { surface: MARINE_SURFACE, deep: MARINE_DEEP } } : {}),
   };

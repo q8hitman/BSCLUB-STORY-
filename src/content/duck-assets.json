@@ -1,0 +1,151 @@
+{
+ "abdullah": {
+  "sheet": "art-source/ducks-final/abdullah.png",
+  "size": [
+   1536,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/abdullah/expr-happy.webp",
+   "curious": "ducks/abdullah/expr-curious.webp",
+   "shocked": "ducks/abdullah/expr-shocked.webp",
+   "worried": "ducks/abdullah/expr-worried.webp",
+   "laughing": "ducks/abdullah/expr-laughing.webp",
+   "sly": "ducks/abdullah/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/abdullah/pose-front.webp",
+   "front-alt": "ducks/abdullah/pose-front-alt.webp",
+   "back": "ducks/abdullah/pose-back.webp",
+   "inspect": "ducks/abdullah/pose-inspect.webp"
+  }
+ },
+ "ahmed": {
+  "sheet": "art-source/ducks-final/ahmed.png",
+  "size": [
+   1536,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/ahmed/expr-happy.webp",
+   "curious": "ducks/ahmed/expr-curious.webp",
+   "shocked": "ducks/ahmed/expr-shocked.webp",
+   "worried": "ducks/ahmed/expr-worried.webp",
+   "laughing": "ducks/ahmed/expr-laughing.webp",
+   "sly": "ducks/ahmed/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/ahmed/pose-front.webp",
+   "reading": "ducks/ahmed/pose-reading.webp",
+   "back": "ducks/ahmed/pose-back.webp",
+   "cheer": "ducks/ahmed/pose-cheer.webp"
+  }
+ },
+ "camel": {
+  "sheet": "art-source/ducks-final/camel.png",
+  "size": [
+   1536,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/camel/expr-happy.webp",
+   "curious": "ducks/camel/expr-curious.webp",
+   "shocked": "ducks/camel/expr-shocked.webp",
+   "worried": "ducks/camel/expr-worried.webp",
+   "laughing": "ducks/camel/expr-laughing.webp",
+   "sly": "ducks/camel/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/camel/pose-front.webp",
+   "reading": "ducks/camel/pose-reading.webp",
+   "back": "ducks/camel/pose-back.webp",
+   "cheer": "ducks/camel/pose-cheer.webp"
+  }
+ },
+ "bassam": {
+  "sheet": "art-source/ducks-final/bassam.png",
+  "size": [
+   1536,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/bassam/expr-happy.webp",
+   "curious": "ducks/bassam/expr-curious.webp",
+   "shocked": "ducks/bassam/expr-shocked.webp",
+   "worried": "ducks/bassam/expr-worried.webp",
+   "laughing": "ducks/bassam/expr-laughing.webp",
+   "sly": "ducks/bassam/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/bassam/pose-front.webp",
+   "tablet": "ducks/bassam/pose-tablet.webp",
+   "back": "ducks/bassam/pose-back.webp",
+   "sitting": "ducks/bassam/pose-sitting.webp"
+  }
+ },
+ "kiraz": {
+  "sheet": "art-source/ducks-final/kiraz.png",
+  "size": [
+   1535,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/kiraz/expr-happy.webp",
+   "curious": "ducks/kiraz/expr-curious.webp",
+   "shocked": "ducks/kiraz/expr-shocked.webp",
+   "worried": "ducks/kiraz/expr-worried.webp",
+   "laughing": "ducks/kiraz/expr-laughing.webp",
+   "sly": "ducks/kiraz/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/kiraz/pose-front.webp",
+   "reading": "ducks/kiraz/pose-reading.webp",
+   "back": "ducks/kiraz/pose-back.webp",
+   "sitting": "ducks/kiraz/pose-sitting.webp"
+  }
+ },
+ "roaa": {
+  "sheet": "art-source/ducks-final/roaa.png",
+  "size": [
+   1536,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/roaa/expr-happy.webp",
+   "curious": "ducks/roaa/expr-curious.webp",
+   "shocked": "ducks/roaa/expr-shocked.webp",
+   "worried": "ducks/roaa/expr-worried.webp",
+   "laughing": "ducks/roaa/expr-laughing.webp",
+   "sly": "ducks/roaa/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/roaa/pose-front.webp",
+   "clipboard": "ducks/roaa/pose-clipboard.webp",
+   "examine": "ducks/roaa/pose-examine.webp",
+   "back": "ducks/roaa/pose-back.webp",
+   "sitting": "ducks/roaa/pose-sitting.webp"
+  }
+ },
+ "zahra": {
+  "sheet": "art-source/ducks-final/zahra.png",
+  "size": [
+   1536,
+   1024
+  ],
+  "expressions": {
+   "happy": "ducks/zahra/expr-happy.webp",
+   "curious": "ducks/zahra/expr-curious.webp",
+   "shocked": "ducks/zahra/expr-shocked.webp",
+   "worried": "ducks/zahra/expr-worried.webp",
+   "laughing": "ducks/zahra/expr-laughing.webp",
+   "sly": "ducks/zahra/expr-sly.webp"
+  },
+  "poses": {
+   "front": "ducks/zahra/pose-front.webp",
+   "writing": "ducks/zahra/pose-writing.webp",
+   "present": "ducks/zahra/pose-present.webp",
+   "back": "ducks/zahra/pose-back.webp",
+   "sitting": "ducks/zahra/pose-sitting.webp"
+  }
+ }
+}

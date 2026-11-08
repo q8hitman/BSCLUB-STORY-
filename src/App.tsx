@@ -12,6 +12,7 @@ import { Builder, NameCreature } from './ui/Builder';
 import { Btn, Logos } from './ui/common';
 import { EndingScreen } from './ui/EndingScreen';
 import { PaintedScene, Play } from './ui/Play';
+import { plateUrl } from './art/plates';
 import { ambient } from './audio';
 
 type Screen = 'title' | 'duck' | 'player' | 'build' | 'cname' | 'mode' | 'play' | 'ending';
@@ -80,7 +81,7 @@ export default function App() {
       <main>
         {screen === 'title' && (
           <section className="screen title">
-            <PaintedScene biome="twilight" props={['sub', 'jelly']} seed={1930} reduced={reduced} className="backdrop" />
+            <PaintedScene biome="twilight" props={['sub', 'jelly']} seed={1930} reduced={reduced} className="backdrop" plate={plateUrl('twilight-siphonophore')} />
             <div className="title-inner">
               <Logos />
               <p className="eyebrow">{t('club', lang)}</p>
@@ -116,7 +117,7 @@ export default function App() {
               <div className="duck-grid" role="radiogroup" aria-label={t('chooseDuck', lang)}>
                 {DUCKS.map((d) => (
                   <button key={d.id} role="radio" aria-checked={duck === d.id} className={`duck-card ${duck === d.id ? 'on' : ''}`} onClick={() => setDuck(d.id)}>
-                    <img src={`${BASE}ducks/${d.img}`} alt={d.name[lang]} width={140} height={151} loading="lazy" />
+                    <img src={`${BASE}ducks/${d.expressions.happy}`} alt={d.name[lang]} width={140} height={151} loading="lazy" />
                     <strong>{d.name[lang]}</strong>
                   </button>
                 ))}
@@ -144,11 +145,11 @@ export default function App() {
             <header className="screen-head"><p className="step">05</p><h2>{t('chooseMode', lang)}</h2></header>
             <div className="mode-grid">
               <button className="mode-card classic" onClick={() => begin('classic')}>
-                <PaintedScene biome="forest" props={[]} seed={11} reduced />
+                <PaintedScene biome="forest" props={[]} seed={11} reduced plate={plateUrl('forest-signal-tree')} />
                 <div className="mode-text"><strong>{t('classic', lang)}</strong><span>{t('classicDesc', lang)}</span></div>
               </button>
               <button className="mode-card marine" onClick={() => begin('marine')}>
-                <PaintedScene biome="midnight" props={['angler']} seed={12} reduced />
+                <PaintedScene biome="midnight" props={['angler']} seed={12} reduced plate={plateUrl('midnight-angler')} />
                 <div className="mode-text">
                   <img className="collab-logo" src={`${BASE}brand/marine-logo-transparent.png`} alt="Marine Science Club" />
                   <strong>{t('marine', lang)}</strong><span>{t('marineDesc', lang)}</span>
