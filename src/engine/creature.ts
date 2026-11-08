@@ -36,8 +36,8 @@ export function isValidConfig(c: Partial<CreatureConfig> | null | undefined): c 
 // Default creature names are plain lab designations ("Octopus Hybrid X-7" / "هجين أخطبوط X-7") so nobody
 // mistakes them for a story character. Players can always type their own name.
 const SHORT: Record<string, { en: string; ar: string }> = {
-  fennec: { en: 'Fennec', ar: 'فنك' }, axolotl: { en: 'Axolotl', ar: 'أكسولوتل' }, gecko: { en: 'Gecko', ar: 'بريص' }, owl: { en: 'Owl', ar: 'بومة' },
-  camel: { en: 'Camel', ar: 'بعير' }, frog: { en: 'Frog', ar: 'ضفدع' }, pangolin: { en: 'Pangolin', ar: 'بنغول' }, octopus: { en: 'Octopus', ar: 'أخطبوط' },
+  fennec: { en: 'Fennec', ar: 'فنك' }, axolotl: { en: 'Axolotl', ar: 'أكسولوتل' }, gecko: { en: 'Gecko', ar: 'أبو بريص' }, owl: { en: 'Owl', ar: 'بومة' },
+  camel: { en: 'Camel', ar: 'جمل' }, frog: { en: 'Frog', ar: 'ضفدع' }, pangolin: { en: 'Pangolin', ar: 'بنغول' }, octopus: { en: 'Octopus', ar: 'أخطبوط' },
 };
 const CODES = ['A', 'B', 'C', 'D', 'K', 'Q', 'R', 'V', 'X', 'Z'];
 

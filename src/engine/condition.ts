@@ -10,22 +10,22 @@ export type Mark = 'mud' | 'frost' | 'dust' | 'wet' | 'glow' | 'soot' | 'scratch
 export type Feeling = 'curious' | 'calm' | 'confident' | 'afraid' | 'excited' | 'exhausted' | 'hurt' | 'proud';
 
 export const MARK_LABEL: Record<Mark, L10n> = {
-  mud: L('Mud-caked', 'مغطّى بالطين'), frost: L('Frosted', 'عليه صقيع'), dust: L('Dusty', 'مغبّر'), wet: L('Soaked', 'مبلول'),
-  glow: L('Glowing algae', 'طحالب مضيئة'), soot: L('Vent soot', 'سخام الفتحات'), scratches: L('Scratched', 'مخدوش'), fatigue: L('Exhausted', 'منهك'),
+  mud: L('Mud-caked', 'مغطّى بالطين'), frost: L('Frosted', 'يكسوه الصقيع'), dust: L('Dusty', 'يعلوه الغبار'), wet: L('Soaked', 'مبتلّ'),
+  glow: L('Glowing algae', 'طحالب مضيئة'), soot: L('Vent soot', 'سخام الفتحات'), scratches: L('Scratched', 'مخدوش'), fatigue: L('Exhausted', 'مُنهَك'),
 };
 export const FEELING_LABEL: Record<Feeling, L10n> = {
-  curious: L('Curious', 'فضولي'), calm: L('Calm', 'هادي'), confident: L('Confident', 'واثق'), afraid: L('Afraid', 'خايف'),
-  excited: L('Excited', 'متحمّس'), exhausted: L('Exhausted', 'تعبان'), hurt: L('Hurt', 'متأذّي'), proud: L('Proud', 'فخور'),
+  curious: L('Curious', 'فضولي'), calm: L('Calm', 'هادئ'), confident: L('Confident', 'واثق'), afraid: L('Afraid', 'خائف'),
+  excited: L('Excited', 'متحمّس'), exhausted: L('Exhausted', 'متعب'), hurt: L('Hurt', 'مصاب'), proud: L('Proud', 'فخور'),
 };
 const REACTION: Record<Feeling, L10n[]> = {
-  curious: [L('Ears up, nose working. Something here is worth knowing.', 'الأذن فوق والخشم شغّال… فيه شي يستاهل يعرفه.'), L('It keeps glancing at the same spot.', 'كل شوي يلتفت لنفس المكان.')],
-  calm: [L('Steady breathing. Ready.', 'نفَس هادي… جاهز.')],
-  confident: [L('Chest out. It knows it can do this.', 'صدره قدّام… يعرف إنه يقدر.'), L('Its trade-offs paid off this time.', 'هالمرة صفاته خدمته.')],
-  afraid: [L('Pressed low, every muscle ready to bolt.', 'منخفض بجسمه وكل عضلة جاهزة تهرب.'), L('It won’t take its eyes off the dark.', 'ما يشيل عينه عن الظلام.')],
-  excited: [L('Can’t stay still. Discovery in the air.', 'ما يقدر يوقف مكانه… ريحة اكتشاف.')],
-  exhausted: [L('Moving slower now. Needs rest soon.', 'صار أبطأ… يحتاج راحة قريب.')],
-  hurt: [L('Favouring one side, but still going.', 'يميل على جنب… بس للحين يكمّل.')],
-  proud: [L('Head high. That one was all its own body.', 'راسه فوق… هذي كانت بجسمه هو.')],
+  curious: [L('Ears up, nose working. Something here is worth knowing.', 'أذناه مرفوعتان وأنفه يتشمّم… هنا شيءٌ يستحق المعرفة.'), L('It keeps glancing at the same spot.', 'يلتفت مرةً بعد مرة إلى المكان نفسه.')],
+  calm: [L('Steady breathing. Ready.', 'أنفاسٌ هادئة… إنه مستعد.')],
+  confident: [L('Chest out. It knows it can do this.', 'صدره إلى الأمام… يعرف أنه قادر.'), L('Its trade-offs paid off this time.', 'هذه المرة أفادته صفاته.')],
+  afraid: [L('Pressed low, every muscle ready to bolt.', 'يلتصق بالأرض، وكل عضلةٍ فيه مستعدةٌ للفرار.'), L('It won’t take its eyes off the dark.', 'لا يرفع عينيه عن الظلام.')],
+  excited: [L('Can’t stay still. Discovery in the air.', 'لا يستطيع البقاء ساكناً… في الجو رائحة اكتشاف.')],
+  exhausted: [L('Moving slower now. Needs rest soon.', 'صار أبطأ… يحتاج إلى الراحة قريباً.')],
+  hurt: [L('Favouring one side, but still going.', 'يميل على جانبٍ واحد… لكنه ما زال يواصل.')],
+  proud: [L('Head high. That one was all its own body.', 'رأسه مرفوع… هذا النجاح صنعه جسده هو.')],
 };
 const BIOME_MARK: Partial<Record<BiomeId, Mark>> = {
   swamp: 'mud', mudflat: 'mud', snow: 'frost', mountain: 'frost', desert: 'dust', cave: 'dust', ruins: 'dust',

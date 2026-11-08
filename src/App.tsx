@@ -15,6 +15,7 @@ import { PaintedScene, Play } from './ui/Play';
 import { plateUrl } from './art/plates';
 import { ambient } from './audio';
 import { LoreBook } from './ui/LoreBook';
+import { u } from './ui/uiText';
 
 type Screen = 'title' | 'lore' | 'duck' | 'player' | 'build' | 'cname' | 'mode' | 'play' | 'ending';
 const BASE = import.meta.env.BASE_URL;
@@ -111,20 +112,26 @@ export default function App() {
 
         {screen === 'duck' && (
           <section className="screen duck-select">
-            <header className="screen-head"><p className="step">01</p><h2>{t('chooseDuck', lang)}</h2><p className="hint">{t('chooseDuckHint', lang)}</p></header>
+            <header className="screen-head"><p className="step">01</p><h2>{u('chooseCompanion', lang)}</h2><p className="hint">{u('companionHint', lang)}</p></header>
             <div className="duck-stage">
-              <div className="duck-hero" style={{ ['--duck-bg' as string]: selectedDuck.bg }}>
-                <img src={`${BASE}ducks/${selectedDuck.img}`} alt={selectedDuck.name[lang]} width={420} height={454} />
+              <article key={selectedDuck.id} className="duck-hero" style={{ ['--duck-bg' as string]: selectedDuck.bg }}>
+                <div className="duck-hero-art"><img src={`${BASE}ducks/${selectedDuck.img}`} alt={selectedDuck.name[lang]} /></div>
                 <div className="duck-hero-text">
+                  <span className="kicker">{u('companion', lang)}</span>
                   <h3>{selectedDuck.name[lang]}</h3>
                   <p className="role">{selectedDuck.role[lang]}</p>
+                  <div className="duck-moods" aria-hidden="true">
+                    {(['happy', 'curious', 'shocked', 'sly'] as const).map((e) => <img key={e} src={`${BASE}ducks/${selectedDuck.expressions[e]}`} alt="" loading="lazy" />)}
+                  </div>
                 </div>
-              </div>
-              <div className="duck-grid" role="radiogroup" aria-label={t('chooseDuck', lang)}>
+              </article>
+              <div className="duck-roster" role="radiogroup" aria-label={u('chooseCompanion', lang)}>
+                <p className="roster-label">{u('crew', lang)} · {DUCKS.length}</p>
                 {DUCKS.map((d) => (
-                  <button key={d.id} role="radio" aria-checked={duck === d.id} className={`duck-card ${duck === d.id ? 'on' : ''}`} onClick={() => setDuck(d.id)}>
-                    <img src={`${BASE}ducks/${d.expressions.happy}`} alt={d.name[lang]} width={140} height={151} loading="lazy" />
-                    <strong>{d.name[lang]}</strong>
+                  <button key={d.id} role="radio" aria-checked={duck === d.id} aria-label={`${d.name[lang]} — ${d.role[lang]}`} className={`duck-card ${duck === d.id ? 'on' : ''}`} onClick={() => setDuck(d.id)} style={{ ['--duck-bg' as string]: d.bg }}>
+                    <span className="duck-thumb"><img src={`${BASE}ducks/${d.expressions.happy}`} alt="" loading="lazy" /></span>
+                    <span className="duck-meta"><strong>{d.name[lang]}</strong><small>{d.role[lang]}</small></span>
+                    {duck === d.id && <span className="duck-check" aria-hidden="true">✓</span>}
                   </button>
                 ))}
               </div>
@@ -136,9 +143,17 @@ export default function App() {
         {screen === 'player' && (
           <section className="screen player">
             <header className="screen-head"><p className="step">02</p><h2>{t('yourName', lang)}</h2><p className="hint">{t('yourNameHint', lang)}</p></header>
-            <div className="name-field">
-              <input className="text-in" maxLength={24} value={player} placeholder={t('namePlaceholder', lang)} aria-label={t('namePlaceholder', lang)} onChange={(e) => setPlayer(e.target.value)} autoFocus />
-            </div>
+            <form className="id-card" onSubmit={(e) => { e.preventDefault(); setPlayer(player.trim()); setScreen('build'); }}>
+              <div className="id-head"><img src={`${BASE}brand/bsc-logo-transparent.png`} alt="" /><span>{u('researcherCard', lang)}</span><span className="id-no" dir="ltr">BSC-{String(data.runs.length + 1).padStart(3, '0')}</span></div>
+              <label className="id-field">
+                <input className="text-in" maxLength={24} value={player} placeholder={t('namePlaceholder', lang)} aria-label={t('namePlaceholder', lang)} onChange={(e) => setPlayer(e.target.value)} autoFocus enterKeyHint="next" />
+              </label>
+              <div className="id-preview">
+                <img src={`${BASE}ducks/${selectedDuck.expressions.happy}`} alt="" />
+                <p><b>{player.trim() || u('unnamed', lang)}</b> {u('joining', lang)} <b className="gold">{selectedDuck.name[lang]}</b></p>
+              </div>
+              <p className="id-hint">{u('enterHint', lang)}</p>
+            </form>
             <footer className="screen-foot"><Btn variant="ghost" onClick={() => setScreen('duck')}>{t('back', lang)}</Btn><Btn onClick={() => { setPlayer(player.trim()); setScreen('build'); }}>{t('next', lang)}</Btn></footer>
           </section>
         )}
@@ -148,17 +163,28 @@ export default function App() {
 
         {screen === 'mode' && (
           <section className="screen mode-select">
-            <header className="screen-head"><p className="step">05</p><h2>{t('chooseMode', lang)}</h2></header>
+            <header className="screen-head"><p className="step">05</p><h2>{t('chooseMode', lang)}</h2><p className="hint">{u('modeHint', lang)}</p></header>
             <div className="mode-grid">
               <button className="mode-card classic" onClick={() => begin('classic')}>
                 <PaintedScene biome="forest" props={[]} seed={11} reduced plate={plateUrl('forest-signal-tree')} />
-                <div className="mode-text"><strong>{t('classic', lang)}</strong><span>{t('classicDesc', lang)}</span></div>
+                <div className="mode-brand"><Logos /><span>{u('bscOriginal', lang)}</span></div>
+                <div className="mode-text">
+                  <span className="kicker">{u('land', lang)}</span>
+                  <strong>{t('classic', lang)}</strong>
+                  <span className="mode-desc">{t('classicDesc', lang)}</span>
+                  <span className="mode-facts"><i>{u('classicScenes', lang)}</i><i>{u('classicPlaces', lang)}</i><i>{u('fourChoices', lang)}</i></span>
+                  <span className="mode-cta">{u('begin', lang)} <b aria-hidden="true">{lang === 'ar' ? '←' : '→'}</b></span>
+                </div>
               </button>
               <button className="mode-card marine" onClick={() => begin('marine')}>
                 <PaintedScene biome="midnight" props={['angler']} seed={12} reduced plate={plateUrl('midnight-angler')} />
+                <div className="mode-brand"><Logos marine /><span>{u('collabWith', lang)}</span></div>
                 <div className="mode-text">
-                  <img className="collab-logo" src={`${BASE}brand/marine-logo-transparent.png`} alt="Marine Science Club" />
-                  <strong>{t('marine', lang)}</strong><span>{t('marineDesc', lang)}</span>
+                  <span className="kicker sea">{u('sea', lang)}</span>
+                  <strong>{t('marine', lang)}</strong>
+                  <span className="mode-desc">{t('marineDesc', lang)}</span>
+                  <span className="mode-facts"><i>{u('marineScenes', lang)}</i><i className="journey">{u('marineJourney', lang)}</i><i>{u('fourChoices', lang)}</i></span>
+                  <span className="mode-cta">{u('begin', lang)} <b aria-hidden="true">{lang === 'ar' ? '←' : '→'}</b></span>
                 </div>
               </button>
             </div>

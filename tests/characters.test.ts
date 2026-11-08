@@ -79,15 +79,17 @@ describe('creature condition & plates', () => {
 });
 
 describe('bestiary', () => {
-  it('every animal has real artwork that exists, and valid facts', async () => {
-    const { BESTIARY } = await import('../src/content/bestiary');
+  it('every animal has real artwork that exists (or is listed as waiting for art), and valid facts', async () => {
+    const { BESTIARY, ART_PENDING } = await import('../src/content/bestiary');
     const { PAINT_PROPS } = await import('../src/art/painter');
     const { FACT_BY_ID } = await import('../src/content/world');
     const plateIds = new Set(PLATE_LIST.map((p) => p.id));
     expect(BESTIARY.length).toBeGreaterThanOrEqual(30);
     for (const a of BESTIARY) {
       const art = [...a.art.plates, ...(a.art.specimen ? [a.art.specimen] : [])];
-      expect(art.length + (a.art.painter ? 1 : 0), a.id).toBeGreaterThan(0);
+      // Real animals named by the story may wait for the art worker; they must be listed in ART_PENDING.
+      if (art.length + (a.art.painter ? 1 : 0) === 0) expect(ART_PENDING, a.id).toContain(a.id);
+      else expect(ART_PENDING, a.id).not.toContain(a.id);
       art.forEach((id) => expect(plateIds.has(id), `${a.id} → ${id}`).toBe(true));
       if (a.art.painter) expect(PAINT_PROPS[a.art.painter], `${a.id} painter`).toBeTruthy();
       if (a.fact) expect(FACT_BY_ID[a.fact], `${a.id} fact`).toBeTruthy();

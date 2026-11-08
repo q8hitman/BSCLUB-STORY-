@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { renderCreaturePortrait, saveBlob } from '../share/shareCard';
 import type { Lang } from '../engine/types';
-import { creatureSvg } from '../art/creatureSvg';
+import { creatureSvg, type CreatureMark, type Expression } from '../art/creatureSvg';
 import type { CreatureConfig } from '../engine/types';
+import { u } from './uiText';
 
-export function CreatureArt({ creature, className = '', title }: { creature: CreatureConfig; className?: string; title?: string }) {
-  const svg = useMemo(() => creatureSvg(creature), [creature]);
+export function CreatureArt({ creature, className = '', title, expression = 'neutral', marks, crop }: { creature: CreatureConfig; className?: string; title?: string; expression?: Expression; marks?: CreatureMark[]; crop?: 'full' | 'face' }) {
+  const mk = marks?.join(',') ?? '';
+  const svg = useMemo(() => creatureSvg(creature, { expression, marks: mk ? (mk.split(',') as CreatureMark[]) : [], crop }), [creature, expression, mk, crop]);
   return <div className={`creature-art ${className}`} title={title} dangerouslySetInnerHTML={{ __html: svg }} />;
 }
 
@@ -54,8 +56,8 @@ export function CaptureCreature({ creature, lang }: { creature: CreatureConfig; 
     finally { setBusy(false); }
   };
   return (
-    <button className="btn btn-ghost capture" onClick={go} disabled={busy}>
-      {busy ? (lang === 'ar' ? 'قاعدين نرسمه…' : 'Drawing…') : done ? (lang === 'ar' ? 'انحفظت ✓ — احفظ مرة ثانية' : 'Saved ✓ — save again') : (lang === 'ar' ? 'احفظ صورة مخلوقك (اختياري)' : 'Save a picture of your creature (optional)')}
+    <button type="button" className="btn btn-ghost btn-sm capture" onClick={go} disabled={busy}>
+      {busy ? u('drawing', lang) : done ? u('savedAgain', lang) : u('savePicture', lang)}
     </button>
   );
 }

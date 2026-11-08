@@ -1,6 +1,6 @@
 // Share card (1080×1350 PNG) drawn on a canvas. Layout is computed separately so it can be unit-tested.
 import QRCode from 'qrcode';
-import { creatureSvg } from '../art/creatureSvg';
+import { creatureSvg, type Expression } from '../art/creatureSvg';
 import { paintScene, PW, PH } from '../art/painter';
 import type { CreatureConfig } from '../engine/types';
 import { DUCK_BY_ID } from '../content/ducks';
@@ -10,6 +10,8 @@ import { encodeCreature } from '../engine/creature';
 import { SLOTS, type Ending, type GameState, type Lang } from '../engine/types';
 
 export const CARD_W = 1080, CARD_H = 1350;
+/** The creature's face on the card matches how its story ended. */
+export const TONE_EXPRESSION: Record<Ending['tone'], Expression> = { heroic: 'confident', comedic: 'happy', bittersweet: 'tired', mysterious: 'curious', scientific: 'curious', wholesome: 'happy' };
 export const FOOTER = 'تصميم اللعبة: عبدالله شويع - نادي العلوم البيولوجية';
 
 export function shareUrl(s: Pick<GameState, 'creature'>, site?: string): string {
@@ -93,7 +95,7 @@ export async function renderShareCard(s: GameState, e: Ending, lang: Lang, showN
 
   // creature panel
   g.fillStyle = '#e9f5ec'; roundRect(g, 70, 190, CARD_W - 140, 406, 28); g.fill(); g.lineWidth = 4; g.stroke();
-  const svg = creatureSvg(s.creature, { width: 600 });
+  const svg = creatureSvg(s.creature, { width: 600, expression: TONE_EXPRESSION[e.tone] ?? 'neutral' });
   const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
   try { const img = await loadImage(url); g.drawImage(img, 240, 196, 600, 480 * 0.8); } finally { URL.revokeObjectURL(url); }
   if (cc.duckImg) {
@@ -150,7 +152,7 @@ function roundRect(g: CanvasRenderingContext2D, x: number, y: number, w: number,
 }
 
 /** Portrait of the player's creature (1080×1350 PNG): painted backdrop, inked specimen, name and traits. */
-export async function renderCreaturePortrait(c: CreatureConfig, lang: Lang): Promise<Blob> {
+export async function renderCreaturePortrait(c: CreatureConfig, lang: Lang, expression: Expression = 'confident'): Promise<Blob> {
   const font = lang === 'ar' ? 'Tajawal' : 'Segoe UI';
   try { await document.fonts.load(`700 40px ${font}`); } catch { /* system font */ }
   const cv = document.createElement('canvas'); cv.width = CARD_W; cv.height = CARD_H;
@@ -162,7 +164,7 @@ export async function renderCreaturePortrait(c: CreatureConfig, lang: Lang): Pro
   const shade = g.createLinearGradient(0, 0, 0, CARD_H); shade.addColorStop(0, 'rgba(6,8,11,.55)'); shade.addColorStop(0.55, 'rgba(6,8,11,.15)'); shade.addColorStop(1, 'rgba(6,8,11,.92)');
   g.fillStyle = shade; g.fillRect(0, 0, CARD_W, CARD_H);
   // creature
-  const url = URL.createObjectURL(new Blob([creatureSvg(c, { width: 900 })], { type: 'image/svg+xml' }));
+  const url = URL.createObjectURL(new Blob([creatureSvg(c, { width: 900, expression })], { type: 'image/svg+xml' }));
   try { const img = await loadImage(url); g.save(); g.shadowColor = 'rgba(0,0,0,.6)'; g.shadowBlur = 40; g.drawImage(img, 90, 260, 900, 720); g.restore(); } finally { URL.revokeObjectURL(url); }
   // logo
   try { const logo = await loadImage(`${import.meta.env?.BASE_URL ?? '/'}brand/bsc-logo-transparent.png`); const h = 110; g.drawImage(logo, (CARD_W - h * (logo.width / logo.height)) / 2, 60, h * (logo.width / logo.height), h); } catch { /* optional */ }

@@ -33,6 +33,8 @@ export function condHolds(cond: Cond | undefined, d: DerivedCreature, s: Pick<Ga
   if (cond.flag && !cond.flag.every((f) => s.flags.includes(f))) return false;
   if (cond.notFlag && cond.notFlag.some((f) => s.flags.includes(f))) return false;
   if (cond.evidenceMin !== undefined && s.evidence.length < cond.evidenceMin) return false;
+  if (cond.flagAny && !cond.flagAny.some((f) => s.flags.includes(f))) return false;
+  if (cond.evidenceAny && !cond.evidenceAny.some((e) => s.evidence.includes(e))) return false;
   if (cond.wet !== undefined && biome && BIOMES[biome].wet !== cond.wet) return false;
   if (cond.biome && biome && !cond.biome.includes(biome)) return false;
   return true;
@@ -192,18 +194,80 @@ export interface BeatView {
   featured?: string | null;
 }
 
-export interface Ctx { name: string; player: string; duck: L10n; duckG: 'm' | 'f'; place: L10n; obstacle: L10n; predator: L10n; critter: L10n; npc: L10n }
+export interface Ctx {
+  name: string; player: string; duck: L10n; duckG: 'm' | 'f'; place: L10n; obstacle: L10n; predator: L10n; critter: L10n; npc: L10n;
+  /** Bestiary ids behind {predator} / {critter}, so the UI can show the animal the text names. */
+  predatorAnimal: string; critterAnimal: string;
+}
 
 export function beatContext(s: GameState, idx = s.index): Ctx {
   const pb = s.plan.beats[idx];
   const b = BIOMES[pb.biome];
   const r = Rng.from(s.seed, `ctx${idx}`);
   const duck = DUCK_BY_ID[s.duck];
+  const obstacle = r.pick(b.obstacles), predator = r.pick(b.predators), critter = r.pick(b.critters);
   return {
-    name: s.creature.name, player: s.player || '—', duck: duck?.name ?? { en: 'the duck', ar: 'البطة' }, duckG: duck?.gender ?? 'f', place: b.name,
-    obstacle: r.pick(b.obstacles), predator: r.pick(b.predators), critter: r.pick(b.critters),
-    npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || { en: 'a stranger', ar: 'شخص غريب' },
+    name: s.creature.name, player: s.player || '—', duck: duck?.name ?? { en: 'your companion', ar: 'رفيقكم' }, duckG: duck?.gender ?? 'm', place: b.name,
+    obstacle, predator: { en: predator.en, ar: predator.ar }, critter: { en: critter.en, ar: critter.ar },
+    predatorAnimal: predator.animal, critterAnimal: critter.animal,
+    npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || { en: 'a stranger', ar: 'شخصٌ غريب' },
   };
+}
+
+/** The bestiary id of the creature a beat's text names, or null (UI shows it via animalArt). */
+export function featuredAnimal(t: BeatTemplate, ctx: Ctx): string | null {
+  if (t.featured) return t.featured;
+  if (t.text.en.includes('{predator}')) return ctx.predatorAnimal;
+  if (t.text.en.includes('{critter}')) return ctx.critterAnimal;
+  return null;
+}
+
+const DEEP_ZONE = new Set<BiomeId>(['twilight', 'midnight', 'vents', 'trench']);
+const B = (en: string, ar: string): L10n => ({ en, ar });
+const AFTER_WIN: L10n[] = [
+  B('Still riding that success, the team presses on.', 'ما زال أثر ذلك النجاح حاضراً، فيمضي الفريق قُدُماً.'),
+  B('With that behind them, {name} moves on, more sure-footed now.', 'بعد ما جرى، يتقدّم {name} بخطى أثبت من ذي قبل.'),
+];
+const AFTER_LOSS: L10n[] = [
+  B('Still shaking off that setback, {name} keeps going.', 'ما زال {name} ينفض عنه أثر تلك العثرة، لكنه يواصل الطريق.'),
+  B('Bruised but not beaten, the team regroups and carries on.', 'يجمع الفريق شتاته بعد تلك الانتكاسة ويمضي، متعَباً لكن غير مهزوم.'),
+];
+
+/**
+ * A short bridge that ties this scene to the previous one (place change, how the last move went, a fresh clue),
+ * and frames the twist and climax as the payoff of what came before. Deterministic; never on the hook or phase change.
+ */
+export function bridgeLine(s: GameState, idx = s.index): L10n | null {
+  const pb = s.plan.beats[idx];
+  const t = BEAT_BY_ID[pb.template];
+  const prev = s.log[idx - 1];
+  if (!t || idx < 1 || !prev || t.kind === 'hook' || t.kind === 'phase') return null;
+  const r = Rng.from(s.seed, `bridge${idx}`);
+  const parts: L10n[] = [];
+  const prevBiome = s.plan.beats[idx - 1].biome;
+  if (prevBiome !== pb.biome && prevBiome !== 'openSea') {
+    const from = BIOMES[prevBiome].name, to = BIOMES[pb.biome].name;
+    parts.push(DEEP_ZONE.has(prevBiome) && DEEP_ZONE.has(pb.biome)
+      ? B(`The sub sinks on, from ${from.en} down into ${to.en}.`, `تواصل الغوّاصة هبوطها من ${from.ar} إلى ${to.ar}.`)
+      : B(`Leaving ${from.en} behind, the team reaches ${to.en}.`, `يترك الفريق ${from.ar} خلفه ويصل إلى ${to.ar}.`));
+  } else if (prevBiome === pb.biome) {
+    parts.push(r.pick(prev.success ? AFTER_WIN : AFTER_LOSS));
+  }
+  const prevTpl = BEAT_BY_ID[prev.beat];
+  const prevChoice = prevTpl?.choices.find((c) => c.id === prev.choice);
+  const prevOut = prevChoice && (prev.success || !prevChoice.fail ? prevChoice.success : prevChoice.fail);
+  if (prevOut?.effects.some((e) => e.t === 'evidence') && t.kind !== 'climax') {
+    parts.push(B('The new clue is safely in the field notebook.', 'والدليل الجديد محفوظٌ الآن في الدفتر الميداني.'));
+  }
+  if (t.kind === 'twist' && s.evidence.length >= 2) {
+    parts.push(B('And then the clues gathered so far begin to fit together.', 'ثم تبدأ الأدلة التي جمعتموها حتى الآن بالتكامل.'));
+  }
+  if (t.kind === 'climax') {
+    parts.push(B('Everything has led to this moment.', 'كل ما مرّ بكم قادكم إلى هذه اللحظة.'));
+    if (s.evidence.length) parts.push(B(`Clues in the notebook so far: ${s.evidence.length}.`, `عدد الأدلة في الدفتر حتى الآن: ${s.evidence.length}.`));
+  }
+  if (!parts.length) return null;
+  return { en: parts.map((p) => p.en).join(' '), ar: parts.map((p) => p.ar).join(' ') };
 }
 
 /** Wraps user-typed names in Unicode bidi isolates so Arabic names read correctly inside English text and vice versa. */
@@ -260,12 +324,14 @@ export function currentBeat(s: GameState): BeatView {
   const d = derive(s.creature);
   const ctx = beatContext(s);
   let text = fill(t.text, ctx);
+  const bridge = bridgeLine(s);
+  if (bridge) { const bt = fill(bridge, ctx); text = { en: `${bt.en} ${text.en}`, ar: `${bt.ar} ${text.ar}` }; }
   for (const v of t.variants ?? []) {
     if (condHolds(v.when, d, s, pb.biome)) { const vt = fill(v.text, ctx); text = { en: `${text.en} ${vt.en}`, ar: `${text.ar} ${vt.ar}` }; }
   }
   const choices = pickChoices(t, s, d, pb.biome)
     .map((c) => ({ choice: c, label: fill(c.label, ctx), odds: successOdds(s, c) }));
-  return { template: t, biome: pb.biome, phase: t.phase, text, choices, ctx };
+  return { template: t, biome: pb.biome, phase: t.phase, text, choices, ctx, featured: featuredAnimal(t, ctx) };
 }
 
 function applyEffects(s: GameState, effects: Effect[]): GameState {

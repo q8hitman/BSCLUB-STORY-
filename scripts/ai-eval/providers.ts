@@ -66,7 +66,7 @@ export function mock(): Provider {
       const out = (s: string) => ({ text: L(`${s} ${n}`), effects: [{ t: 'evidence', id: `e${n}` }], duck_mood: 'thinking', creature_state: 'curious' });
       const body = kind === 'outline'
         ? { title: L(`Mock ${n}`), premise: L(`premise ${n}`), premise_tag: `p${n % 7}`, tone: 'mysterious', twist_tag: `t${n % 5}`, acts, mysteries: ['m'], ending_options: ['x'] }
-        : kind === 'ending' ? { title: L('End'), summary: L('Summary'), epilogue: L('Epilogue'), tone: 'heroic' }
+        : kind === 'ending' ? { title: L('End'), summary: L('Summary'), epilogue: L('Epilogue'), tone: 'heroic', pays_off_clues: ['c1'] }
           : { act_id: 'a0', text: L(`beat ${n}`), duck_line: L('hmm'), fact_id: null, choices: ['bold', 'careful', 'clever', 'kind'].map((st, i) => ({ id: `c${i}`, label: L(`choice ${i} ${n}`), style: st, uses_capability: null, check: i < 2 ? { stat: 'agility', dc: 5 } : null, success: out('ok'), fail: i < 2 ? out('fail') : null })) };
       return { text: JSON.stringify(body), ms: 5, status: 200, usage: { inTok: 1500, outTok: 600 } };
     },

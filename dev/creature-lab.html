@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>Creature lab</title>
+<style>body{margin:0;background:#15110d;color:#e9dcc4;font:13px system-ui}#g{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:10px;padding:10px}.c{background:radial-gradient(circle at 50% 40%,#3a3026,#17120e 75%);border-radius:10px;padding:6px}.c svg{width:100%;height:auto;display:block}.c p{margin:2px 6px;opacity:.7}</style>
+<div id="g"></div>
+<script type="module">
+import { creatureSvg } from '../src/art/creatureSvg.ts';
+import { randomCreature } from '../src/engine/creature.ts';
+import { Rng } from '../src/engine/rng.ts';
+const q = new URLSearchParams(location.search);
+const S = [
+ {name:'A',base:'fennec',head:'bigEars',eyes:'owlEyes',limbs:'wings',tail:'fluffy',adaptation:'thickFur',ability:'echo',hue:0},
+ {name:'B',base:'axolotl',head:'gillFrills',eyes:'glowEyes',limbs:'webbed',tail:'finTail',adaptation:'biolum',ability:'regen',hue:1},
+ {name:'C',base:'pangolin',head:'horns',eyes:'tinyEyes',limbs:'digClaws',tail:'club',adaptation:'shell',ability:'smell',hue:3},
+ {name:'D',base:'owl',head:'crest',eyes:'compound',limbs:'climbClaws',tail:'stinger',adaptation:'camo',ability:'mimicry',hue:5},
+ {name:'E',base:'camel',head:'helmet',eyes:'chameleon',limbs:'springLegs',tail:'prehensile',adaptation:'hump',ability:'heatPits',hue:6},
+ {name:'F',base:'octopus',head:'antennae',eyes:'stalkEyes',limbs:'tentacles',tail:'lure',adaptation:'gills',ability:'ink',hue:4},
+ {name:'G',base:'gecko',head:'crest',eyes:'chameleon',limbs:'climbClaws',tail:'prehensile',adaptation:'camo',ability:'heatPits',hue:2},
+ {name:'H',base:'frog',head:'antennae',eyes:'glowEyes',limbs:'springLegs',tail:'stinger',adaptation:'spikes',ability:'shock',hue:7},
+];
+const exprs = (q.get('ex')||'neutral').split(',');
+const marks = (q.get('marks')||'').split(',').filter(Boolean);
+if (q.get('random')) { S.length = 0; const r = new Rng(Number(q.get('seed')||1)); for (let i=0;i<Number(q.get('random'));i++) S.push({...randomCreature(r), name: String(i)}); }
+const pick = q.get('only') ? S.filter(s=>q.get('only').split(',').includes(s.name)) : S;
+document.getElementById('g').style.setProperty('--cols', q.get('cols')||4);
+for (const s of pick) for (const ex of exprs) {
+  const d = document.createElement('div'); d.className='c';
+  d.innerHTML = creatureSvg(s, { expression: ex, marks, crop: q.get('crop') || 'full' }) + `<p>${s.name} ${s.base} · ${ex} ${marks.join(' ')}</p>`;
+  document.getElementById('g').appendChild(d);
+}
+</script>

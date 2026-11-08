@@ -14,7 +14,37 @@ import { MAX_ENERGY, advance, choose, currentBeat } from '../engine/story';
 import type { BiomeId, DuckMood, GameState, Lang, Style } from '../engine/types';
 import type { Settings } from '../engine/storage';
 import { t } from '../i18n';
-import { Btn, CreatureArt, Logos, Typewriter } from './common';
+import { Btn, Logos, Typewriter } from './common';
+import { animalArt } from '../art/animalArt';
+import { ANIMAL_BY_ID } from '../content/bestiary';
+import { ROLE_LABEL, u } from './uiText';
+
+/** The animal the story is talking about, shown as an inset specimen card over the scene. Null/unknown id → nothing. */
+function FeaturedAnimal({ id, biome, seed, lang, scene }: { id: string | null | undefined; biome: BiomeId; seed: number; lang: Lang; scene?: string | null }) {
+  const animal = id ? ANIMAL_BY_ID[id] : undefined;
+  const art = useMemo(() => { try { return animalArt(id); } catch { return null; } }, [id]);
+  const src = useMemo(() => {
+    if (!art) return null;
+    if (art.kind !== 'painter') return art.src;
+    try { return sceneImage(biome, [art.src.replace(/^painter:/, '')], seed); } catch { return null; }
+  }, [art, biome, seed]);
+  const [broken, setBroken] = useState<string | null>(null);
+  if (!animal || !art || !src || broken === src) return null;
+  const role = animal.roles?.[0];
+  return (
+    <figure className={`featured kind-${art.kind} ${src === scene ? 'same-as-scene' : ''}`} aria-label={`${u('inScene', lang)}: ${animal.name[lang]}`}>
+      <div className="featured-img"><img src={src} alt={animal.name[lang]} onError={() => setBroken(src)} /></div>
+      <figcaption>
+        <span className="kicker">{u('inScene', lang)}</span>
+        <b>{animal.name[lang]}</b>
+        <span className="featured-tags">
+          {role && ROLE_LABEL[role] && <em className={`role-${role}`}>{ROLE_LABEL[role][lang]}</em>}
+          <em>{animal.kind === 'fictional' ? u('fictional', lang) : u('realAnimal', lang)}</em>
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
 
 const STYLE_LABEL: Record<Style, { en: string; ar: string }> = {
   bold: { en: 'Bold', ar: 'جريء' }, careful: { en: 'Careful', ar: 'حذر' }, clever: { en: 'Clever', ar: 'ذكي' },
@@ -51,7 +81,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const reduced = settings.reducedMotion;
   const speed = reduced ? Math.max(settings.textSpeed, 90) : settings.textSpeed;
 
-  useEffect(() => { setTyped(false); }, [game.index, game.stage]);
+  useEffect(() => { setTyped(false); if (typeof window !== 'undefined' && window.scrollY > 0) window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); }, [game.index, game.stage]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (!settings.muted && view) ambient.play(view.biome); else ambient.stop(); }, [view?.biome, settings.muted]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => ambient.stop(), []);
 
@@ -90,6 +120,8 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   useEffect(() => { if (glimpse) onSighting?.(glimpse.id); }, [glimpse?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!view) return null;
+  // engine-resolved creature first; the beat template's own `featured` as a fallback while the engine wiring lands
+  const featuredId = view.featured !== undefined ? view.featured : (view.template as { featured?: string }).featured ?? null;
   const isOutcome = game.stage === 'outcome' && game.lastOutcome;
   const o = game.lastOutcome;
   const descendIdx = game.plan.beats.findIndex((b) => b.template === 'pm-descend');
@@ -118,13 +150,16 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
       </header>
 
       <CreaturePanel game={game} lang={lang} />
+      <FeaturedAnimal key={featuredId ?? "none"} id={featuredId} biome={view.biome} seed={game.seed + game.index} lang={lang} scene={plate ? plateUrl(plate.id) : null} />
 
       {collab && (
         <div className="collab-intro" onClick={() => setCollab(false)} role="dialog" aria-label={t('collab', lang)}>
           <div className="inner">
-            <Logos marine />
+            <p className="kicker sea">{u('collabWith', lang)}</p>
+            <Logos marine className="collab-logos" />
             <h2>{t('marine', lang)}</h2>
             <p>{t('collab', lang)}</p>
+            <span className="collab-journey">{u('marineJourney', lang)}</span>
           </div>
         </div>
       )}

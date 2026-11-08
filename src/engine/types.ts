@@ -67,6 +67,10 @@ export interface Cond {
   flag?: string[];
   notFlag?: string[];
   evidenceMin?: number;
+  /** At least one of these flags is set. */
+  flagAny?: string[];
+  /** At least one of these evidence ids was collected (lets later beats pay off earlier clues). */
+  evidenceAny?: string[];
   mode?: Mode;
   /** Current biome is (not) underwater/wet. */
   wet?: boolean;
@@ -118,6 +122,8 @@ export interface BeatTemplate {
   choices: Choice[];
   npc?: string;
   weight?: number;
+  /** Bestiary id of an animal this beat's text names directly (not via {predator}/{critter}), so the UI can show it. */
+  featured?: string;
 }
 
 export interface PlannedBeat {

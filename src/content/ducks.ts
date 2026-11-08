@@ -32,8 +32,8 @@ const mk = (id: string, d: Omit<Duck, 'id' | 'img' | 'expressions' | 'poses'>): 
 
 // Final approved BSC characters (art-source/ducks-final). Ali has been replaced by Camel (الجمل).
 export const DUCKS: Duck[] = [
-  mk('abdullah', { gender: 'm', bg: '#3a2e2a', name: L('Abdullah', 'عبدالله'), role: L('Microbiology enthusiast', 'مهووس الميكروبات'),
-    voice: 'Energetic microbiology fan in a backwards cap. Sees microbes everywhere, hypes the team, impatient, warm, Kuwaiti slang.' }),
+  mk('abdullah', { gender: 'm', bg: '#3a2e2a', name: L('Abdullah', 'عبدالله'), role: L('Microbiology enthusiast', 'شغوف بالميكروبات'),
+    voice: 'Energetic microbiology fan in a backwards cap. Sees microbes everywhere, hypes the team, impatient, warm. Speaks simple Modern Standard Arabic with a light playful touch.' }),
   mk('ahmed', { gender: 'm', bg: '#3b3226', name: L('Ahmed', 'أحمد'), role: L('Field naturalist', 'عالم طبيعة ميداني'),
     voice: 'Enthusiastic field naturalist with a test tube and a notebook. Loves tracks, habitats and collecting samples. Optimistic, sometimes rushes in.' }),
   mk('camel', { gender: 'm', bg: '#33302a', name: L('Camel', 'الجمل'), role: L('Molecular biologist & theorist', 'عالم أحياء جزيئية وصاحب نظريات'),
@@ -60,10 +60,10 @@ export const MOOD_EXPRESSION: Record<DuckMood, Expression> = { happy: 'happy', w
 
 /** Short, natural reactions used when no character-specific line fits. */
 export const MOOD_LINES: Record<DuckMood, L10n[]> = {
-  happy: [L('Good. That worked.', 'زين، مشت معانا.'), L('Keep going — we’re on track.', 'كمّلوا، إحنا ماشين صح.'), L('Noted.', 'سجّلتها.'), L('Nice and clean.', 'حلوة… ونظيفة.')],
-  worried: [L('I don’t like this.', 'مو مرتاح لهالشي.'), L('Careful.', 'انتبهوا.'), L('Let’s step back a little.', 'خلّونا نتراجع شوي.'), L('That cost us.', 'هذي كلّفتنا.')],
-  shocked: [L('Did you see that?', 'شفتوا هذا؟'), L('Wait… what was that?', 'لحظة… شنو كان هذا؟'), L('Don’t move.', 'لا تتحركون.'), L('That wasn’t on any chart.', 'هذا مو موجود بأي مرجع.')],
-  thinking: [L('Something here isn’t right.', 'فيه شي مو طبيعي هني.'), L('Watch the details.', 'ركّزوا على التفاصيل.'), L('Think before we move.', 'خلّونا نفكر قبل لا نتحرك.'), L('Look closer.', 'طالعوا زين.')],
-  laughing: [L('Didn’t see that coming.', 'ما توقعت هالشي.'), L('Well, that was something.', 'طيب… هذي كانت تجربة.'), L('We’ll call it an experiment.', 'نعتبرها تجربة علمية.')],
-  proud: [L('Clean work.', 'شغل نظيف.'), L('The club would be proud.', 'النادي بيفتخر فيكم.'), L('That’s what we call science.', 'هذا اللي نسميه علم.')],
+  happy: [L('Good. That worked.', 'جيد، نجح الأمر.'), L('Keep going — we’re on track.', 'واصلوا، نحن على الطريق الصحيح.'), L('Noted.', 'سجّلتُ ذلك.'), L('Nice and clean.', 'جميل… ونظيف.')],
+  worried: [L('I don’t like this.', 'لست مرتاحاً لهذا.'), L('Careful.', 'انتبهوا.'), L('Let’s step back a little.', 'لنتراجع قليلاً.'), L('That cost us.', 'هذه كلّفتنا الكثير.')],
+  shocked: [L('Did you see that?', 'هل رأيتم ذلك؟'), L('Wait… what was that?', 'لحظة… ما كان ذلك؟'), L('Don’t move.', 'لا تتحرّكوا.'), L('That wasn’t on any chart.', 'هذا غير موجود في أي مرجع.')],
+  thinking: [L('Something here isn’t right.', 'هناك شيء غير طبيعي هنا.'), L('Watch the details.', 'ركّزوا على التفاصيل.'), L('Think before we move.', 'لنفكّر قبل أن نتحرّك.'), L('Look closer.', 'انظروا جيداً.')],
+  laughing: [L('Didn’t see that coming.', 'لم أتوقّع هذا.'), L('Well, that was something.', 'حسناً… كانت تلك تجربة.'), L('We’ll call it an experiment.', 'نعتبرها تجربة علمية.')],
+  proud: [L('Clean work.', 'عمل متقن.'), L('The club would be proud.', 'سيفخر بكم النادي.'), L('That’s what we call science.', 'هذا ما نسمّيه علماً.')],
 };
