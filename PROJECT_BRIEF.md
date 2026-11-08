@@ -67,6 +67,12 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
 - **Bestiary**: `src/content/bestiary.ts` (35 animals/creatures, each linked to existing art); exposed to the AI catalog.
 - **Designer constraint (latest)**: no dependence on the designer's PC for future art → new art should come from the in-browser canvas painter; the existing 57 SDXL plates are static files already in the repo (decision to keep them is pending with the designer).
 
+## 5e. Night session (2026-11-08, session 4)
+- **Companion gender**: ducks have `gender` (m: abdullah, ahmed, camel, bassam; f: kiraz, roaa, zahra). Story text uses `{duck}` + `{g:masc|fem}` (resolved in `fill()` and the Ending Composer). Never write «البطة» for the companion.
+- **Legends** (`src/content/legends.ts`): 12 ORIGINAL creatures (6 land, 6 sea) with lore/signs/rules/glimpse, fiction-labelled. Rare sightings (~30% of runs, max one, place-matched) via `src/engine/sighting.ts`; recorded in `SaveData.legendsSeen`; **Book of Legends** screen (`src/ui/LoreBook.tsx`) from the title. Bu Sahn = the sailor legend's giant.
+- **Art**: designer allowed ComfyUI on their PC except while they play. 115 curated plates now (`scripts/comfy/export-plates.py` lists every pick/reject); legend art tagged `event: "lore"` (never used as ordinary scenes). Coverage 98% (gaps: vents cross/rescue, seagrass lm-tale).
+- **Bestiary** 45 animals. **Creature art**: added gradient volume, rim light, grain, ground shadow — still the weakest visual (needs painted parts).
+
 ## 6. Session log
 - 2026-11-08 — v1 built and tested, pushed to GitHub `main`, Pages enabled (https://q8hitman.github.io/BSCLUB-STORY-/).
 - 2026-11-08 — v2 started: real duck names, painterly scenes, cinematic VN UI, new menus, logos, 4 choices, deep-sea horror rewrite. Designer feedback received (section 2). Logos + references added. Work lives in a temporary session folder — move to a permanent folder before continuing.

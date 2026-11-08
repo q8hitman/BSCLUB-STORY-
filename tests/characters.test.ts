@@ -111,3 +111,27 @@ describe('companion gender agreement', () => {
     }
   });
 });
+
+describe('legends', () => {
+  it('every legend is complete in both languages and lives in real biomes', async () => {
+    const { LEGENDS } = await import('../src/content/legends');
+    const { BIOMES } = await import('../src/content/world');
+    expect(LEGENDS.length).toBeGreaterThanOrEqual(12);
+    expect(LEGENDS.filter((l) => l.realm === 'land').length).toBeGreaterThanOrEqual(6);
+    for (const l of LEGENDS) {
+      for (const t of [l.name, l.epithet, l.lore, l.signs, l.rule, l.glimpse]) { expect(t.en.length).toBeGreaterThan(3); expect(/[؀-ۿ]/.test(t.ar)).toBe(true); }
+      l.biomes.forEach((b) => expect(BIOMES[b], `${l.id} ${b}`).toBeTruthy());
+    }
+  });
+  it('sightings are rare (≈30% of runs), at most one per run, and match the place', async () => {
+    const { sightingFor } = await import('../src/engine/sighting');
+    let n = 0; const runs = 600;
+    for (let i = 0; i < runs; i++) {
+      const s = simulateRun(i, i % 2 ? 'marine' : 'classic').state;
+      const sg = sightingFor(s);
+      if (sg) { n++; expect(sg.legend.biomes).toContain(s.plan.beats[sg.index].biome); expect(sg.index).toBeGreaterThanOrEqual(2); }
+    }
+    expect(n / runs).toBeGreaterThan(0.15);
+    expect(n / runs).toBeLessThan(0.4);
+  });
+});

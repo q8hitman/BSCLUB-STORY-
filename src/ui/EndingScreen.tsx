@@ -15,7 +15,10 @@ const TONE: Record<Ending['tone'], { en: string; ar: string }> = {
 
 export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay }: { game: GameState; ending: Ending; lang: Lang; reduced: boolean; onNew: () => void; onReplay: () => void }) {
   const last = game.plan.beats[game.plan.beats.length - 1];
-  const endPlate = platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.plan.beats.length - 1).filter(Boolean).pop() ?? null;
+  const tonePlate = game.mode === 'marine' && (ending.tone === 'mysterious' || ending.tone === 'bittersweet') ? 'ending-deep-farewell'
+    : ending.tone === 'comedic' || ending.tone === 'scientific' ? 'ending-lab-celebration'
+    : game.mode === 'classic' && (ending.tone === 'heroic' || ending.tone === 'wholesome' || ending.tone === 'mysterious') ? 'ending-sunrise-wild' : null;
+  const runPlate = platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.plan.beats.length - 1).filter(Boolean).pop() ?? null;
   const [showName, setShowName] = useState(!!game.player);
   const [busy, setBusy] = useState(false);
   const [png, setPng] = useState<{ url: string; blob: Blob } | null>(null);
@@ -35,7 +38,7 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay }: {
 
   return (
     <section className="screen ending">
-      <PaintedScene biome={last.biome} props={[]} seed={game.seed} reduced={reduced} className="backdrop" plate={endPlate ? plateUrl(endPlate.id) : null} />
+      <PaintedScene biome={last.biome} props={[]} seed={game.seed} reduced={reduced} className="backdrop" plate={tonePlate ? plateUrl(tonePlate) : runPlate ? plateUrl(runPlate.id) : null} />
       <div className="ending-card">
         <span className="tag">{t('endingTitle', lang)} · {TONE[ending.tone][lang]}</span>
         <CreatureArt creature={game.creature} className="specimen big" />

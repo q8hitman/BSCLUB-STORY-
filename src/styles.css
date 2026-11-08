@@ -335,3 +335,29 @@ html[lang='ar'] .cp-name { font-family: var(--display-ar); }
 .radio-line div { display: flex; flex-direction: column; line-height: 1.35; }
 .radio-line b { color: var(--gold-2); font-size: .85rem; }
 .radio-line span { color: #e9e1cd; font-size: .95rem; }
+
+/* ───────── Book of Legends ───────── */
+.lore-book .legend-group { margin-top: 18px; }
+.realm { font-size: 1.3rem; color: var(--gold); margin: 0 0 10px; letter-spacing: .06em; }
+.legend-grid { display: grid; gap: 14px; }
+@media (min-width: 760px) { .legend-grid { grid-template-columns: 1fr 1fr; } }
+.legend-card { background: var(--glass-2); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.legend-card.seen { border-color: rgba(216, 180, 106, .5); }
+.legend-head { display: grid; grid-template-rows: auto auto; width: 100%; padding: 0; border: 0; background: none; text-align: start; cursor: pointer; }
+.legend-head img { width: 100%; height: auto; aspect-ratio: 1344 / 768; object-fit: cover; display: block; filter: saturate(.9); }
+.legend-card:not(.seen) .legend-head img { filter: saturate(.55) brightness(.8); }
+.legend-titles { padding: 12px 16px; }
+.legend-titles h3 { margin: 4px 0 0; font-size: 1.6rem; color: var(--gold-2); }
+.epithet { margin: 0; color: var(--paper-dim); font-style: italic; }
+.sighted { margin: 6px 0 0; font-size: .78rem; color: var(--paper-dim); } .sighted.yes { color: var(--leaf); }
+.fiction-tag { color: #f0a07a; border-color: rgba(240, 160, 122, .45); }
+.legend-body { padding: 0 16px 16px; line-height: 1.8; }
+.legend-body .lore { color: #ece3cf; }
+.legend-body .rule { color: var(--gold-2); }
+.legend-body .where { color: var(--paper-dim); font-size: .9rem; }
+/* in-story glimpse */
+.glimpse { display: grid; grid-template-columns: 140px 1fr; gap: 12px; align-items: center; background: rgba(20, 10, 10, .78); backdrop-filter: blur(8px); border: 1px solid rgba(240, 160, 122, .4); border-radius: 14px; padding: 8px; animation: rise .8s ease .3s both; }
+.glimpse img { width: 100%; height: auto; border-radius: 10px; filter: brightness(.85); }
+.glimpse p { margin: 6px 0 2px; color: #f0e6d0; font-style: italic; }
+.glimpse small { color: var(--paper-dim); }
+@media (max-width: 480px) { .glimpse { grid-template-columns: 1fr; } }

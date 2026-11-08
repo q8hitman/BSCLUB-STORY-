@@ -14,8 +14,9 @@ import { EndingScreen } from './ui/EndingScreen';
 import { PaintedScene, Play } from './ui/Play';
 import { plateUrl } from './art/plates';
 import { ambient } from './audio';
+import { LoreBook } from './ui/LoreBook';
 
-type Screen = 'title' | 'duck' | 'player' | 'build' | 'cname' | 'mode' | 'play' | 'ending';
+type Screen = 'title' | 'lore' | 'duck' | 'player' | 'build' | 'cname' | 'mode' | 'play' | 'ending';
 const BASE = import.meta.env.BASE_URL;
 
 function sharedFromHash(): CreatureConfig | null {
@@ -51,7 +52,10 @@ export default function App() {
   const updateGame = (g: GameState) => {
     if (g.stage === 'ending') {
       const e = composeEnding(g, data.runs.slice(-5).map((r) => r.ending));
-      setEnding(e); setGame(g); setData((d) => recordRun(d, g, e)); setScreen('ending');
+      setEnding(e); setGame(g);
+      // the marine legend's giant counts as a sighting of Bu Sahn
+      setData((d) => { const r = recordRun(d, g, e); return g.flags.includes('saw-leviathan') && !r.legendsSeen.includes('bu-sahn') ? { ...r, legendsSeen: [...r.legendsSeen, 'bu-sahn'] } : r; });
+      setScreen('ending');
       return;
     }
     setGame(g); setData((d) => ({ ...d, current: g }));
@@ -91,6 +95,7 @@ export default function App() {
               <div className="title-actions">
                 <Btn onClick={() => setScreen('duck')}>{t('enterLab', lang)}</Btn>
                 {data.current && <Btn variant="ghost" onClick={resume}>{t('continueRun', lang)}</Btn>}
+                <Btn variant="ghost" onClick={() => setScreen('lore')}>{lang === 'ar' ? 'كتاب الأساطير' : 'Book of Legends'}</Btn>
               </div>
               {data.runs.length > 0 && (
                 <details className="past">
@@ -101,6 +106,8 @@ export default function App() {
             </div>
           </section>
         )}
+
+        {screen === 'lore' && <LoreBook lang={lang} seen={data.legendsSeen} onBack={() => setScreen('title')} />}
 
         {screen === 'duck' && (
           <section className="screen duck-select">
@@ -160,7 +167,8 @@ export default function App() {
           </section>
         )}
 
-        {screen === 'play' && game && <Play game={game} setGame={updateGame} settings={data.settings} lang={lang} onQuit={quit} />}
+        {screen === 'play' && game && <Play game={game} setGame={updateGame} settings={data.settings} lang={lang} onQuit={quit} legendsSeen={data.legendsSeen}
+            onSighting={(id) => setData((d) => (d.legendsSeen.includes(id) ? d : { ...d, legendsSeen: [...d.legendsSeen, id] }))} />}
         {screen === 'ending' && game && ending && (
           <EndingScreen game={game} ending={ending} lang={lang} reduced={reduced}
             onReplay={() => begin(game.mode, game.creature)}

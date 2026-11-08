@@ -3,8 +3,8 @@
 import { HUES } from '../content/parts';
 import type { CreatureConfig } from '../engine/types';
 
-const INK = '#2b2118';
-const SW = 4;
+const INK = '#2b1d14';
+const SW = 3;
 
 interface BaseShape { rx: number; ry: number; cx: number; cy: number; hx: number; hy: number; hr: number; snout: 'point' | 'round' | 'beak' | 'wide' | 'long' | 'none'; neck?: boolean }
 
@@ -145,7 +145,14 @@ function abilityFx(id: string, b: BaseShape): string {
   }
 }
 
+function tint(hex: string, k: number) {
+  const n = parseInt(hex.slice(1), 16); const f = (v: number) => Math.max(0, Math.min(255, Math.round(v * k)));
+  return `#${[(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => f(v).toString(16).padStart(2, '0')).join('')}`;
+}
+
 export function creatureSvg(c: CreatureConfig, opts: { width?: number; idPrefix?: string } = {}): string {
+  // unique gradient/filter ids per creature so several can share one page
+  const id = opts.idPrefix ?? `cr${Math.abs([...(c.base + c.head + c.eyes + c.limbs + c.tail + c.adaptation + c.ability + c.hue)].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) | 0, 7))}`;
   const raw = BASE_SHAPES[c.base] ?? BASE_SHAPES.fennec;
   const col = HUES[c.hue] ?? HUES[0];
   const b: BaseShape = c.adaptation === 'blubber' ? { ...raw, rx: raw.rx * 1.1, ry: raw.ry * 1.12 } : raw;
@@ -156,22 +163,31 @@ export function creatureSvg(c: CreatureConfig, opts: { width?: number; idPrefix?
   s += legs(c.limbs, b, col, false);
   s += adaptationBack(c.adaptation, b, col);
   // body
-  s += ellipse(b.cx, b.cy, b.rx, b.ry, col.body);
-  s += el('ellipse', { cx: b.cx + 8, cy: b.cy + b.ry * 0.35, rx: b.rx * 0.62, ry: b.ry * 0.45, fill: col.belly });
+  // volume: light from upper-left, belly glow, rim light on the shadow side
+  s += ellipse(b.cx, b.cy, b.rx, b.ry, `url(#${id}-body)`);
+  s += el('ellipse', { cx: b.cx + 8, cy: b.cy + b.ry * 0.35, rx: b.rx * 0.62, ry: b.ry * 0.45, fill: `url(#${id}-belly)` });
+  s += el('ellipse', { cx: b.cx, cy: b.cy, rx: b.rx - 3, ry: b.ry - 3, fill: 'none', stroke: 'rgba(255,236,200,.35)', 'stroke-width': 2.5, 'stroke-dasharray': `${b.rx * 0.9} ${b.rx * 9}`, 'stroke-dashoffset': `${-b.rx * 0.2}` });
   if (c.base === 'pangolin') for (let i = -2; i <= 2; i++) s += path(`M${b.cx + i * 22 - 10} ${b.cy - 12} q10 12 20 0`, 'none', { 'stroke-width': 2.5 });
   s += adaptationFront(c.adaptation, b, col);
   s += legs(c.limbs, b, col, true);
   // head
   if (b.neck) s += path(`M${b.cx + b.rx * 0.55} ${b.cy - b.ry * 0.5} L${b.hx - 18} ${b.hy + 10} L${b.hx + 6} ${b.hy + 18} L${b.cx + b.rx * 0.9} ${b.cy - b.ry * 0.2} Z`, col.body);
   s += headPart(c.head === 'gillFrills' ? 'gillFrills' : '', b, col); // gills sit behind the head
-  s += circle(b.hx, b.hy, b.hr, col.body);
+  s += circle(b.hx, b.hy, b.hr, `url(#${id}-head)`);
   s += el('ellipse', { cx: b.hx + b.hr * 0.6, cy: b.hy + b.hr * 0.35, rx: 6, ry: 4, fill: '#f48fb1', opacity: 0.6 });
   s += snout(b, col);
   s += eyes(c.eyes, b);
   if (c.head !== 'gillFrills') s += headPart(c.head, b, col);
   s += abilityFx(c.ability, b);
   const w = opts.width ? ` width="${opts.width}" height="${Math.round(opts.width * 0.8)}"` : '';
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -10 340 272"${w} role="img" aria-label="${escapeXml(c.name)}">${s}</svg>`;
+  const defs = `<defs>
+    <radialGradient id="${id}-body" cx="38%" cy="30%" r="80%"><stop offset="0%" stop-color="${tint(col.body, 1.18)}"/><stop offset="55%" stop-color="${col.body}"/><stop offset="100%" stop-color="${col.dark}"/></radialGradient>
+    <radialGradient id="${id}-head" cx="35%" cy="28%" r="80%"><stop offset="0%" stop-color="${tint(col.body, 1.22)}"/><stop offset="60%" stop-color="${col.body}"/><stop offset="100%" stop-color="${col.dark}"/></radialGradient>
+    <radialGradient id="${id}-belly" cx="50%" cy="35%" r="70%"><stop offset="0%" stop-color="${col.belly}"/><stop offset="100%" stop-color="${col.belly}" stop-opacity=".55"/></radialGradient>
+    <filter id="${id}-grain" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n"/><feColorMatrix in="n" type="saturate" values="0" result="g"/><feComponentTransfer in="g" result="g2"><feFuncA type="linear" slope="0.18"/></feComponentTransfer><feComposite in="g2" in2="SourceGraphic" operator="in" result="gm"/><feBlend in="SourceGraphic" in2="gm" mode="multiply"/></filter>
+  </defs>`;
+  const shadow = el('ellipse', { cx: b.cx + 10, cy: b.cy + b.ry + 52, rx: b.rx * 1.05, ry: 10, fill: 'rgba(0,0,0,.28)' });
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -10 340 272"${w} role="img" aria-label="${escapeXml(c.name)}">${defs}${shadow}<g filter="url(#${id}-grain)">${s}</g></svg>`;
 }
 
 export function escapeXml(s: string) {

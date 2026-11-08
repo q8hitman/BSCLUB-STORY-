@@ -1,0 +1,6 @@
+[
+  {"id":"legend-alhajin-sifr","seed":7112,"style":"specimen","prompt":"a disturbing patchwork hybrid creature made of mismatched animal parts, one large glowing eye and one small eye, fur and scales stitched together, crouching, specimen plate on black","negative":"room, computer, furniture"},
+  {"id":"legend-musghi-alsaqee","seed":7110,"style":"specimen","prompt":"an eerie pale white creature with enormous bat-like listening ears, long seal-like fins instead of front legs, thin body covered in frost, hollow dark eyes, specimen plate on black","negative":"cute, bear, rabbit"},
+  {"id":"legend-ouyoun-alhawd","seed":7109,"style":"nocturne","prompt":"close view of a black cave pool at night, dozens of small round glowing white eyes floating just above the dark water surface in rows, staring, nothing else visible, terrifying","negative":"daylight, bright, landscape, sky"},
+  {"id":"legend-sahibat-alquroun","seed":7108,"style":"nocturne","prompt":"a tall gaunt humanoid forest spirit covered in moss and bark with a deer skull face and huge antlers, long thin arms, standing between dark trees in mist, a circle of white bones on the ground","negative":"deer, stag, animal"}
+]

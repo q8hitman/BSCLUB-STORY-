@@ -6,6 +6,7 @@ import { ambient } from '../audio';
 import { DUCK_BY_ID, resolveDuckId } from '../content/ducks';
 import { radio } from '../engine/radio';
 import { CreaturePanel } from './CreaturePanel';
+import { sightingFor } from '../engine/sighting';
 import { BIOMES, FACT_BY_ID } from '../content/world';
 import { aiAvailable, narrate } from '../engine/ai';
 import { Rng } from '../engine/rng';
@@ -38,7 +39,7 @@ export function PaintedScene({ biome, props, seed, reduced, className = '', plat
   );
 }
 
-export function Play({ game, setGame, settings, lang, onQuit }: { game: GameState; setGame: (g: GameState) => void; settings: Settings; lang: Lang; onQuit: () => void }) {
+export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], onSighting }: { game: GameState; setGame: (g: GameState) => void; settings: Settings; lang: Lang; onQuit: () => void; legendsSeen?: string[]; onSighting?: (id: string) => void }) {
   const view = useMemo(() => (game.stage === 'beat' || game.stage === 'outcome' ? currentBeat(game) : null), [game]);
   const [typed, setTyped] = useState(false);
   const [aiText, setAiText] = useState<string | null>(null);
@@ -83,6 +84,10 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
   const plate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const lines = useMemo(() => (view ? radio(game, view.template.kind, view.biome) : []), [game, view]);
+  // seen-list is read once per run so the chosen sighting stays stable
+  const sighting = useMemo(() => sightingFor(game, legendsSeen), [game.seed, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
+  const glimpse = sighting && game.stage === 'outcome' && game.index === sighting.index ? sighting.legend : null;
+  useEffect(() => { if (glimpse) onSighting?.(glimpse.id); }, [glimpse?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!view) return null;
   const isOutcome = game.stage === 'outcome' && game.lastOutcome;
@@ -167,6 +172,16 @@ export function Play({ game, setGame, settings, lang, onQuit }: { game: GameStat
           </div>
         ) : (
           <>
+            {glimpse && (
+              <aside className="glimpse" aria-label={glimpse.name[lang]}>
+                <img src={`${import.meta.env.BASE_URL}scenes/${glimpse.art}.webp`} alt="" width={672} height={384} />
+                <div>
+                  <span className="tag fiction-tag">{lang === 'ar' ? 'أسطورة' : 'Legend'}</span>
+                  <p>{glimpse.glimpse[lang]}</p>
+                  <small>{lang === 'ar' ? `${glimpse.name.ar}؟ انضافت لكتاب الأساطير.` : `${glimpse.name.en}? Added to the Book of Legends.`}</small>
+                </div>
+              </aside>
+            )}
             {newFacts.map((id) => FACT_BY_ID[id] && (
               <aside key={id} className="fact" aria-label={t('realScience', lang)}>
                 <span className="tag real">{t('realScience', lang)}</span>

@@ -454,5 +454,469 @@
   "tone": "calm",
   "mystery": 0,
   "style": "specimen"
+ },
+ {
+  "id": "forest-ravine-crossing",
+  "biome": "forest",
+  "event": "challenge",
+  "tone": "adventurous",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "forest-river-crossing",
+  "biome": "forest",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "forest-collapse",
+  "biome": "forest",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "forest-rival-cage",
+  "biome": "forest",
+  "event": "finale",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "desert-dune-crossing",
+  "biome": "desert",
+  "event": "challenge",
+  "tone": "adventurous",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "desert-heat-haze",
+  "biome": "desert",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "desert-collapse",
+  "biome": "desert",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "desert-rival-jeep",
+  "biome": "desert",
+  "event": "finale",
+  "tone": "comedic",
+  "mystery": 1,
+  "style": "storybook"
+ },
+ {
+  "id": "cave-flooded-tunnel",
+  "biome": "cave",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "cave-trapped-bat",
+  "biome": "cave",
+  "event": "challenge",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "cave-collapse",
+  "biome": "cave",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "snow-frozen-lake",
+  "biome": "snow",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "snow-blizzard",
+  "biome": "snow",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "snow-avalanche",
+  "biome": "snow",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "swamp-root-channel",
+  "biome": "swamp",
+  "event": "challenge",
+  "tone": "adventurous",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "swamp-sinking-log",
+  "biome": "swamp",
+  "event": "challenge",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "storybook"
+ },
+ {
+  "id": "swamp-flood",
+  "biome": "swamp",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "ruins-blast-door",
+  "biome": "ruins",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "ruins-hamster-vent",
+  "biome": "ruins",
+  "event": "challenge",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "mountain-scree",
+  "biome": "mountain",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "mountain-collapse",
+  "biome": "mountain",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "reef-shark-patrol",
+  "biome": "reef",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "ink"
+ },
+ {
+  "id": "reef-strange-coral",
+  "biome": "reef",
+  "event": "evidence",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "mudflat-rising-tide",
+  "biome": "mudflat",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "mudflat-heron",
+  "biome": "mudflat",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "mudflat-old-sailor",
+  "biome": "mudflat",
+  "event": "legend",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "seagrass-net-wall",
+  "biome": "seagrass",
+  "event": "challenge",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "ink"
+ },
+ {
+  "id": "seagrass-clue",
+  "biome": "seagrass",
+  "event": "evidence",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "nocturne"
+ },
+ {
+  "id": "twilight-crossing",
+  "biome": "twilight",
+  "event": "challenge",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "twilight-swordfish",
+  "biome": "twilight",
+  "event": "suspense",
+  "tone": "suspenseful",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "midnight-jelly-field",
+  "biome": "midnight",
+  "event": "challenge",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "midnight-viperfish",
+  "biome": "midnight",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "midnight-vampire-squid",
+  "biome": "midnight",
+  "event": "evidence",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "vents-crab-swarm",
+  "biome": "vents",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "trench-cliff",
+  "biome": "trench",
+  "event": "challenge",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "trench-amphipods",
+  "biome": "trench",
+  "event": "suspense",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "trench-eruption",
+  "biome": "trench",
+  "event": "finale",
+  "tone": "heroic",
+  "mystery": 2,
+  "style": "abyss"
+ },
+ {
+  "id": "ending-lab-celebration",
+  "biome": "lab",
+  "event": "ending",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "storybook"
+ },
+ {
+  "id": "ending-sunrise-wild",
+  "biome": "forest",
+  "event": "ending",
+  "tone": "emotional",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "ending-deep-farewell",
+  "biome": "twilight",
+  "event": "ending",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "specimen-lynx",
+  "biome": "forest",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-ibex",
+  "biome": "mountain",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-dugong",
+  "biome": "seagrass",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-anglerfish",
+  "biome": "midnight",
+  "event": "bestiary",
+  "tone": "eerie",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-mudskipper",
+  "biome": "mudflat",
+  "event": "bestiary",
+  "tone": "comedic",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-dhub",
+  "biome": "desert",
+  "event": "bestiary",
+  "tone": "calm",
+  "mystery": 0,
+  "style": "specimen"
+ },
+ {
+  "id": "legend-umm-alfanar",
+  "biome": "openSea",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "legend-bu-sahn",
+  "biome": "trench",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "legend-katib-almad",
+  "biome": "mudflat",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "legend-saraqat-allulu",
+  "biome": "reef",
+  "event": "lore",
+  "tone": "mysterious",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "legend-jawqat-alqa",
+  "biome": "trench",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "abyss"
+ },
+ {
+  "id": "legend-abu-sabaa",
+  "biome": "midnight",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "specimen"
+ },
+ {
+  "id": "legend-mashi-alkuthban",
+  "biome": "desert",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "legend-sahibat-alquroun",
+  "biome": "forest",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "legend-ouyoun-alhawd",
+  "biome": "cave",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "legend-musghi-alsaqee",
+  "biome": "snow",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "legend-raai-aladwa",
+  "biome": "swamp",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
+ },
+ {
+  "id": "legend-alhajin-sifr",
+  "biome": "ruins",
+  "event": "lore",
+  "tone": "eerie",
+  "mystery": 3,
+  "style": "nocturne"
  }
 ]

@@ -8,14 +8,14 @@ const MAX_RUNS = 40;
 
 export interface Settings { lang: Lang; textSpeed: number; muted: boolean; reducedMotion: boolean; ai: boolean }
 export interface RunRecord extends RunMemory { at: number; title: Ending['title']; creature: CreatureConfig; player: string; duck: string }
-export interface SaveData { settings: Settings; current: GameState | null; runs: RunRecord[]; endingsSeen: string[] }
+export interface SaveData { settings: Settings; current: GameState | null; runs: RunRecord[]; endingsSeen: string[]; legendsSeen: string[] }
 
 export function defaultSettings(): Settings {
   const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   return { lang: 'ar', textSpeed: 60, muted: true, reducedMotion: reduced, ai: false };
 }
 
-function empty(): SaveData { return { settings: defaultSettings(), current: null, runs: [], endingsSeen: [] }; }
+function empty(): SaveData { return { settings: defaultSettings(), current: null, runs: [], endingsSeen: [], legendsSeen: [] }; }
 
 /** Defensive load: anything malformed is dropped instead of crashing the game. */
 export function load(storage: Storage | undefined = globalThis.localStorage): SaveData {
@@ -37,7 +37,8 @@ export function load(storage: Storage | undefined = globalThis.localStorage): Sa
     }
     const runs = Array.isArray(d.runs) ? d.runs.filter((r) => r && Array.isArray(r.planTokens) && Array.isArray(r.pathTokens) && typeof r.ending === 'string').slice(-MAX_RUNS) : [];
     const endingsSeen = Array.isArray(d.endingsSeen) ? d.endingsSeen.filter((x) => typeof x === 'string') : [];
-    return { settings, current, runs, endingsSeen };
+    const legendsSeen = Array.isArray(d.legendsSeen) ? d.legendsSeen.filter((x) => typeof x === 'string') : [];
+    return { settings, current, runs, endingsSeen, legendsSeen };
   } catch {
     return base;
   }
