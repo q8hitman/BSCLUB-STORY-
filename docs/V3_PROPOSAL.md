@@ -181,7 +181,7 @@ CF_ACCOUNT_ID=... CF_API_TOKEN=... npx tsx scripts/ai-eval/run.ts --provider=clo
 1. Provide a **Gemini API key** (AI Studio, no billing) and/or a **Cloudflare account ID + Workers AI API token** for the test.
 2. Approve installing **ComfyUI Desktop + comfyui-mcp** and downloading 2–3 models (~15–25 GB).
 3. Will a **club illustrator** paint the creature parts, or do we go AI-assisted with cleanup?
-4. Do you approve the **"living story bank"** (store anonymous validated AI adventures to reuse)?
+4. ~~Living story bank~~ — **APPROVED by the designer (2026-11-08)**; build it with the Worker once a Gemini key exists.
 
 ### Sources
 - Cloudflare Workers AI pricing and free allocation: https://developers.cloudflare.com/workers-ai/platform/pricing/
