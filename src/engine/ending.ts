@@ -81,7 +81,7 @@ export const ARCHETYPES: Archetype[] = [
   // Shared fallbacks
   { id: 'nap', mode: 'both', tone: 'comedic', score: (s) => (s.energy <= 0 ? 5 : 0),
     titles: [L('Nap of Champions', 'قيلولة الأبطال'), L('Too Tired to Be Famous', 'تعبان وايد عشان يصير مشهور')],
-    epilogue: L('{name} sleeps for two full days. The duck guards the door with a coffee and a “Do Not Disturb” sign.', '{name} نام يومين كاملة. والبطة تحرس الباب ومعاها قهوة ولوحة «ممنوع الإزعاج».') },
+    epilogue: L('{name} sleeps for two full days. {duck} guards the door with a coffee and a “Do Not Disturb” sign.', '{name} نام يومين كاملة. و{duck} {g:يحرس الباب ومعاه|تحرس الباب ومعاها} قهوة ولوحة «ممنوع الإزعاج».') },
   { id: 'chaos', mode: 'both', tone: 'comedic', score: (s) => { const silly = s.log.filter((l) => l.style === 'silly').length; const fails = s.log.filter((l) => !l.success).length; return silly >= 2 || fails >= 4 ? 2 + silly + fails / 2 : 0; },
     titles: [L('A Glorious Disaster', 'كارثة مجيدة'), L('Science, Technically', 'علم… تقنياً')],
     epilogue: L('Nothing went to plan, and it was the best trip the club ever had. The group chat is still sending memes about it.', 'ولا شي مشى حسب الخطة، وكانت أحلى رحلة للنادي. القروب للحين يرسل ميمز عنها.') },
@@ -118,7 +118,8 @@ function joinList(items: string[], lang: 'en' | 'ar'): string {
 }
 
 function sub(t: L10n, s: GameState, last: L10n): L10n {
-  const r = (x: string, l: 'en' | 'ar') => x.replace(/\{name\}/g, iso(s.creature.name)).replace(/\{player\}/g, s.player ? iso(s.player) : (l === 'ar' ? 'الفريق' : 'the team')).replace(/\{last\}/g, last[l]);
+  const duck = DUCK_BY_ID[s.duck];
+  const r = (x: string, l: 'en' | 'ar') => x.replace(/\{g:([^|}]*)\|([^}]*)\}/g, (_m, m: string, f: string) => ((duck?.gender ?? 'f') === 'm' ? m : f)).replace(/\{duck\}/g, duck?.name[l] ?? '').replace(/\{name\}/g, iso(s.creature.name)).replace(/\{player\}/g, s.player ? iso(s.player) : (l === 'ar' ? 'الفريق' : 'the team')).replace(/\{last\}/g, last[l]);
   return { en: r(t.en, 'en'), ar: r(t.ar, 'ar') };
 }
 

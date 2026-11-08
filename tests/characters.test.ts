@@ -94,3 +94,20 @@ describe('bestiary', () => {
     }
   });
 });
+
+describe('companion gender agreement', () => {
+  it('story text resolves {duck} and {g:m|f} for male and female companions', async () => {
+    const { ALL_BEATS, fill, beatContext } = await import('../src/engine/story');
+    for (const duck of ['camel', 'roaa']) {
+      const s = startGame({ mode: 'classic', seed: 1, duck, player: '', creature: simulateRun(1, 'classic').state.creature });
+      const ctx = beatContext(s);
+      expect(ctx.duckG).toBe(duck === 'camel' ? 'm' : 'f');
+      for (const b of ALL_BEATS) for (const c of b.choices) for (const t of [c.label, c.success.text, c.fail?.text]) {
+        if (!t) continue;
+        const out = fill(t, ctx);
+        expect(out.ar + out.en, `${b.id}.${c.id}`).not.toMatch(/[{}]/);
+        if (duck === 'camel') expect(out.ar).not.toMatch(/الجمل (صارت|تلوّح|زحلقت|سوّتها|ترجمت|تهفّ|طلّعت|بدت|اختارت|زعلانة|انخرعت|ألقت)/);
+      }
+    }
+  });
+});

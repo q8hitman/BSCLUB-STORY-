@@ -11,6 +11,8 @@ export interface Duck {
   /** Default portrait (front pose), relative to /ducks/. Original approved artwork, never redrawn. */
   img: string;
   bg: string;
+  /** Grammatical gender, used for Arabic verb/adjective agreement in story text. */
+  gender: 'm' | 'f';
   name: L10n;
   role: L10n;
   perk: L10n;
@@ -33,25 +35,25 @@ const mk = (id: string, d: Omit<Duck, 'id' | 'img' | 'expressions' | 'poses'>): 
 
 // Final approved BSC characters (art-source/ducks-final). Ali has been replaced by Camel (الجمل).
 export const DUCKS: Duck[] = [
-  mk('abdullah', { bg: '#3a2e2a', name: L('Abdullah', 'عبدالله'), role: L('Microbiology enthusiast', 'مهووس الميكروبات'),
+  mk('abdullah', { gender: 'm', bg: '#3a2e2a', name: L('Abdullah', 'عبدالله'), role: L('Microbiology enthusiast', 'مهووس الميكروبات'),
     perk: L('+1 Charm checks', '+١ لاختبارات الجاذبية'), bonusStat: 'charm', favStyle: 'bold',
     voice: 'Energetic microbiology fan in a backwards cap. Sees microbes everywhere, hypes the team, impatient, warm, Kuwaiti slang.' }),
-  mk('ahmed', { bg: '#3b3226', name: L('Ahmed', 'أحمد'), role: L('Field naturalist', 'عالم طبيعة ميداني'),
+  mk('ahmed', { gender: 'm', bg: '#3b3226', name: L('Ahmed', 'أحمد'), role: L('Field naturalist', 'عالم طبيعة ميداني'),
     perk: L('+1 Agility checks', '+١ لاختبارات الرشاقة'), bonusStat: 'agility', favStyle: 'bold',
     voice: 'Enthusiastic field naturalist with a test tube and a notebook. Loves tracks, habitats and collecting samples. Optimistic, sometimes rushes in.' }),
-  mk('camel', { bg: '#33302a', name: L('Camel', 'الجمل'), role: L('Molecular biologist & theorist', 'عالم أحياء جزيئية وصاحب نظريات'),
+  mk('camel', { gender: 'm', bg: '#33302a', name: L('Camel', 'الجمل'), role: L('Molecular biologist & theorist', 'عالم أحياء جزيئية وصاحب نظريات'),
     perk: L('+1 Intellect checks', '+١ لاختبارات الذكاء'), bonusStat: 'intellect', favStyle: 'clever',
     voice: 'Analytical male duck with glasses, a green vest, a book and a molecular model. Curious about biological processes and molecules, proposes theories that are sometimes wrong, dry humour. Never reveals the right choice.' }),
-  mk('bassam', { bg: '#2e2f33', name: L('Bassam', 'بسام'), role: L('Lab safety officer', 'مسؤول السلامة'),
+  mk('bassam', { gender: 'm', bg: '#2e2f33', name: L('Bassam', 'بسام'), role: L('Lab safety officer', 'مسؤول السلامة'),
     perk: L('+1 Cold & Heat checks', '+١ لاختبارات الحر والبرد'), bonusStat: 'cold', favStyle: 'careful',
     voice: 'Calm safety officer with goggles and a coffee mug. Unbothered, practical, quietly funny, always thinking about risk.' }),
-  mk('kiraz', { bg: '#3a2629', name: L('Kiraz', 'كيراز'), role: L('Gothic biochemist', 'كيميائية حيوية قوطية'),
+  mk('kiraz', { gender: 'f', bg: '#3a2629', name: L('Kiraz', 'كيراز'), role: L('Gothic biochemist', 'كيميائية حيوية قوطية'),
     perk: L('+1 Strength checks', '+١ لاختبارات القوة'), bonusStat: 'strength', favStyle: 'bold',
     voice: 'Gothic biochemist with a cherry bow. Delighted by toxins and strange chemistry, dark deadpan humour, fearless.' }),
-  mk('roaa', { bg: '#382a30', name: L('Roaa', 'رؤى'), role: L('Microscopy specialist', 'متخصصة المجهر'),
+  mk('roaa', { gender: 'f', bg: '#382a30', name: L('Roaa', 'رؤى'), role: L('Microscopy specialist', 'متخصصة المجهر'),
     perk: L('+1 Stealth checks (she notices everything)', '+١ للتخفّي (تلاحظ كل شي)'), bonusStat: 'stealth', favStyle: 'kind',
     voice: 'Microscopy specialist with a black bow. Notices tiny details others miss, gentle, cares about animals, gets excited quietly.' }),
-  mk('zahra', { bg: '#30292a', name: L('Dr. Zahra', 'دكتورة زهراء'), role: L('Bioinformatics lead', 'قائدة المعلوماتية الحيوية'),
+  mk('zahra', { gender: 'f', bg: '#30292a', name: L('Dr. Zahra', 'دكتورة زهراء'), role: L('Bioinformatics lead', 'قائدة المعلوماتية الحيوية'),
     perk: L('Shows the odds on every choice', 'تبيّن نسبة النجاح لكل خيار'), bonusStat: 'swim', favStyle: 'clever',
     voice: 'Calm, confident bioinformatics lead in a grey hijab with a tablet. Thinks in data and probabilities, dry wit, the voice of reason.' }),
 ];

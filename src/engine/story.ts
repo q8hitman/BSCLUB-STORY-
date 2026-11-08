@@ -190,7 +190,7 @@ export interface BeatView {
   ctx: Ctx;
 }
 
-export interface Ctx { name: string; player: string; duck: L10n; place: L10n; obstacle: L10n; predator: L10n; critter: L10n; npc: L10n }
+export interface Ctx { name: string; player: string; duck: L10n; duckG: 'm' | 'f'; place: L10n; obstacle: L10n; predator: L10n; critter: L10n; npc: L10n }
 
 export function beatContext(s: GameState, idx = s.index): Ctx {
   const pb = s.plan.beats[idx];
@@ -198,7 +198,7 @@ export function beatContext(s: GameState, idx = s.index): Ctx {
   const r = Rng.from(s.seed, `ctx${idx}`);
   const duck = DUCK_BY_ID[s.duck];
   return {
-    name: s.creature.name, player: s.player || '—', duck: duck?.name ?? { en: 'the duck', ar: 'البطة' }, place: b.name,
+    name: s.creature.name, player: s.player || '—', duck: duck?.name ?? { en: 'the duck', ar: 'البطة' }, duckG: duck?.gender ?? 'f', place: b.name,
     obstacle: r.pick(b.obstacles), predator: r.pick(b.predators), critter: r.pick(b.critters),
     npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || { en: 'a stranger', ar: 'شخص غريب' },
   };
@@ -208,7 +208,9 @@ export function beatContext(s: GameState, idx = s.index): Ctx {
 export const iso = (s: string) => `\u2068${s}\u2069`;
 
 export function fill(t: L10n, c: Ctx): L10n {
+  // {g:masculine|feminine} picks the form that agrees with the companion duck's gender.
   const one = (str: string, lang: Lang) => str
+    .replace(/\{g:([^|}]*)\|([^}]*)\}/g, (_m, m: string, f: string) => (c.duckG === 'm' ? m : f))
     .replace(/\{name\}/g, iso(c.name)).replace(/\{player\}/g, iso(c.player)).replace(/\{duck\}/g, c.duck[lang])
     .replace(/\{place\}/g, c.place[lang]).replace(/\{obstacle\}/g, c.obstacle[lang]).replace(/\{predator\}/g, c.predator[lang])
     .replace(/\{critter\}/g, c.critter[lang]).replace(/\{npc\}/g, c.npc[lang]);

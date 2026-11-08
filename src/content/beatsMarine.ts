@@ -168,7 +168,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
         O('{name} clings to the hull as the blue drains to black. Things brush past it in the dark. It doesn’t let go.', '{name} متمسّك بجسم الغوّاصة والأزرق ينسحب للسواد. أشياء تحتك فيه بالظلام… وما فك.', 'shocked', [fl('rode-outside')], 'sub'),
         { requires: { capAny: ['swim', 'breatheWater', 'grip'] }, check: chk('swim', 4, ['breatheWater', 'pressure']), fail: O('Two hundred metres down, {name} knocks on the window, very politely, to be let in.', 'على عمق ميتين متر، {name} يطق الدريشة بكل أدب… يبي يدخل.', 'laughing', [en(-1)], 'sub') }),
       C('playlist', L('Choose the dive playlist', 'اختيار قائمة الأغاني للغوص'), 'silly',
-        O('The duck picks old Kuwaiti sea songs. Everyone hums along, and for a while the dark outside feels a little smaller.', 'البطة اختارت أغاني بحرية كويتية قديمة. الكل يدندن، وفترة… الظلام برا صار أصغر شوي.', 'laughing', [tr(2)], 'sub')),
+        O('{duck} picks old Kuwaiti sea songs. Everyone hums along, and for a while the dark outside feels a little smaller.', '{duck} {g:اختار|اختارت} أغاني بحرية كويتية قديمة. الكل يدندن، وفترة… الظلام برا صار أصغر شوي.', 'laughing', [tr(2)], 'sub')),
       C('light', L('Log the light as it disappears', 'تسجيل الضوء وهو يختفي'), 'clever',
         O('At fifty metres, red vanishes. Then orange, then yellow. By two hundred the world is a deep, cold blue — and then not even that.', 'على خمسين متر، الأحمر يختفي. وبعده البرتقالي، وبعده الأصفر. وعلى ميتين، الدنيا زرقا باردة غامقة… وبعدين حتى الأزرق يروح.', 'thinking', [ev('light-log'), di('bathysphere-1934')], 'scan')),
       C('close', L('Hold {name} close as the light goes', 'ضم {name} مع اختفاء الضوء'), 'kind',
