@@ -134,7 +134,7 @@ npx vitest run
 
 ## Fully automatic mode (no human review)
 
-The GitHub workflow `.github/workflows/story-factory.yml` runs every Monday at 06:00 Kuwait time. It can also be
+The GitHub workflow `.github/workflows/story-factory.yml` runs every Monday and Thursday at 06:00 Kuwait time. It can also be
 started by hand: Actions → Story Factory → Run workflow. It needs only the repository secret `GEMINI_API_KEY`.
 
 1. `generate.ts --review-drafts` gives any leftover drafts their editor pass.
