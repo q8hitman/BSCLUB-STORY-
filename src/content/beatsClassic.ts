@@ -7,6 +7,7 @@ export const CLASSIC_BEATS: BeatTemplate[] = [
   // ───────────── HOOKS (always in the BSC lab) ─────────────
   {
     id: 'h-signal', mode: 'classic', kind: 'hook', biomes: ['lab'], props: ['lab', 'radio'],
+    goal: L('Follow the signal to the abandoned field lab and find out who — or what — is sending it.', 'تتبّعوا الإشارة حتى المختبر الميداني المهجور، واكتشفوا مَن يرسلها… أو ما الذي يرسلها.'),
     text: L('Midnight in the BSC lab. The hybrid simulator sparks, the lights flicker — and {name} is suddenly, very really, sitting on the bench. At the same moment, the old radio crackles with a signal from a field lab abandoned twenty years ago.',
       'منتصف الليل في مختبر النادي. يقدح جهاز محاكاة الهجائن شرراً، وترتعش الأضواء… وفجأةً يجلس {name} على الطاولة، حقيقياً تماماً. وفي اللحظة نفسها، يلتقط المذياع القديم إشارةً من مختبرٍ ميداني مهجور منذ عشرين عاماً.'),
     choices: [
@@ -23,6 +24,7 @@ export const CLASSIC_BEATS: BeatTemplate[] = [
   },
   {
     id: 'h-prof', mode: 'classic', kind: 'hook', biomes: ['lab'], props: ['lab', 'postcard'],
+    goal: L('Follow Dr. Basma’s map and find out what happened to her.', 'اتّبعوا خريطة الدكتورة بسمة، واكتشفوا ما الذي حدث لها.'),
     text: L('Dr. Basma, the club’s founding scientist, vanished on fieldwork last year. Tonight, as {name} blinks into existence in the simulator, a dusty postcard drops out of the machine: a hand-drawn map, and three words — “Bring the hybrid.”',
       'اختفت الدكتورة بسمة، مؤسِّسة النادي، في رحلةٍ ميدانية العام الماضي. والليلة، بينما يتجسّد {name} في المحاكي، تسقط من الجهاز بطاقةٌ بريدية مغبرّة: خريطةٌ مرسومة باليد، وكلمتان: «أحضِروا الهجين».'),
     choices: [
@@ -39,6 +41,7 @@ export const CLASSIC_BEATS: BeatTemplate[] = [
   },
   {
     id: 'h-escape', mode: 'classic', kind: 'hook', biomes: ['lab'], props: ['lab', 'vents'],
+    goal: L('Track the escaped lab samples into the wild and bring them back safely.', 'تعقّبوا عيّنات المختبر الهاربة في البرية، وأعيدوها سالمة.'),
     text: L('The simulator overloads. {name} appears — and so does a crack in the specimen wall. Every experimental sample has escaped through the vents, heading for the wild.',
       'يتجاوز المحاكي طاقته. يظهر {name}… ويظهر معه شقٌّ في جدار العيّنات. لقد هربت كل العيّنات التجريبية عبر فتحات التهوية متجهةً إلى البرية.'),
     choices: [
@@ -56,6 +59,7 @@ export const CLASSIC_BEATS: BeatTemplate[] = [
   },
   {
     id: 'h-contest', mode: 'classic', kind: 'hook', biomes: ['lab'], props: ['lab', 'trophy'],
+    goal: L('Document a never-before-seen animal behaviour before the Bio Fair — and before Dr. Vex.', 'وثّقوا سلوكاً حيوانياً لم يُرصد من قبل، قبل معرض الأحياء… وقبل د. فيكس.'),
     text: L('The Kuwait University Bio Fair is in three days. The prize goes to whoever documents a never-before-seen behaviour in the wild. The favourite is Dr. Vex — who has been “borrowing” BSC equipment. Then {name} sneezes itself into existence.',
       'بعد ثلاثة أيام يُقام معرض الأحياء في جامعة الكويت، والجائزة لمن يوثّق سلوكاً لم يُرصد من قبل في البرية. المرشّح الأقوى هو د. فيكس، الذي «يستعير» أجهزة النادي منذ مدة. ثم يعطس {name}… فيتجسّد.'),
     npc: 'rival',

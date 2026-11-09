@@ -11,6 +11,8 @@ export interface Duck {
   /** Default portrait (front pose), relative to /ducks/. Original approved artwork, never redrawn. */
   img: string;
   bg: string;
+  /** Backdrop colour at the edges of the portrait art, so the card behind it blends with no visible rectangle. */
+  edge: string;
   /** Grammatical gender, used for Arabic verb/adjective agreement in story text. */
   gender: 'm' | 'f';
   name: L10n;
@@ -32,19 +34,19 @@ const mk = (id: string, d: Omit<Duck, 'id' | 'img' | 'expressions' | 'poses'>): 
 
 // Final approved BSC characters (art-source/ducks-final). Ali has been replaced by Camel (الجمل).
 export const DUCKS: Duck[] = [
-  mk('abdullah', { gender: 'm', bg: '#3a2e2a', name: L('Abdullah', 'عبدالله'), role: L('Microbiology enthusiast', 'شغوف بالميكروبات'),
+  mk('abdullah', { edge: '#756255', gender: 'm', bg: '#3a2e2a', name: L('Abdullah', 'عبدالله'), role: L('Microbiology researcher', 'باحث في الأحياء الدقيقة'),
     voice: 'Energetic microbiology fan in a backwards cap. Sees microbes everywhere, hypes the team, impatient, warm. Speaks simple Modern Standard Arabic with a light playful touch.' }),
-  mk('ahmed', { gender: 'm', bg: '#3b3226', name: L('Ahmed', 'أحمد'), role: L('Field naturalist', 'عالم طبيعة ميداني'),
+  mk('ahmed', { edge: '#614b3e', gender: 'm', bg: '#3b3226', name: L('Ahmed', 'أحمد'), role: L('Field explorer & sample collector', 'مستكشف ميداني وجامع عيّنات'),
     voice: 'Enthusiastic field naturalist with a test tube and a notebook. Loves tracks, habitats and collecting samples. Optimistic, sometimes rushes in.' }),
-  mk('camel', { gender: 'm', bg: '#33302a', name: L('Camel', 'الجمل'), role: L('Molecular biologist & theorist', 'عالم أحياء جزيئية وصاحب نظريات'),
+  mk('camel', { edge: '#543e31', gender: 'm', bg: '#33302a', name: L('Camel', 'الجمل'), role: L('Molecular biologist', 'باحث في الأحياء الجزيئية'),
     voice: 'Analytical male duck with glasses, a green vest, a book and a molecular model. Curious about biological processes and molecules, proposes theories that are sometimes wrong, dry humour. Never reveals the right choice.' }),
-  mk('bassam', { gender: 'm', bg: '#2e2f33', name: L('Bassam', 'بسام'), role: L('Lab safety officer', 'مسؤول السلامة'),
+  mk('bassam', { edge: '#58423c', gender: 'm', bg: '#2e2f33', name: L('Bassam', 'بسام'), role: L('Lab safety officer', 'مسؤول السلامة في المختبر'),
     voice: 'Calm safety officer with goggles and a coffee mug. Unbothered, practical, quietly funny, always thinking about risk.' }),
-  mk('kiraz', { gender: 'f', bg: '#3a2629', name: L('Kiraz', 'كيراز'), role: L('Gothic biochemist', 'كيميائية حيوية قوطية'),
-    voice: 'Gothic biochemist with a cherry bow. Delighted by toxins and strange chemistry, dark deadpan humour, fearless.' }),
-  mk('roaa', { gender: 'f', bg: '#382a30', name: L('Roaa', 'رؤى'), role: L('Microscopy specialist', 'متخصصة المجهر'),
+  mk('kiraz', { edge: '#574039', gender: 'f', bg: '#3a2629', name: L('Kiraz', 'كيراز'), role: L('Biochemist & toxins researcher', 'باحثة في الكيمياء الحيوية والسموم'),
+    voice: 'Biochemist with a cherry bow and a dark outfit. Delighted by toxins and strange chemistry, deadpan humour, fearless.' }),
+  mk('roaa', { edge: '#523c34', gender: 'f', bg: '#382a30', name: L('Roaa', 'رؤى'), role: L('Microscopy specialist', 'أخصائية الفحص المجهري'),
     voice: 'Microscopy specialist with a black bow. Notices tiny details others miss, gentle, cares about animals, gets excited quietly.' }),
-  mk('zahra', { gender: 'f', bg: '#30292a', name: L('Dr. Zahra', 'دكتورة زهراء'), role: L('Bioinformatics lead', 'قائدة المعلوماتية الحيوية'),
+  mk('zahra', { edge: '#4a3430', gender: 'f', bg: '#30292a', name: L('Dr. Zahra', 'دكتورة زهراء'), role: L('Bioinformatics lead', 'قائدة فريق المعلوماتية الحيوية'),
     voice: 'Calm, confident bioinformatics lead in a grey hijab with a tablet. Thinks in data and probabilities, dry wit, the voice of reason.' }),
 ];
 

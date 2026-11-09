@@ -52,7 +52,7 @@ def get(path):
     return urllib.request.urlopen(HOST + path, timeout=60).read()
 
 def run(plate, seed, out_dir, tag):
-    pid = post("/prompt", {"prompt": workflow(plate["prompt"], plate.get("negative", ""), seed, plate.get("style", "nocturne"))})["prompt_id"]
+    pid = post("/prompt", {"prompt": workflow(plate["prompt"], plate.get("negative", ""), seed, plate.get("style", "nocturne"), plate.get("w", 1344), plate.get("h", 768))})["prompt_id"]
     t0 = time.time()
     while True:
         hist = json.loads(get(f"/history/{pid}"))

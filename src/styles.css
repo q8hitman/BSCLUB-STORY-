@@ -118,15 +118,17 @@ html[lang='ar'] .kicker { letter-spacing: 0; font-size: .85rem; }
 /* ───────── Companion (duck) select ───────── */
 .duck-stage { display: grid; gap: var(--s4); }
 @media (min-width: 860px) { .duck-stage { grid-template-columns: minmax(0, 1.25fr) minmax(300px, .9fr); align-items: stretch; } }
-.duck-hero { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(120% 90% at 30% 25%, color-mix(in srgb, var(--duck-bg) 80%, #8a6a4a 20%), #0d0f11 78%); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; min-height: 440px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); animation: enter .45s ease both; }
-.duck-hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(transparent, rgba(6, 8, 11, .55)); pointer-events: none; }
-.duck-hero-art { position: relative; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding: var(--s5) var(--s3) 0; }
-.duck-hero-art img { display: block; height: min(420px, 58vh); width: auto; max-width: 100%; object-fit: contain; object-position: bottom center;
-  -webkit-mask-image: radial-gradient(70% 62% at 50% 48%, #000 62%, transparent 100%); mask-image: radial-gradient(70% 62% at 50% 48%, #000 62%, transparent 100%); }
-.duck-hero-text { position: relative; z-index: 1; padding: var(--s5) var(--s5) var(--s5) var(--s3); display: flex; flex-direction: column; gap: var(--s2); }
-.duck-hero h3 { margin: 0; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.05; color: var(--gold-2); }
-.duck-hero .role { margin: 0; color: var(--paper); font-size: 1.08rem; line-height: 1.5; }
-.duck-moods { display: flex; gap: var(--s2); margin-top: var(--s3); }
+.duck-hero { position: relative; border-radius: 24px; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(60% 55% at 50% 40%, var(--duck-edge, var(--duck-bg)) 35%, color-mix(in srgb, var(--duck-edge, var(--duck-bg)) 45%, #0d0f11) 75%, #0d0f11 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-height: 440px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); animation: enter .45s ease both; text-align: center; }
+.duck-hero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(transparent, rgba(6, 8, 11, .7)); pointer-events: none; }
+/* The duck stands centred; only the outer edges of its card art fade into the panel, so no hair or prop is cut. */
+.duck-hero-art { position: relative; display: flex; justify-content: center; width: 100%; padding: var(--s4) var(--s3) 0; }
+.duck-hero-art img { display: block; height: min(380px, 52vh); width: auto; max-width: 100%; object-fit: contain;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent), linear-gradient(180deg, transparent, #000 6%, #000 88%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent), linear-gradient(180deg, transparent, #000 6%, #000 88%, transparent); mask-composite: intersect; }
+.duck-hero-text { position: relative; z-index: 1; margin-top: calc(-1 * var(--s5)); padding: 0 var(--s4) var(--s4); display: flex; flex-direction: column; align-items: center; gap: var(--s1); }
+.duck-hero h3 { margin: 0; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.05; color: var(--gold-2); text-shadow: 0 2px 14px rgba(0, 0, 0, .8); }
+.duck-hero .role { margin: 0; color: var(--paper); font-size: 1.05rem; line-height: 1.5; max-width: 34ch; }
+.duck-moods { display: flex; gap: var(--s2); margin-top: var(--s2); justify-content: center; }
 .duck-moods img { width: 54px; height: 64px; object-fit: cover; object-position: 50% 18%; border-radius: 12px; border: 1px solid var(--line); }
 .duck-roster { display: grid; gap: 6px; align-content: space-between; }
 .roster-label { margin: 0 0 2px; font-size: .78rem; color: var(--paper-dim); letter-spacing: .14em; text-transform: uppercase; }
@@ -144,11 +146,8 @@ html[dir='rtl'] .duck-card.on { background: linear-gradient(270deg, rgba(216, 18
 .duck-meta small { color: var(--paper-dim); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .duck-check { width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: #1b1408; display: grid; place-items: center; font-size: .8rem; font-weight: 800; }
 @media (max-width: 859px) {
-  .duck-hero { min-height: 0; grid-template-columns: 44% 1fr; }
-  .duck-hero-art { padding-top: var(--s3); }
-  .duck-hero-art img { height: 260px; }
-  .duck-hero-text { padding: var(--s4) var(--s4) var(--s4) 0; }
-  html[dir='rtl'] .duck-hero-text { padding: var(--s4) 0 var(--s4) var(--s4); }
+  .duck-hero { min-height: 0; }
+  .duck-hero-art img { height: 300px; }
   .duck-moods img { width: 40px; height: 48px; }
   .duck-roster { grid-template-columns: 1fr 1fr; }
   /* 7 companions in two columns: centre the last one instead of leaving a hole */
@@ -156,7 +155,7 @@ html[dir='rtl'] .duck-card.on { background: linear-gradient(270deg, rgba(216, 18
   .roster-label { grid-column: 1 / -1; }
 }
 @media (max-width: 480px) {
-  .duck-hero-art img { height: 210px; }
+  .duck-hero-art img { height: 250px; }
   .duck-hero h3 { font-size: 1.9rem; }
   .duck-hero .role { font-size: .95rem; }
   .duck-moods { gap: 6px; }
@@ -242,6 +241,9 @@ html[lang='ar'] .detail-cols b { letter-spacing: 0; font-size: .85rem; }
 .part { text-align: start; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .03); padding: var(--s3); cursor: pointer; display: flex; flex-direction: column; gap: 6px; transition: border-color .2s, background .2s; }
 .part:hover { border-color: rgba(216, 180, 106, .5); }
 .part strong { color: var(--paper); font-size: 1rem; }
+.part.has-art { padding-top: var(--s2); }
+.part-art { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; display: block; background: #0b0d10; filter: saturate(.9) brightness(.92); transition: filter .2s; }
+.part:hover .part-art, .part.on .part-art { filter: none; }
 .part.on { border-color: var(--gold); background: rgba(216, 180, 106, .09); } .part.on strong { color: var(--gold-2); }
 .part-desc { font-size: .84rem; color: var(--paper-dim); line-height: 1.5; }
 .part-stats { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -351,7 +353,7 @@ html[lang='ar'] .typewriter { line-height: 1.95; }
   .chapter { display: none; }
   .vn-hud { top: calc(54px + env(safe-area-inset-top)); padding: 0 12px; gap: 6px; }
   .vn-meter { gap: 8px; padding-inline-start: 10px; }
-  .collab-intro, .vn-confirm { position: fixed; }
+  .collab-intro, .briefing, .vn-confirm { position: fixed; }
 }
 .vn-progress { display: none; font-size: .8rem; color: var(--paper-dim); }
 @media (max-aspect-ratio: 1/1) { .vn-progress { display: inline; } }
@@ -551,3 +553,19 @@ html[lang='ar'] .featured figcaption b { font-family: var(--display-ar); }
 .mood-strip .mood .creature-art { width: 100%; }
 .mood-strip small { font-size: .68rem; }
 @media (max-width: 520px) { .mood-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* ───────── Mission briefing (before the first scene) ───────── */
+.briefing { position: absolute; inset: 0; z-index: 12; overflow-y: auto; display: flex; padding: calc(var(--s5) + 60px) var(--s4) var(--s5); background: radial-gradient(circle at 50% 35%, rgba(18, 24, 22, .96), rgba(3, 5, 8, .99)); animation: fade-in .5s both; }
+.briefing .inner { margin: auto; width: min(100%, 620px); display: flex; flex-direction: column; align-items: center; gap: var(--s3); text-align: center; animation: rise .7s ease .05s both; }
+.briefing .logos img { height: clamp(56px, 11vw, 88px); }
+.briefing .kicker { margin: 0; }
+.brief-creature { width: min(240px, 60vw); }
+.brief-creature .creature-art svg { width: 100%; height: auto; display: block; }
+.brief-who, .brief-animal { margin: 0; color: var(--paper); line-height: 1.75; font-size: 1.04rem; }
+.brief-animal { color: var(--paper-dim); font-size: .96rem; }
+.brief-goal { width: 100%; display: flex; flex-direction: column; gap: 4px; padding: var(--s3) var(--s4); border-radius: 16px; border: 1px solid rgba(216, 180, 106, .45); background: rgba(216, 180, 106, .08); }
+.brief-goal b { color: var(--gold-2); font-size: .85rem; letter-spacing: .08em; }
+.brief-goal span { color: var(--paper); font-size: 1.08rem; line-height: 1.6; }
+.brief-how { width: 100%; text-align: start; padding: var(--s3) var(--s4); border-radius: 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, .03); }
+.brief-how b { color: var(--gold-2); font-size: .85rem; }
+.brief-how ol { margin: var(--s2) 0 0; padding-inline-start: 1.3em; display: grid; gap: 6px; color: var(--paper-dim); line-height: 1.6; font-size: .95rem; }

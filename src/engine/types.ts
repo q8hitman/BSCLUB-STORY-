@@ -116,6 +116,8 @@ export interface BeatTemplate {
   /** Visual props for scene art. */
   props: string[];
   text: L10n;
+  /** Hooks only: the run's mission in one sentence, shown on the mission briefing before the first scene. */
+  goal?: L10n;
   /** Extra paragraph added when the condition holds — anatomy/state-aware narration. */
   variants?: { when: Cond; text: L10n }[];
   fact?: string; // real-science fact id shown after the beat

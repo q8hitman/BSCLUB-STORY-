@@ -30,6 +30,7 @@ HARD RULES:
 - Marine order: surface, open sea, twilight, midnight/vents, trench; never climb back up.
 - Legends: at most one act may set "legend" to an id from catalog.legends_rare, in one of that legend's biomes.
 - Ducks are companions only: they comment, react, theorise and give light hints; they never decide.
+- The creature ({CREATURE}) is an animal: it NEVER speaks, writes, signals words or reasons like a person. It sniffs, listens, explores, reacts and helps the team with its body and senses. People may talk TO it.
 - In Arabic, name the creature's body parts and the places EXACTLY by the Arabic names given in the brief/catalog — never translate them yourself.
 - Ducks speak to the team in plural (شوفوا، انتبهوا).
 - EVERY player-facing text field (title, premise, text, label, duck_line, summary, epilogue, outcome text) is an object {"en": "...", "ar": "..."} — never a plain string.

@@ -8,6 +8,10 @@ import { Btn, CaptureCreature, CreatureArt } from './common';
 import type { Expression } from '../art/creatureSvg';
 
 const PREVIEW_MOODS: Expression[] = ['neutral', 'curious', 'happy', 'frightened', 'suspicious', 'tired'];
+import PART_ART_LIST from '../content/part-art.json';
+
+/** Painted picture of the real animal behind each option (public/parts/<id>.webp), so players see what they pick. */
+const PART_ART = new Set<string>(PART_ART_LIST as string[]);
 import { u } from './uiText';
 
 /** A lit stage for the creature: spotlight from above, a soft pedestal shadow below. The creature is the hero. */
@@ -87,7 +91,8 @@ export function Builder({ lang, value, onChange, onNext, onBack }: { lang: Lang;
           <p className="kicker list-label">{u('chooseSlot', lang)} · {partsFor(slot).length}</p>
           <div className="part-list" role="radiogroup" aria-label={SLOT_LABEL[slot][lang]}>
             {partsFor(slot).map((p) => (
-              <button key={p.id} role="radio" aria-checked={value[slot] === p.id} className={`part ${value[slot] === p.id ? 'on' : ''}`} onClick={() => set(slot, p.id)}>
+              <button key={p.id} role="radio" aria-checked={value[slot] === p.id} className={`part ${value[slot] === p.id ? 'on' : ''} ${PART_ART.has(p.id) ? 'has-art' : ''}`} onClick={() => set(slot, p.id)}>
+                {PART_ART.has(p.id) && <img className="part-art" src={`${import.meta.env.BASE_URL}parts/${p.id}.webp`} alt="" loading="lazy" width={320} height={240} />}
                 <strong>{p.name[lang]}</strong>
                 <span className="part-desc">{p.desc[lang]}</span>
                 <span className="part-stats">{Object.entries(p.stats).map(([k, v]) => <i key={k} className={v! < 0 ? 'neg' : 'pos'}>{v! > 0 ? '+' : ''}{v} {STAT_LABEL[k][lang]}</i>)}</span>

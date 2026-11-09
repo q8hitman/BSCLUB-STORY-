@@ -14,7 +14,7 @@ import { MAX_ENERGY, advance, choose, currentBeat } from '../engine/story';
 import type { BiomeId, DuckMood, GameState, Lang, Style } from '../engine/types';
 import type { Settings } from '../engine/storage';
 import { t } from '../i18n';
-import { Btn, Logos, Typewriter } from './common';
+import { Btn, CreatureArt, Logos, Typewriter } from './common';
 import { animalArt } from '../art/animalArt';
 import { ANIMAL_BY_ID } from '../content/bestiary';
 import { ROLE_LABEL, u } from './uiText';
@@ -75,8 +75,8 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const [aiText, setAiText] = useState<string | null>(null);
   const [newFacts, setNewFacts] = useState<string[]>([]);
   const [confirmQuit, setConfirmQuit] = useState(false);
-  const [collab, setCollab] = useState(game.mode === 'marine' && game.index === 0 && game.stage === 'beat');
-  useEffect(() => { if (!collab) return; const id = setTimeout(() => setCollab(false), 4200); return () => clearTimeout(id); }, [collab]);
+  // Mission briefing before the first scene: premise, the run's goal and how to play (the marine collaboration is introduced here too).
+  const [brief, setBrief] = useState(game.index === 0 && game.stage === 'beat' && game.log.length === 0);
   const recent = useRef<string[]>([]);
   const reduced = settings.reducedMotion;
   const speed = reduced ? Math.max(settings.textSpeed, 90) : settings.textSpeed;
@@ -104,12 +104,12 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   // Keyboard: 1–4 pick a choice, Enter/Space continues.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!view || confirmQuit || (e.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (!view || confirmQuit || brief || (e.target as HTMLElement)?.tagName === 'INPUT') return;
       if (game.stage === 'beat' && typed) { const n = Number(e.key); if (n >= 1 && n <= view.choices.length) onChoose(view.choices[n - 1].choice.id); }
       else if (game.stage === 'outcome' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onContinue(); }
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
-  }, [view, game.stage, typed, confirmQuit, onChoose, onContinue]);
+  }, [view, game.stage, typed, confirmQuit, brief, onChoose, onContinue]);
 
   const plate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -152,17 +152,26 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
       <CreaturePanel game={game} lang={lang} />
       <FeaturedAnimal key={featuredId ?? "none"} id={featuredId} biome={view.biome} seed={game.seed + game.index} lang={lang} scene={plate ? plateUrl(plate.id) : null} />
 
-      {collab && (
-        <div className="collab-intro" onClick={() => setCollab(false)} role="dialog" aria-label={t('collab', lang)}>
-          <div className="inner">
-            <p className="kicker sea">{u('collabWith', lang)}</p>
-            <Logos marine className="collab-logos" />
-            <h2>{t('marine', lang)}</h2>
-            <p>{t('collab', lang)}</p>
-            <span className="collab-journey">{u('marineJourney', lang)}</span>
+      {brief && (() => {
+        const nm = (x: string) => x.replace(/\{name\}/g, game.creature.name);
+        const goal = BEAT_BY_ID[game.plan.beats[0].template]?.goal;
+        return (
+          <div className="briefing" role="dialog" aria-modal="true" aria-label={u('briefKicker', lang)}>
+            <div className="inner">
+              {game.mode === 'marine'
+                ? <><p className="kicker sea">{u('collabWith', lang)}</p><Logos marine className="collab-logos" /></>
+                : <Logos className="collab-logos" />}
+              <p className="kicker">{u('briefKicker', lang)} · {t(game.mode === 'marine' ? 'marine' : 'classic', lang)}</p>
+              <div className="brief-creature"><CreatureArt creature={game.creature} expression="curious" /></div>
+              <p className="brief-who">{nm(u('briefWho', lang))}</p>
+              <p className="brief-animal">{nm(u('briefAnimal', lang))}</p>
+              {goal && <div className="brief-goal"><b>{u('briefGoal', lang)}</b><span>{nm(goal[lang])}</span></div>}
+              <div className="brief-how"><b>{u('briefHow', lang)}</b><ol><li>{nm(u('briefHow1', lang))}</li><li>{u('briefHow2', lang)}</li><li>{u('briefHow3', lang)}</li></ol></div>
+              <Btn onClick={() => setBrief(false)} autoFocus>{u('briefStart', lang)}</Btn>
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {confirmQuit && (
         <div className="vn-confirm" role="alertdialog">

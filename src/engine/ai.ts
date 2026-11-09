@@ -28,6 +28,11 @@ const CONTRADICTIONS: { cap: Capability[]; words: RegExp }[] = [
   { cap: ['glow'], words: /\b(glow|glowed|glowing)\b|يضوي|توهج/i },
 ];
 
+// The creature is an animal: narration where it speaks (says/asks/replies…) is rejected.
+const reEsc = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const SPEECH_EN = '(says|said|asks|asked|replies|replied|answers|answered|tells|told|whispers|shouts)';
+const SPEECH_AR = '(قال|يقول|سأل|يسأل|أجاب|يجيب|همس|يهمس)';
+const SPEAKS = (name: string) => new RegExp(`${reEsc(name)}\\s+${SPEECH_EN}\\b|${SPEECH_AR}\\s+${reEsc(name)}`, 'i');
 const BANNED = /(https?:\/\/|<script|\bkill(ed)?\b|\bblood\b|\bdie[ds]?\b|انتحار)/i;
 const ARABIC = /[؀-ۿ]/;
 
@@ -41,6 +46,7 @@ export function validateAiResponse(raw: unknown, req: AiRequest): { ok: true; te
   const text = n.trim();
   if (text.length < 20 || text.length > 420) return { ok: false, reason: 'length' };
   if (BANNED.test(text)) return { ok: false, reason: 'banned-content' };
+  if (SPEAKS(req.creature.name).test(text)) return { ok: false, reason: 'creature-speaks' };
   if (req.lang === 'ar' && !ARABIC.test(text)) return { ok: false, reason: 'wrong-language' };
   if (req.lang === 'en' && ARABIC.test(text)) return { ok: false, reason: 'wrong-language' };
   if (!text.includes(req.creature.name)) return { ok: false, reason: 'continuity-name' };

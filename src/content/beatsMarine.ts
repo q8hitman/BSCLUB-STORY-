@@ -18,6 +18,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   // ───────────── HOOKS ─────────────
   {
     id: 'hm-reef', mode: 'marine', kind: 'hook', biomes: ['lab'], phase: 'surface', props: ['lab', 'boat'],
+    goal: L('Find out what is bleaching the reef near Kubbar Island.', 'اكتشفوا ما الذي يُبيّض شعاب جزيرة كبّر.'),
     text: L('The Marine Science Club bursts into the BSC lab: patches of reef near Kubbar Island are turning bone-white, fast. They need a field partner that can go where divers can’t — and every head turns toward {name}.',
       'اندفع أعضاء نادي علوم البحار إلى مختبر النادي: أجزاء من شعاب جزيرة كبّر تبيضّ كالعظم، وبسرعة. إنهم يحتاجون إلى شريك ميداني يبلغ أماكن لا يصلها الغواصون — فالتفتت الرؤوس كلها نحو {name}.'),
     choices: [
@@ -34,8 +35,9 @@ export const MARINE_BEATS: BeatTemplate[] = [
   },
   {
     id: 'hm-sound', mode: 'marine', kind: 'hook', biomes: ['lab'], phase: 'surface', props: ['lab', 'hydrophone'],
-    text: L('The Marine Science Club’s underwater microphone caught a sound no one can identify: long, low, enormous, like a door slowly opening at the bottom of the sea. They play it in the BSC lab. {name} answers it.',
-      'التقط الميكروفون المائي لنادي علوم البحار صوتاً لم يتعرّف عليه أحد: طويلاً، عميقاً، هائلاً، كبابٍ يُفتح ببطء في قاع البحر. شغّلوه في مختبر النادي… فأجابه {name}.'),
+    goal: L('Find the source of the mysterious deep-sea sound.', 'اعثروا على مصدر الصوت الغامض في أعماق البحر.'),
+    text: L('The Marine Science Club’s underwater microphone caught a sound no one can identify: long, low, enormous, like a door slowly opening at the bottom of the sea. They play it in the BSC lab — and {name} lets out a long, low call of its own.',
+      'التقط الميكروفون المائي لنادي علوم البحار صوتاً لم يتعرّف عليه أحد: طويلاً، عميقاً، هائلاً، كبابٍ يُفتح ببطء في قاع البحر. شغّلوه في مختبر النادي… فأطلق {name} نداءً طويلاً عميقاً يشبهه.'),
     choices: [
       C('record', L('Record {name}’s reply', 'سجّلوا ردّ {name}'), 'clever',
         O('The two waveforms line up in a way nobody can explain. Whatever made that sound, {name} recognises it.', 'تطابقت الموجتان بطريقة لا يفسّرها أحد. أيّاً كان مصدر ذلك الصوت، فإن {name} يعرفه.', 'shocked', [fl('hook:sound'), ev('sound-match')], 'radio')),
@@ -49,6 +51,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   },
   {
     id: 'hm-nets', mode: 'marine', kind: 'hook', biomes: ['lab'], phase: 'surface', props: ['lab', 'net'],
+    goal: L('Find out which creature left the strange cold scales in the ghost net.', 'اكتشفوا أيّ كائنٍ ترك الحراشف الباردة الغريبة في الشبكة المهجورة.'),
     text: L('A fisherman brought the Marine Science Club a ghost net — an abandoned fishing net — with strange scales caught in it. Big scales, cold to the touch even in the sun. The clubs team up, and {name} cannot stop sniffing them.',
       'أحضر صياد إلى نادي علوم البحار شبكة صيد مهجورة علقت فيها حراشف غريبة: حراشف كبيرة، باردة الملمس حتى تحت الشمس. تعاون الناديان، ولم يكفّ {name} عن شمّها.'),
     choices: [
@@ -132,7 +135,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('night', L('Ask about her night dives', 'اسألوها عن غوصاتها الليلية'), 'careful',
         O('She hesitates. “At night, past the drop-off, the lights in the water aren’t always plankton.”', 'تردّدت ثم قالت: «في الليل، بعد حافة المنحدر، ليست كل الأضواء في الماء عوالق.»', 'worried', [fl('met:diver'), rel('diver', 1), ev('night-dive-notes')], 'still')),
       C('signals', L('Let {name} show off its dive signals', 'دعوا {name} يستعرض إشارات الغوص'), 'silly',
-        O('{name} signals “OK”, “shark”, and something that might mean “snack”. She laughs into her regulator.', 'أشار {name} بـ«تمام» و«قرش» وبشيء قد يعني «وجبة خفيفة». فضحكت في منظِّم التنفّس.', 'laughing', [fl('met:diver'), rel('diver', 1)], 'heart')),
+        O('{name} copies her slow hand movements with its own limbs — badly — then swims a happy loop around her. She laughs into her regulator.', 'قلّد {name} حركات يديها البطيئة بأطرافه… بشكلٍ مضحك، ثم دار حولها دورةً مرحة. فضحكت في منظِّم التنفّس.', 'laughing', [fl('met:diver'), rel('diver', 1)], 'heart')),
     ],
   },
   {
@@ -147,7 +150,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('log', L('Trade a weather forecast for his catch log', 'بادلوه توقعات الطقس بسجلّ صيده'), 'clever',
         O('His log shows deep-water fish turning up in his nets — fish that should never come this close to the surface.', 'يُظهر سجلّه أسماك أعماق علقت في شباكه — أسماكاً لا ينبغي أن تقترب من السطح أبداً.', 'thinking', [fl('met:fisher'), rel('fisher', 1), ev('catch-log')], 'map')),
       C('sort', L('Let {name} help sort the catch', 'دعوا {name} يساعد في فرز الصيد'), 'silly',
-        O('{name} sorts the fish into “looks friendly” and “looks suspicious”. Yousef admits it’s not a bad system.', 'فرز {name} السمك إلى «يبدو ودوداً» و«يبدو مريباً». واعترف يوسف بأنه ليس نظاماً سيئاً.', 'laughing', [fl('met:fisher'), rel('fisher', 1)], 'sample')),
+        O('{name} sniffs every fish in the crate and growls at just one of them. Yousef checks it: it is the only one caught near the warm water.', 'شمّ {name} كل سمكة في الصندوق، وزمجر عند واحدةٍ فقط. فحصها يوسف: إنها الوحيدة التي اصطيدت قرب الماء الدافئ.', 'laughing', [fl('met:fisher'), rel('fisher', 1)], 'sample')),
     ],
   },
 

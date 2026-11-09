@@ -3,6 +3,16 @@
 import type { Lang } from '../engine/types';
 
 const U = {
+  // mission briefing (shown before the first scene of every run)
+  briefKicker: { en: 'Mission file', ar: 'ملف المهمة' },
+  briefWho: { en: 'You are a researcher at the Biological Sciences Club. In the club lab’s hybrid simulator you designed a creature that never existed before: {name}. Tonight it stepped out of the simulator, alive.', ar: 'أنت باحث في نادي العلوم البيولوجية. صمّمتَ في محاكي الهجائن بمختبر النادي مخلوقاً لم يوجد من قبل: {name}. والليلة خرج من المحاكي حيّاً.' },
+  briefAnimal: { en: '{name} is an animal: it does not talk. It sniffs, listens, explores and reacts — and investigates alongside the team with its body and senses.', ar: '{name} حيوان لا يتكلم. يشمّ ويُصغي ويستكشف ويتفاعل، ويبحث مع الفريق بأعضائه وحواسّه.' },
+  briefGoal: { en: 'Mission', ar: 'المهمة' },
+  briefHow: { en: 'How to play', ar: 'طريقة اللعب' },
+  briefHow1: { en: 'Each scene gives you four choices. {name}’s body parts make some choices easier and others harder.', ar: 'في كل مشهد أربعة خيارات. أعضاء {name} تجعل بعض الخيارات أسهل وبعضها أصعب.' },
+  briefHow2: { en: 'Collect evidence ◆ and discoveries ✦. The ending is built from your decisions and what you found.', ar: 'اجمعوا الأدلة ◆ والاكتشافات ✦. النهاية تُبنى على قراراتكم وعلى ما وجدتموه.' },
+  briefHow3: { en: 'Watch the energy bar. Club members (the ducks) follow you over the radio with comments and hints — but the decisions are yours.', ar: 'انتبهوا لشريط الطاقة. أعضاء النادي (البط) يرافقونكم عبر اللاسلكي بالتعليقات والتلميحات، لكن القرار قراركم.' },
+  briefStart: { en: 'Start the mission', ar: 'ابدأ المهمة' },
   // companion select
   companion: { en: 'Companion', ar: 'الرفيق' },
   companionHint: { en: 'Your companion travels with you and speaks over the Duck Radio. Companions do not change the odds — choose the one you like.', ar: 'يرافقك في الرحلة ويتحدث عبر راديو البط. الرفيق لا يغيّر فرص النجاح، فاختر من يعجبك.' },

@@ -74,7 +74,7 @@ export default function App() {
     <div className={`app lang-${lang} screen-${screen}`}>
       <div className="topbar">
         <button className="brand" onClick={() => setScreen('title')} aria-label={t('subtitle', lang)}>
-          <img src={`${BASE}brand/bsc-logo-transparent.png`} alt="" /> <span>BioLab</span>
+          <img src={`${BASE}brand/bsc-logo-white.png`} alt="" /> <span>BioLab</span>
         </button>
         <div className="top-actions">
           <button className="ghost-icon" onClick={() => setSettings({ lang: lang === 'ar' ? 'en' : 'ar' })} aria-label={t('language', lang)}>{lang === 'ar' ? 'EN' : 'ع'}</button>
@@ -114,7 +114,7 @@ export default function App() {
           <section className="screen duck-select">
             <header className="screen-head"><p className="step">01</p><h2>{u('chooseCompanion', lang)}</h2><p className="hint">{u('companionHint', lang)}</p></header>
             <div className="duck-stage">
-              <article key={selectedDuck.id} className="duck-hero" style={{ ['--duck-bg' as string]: selectedDuck.bg }}>
+              <article key={selectedDuck.id} className="duck-hero" style={{ ['--duck-bg' as string]: selectedDuck.bg, ['--duck-edge' as string]: selectedDuck.edge }}>
                 <div className="duck-hero-art"><img src={`${BASE}ducks/${selectedDuck.img}`} alt={selectedDuck.name[lang]} /></div>
                 <div className="duck-hero-text">
                   <span className="kicker">{u('companion', lang)}</span>
@@ -144,7 +144,7 @@ export default function App() {
           <section className="screen player">
             <header className="screen-head"><p className="step">02</p><h2>{t('yourName', lang)}</h2><p className="hint">{t('yourNameHint', lang)}</p></header>
             <form className="id-card" onSubmit={(e) => { e.preventDefault(); setPlayer(player.trim()); setScreen('build'); }}>
-              <div className="id-head"><img src={`${BASE}brand/bsc-logo-transparent.png`} alt="" /><span>{u('researcherCard', lang)}</span><span className="id-no" dir="ltr">BSC-{String(data.runs.length + 1).padStart(3, '0')}</span></div>
+              <div className="id-head"><img src={`${BASE}brand/bsc-logo-white.png`} alt="" /><span>{u('researcherCard', lang)}</span><span className="id-no" dir="ltr">BSC-{String(data.runs.length + 1).padStart(3, '0')}</span></div>
               <label className="id-field">
                 <input className="text-in" maxLength={24} value={player} placeholder={t('namePlaceholder', lang)} aria-label={t('namePlaceholder', lang)} onChange={(e) => setPlayer(e.target.value)} autoFocus enterKeyHint="next" />
               </label>
