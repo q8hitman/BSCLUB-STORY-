@@ -44,5 +44,13 @@
   "camp-snow-cocoa": "v2",
   "camp-sub-porthole": "v1",
   "camp-swamp-raft": "x"
+ },
+ "ending": {
+  "ending-deep-glow": "v2",
+  "ending-fair-trophy": "x",
+  "ending-lab-return": "v1",
+  "ending-mystery-door": "v2",
+  "ending-reef-healing": "v1",
+  "ending-starry-desert": "v2"
  }
 }

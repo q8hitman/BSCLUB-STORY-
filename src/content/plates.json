@@ -2502,5 +2502,45 @@
   "tone": "mysterious",
   "mystery": 2,
   "style": "specimen"
+ },
+ {
+  "id": "ending-deep-glow",
+  "biome": "lab",
+  "event": "ending",
+  "tone": "wholesome",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "ending-lab-return",
+  "biome": "lab",
+  "event": "ending",
+  "tone": "wholesome",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "ending-mystery-door",
+  "biome": "lab",
+  "event": "ending",
+  "tone": "wholesome",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "ending-reef-healing",
+  "biome": "lab",
+  "event": "ending",
+  "tone": "wholesome",
+  "mystery": 1,
+  "style": "nocturne"
+ },
+ {
+  "id": "ending-starry-desert",
+  "biome": "lab",
+  "event": "ending",
+  "tone": "wholesome",
+  "mystery": 1,
+  "style": "nocturne"
  }
 ]
