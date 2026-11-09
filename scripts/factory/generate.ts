@@ -60,9 +60,19 @@ Existing stories (do NOT repeat their premise or structure): ${existing.map((s) 
 }
 
 /** Free tier hiccups (503 busy, 429 rate) are retried with a pause, so an unattended run does not give up early. */
+/** Free tier: requests are spaced out (per-minute limit), and a run stops cleanly once the daily quota is used up. */
+let lastCall = 0; let quotaOut = false;
+class QuotaExhausted extends Error {}
 function patient(pv: ReturnType<typeof gemini>): ReturnType<typeof gemini> {
   return { ...pv, async call(sys, user, max) {
-    for (let a = 0; ; a++) { const r = await pv.call(sys, user, max); if (![429, 500, 503].includes(r.status) || a >= 3) return r; console.log(`  (Gemini ${r.status}, retrying in ${20 * (a + 1)} s)`); await new Promise((res) => setTimeout(res, 20000 * (a + 1))); }
+    for (let a = 0; ; a++) {
+      if (quotaOut) throw new QuotaExhausted('daily Gemini quota used up — stopping this run');
+      const wait = lastCall + (cfg.budget.minSecondsBetweenRequests ?? 0) * 1000 - Date.now();
+      if (wait > 0) await new Promise((res) => setTimeout(res, wait));
+      lastCall = Date.now();
+      const r = await pv.call(sys, user, max);
+      if (r.status === 429 && a >= 3) { quotaOut = true; throw new QuotaExhausted('daily Gemini quota used up — stopping this run'); }
+      if (![429, 500, 503].includes(r.status) || a >= 3) return r; console.log(`  (Gemini ${r.status}, retrying in ${20 * (a + 1)} s)`); await new Promise((res) => setTimeout(res, 20000 * (a + 1))); }
   } };
 }
 const provider = patient(gemini(cfg.model));
@@ -197,7 +207,7 @@ if (process.argv.includes('--review-drafts')) {
       });
       fs.writeFileSync(`scripts/comfy/plates-factory-${pkg.id}.json`, JSON.stringify(batch, null, 1));
     }
-  } catch (e) { console.log(`concept ${i + 1}: failed — ${(e as Error).message}`); }
+  } catch (e) { console.log(`concept ${i + 1}: failed — ${(e as Error).message}`); if (e instanceof QuotaExhausted) break; }
   log.push({ concept: i + 1, mode, tone, id: pkg?.id, status: pkg?.status, errors: report?.errors, warnings: report?.warnings, stats: report?.stats });
 }
 fs.writeFileSync(`factory/runs/${new Date().toISOString().replace(/[:.]/g, '-')}.json`, JSON.stringify({ requests, tokens, log }, null, 1));

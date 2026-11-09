@@ -1,6 +1,6 @@
 {
-  "_doc": "BSC Story Factory production controls. Only used by scripts/factory/*.ts during a production session you start yourself. Visitors never call Gemini or ComfyUI.",
-  "model": "gemini-3.5-flash",
+  "_doc": "BSC Story Factory production controls. Used by scripts/factory/*.ts — automatically every day by .github/workflows/story-factory.yml, or by hand. Visitors never call Gemini or ComfyUI.",
+  "model": "gemini-3.5-flash-lite",
   "concepts": 2,
   "modes": {
     "classic": 0.5,
@@ -53,10 +53,11 @@
     "requireExistingPlates": false
   },
   "budget": {
-    "maxRequests": 12,
+    "maxRequests": 30,
     "maxOutputTokensPerRequest": 32000,
-    "maxTotalTokens": 400000,
-    "repairAttempts": 2
+    "maxTotalTokens": 1500000,
+    "repairAttempts": 2,
+    "minSecondsBetweenRequests": 20
   },
   "quality": {
     "maxErrors": 0,
@@ -67,10 +68,10 @@
   },
   "auto": {
     "_doc": "Used by .github/workflows/story-factory.yml (weekly, no human review). A story is published only with 0 validator errors AND every editor score >= minReviewScore; otherwise it stays hidden in 'review'.",
-    "schedule": "every Monday and Thursday 06:00 Kuwait time",
+    "schedule": "every day 06:00 Kuwait time",
     "perRun": {
-      "classic": 1,
-      "marine": 1
+      "classic": 3,
+      "marine": 3
     },
     "minReviewScore": 8,
     "reviseOnce": true
