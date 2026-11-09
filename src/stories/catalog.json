@@ -1,0 +1,282 @@
+[
+ {
+  "id": "deep-glow-caves",
+  "v": 1,
+  "status": "review",
+  "mode": "classic",
+  "tone": "suspense",
+  "title": {
+   "en": "The Deep Glow Caves",
+   "ar": "كهوف الوهج العميق"
+  },
+  "premise": {
+   "en": "A deep underground lake in the cave system has started emitting a strange, pulsing bioluminescence, luring local wildlife deeper inside.",
+   "ar": "بدأت بحيرة جوفية عميقة في شبكة الكهوف بإصدار تلألؤ بيولوجي غريب نابض بالحياة، مما يجذب الحياة البرية المحلية إلى الأعماق."
+  },
+  "locations": [
+   "cave"
+  ],
+  "themes": [
+   "bioluminescence",
+   "underwater",
+   "exploration"
+  ],
+  "twist": "natural-explanation",
+  "endings": {
+   "scientific": {
+    "en": "Natural Resonance",
+    "ar": "الرنين الطبيعي"
+   },
+   "wholesome": {
+    "en": "Guardian of the Deep",
+    "ar": "حارس الأعماق"
+   },
+   "heroic": {
+    "en": "Heroes of the Crystal Depths",
+    "ar": "أبطال الأعماق البلورية"
+   }
+  },
+  "world": {
+   "w:crystal_resonance": {
+    "en": "Crystals tuned to the glow",
+    "ar": "بلورات متوافقة مع التوهج"
+   }
+  },
+  "nodes": 7,
+  "hash": "1ta3swn",
+  "fingerprint": [
+   "mode:classic",
+   "tone:suspense",
+   "twist:natural-explanation",
+   "theme:bioluminescence",
+   "theme:underwater",
+   "theme:exploration",
+   "loc:cave",
+   "cr:cavefish",
+   "cr:glow-frog",
+   "arc:hook>explore>challenge>encounter>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:heroic"
+  ],
+  "publishedAt": "2026-11-09"
+ },
+ {
+  "id": "lantern-wreck",
+  "v": 1,
+  "status": "published",
+  "mode": "marine",
+  "tone": "mystery",
+  "title": {
+   "en": "The Breathing Wreck",
+   "ar": "الحطام الذي يتنفّس"
+  },
+  "premise": {
+   "en": "Fishers say an old wreck in the bay “breathes” at night — a slow glow rises from it, then fades. The research buoy above it stopped sending data last week.",
+   "ar": "يقول الصيّادون إن حطاماً قديماً في الخليج «يتنفّس» ليلاً: وهجٌ بطيء يصعد منه ثم يخبو. وقد توقّفت عوّامة الأبحاث فوقه عن إرسال البيانات منذ أسبوع."
+  },
+  "locations": [
+   "openSea",
+   "reef",
+   "twilight",
+   "midnight"
+  ],
+  "themes": [
+   "shipwreck",
+   "bioluminescence",
+   "pollution",
+   "equipment-repair"
+  ],
+  "twist": "natural-explanation",
+  "endings": {
+   "freed": {
+    "en": "The Wreck Breathes Free",
+    "ar": "الحطام يتنفّس بحرّية"
+   },
+   "recorded": {
+    "en": "Footage From the Dark",
+    "ar": "لقطاتٌ من الظلام"
+   },
+   "mystery": {
+    "en": "The Slow Light",
+    "ar": "الضوء البطيء"
+   }
+  },
+  "world": {
+   "w:buoy": {
+    "en": "The research buoy is sending data again",
+    "ar": "عادت عوّامة الأبحاث إلى إرسال البيانات"
+   },
+   "w:net-cut": {
+    "en": "The ghost net is cut away",
+    "ar": "أُزيلت الشبكة الشبحية"
+   }
+  },
+  "nodes": 5,
+  "hash": "10lygrc",
+  "fingerprint": [
+   "mode:marine",
+   "tone:mystery",
+   "twist:natural-explanation",
+   "theme:shipwreck",
+   "theme:bioluminescence",
+   "theme:pollution",
+   "theme:equipment-repair",
+   "loc:openSea",
+   "loc:reef",
+   "loc:twilight",
+   "loc:midnight",
+   "cr:siphonophore",
+   "cr:lanternfish",
+   "cr:sea-turtle",
+   "arc:hook>explore>explore>twist",
+   "end:wholesome",
+   "end:scientific",
+   "end:mysterious"
+  ],
+  "publishedAt": "2026-11-09"
+ },
+ {
+  "id": "silent-ridge",
+  "v": 1,
+  "status": "published",
+  "mode": "classic",
+  "tone": "investigation",
+  "title": {
+   "en": "The Silent Ridge Station",
+   "ar": "محطة الحافّة الصامتة"
+  },
+  "premise": {
+   "en": "A mountain research station went dark three days ago. Its last sensor log recorded something pale moving in the caves below.",
+   "ar": "انطفأت محطة أبحاثٍ جبلية قبل ثلاثة أيام. وآخر ما سجّلته أجهزتها: شيءٌ شاحب يتحرّك في الكهوف أسفلها."
+  },
+  "locations": [
+   "mountain",
+   "snow",
+   "ruins",
+   "cave"
+  ],
+  "themes": [
+   "abandoned-station",
+   "human-impact",
+   "cave-life",
+   "water"
+  ],
+  "twist": "humans-caused-it",
+  "endings": {
+   "shared": {
+    "en": "The Stream That Sang Again",
+    "ar": "الجدول الذي عاد يغنّي"
+   },
+   "dark": {
+    "en": "Lights Out on the Ridge",
+    "ar": "انطفاء الأضواء فوق الحافّة"
+   },
+   "report": {
+    "en": "The Report From Silent Ridge",
+    "ar": "التقرير القادم من الحافّة الصامتة"
+   }
+  },
+  "world": {
+   "w:power": {
+    "en": "Station power restored",
+    "ar": "عادت الكهرباء إلى المحطة"
+   },
+   "w:stream": {
+    "en": "The cave stream flows again",
+    "ar": "عاد جدول الكهف إلى الجريان"
+   },
+   "w:marked": {
+    "en": "A safe trail is marked",
+    "ar": "عُلِّم طريقٌ آمن"
+   }
+  },
+  "nodes": 7,
+  "hash": "14jqq82",
+  "fingerprint": [
+   "mode:classic",
+   "tone:investigation",
+   "twist:humans-caused-it",
+   "theme:abandoned-station",
+   "theme:human-impact",
+   "theme:cave-life",
+   "theme:water",
+   "loc:mountain",
+   "loc:snow",
+   "loc:ruins",
+   "loc:cave",
+   "cr:olm",
+   "cr:bat",
+   "arc:hook>explore>twist>explore>encounter>climax",
+   "end:scientific",
+   "end:bittersweet",
+   "end:mysterious"
+  ],
+  "publishedAt": "2026-11-09"
+ },
+ {
+  "id": "trench-whispers",
+  "v": 1,
+  "status": "review",
+  "mode": "marine",
+  "tone": "strange",
+  "title": {
+   "en": "Whispers of the Deep Trench",
+   "ar": "همسات الأخدود العميقة"
+  },
+  "premise": {
+   "en": "An automated deep-sea probe in the Mariana Trench started broadcasting rhythmic biological pulses before going offline. Something down there is generating complex acoustic signals.",
+   "ar": "بدأ مسبار بحري عميق وآلي في أخدود ماريانا ببث نبضات بيولوجية إيقاعية قبل أن ينقطع اتصاله. هناك شيء ما في الأسفل يولد إشارات صوتية معقدة."
+  },
+  "locations": [
+   "trench",
+   "midnight"
+  ],
+  "themes": [
+   "mysterious",
+   "deep-sea",
+   "acoustics"
+  ],
+  "twist": "natural-explanation",
+  "endings": {
+   "scientific-triumph": {
+    "en": "Abyssal Geophysics Solved",
+    "ar": "حل لغز جيوفيزياء الأعماق"
+   },
+   "ecological-harmony": {
+    "en": "Guardians of the Deep",
+    "ar": "حراس الأعماق"
+   },
+   "acoustic-melody": {
+    "en": "Symphony of the Trenches",
+    "ar": "سفونية الأخدود"
+   }
+  },
+  "world": {
+   "w:sonar": {
+    "en": "Sonar calibration active",
+    "ar": "معايرة السونار نشطة"
+   }
+  },
+  "nodes": 7,
+  "hash": "1281en6",
+  "fingerprint": [
+   "mode:marine",
+   "tone:strange",
+   "twist:natural-explanation",
+   "theme:mysterious",
+   "theme:deep-sea",
+   "theme:acoustics",
+   "loc:trench",
+   "loc:midnight",
+   "cr:dumbo-octopus",
+   "cr:amphipod",
+   "cr:snailfish",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:comedic"
+  ],
+  "publishedAt": "2026-11-09"
+ }
+]

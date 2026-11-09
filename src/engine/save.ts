@@ -10,13 +10,14 @@
 // player can still see; past paragraphs are not shown again), within a strict size budget.
 import { decodeCreature, encodeCreature, isValidConfig } from './creature';
 import { BEAT_BY_ID, DYNAMIC_KINDS, advance, choose, planVariant, startFromPlan, validateState, type PlanOpts } from './story';
+import { getStory, startStory } from './archive';
 import type { BiomeId, GameState, Lang, Mode, PlannedBeat, StoryPlan } from './types';
 
 export const SAVE_VERSION = 1;
 /** Longest link we put in a QR. ~1,200 characters keeps the code scannable from a booth monitor and a phone photo. */
 export const MAX_LINK_CHARS = 1200;
 
-type PlanField = number | [string, string, string?, string?][]; // variant index, or explicit beats (fallback)
+type PlanField = number | string | [string, string, string?, string?][]; // variant index, Story Archive 'id@v', or explicit beats // variant index, or explicit beats (fallback)
 /** [v, mode, seed, plan, duck, player, creature, avoid, choices, stage, sighting, recentEndings, ai, opts, (explicit plan only:) hook, biomes, twist, legend] */
 type Payload = [number, 'c' | 'm', number, PlanField, string, string, string, string[], string[], 0 | 1 | 2, [number, string] | 0, string[], [number, Lang, string] | 0, ...unknown[]];
 
@@ -41,7 +42,7 @@ function check(s: string): string {
 export function encodeSave(s: GameState, opts: { includeAi?: boolean } = {}): string {
   // Legacy runs without a variant index carry the plan explicitly. Runtime-resolved beats (encounter/twist/climax are
   // only ever placed by resolution) go back to their '@kind' slot so the replay resolves them exactly as before.
-  const plan: PlanField = typeof s.plan.variant === 'number' ? s.plan.variant
+  const plan: PlanField = s.plan.story ? `${s.plan.story.id}@${s.plan.story.v}` : typeof s.plan.variant === 'number' ? s.plan.variant
     : s.plan.beats.map((b) => { const k = BEAT_BY_ID[b.template]?.kind; return [k && DYNAMIC_KINDS.has(k) ? `@${k}` : b.template, b.biome, b.npc && !(k && DYNAMIC_KINDS.has(k)) ? b.npc : '', b.obstacle ?? '']; });
   const avoid = (s.avoid ?? []).filter((id) => DYNAMIC_KINDS.has(BEAT_BY_ID[id]?.kind ?? ''));
   const ai: Payload[12] = opts.includeAi !== false && s.ai && s.stage === 'outcome' && s.ai.i === s.index ? [s.ai.i, s.ai.lang, s.ai.text] : 0;
@@ -75,7 +76,13 @@ export function decodeSave(code: string): DecodeResult {
   const opts: PlanOpts = { length: of[0] === 'q' ? 'quick' : 'full', tone: of[1] === 'l' ? 'light' : of[1] === 'm' ? 'mystery' : 'balanced' };
   try {
     let plan: StoryPlan;
-    if (typeof planF === 'number') {
+    if (typeof planF === 'string') {
+      // Story Archive adventure: the exact published version must be loaded (see peekStory); never fall back to another.
+      const m2 = /^([a-z0-9-]{1,40})@(\d{1,4})$/.exec(planF);
+      const pkg = m2 ? getStory(m2[1], Number(m2[2])) : undefined;
+      if (!pkg || pkg.mode !== mode) return { ok: false, reason: 'content', creature };
+      plan = startStory({ mode, seed, duck, player, creature }, pkg).plan;
+    } else if (typeof planF === 'number') {
       if (!Number.isInteger(planF) || planF < 0 || planF > 31) return { ok: false, reason: 'format', creature };
       plan = planVariant(seed, mode, creature, planF, undefined, opts);
     } else {
@@ -109,3 +116,13 @@ export function saveLink(s: GameState, site: string): { url: string; aiDropped: 
 }
 
 export const saveFromHash = (hash: string): string | null => /#s=([\w.-]+)/.exec(hash)?.[1] ?? null;
+
+/** Which Story Archive adventure (if any) a code needs, so the app can lazy-load that exact version before decoding. */
+export function peekStory(code: string): { id: string; v: number } | null {
+  try {
+    const body = /^([\w-]{8,6000})\./.exec((code ?? '').trim())?.[1]; if (!body) return null;
+    const p = JSON.parse(new TextDecoder().decode(unb64url(body))) as unknown[];
+    const m = typeof p?.[3] === 'string' ? /^([a-z0-9-]{1,40})@(\d{1,4})$/.exec(p[3]) : null;
+    return m ? { id: m[1], v: Number(m[2]) } : null;
+  } catch { return null; }
+}

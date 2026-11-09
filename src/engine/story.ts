@@ -406,6 +406,15 @@ export function choose(s: GameState, choiceId: string): GameState {
 export function advance(s: GameState): GameState {
   if (s.stage !== 'outcome') throw new Error(`Cannot advance in stage ${s.stage}`);
   const next = s.index + 1;
+  if (s.plan.story) {
+    // Story Archive graph: the result just played names the next node (or the ending). State carries over unchanged.
+    const t = BEAT_BY_ID[s.plan.beats[s.index].template];
+    const l = s.log[s.log.length - 1];
+    const c = t?.choices.find((x) => x.id === l?.choice);
+    const nx = c ? (l.success || !c.fail ? c.success : c.fail).next : undefined;
+    if (!nx || nx.startsWith('end:') || !BEAT_BY_ID[nx]) return { ...s, stage: 'ending', lastOutcome: undefined, flags: nx?.startsWith('end:') ? [...s.flags, nx] : s.flags };
+    return { ...s, index: next, stage: 'beat', lastOutcome: undefined, plan: { ...s.plan, beats: [...s.plan.beats, { template: nx, biome: BEAT_BY_ID[nx].biomes[0] }] } };
+  }
   if (next >= s.plan.beats.length) return { ...s, stage: 'ending', lastOutcome: undefined };
   return resolveCurrent({ ...s, index: next, stage: 'beat', lastOutcome: undefined });
 }

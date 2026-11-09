@@ -1,3 +1,4 @@
+import { reachedEnding } from '../engine/archive';
 import { useEffect, useMemo, useState } from 'react';
 import { PART_BY_ID } from '../content/parts';
 import { SLOTS, type Ending, type GameState, type Lang } from '../engine/types';
@@ -28,7 +29,8 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unl
     'any:comedic': ['ending-lab-celebration', 'ending-fair-trophy'], 'any:scientific': ['ending-lab-celebration', 'ending-lab-return', 'ending-fair-trophy'],
   };
   const pool = (ENDING_ART[`${game.mode}:${ending.tone}`] ?? ENDING_ART[`any:${ending.tone}`] ?? []).filter((id) => PLATE_LIST.some((p) => p.id === id));
-  const tonePlate = pool.length ? pool[game.seed % pool.length] : null;
+  const arcPlate = reachedEnding(game)?.ending.plate;
+  const tonePlate = arcPlate && PLATE_LIST.some((p) => p.id === arcPlate) ? arcPlate : pool.length ? pool[game.seed % pool.length] : null;
   const runPlate = platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.plan.beats.length - 1).filter(Boolean).pop() ?? null;
   const [showName, setShowName] = useState(!!game.player);
   const memories = useMemo(() => highlights(game, 6), [game]);

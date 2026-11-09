@@ -7,3 +7,4 @@ reports/*.tmp
 .env
 .env.*
 reports/ai-eval/mock-*
+factory/runs/

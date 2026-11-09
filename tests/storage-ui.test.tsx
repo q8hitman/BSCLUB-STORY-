@@ -68,8 +68,26 @@ describe('UI: language and direction', () => {
     expect(screen.getByText('Build your hybrid')).toBeTruthy();
     await act(async () => { fireEvent.click(screen.getByText('Next')); });
     await act(async () => { fireEvent.click(screen.getByText('Next')); });
+    expect(screen.getByText('Creature Test Lab')).toBeTruthy();
+    await act(async () => { fireEvent.click(screen.getByText('The smooth wall')); });
+    await act(async () => { fireEvent.click(screen.getByText('Run the test')); });
+    expect(document.querySelector('.lab-result')).toBeTruthy();
+    expect(screen.getByText('Fiction')).toBeTruthy();
+    await act(async () => { fireEvent.click(screen.getByText('To the adventure')); });
+    await act(async () => { fireEvent.click(screen.getByText('Generated journey')); });
     await act(async () => { fireEvent.click(screen.getByText('Marine Science Club Mode')); });
     expect(screen.getByText('Phase 1 · Surface Waters')).toBeTruthy();
     expect(document.querySelectorAll('.btn-choice').length).toBeGreaterThanOrEqual(2);
+  });
+  it('can start a branching Story Archive adventure from the mode screen', async () => {
+    render(<App />);
+    await act(async () => { fireEvent.click(screen.getByText('EN')); });
+    await act(async () => { fireEvent.click(screen.getByText('Enter the Lab')); });
+    for (let i = 0; i < 4; i++) await act(async () => { fireEvent.click(screen.getByText('Next')); });
+    await act(async () => { fireEvent.click(screen.getByText('Skip the lab')); });
+    await act(async () => { fireEvent.click(screen.getByText(/The Silent Ridge Station/)); });
+    await act(async () => { fireEvent.click(screen.getByText('Classic BioLab')); });
+    await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+    expect(screen.getByText('Scene 1')).toBeTruthy();
   });
 });

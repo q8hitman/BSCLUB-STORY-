@@ -5,6 +5,9 @@ import PLATES from '../content/plates.json';
 import { Rng } from '../engine/rng';
 import type { BeatTemplate, BiomeId, GameState } from '../engine/types';
 
+/** Set by the story engine at load (avoids an import cycle): template id → its fixed plate, if any. */
+export const BEAT_BY_ID_REF: { get?: (template: string) => string | undefined } = {};
+
 export interface Plate { id: string; biome: string; event: string; tone: string; mystery: number; style: string }
 export const PLATE_LIST = PLATES as Plate[];
 
@@ -43,11 +46,15 @@ export function plateFor(s: GameState, idx: number, kind: BeatTemplate['kind'], 
 }
 
 /** Plates for every beat up to and including `upto`, so repeats are avoided across the whole run. */
-export function platesForRun(s: GameState, kinds: (i: number) => BeatTemplate['kind'] | null, upto: number): (Plate | null)[] {
+export function platesForRun(s: GameState, kinds: (i: number) => BeatTemplate['kind'] | null, upto: number, fixedPlates: ((i: number) => string | undefined) | null = (i) => BEAT_BY_ID_REF.get?.(s.plan.beats[i].template)): (Plate | null)[] {
   // template ids let specific beats ask for specific events
   const used = new Set<string>(); const out: (Plate | null)[] = [];
   for (let i = 0; i <= upto && i < s.plan.beats.length; i++) {
     const k = kinds(i);
+    // Story Archive nodes name their own plate (Play swaps in the Living World variant for the current scene)
+    const own = fixedPlates?.(i);
+    const ownPlate = own ? PLATE_LIST.find((x) => x.id === own) ?? null : null;
+    if (ownPlate) { used.add(ownPlate.id); out.push(ownPlate); continue; }
     const p = k ? plateFor(s, i, k, s.plan.beats[i].biome, used, s.plan.beats[i].template) : null;
     if (p) used.add(p.id);
     out.push(p);

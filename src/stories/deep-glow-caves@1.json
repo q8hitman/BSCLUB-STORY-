@@ -1,0 +1,1209 @@
+{
+ "id": "deep-glow-caves",
+ "v": 1,
+ "status": "review",
+ "mode": "classic",
+ "source": "factory:gemini-3.5-flash-lite",
+ "title": {
+  "en": "The Deep Glow Caves",
+  "ar": "كهوف الوهج العميق"
+ },
+ "premise": {
+  "en": "A deep underground lake in the cave system has started emitting a strange, pulsing bioluminescence, luring local wildlife deeper inside.",
+  "ar": "بدأت بحيرة جوفية عميقة في شبكة الكهوف بإصدار تلألؤ بيولوجي غريب نابض بالحياة، مما يجذب الحياة البرية المحلية إلى الأعماق."
+ },
+ "tone": "suspense",
+ "tags": {
+  "themes": [
+   "bioluminescence",
+   "underwater",
+   "exploration"
+  ],
+  "locations": [
+   "cave"
+  ],
+  "twist": "natural-explanation",
+  "creatures": [
+   "cavefish",
+   "glow-frog"
+  ]
+ },
+ "world": {
+  "w:crystal_resonance": {
+   "en": "Crystals tuned to the glow",
+   "ar": "بلورات متوافقة مع التوهج"
+  }
+ },
+ "science": [
+  "cave-troglo",
+  "midnight-light"
+ ],
+ "start": "hook",
+ "nodes": {
+  "hook": {
+   "kind": "hook",
+   "biome": "cave",
+   "props": [
+    "crystals",
+    "mist"
+   ],
+   "plate": "cave-crystal-passage",
+   "goal": {
+    "en": "Discover the source of the mysterious pulsing light deep within the crystal caves.",
+    "ar": "اكتشف مصدر الضوء النابض الغامض في أعماق كهوف البلور."
+   },
+   "text": {
+    "en": "Deep in the crystal caves, a soft blue light pulses against the damp stone walls. {duck} stands cautiously and looks into the deep dark tunnel as the strange light pulses once more.",
+    "ar": "في أعماق كهوف البلور، ينبض ضوء أزرق خافت مقابل جدران الحجر الرطب. {duck} {g:يقف|تقف} بحذر و{g:ينظر|تنظر} إلى النفق العميق المظلم بينما ينبض الضوء الغريب مرة أخرى."
+   },
+   "choices": [
+    {
+     "id": "c1",
+     "label": {
+      "en": "Walk boldly down the main tunnel",
+      "ar": "المشي بثبات في النفق الرئيسي"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} strode forward into the glowing mist, confident and ready for anything.",
+       "ar": "تقدم {name} بخطى ثابتة نحو الضباب المتوهج، واثقاً ومستعداً لكل احتمال."
+      },
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "mood": "proud",
+      "fx": "chase",
+      "next": "path-a"
+     }
+    },
+    {
+     "id": "c2",
+     "label": {
+      "en": "Examine the glowing wall closely",
+      "ar": "فحص الجدار المتوهج عن قرب"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} inspected the minerals on the wall, noting a strange chemical reaction.",
+       "ar": "فحص {name} المعادن على الجدار، ملاحظاً تفاعلاً كيميائياً غريباً."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "glowing-minerals"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "path-a"
+     }
+    },
+    {
+     "id": "c3",
+     "label": {
+      "en": "Map the alternate branch on the right",
+      "ar": "رسم خريطة للفرع البديل على اليمين"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Consulting the cave map, {name} chose a safer, quieter side corridor.",
+       "ar": "بالرجوع إلى خريطة الكهف، اختار {name} ممرًا جانبيًا أكثر أمانًا وهدوءًا."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "map",
+      "next": "path-b"
+     }
+    },
+    {
+     "id": "c4",
+     "label": {
+      "en": "Comfort {duck} and stay quiet",
+      "ar": "تهدئة {duck} والبقاء في هدوء"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} stayed completely still, letting {duck} calm down before moving on.",
+       "ar": "بقى {name} ساكناً تماماً، متيحاً لـ {duck} الهدوء قبل المتابعة."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "calm-start"
+       }
+      ],
+      "mood": "happy",
+      "fx": "still",
+      "next": "path-b"
+     }
+    },
+    {
+     "id": "c5",
+     "label": {
+      "en": "Listen carefully to the echoes in the dark",
+      "ar": "الإنصات بحذر إلى الصدى في الظلام"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "By listening to the sound bouncing off the walls, {name} mapped the tunnel ahead perfectly.",
+       "ar": "من خلال الاستماع إلى الصوت المرتد عن الجدران، قام {name} برسم خريطة النفق بدقة."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "echo-map"
+       }
+      ],
+      "mood": "proud",
+      "fx": "echo",
+      "next": "path-a"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation"
+      ]
+     }
+    },
+    {
+     "id": "c6",
+     "label": {
+      "en": "Climb up the steep crystal wall to bypass the lower mist",
+      "ar": "التسلق بحذر عبر جدار الكريستال لتجاوز الضباب السفلي"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} scaled the sheer wall smoothly, avoiding the strange vapors below.",
+       "ar": "تسلق {name} الجدار العمودي بسلاسة، متجنباً الأبخرة الغريبة في الأسفل."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "climbed-high"
+       }
+      ],
+      "mood": "proud",
+      "fx": "climb",
+      "next": "path-b"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "path-a": {
+   "kind": "explore",
+   "biome": "cave",
+   "props": [
+    "glow-worms"
+   ],
+   "plate": "cave-glow-worms",
+   "text": {
+    "en": "The tunnel opens into a vast chamber lit entirely by thousands of glowing cave-dwelling organisms.",
+    "ar": "ينفتح النفق على حجرة واسعة مضاءة بالكامل بآلاف الكائنات المتوهجة التي تعيش في الكهوف."
+   },
+   "choices": [
+    {
+     "id": "a1",
+     "label": {
+      "en": "Walk straight across the chamber",
+      "ar": "المشي مباشرة عبر الحجرة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} crossed the glowing floor without hesitation.",
+       "ar": "عبر {name} الأرضية المتوهجة دون تردد."
+      },
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "chase",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "a2",
+     "label": {
+      "en": "Collect a small glowing sample",
+      "ar": "جمع عينة صغيرة متوهجة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} carefully gathered a glowing sample in a secure container.",
+       "ar": "جمع {name} بعناية عينة متوهجة في وعاء محكم."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "glow-sample"
+       }
+      ],
+      "mood": "proud",
+      "fx": "sample",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "a3",
+     "label": {
+      "en": "Observe the light patterns quietly",
+      "ar": "مراقبة أنماط الضوء بهدوء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The patterns reveal a rhythmic communication between the organisms.",
+       "ar": "تكشف الأنماط عن التواصل الإيقاعي بين الكائنات."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "a4",
+     "label": {
+      "en": "Share warmth with {duck}",
+      "ar": "مشاركة الدفء مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} made sure {duck} felt safe in the chilly cave air.",
+       "ar": "تأكد {name} من أن {duck} يشعر بالأمان في هواء الكهف البارد."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "warm_bond"
+       }
+      ],
+      "mood": "happy",
+      "fx": "heart",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "a5",
+     "label": {
+      "en": "Dig into the glowing soil to find the root cause",
+      "ar": "الحفر في التربة المتوهجة لمعرفة السبب الجذري"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} dug quickly, uncovering rich, mineral-heavy deposits beneath.",
+       "ar": "حفر {name} بسرعة، كاشفاً عن رواسب غنية بالمعادن في الأسفل."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "w:crystal_resonance"
+       }
+      ],
+      "mood": "proud",
+      "fx": "dig",
+      "next": "middle-node"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "a6",
+     "label": {
+      "en": "Use night vision to scan the dark upper ledges",
+      "ar": "استخدام الرؤية الليلية لمسح الحواف المظلمة العليا"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "In the gloom, {name} spotted ancient mineral veins feeding the glow.",
+       "ar": "في الظلام، رصد {name} عروق معدنية قديمة تغذي التوهج."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "mineral-veins"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "middle-node"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "path-b": {
+   "kind": "explore",
+   "biome": "cave",
+   "props": [
+    "water"
+   ],
+   "plate": "cave-flooded-tunnel",
+   "text": {
+    "en": "This alternate path leads through a low, damp tunnel where water pools in strange, glowing ripples.",
+    "ar": "يؤدي هذا المسار البديل عبر نفق منخفض ورطب حيث تتجمع المياه في تموجات غريبة ومتوهجة."
+   },
+   "choices": [
+    {
+     "id": "b1",
+     "label": {
+      "en": "Wade through the shallow water",
+      "ar": "الخوض في المياه الضحلة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} pushed through the cool water steadily.",
+       "ar": "تقدم {name} عبر الماء البارد بثبات."
+      },
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "splash",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "b2",
+     "label": {
+      "en": "Test the water temperature and composition",
+      "ar": "اختبار درجة حرارة الماء ومكوناته"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The water is slightly warm, heated by geothermal activity below.",
+       "ar": "الماء دافئ قليلاً، ومسخن بسبب النشاط الحراري الأرضي في الأسفل."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "geothermal-water"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "sample",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "b3",
+     "label": {
+      "en": "Move quietly around the wet edges",
+      "ar": "التحرك بهدوء حول الحواف الرطبة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} avoided disturbing the delicate pools.",
+       "ar": "تجنب {name} إزعاج البرك الحساسة."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "happy",
+      "fx": "camo",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "b4",
+     "label": {
+      "en": "Reassure {duck} near the water",
+      "ar": "طمأنة {duck} بالقرب من الماء"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} stayed close to {duck} as the water rippled.",
+       "ar": "بقى {name} بقرب {duck} بينما تموج الماء."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "water_comfort"
+       }
+      ],
+      "mood": "happy",
+      "fx": "heart",
+      "next": "middle-node"
+     }
+    },
+    {
+     "id": "b5",
+     "label": {
+      "en": "Swim smoothly through the flooded section",
+      "ar": "السباحة بسلاسة عبر القسم المغمور"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} glided through the underwater tunnel with ease.",
+       "ar": "انزلق {name} عبر النفق المغمور بسهولة."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "proud",
+      "fx": "swim",
+      "next": "middle-node"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "breatheWater"
+      ]
+     }
+    },
+    {
+     "id": "b6",
+     "label": {
+      "en": "Jump across the slippery underground stream",
+      "ar": "القفز فوق جدول المياه الجوفي الزلق"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} leaped cleanly over the hazardous current.",
+       "ar": "قفز {name} بنظافة فوق التيار الخطر."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "stream-crossing"
+       }
+      ],
+      "mood": "proud",
+      "fx": "tumble",
+      "next": "middle-node"
+     },
+     "requires": {
+      "capAny": [
+       "jump"
+      ]
+     }
+    }
+   ]
+  },
+  "middle-node": {
+   "kind": "challenge",
+   "biome": "cave",
+   "props": [
+    "tunnel",
+    "crystals"
+   ],
+   "plate": "cave-echo-pulse",
+   "text": {
+    "en": "Both paths converge at a massive underground chasm. A roaring subterranean river blocks the way forward.",
+    "ar": "يلتقي المساران عند هوة جوفية هائلة. نهر جوفي هادر يطوق الطريق إلى الأمام."
+   },
+   "choices": [
+    {
+     "id": "m1",
+     "label": {
+      "en": "Search for a narrow bridge across",
+      "ar": "البحث عن جسر ضيق للعبور"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} found a narrow natural rock bridge spanning the chasm.",
+       "ar": "وجدت {name} جسراً صخرياً طبيعياً ضيقاً يمتد عبر الهوة."
+      },
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "map",
+      "next": "path-c"
+     }
+    },
+    {
+     "id": "m2",
+     "label": {
+      "en": "Analyze the river current carefully",
+      "ar": "تحليل تيار النهر بحذر"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} noted the flow direction and speed before crossing.",
+       "ar": "لاحظ {name} اتجاه التدفق والسرعة قبل العبور."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "river-flow"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "path-c"
+     }
+    },
+    {
+     "id": "m3",
+     "label": {
+      "en": "Use the echo to find a stable path",
+      "ar": "استخدام الصدى لإيجاد مسار مستقر"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Sound waves revealed a solid rock ledge just beneath the surface.",
+       "ar": "كشفت موجات الصوت عن حافة صخرية صلبة تحت السطح مباشرة."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "proud",
+      "fx": "echo",
+      "next": "path-d"
+     }
+    },
+    {
+     "id": "m4",
+     "label": {
+      "en": "Keep {duck} secure against the rushing wind",
+      "ar": "الحفاظ على أمان {duck} ضد الرياح المتدفقة"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} shielded {duck} from the cold updraft.",
+       "ar": "حمى {name} الكائن {duck} من التيار الهوائي البارد الصاعد."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "protected_duck"
+       }
+      ],
+      "mood": "happy",
+      "fx": "heart",
+      "next": "path-d"
+     }
+    },
+    {
+     "id": "m5",
+     "label": {
+      "en": "Leap across the chasm in a single powerful bound",
+      "ar": "القفز فوق الهوة بوثبة قوية واحدة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} vaulted across the wide gap effortlessly.",
+       "ar": "اجتاز {name} الفجوة العريضة بلا مجهود."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "proud",
+      "fx": "tumble",
+      "next": "path-c"
+     },
+     "requires": {
+      "capAny": [
+       "jump"
+      ]
+     }
+    },
+    {
+     "id": "m6",
+     "label": {
+      "en": "Dig a temporary anchor point in the stone wall",
+      "ar": "حفر نقطة تثبيت مؤقتة في الجدار الصخري"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} secured a firm foothold in the hard rock.",
+       "ar": "ثبت {name} موطئ قدم راسخ في الصخر الصلب."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "rock-anchor"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "dig",
+      "next": "path-d"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "climb"
+      ]
+     }
+    }
+   ]
+  },
+  "path-c": {
+   "kind": "encounter",
+   "biome": "cave",
+   "props": [
+    "crystals",
+    "pool"
+   ],
+   "plate": "cave-pool-eyes",
+   "text": {
+    "en": "The tunnel opens into a breathtaking grotto where blind cavefish swim in crystal-clear waters reflecting the pulsing light.",
+    "ar": "ينفتح النفق على مغارة خلابة حيث تسبح أسماك الكهوف العمياء في مياه صافية كالسريل تعكس الضوء النابض."
+   },
+   "choices": [
+    {
+     "id": "c_1",
+     "label": {
+      "en": "Approach the grotto cautiously",
+      "ar": "الاقتراب من المغارة بحذر"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} moved closer, observing the peaceful aquatic life.",
+       "ar": "اقترب {name} أكثر، مراقباً الحياة المائية الهادئة."
+      },
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "c_2",
+     "label": {
+      "en": "Study the water reflections",
+      "ar": "دراسة انعكاسات الماء"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} analyzed how the bioluminescence refracts through the mineral water.",
+       "ar": "حلل {name} كيف ينكسر التلألؤ البيولوجي عبر الماء المعدني."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "refraction-study"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "sample",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "c_3",
+     "label": {
+      "en": "Signal gently to the creatures",
+      "ar": "الإشارة برفق إلى الكائنات"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The creatures reacted to the vibrations in the water calmly.",
+       "ar": "استجابت الكائنات للاهتزازات في الماء بهدوء."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "happy",
+      "fx": "flash",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "c_4",
+     "label": {
+      "en": "Rest with {duck} by the pool",
+      "ar": "الاستراحة مع {duck} بجانب البركة"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} and {duck} took a peaceful moment by the underground pool.",
+       "ar": "أخذ {name} و {duck} لحظة هادئة بجانب البركة الجوفية."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "pool_rest"
+       }
+      ],
+      "mood": "happy",
+      "fx": "heart",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "c_5",
+     "label": {
+      "en": "Glide silently across the pool surface",
+      "ar": "الانزلاق بصمت عبر سطح البركة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} crossed the water without creating a single ripple.",
+       "ar": "عبر {name} الماء دون إحداث تموج واحد."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "proud",
+      "fx": "swim",
+      "next": "climax"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "glide"
+      ]
+     }
+    },
+    {
+     "id": "c_6",
+     "label": {
+      "en": "Use heat sense to detect living warmth in the grotto",
+      "ar": "استخدام استشعار الحرارة للكشف عن الدفء الحي في المغارة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} tracked tiny thermal signatures beneath the stones.",
+       "ar": "تتبع {name} بصمات حرارية صغيرة تحت الصخور."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "thermal-signatures"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "climax"
+     },
+     "requires": {
+      "capAny": [
+       "heatSense"
+      ]
+     }
+    }
+   ]
+  },
+  "path-d": {
+   "kind": "encounter",
+   "biome": "cave",
+   "props": [
+    "carvings"
+   ],
+   "plate": "cave-wall-carving",
+   "text": {
+    "en": "This higher ledge features ancient wall carvings glowing softly under mineral deposits, showing strange subterranean patterns.",
+    "ar": "تتميز هذه الحافة الأعلى بنقوش جدارية قديمة تتوهج برفق تحت رواسب المعادن، تظهر أنماطاً جوفية غريبة."
+   },
+   "choices": [
+    {
+     "id": "d_1",
+     "label": {
+      "en": "Examine the ancient carvings",
+      "ar": "فحص النقوش القديمة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} traced the old lines etched into the stone.",
+       "ar": "تتبع {name} الخطوط القديمة المحفورة في الحجر."
+      },
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "mood": "thinking",
+      "fx": "scan",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "d_2",
+     "label": {
+      "en": "Record the carving patterns",
+      "ar": "تسجيل أنماط النقش"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} carefully documented every symbol on the wall.",
+       "ar": "وثق {name} بعناية كل رمز على الجدار."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "carving-symbols"
+       }
+      ],
+      "mood": "thinking",
+      "fx": "camera",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "d_3",
+     "label": {
+      "en": "Inspect the mineral buildup",
+      "ar": "فحص تراكم المعادن"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The minerals are naturally reacting with moisture to emit light.",
+       "ar": "تتفاعل المعادن بشكل طبيعي مع الرطوبة لإصدار الضوء."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "happy",
+      "fx": "scan",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "d_4",
+     "label": {
+      "en": "Stand close with {duck} by the glowing wall",
+      "ar": "الوقوف بقرب {duck} بجانب الجدار المتوهج"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} made sure {duck} felt warm and secure near the wall.",
+       "ar": "تأكد {name} من شعور {duck} بالدفء والأمان بالقرب من الجدار."
+      },
+      "effects": [
+       {
+        "t": "flag",
+        "id": "wall_comfort"
+       }
+      ],
+      "mood": "happy",
+      "fx": "heart",
+      "next": "climax"
+     }
+    },
+    {
+     "id": "d_5",
+     "label": {
+      "en": "Climb higher to check the top of the carving",
+      "ar": "التسلق أعلى للتحقق من قمة النقش"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} climbed to the highest point of the panel easily.",
+       "ar": "تسلق {name} إلى أعلى نقطة في اللوحة بسهولة."
+      },
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "mood": "proud",
+      "fx": "climb",
+      "next": "climax"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "grip"
+      ]
+     }
+    },
+    {
+     "id": "d_6",
+     "label": {
+      "en": "Use night vision to read faded marks in total darkness",
+      "ar": "استخدام الرؤية الليلية لقراءة العلامات الباهتة في الظلام الدامس"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Hidden symbols appeared clearly under enhanced vision.",
+       "ar": "ظهرت الرموز المخفية بوضوح تحت الرؤية المحسنة."
+      },
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "hidden-symbols"
+       }
+      ],
+      "mood": "proud",
+      "fx": "scan",
+      "next": "climax"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "climax": {
+   "kind": "climax",
+   "biome": "cave",
+   "props": [
+    "crystals",
+    "light"
+   ],
+   "plate": "cave-glow-worms",
+   "text": {
+    "en": "At the heart of the cavern stands the grand source: a massive cluster of bioluminescent crystals reacting to underground mineral currents.",
+    "ar": "في قلب الكهف يقع المصدر الرئيسي: مجموعة ضخمة من البلورات المتوهجة حيوياً والتي تتفاعل مع تيارات المعادن الجوفية."
+   },
+   "choices": [
+    {
+     "id": "cx1",
+     "label": {
+      "en": "Investigate the central crystal cluster",
+      "ar": "التحقيق في مجموعة البلورات المركزية"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} approached the grand crystal core directly.",
+       "ar": "اقترب {name} من نواة البلورة الكبرى مباشرة."
+      },
+      "effects": [],
+      "mood": "proud",
+      "fx": "flash",
+      "next": "end:scientific"
+     }
+    },
+    {
+     "id": "cx2",
+     "label": {
+      "en": "Document the entire phenomenon carefully",
+      "ar": "توثيق الظاهرة بأكملها بحذر"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} recorded comprehensive data on the natural glow.",
+       "ar": "سجل {name} بيانات شاملة عن التوهج الطبيعي."
+      },
+      "effects": [],
+      "mood": "thinking",
+      "fx": "camera",
+      "next": "end:scientific"
+     }
+    },
+    {
+     "id": "cx3",
+     "label": {
+      "en": "Create a peaceful sanctuary around the light",
+      "ar": "إنشاء ملاذ هادئ حول الضوء"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} ensured the area remains undisturbed and safe.",
+       "ar": "تأكد {name} من بقاء المنطقة هادئة وآمنة."
+      },
+      "effects": [],
+      "mood": "happy",
+      "fx": "heart",
+      "next": "end:wholesome"
+     }
+    },
+    {
+     "id": "cx4",
+     "label": {
+      "en": "Celebrate the amazing discovery with {duck}",
+      "ar": "الاحتفال بالكتشف المذهل مع {duck}"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} and {duck} celebrated their successful journey into the deep.",
+       "ar": "احتفل {name} و {duck} برحلتهما الناجحة إلى الأعماق."
+      },
+      "effects": [],
+      "mood": "laughing",
+      "fx": "stars",
+      "next": "end:heroic"
+     }
+    },
+    {
+     "id": "cx5",
+     "label": {
+      "en": "Dig into the base of the main crystal to stabilize it",
+      "ar": "الحفر في قاعدة البلورة الرئيسية لتثبيتها"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} reinforced the crystal bed, securing the glowing wonder.",
+       "ar": "عزز {name} سرير البلورة، مؤمناً الأعجوبة المتوهجة."
+      },
+      "effects": [],
+      "mood": "proud",
+      "fx": "dig",
+      "next": "end:scientific"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "cx6",
+     "label": {
+      "en": "Climb to the top crystal arch for a complete view",
+      "ar": "التسلق إلى القوس البلوري العلوي للحصول على رؤية كاملة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} reached the highest arch, overlooking the glowing cavern.",
+       "ar": "وصل {name} إلى أعلى قوس، مطلّاً على الكهف المتوهج."
+      },
+      "effects": [],
+      "mood": "proud",
+      "fx": "climb",
+      "next": "end:heroic"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "jump"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "scientific": {
+   "tone": "scientific",
+   "title": {
+    "en": "Natural Resonance",
+    "ar": "الرنين الطبيعي"
+   },
+   "summary": {
+    "en": "The glowing phenomenon was proven to be a completely natural chemical reaction involving rare subterranean minerals and specialized cave organisms.",
+    "ar": "ثبت أن ظاهرة التوهج هي تفاعل كيميائي طبيعي بالكامل يشارك فيه معادن جوفية نادرة وكائنات كهفية متخصصة."
+   },
+   "epilogue": {
+    "en": "{name} and {duck} returned to the surface with invaluable scientific data, leaving the deep caves glowing in peaceful harmony.",
+    "ar": "عاش {name} و {duck} تجربة فريدة وعادا إلى السطح ببيانات علمية لا تقدر بثمن، تاركين الكهوف العميقة متوهجة بانسجام هادئ."
+   }
+  },
+  "wholesome": {
+   "tone": "wholesome",
+   "title": {
+    "en": "Guardian of the Deep",
+    "ar": "حارس الأعماق"
+   },
+   "summary": {
+    "en": "{name} protected the fragile ecosystem of the glowing grotto, ensuring its secret remains safe and undisturbed.",
+    "ar": "حمى {name} النظام البيئي الهش للمغارة المتوهجة، مما ضمن بقاء سرها آمناً وغير منزعج."
+   },
+   "epilogue": {
+    "en": "Side by side, {name} and {duck} watch over the subterranean wonder, cherished protectors of the underground world.",
+    "ar": "جنباً إلى جنب، يحرس {name} و {duck} الأعجوبة الجوفية، كحراس محبوبين لعالم تحت الأرض."
+   }
+  },
+  "heroic": {
+   "tone": "heroic",
+   "title": {
+    "en": "Heroes of the Crystal Depths",
+    "ar": "أبطال الأعماق البلورية"
+   },
+   "summary": {
+    "en": "Through courage and exploration, {name} mapped the treacherous depths and revealed the true beauty of the crystal caves.",
+    "ar": "من خلال الشجاعة والاستكشاف، قام {name} برسم خريطة الأعماق الخطرة وكشف الجمال الحقيقي لكهوف البلور."
+   },
+   "epilogue": {
+    "en": "Legends of their grand adventure will echo through the club for years to come, inspiring new explorers to look deeper.",
+    "ar": "ستتردد أساطير مغامرتهما الكبرى في النادي لسنوات قادمة، ملهمة المستكشفين الجدد للنظر بعمق أكبر."
+   }
+  }
+ }
+}

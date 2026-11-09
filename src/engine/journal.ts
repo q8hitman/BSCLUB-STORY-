@@ -9,6 +9,8 @@ import { encodeCreature } from './creature';
 import { fieldNotes } from './radio';
 import { rareFor } from './sighting';
 import { RARE_BY_ID } from '../content/rare';
+import { storyOf } from './archive';
+import { runFingerprint } from './memory';
 import { BEAT_BY_ID, beatContext, featuredAnimal } from './story';
 import type { BiomeId, CreatureConfig, Ending, GameState, L10n, Mode } from './types';
 
@@ -24,7 +26,7 @@ export const ADVENTURE_TITLE: Record<string, L10n> = {
   'hm-sound': L('The Sound from the Deep', 'الصوت القادم من الأعماق'),
   'hm-nets': L('The Cold Scales', 'الحراشف الباردة'),
 };
-export const adventureTitle = (s: Pick<GameState, 'plan'>): L10n => ADVENTURE_TITLE[s.plan.beats[0]?.template] ?? L('An Expedition', 'رحلة استكشافية');
+export const adventureTitle = (s: Pick<GameState, 'plan'>): L10n => storyOf(s)?.title ?? ADVENTURE_TITLE[s.plan.beats[0]?.template] ?? L('An Expedition', 'رحلة استكشافية');
 
 export interface AnimalEntry { id: string; first: number; adventure: L10n; biome: BiomeId; times: number }
 export interface EndingEntry {
@@ -38,6 +40,12 @@ export interface Journal {
   notes: Record<string, { first: number; adventure: L10n }>;
   endings: EndingEntry[];
   biomes: BiomeId[];
+  /** Story Archive adventures finished on this device (Adventure Memory + replay favourites). */
+  stories?: Record<string, { v: number; plays: number; endings: string[]; last: number }>;
+  /** Living World changes this explorer caused ("w:*" flags), first time only. */
+  world?: Record<string, { first: number; adventure: L10n }>;
+  /** Narrative fingerprints of recent adventures (last 20), so the next one can be different. */
+  memory?: { fp: string[]; at: number }[];
   achievements: Record<string, number>;
 }
 export const MAX_ENDINGS = 60;
@@ -79,7 +87,9 @@ export const ACHIEVEMENTS: Achievement[] = [
 /** Adds a run's discoveries to the journal. Endings are recorded once per run (restoring the same QR twice is harmless). */
 export function recordToJournal(j: Journal, s: GameState, ending: Ending | null, plate: string | null, now = Date.now()): { journal: Journal; unlocked: string[] } {
   const adventure = adventureTitle(s);
-  const n: Journal = { animals: { ...j.animals }, legends: { ...j.legends }, rare: { ...j.rare }, notes: { ...j.notes }, endings: [...j.endings], biomes: [...j.biomes], achievements: { ...j.achievements } };
+  const n: Journal = { animals: { ...j.animals }, legends: { ...j.legends }, rare: { ...j.rare }, notes: { ...j.notes }, endings: [...j.endings], biomes: [...j.biomes], achievements: { ...j.achievements },
+    stories: { ...(j.stories ?? {}) }, world: { ...(j.world ?? {}) }, memory: [...(j.memory ?? [])] };
+  for (const f of s.flags) if (f.startsWith('w:') && !n.world![f]) n.world![f] = { first: now, adventure };
   const met = animalsMet(s);
   for (const a of met) { const prev = n.animals[a.id]; n.animals[a.id] = prev ? { ...prev, times: prev.times + (ending ? 1 : 0) } : { id: a.id, first: now, adventure, biome: a.biome, times: 1 }; }
   for (const note of Object.values(fieldNotes(s))) if (!n.notes[note.id]) n.notes[note.id] = { first: now, adventure };
@@ -96,6 +106,12 @@ export function recordToJournal(j: Journal, s: GameState, ending: Ending | null,
       n.endings.push({ at: now, mode: s.mode, adventure, creature: s.creature, duck: s.duck, player: s.player, endingId: ending.id, tone: ending.tone,
         title: ending.title, summary: ending.summary, plate, discoveries: s.discoveries.slice(), animals: met.map((a) => a.id), key });
       n.endings = n.endings.slice(-MAX_ENDINGS);
+      n.memory = [...n.memory!, { fp: runFingerprint(s), at: now }].slice(-20);
+      const p = storyOf(s);
+      if (p) {
+        const endId = ending.id.slice(ending.id.indexOf(':') + 1); const prev = n.stories![p.id];
+        n.stories![p.id] = { v: p.v, plays: (prev?.plays ?? 0) + 1, endings: [...new Set([...(prev?.endings ?? []), endId])], last: now };
+      }
     }
   }
   const unlocked: string[] = [];
@@ -113,5 +129,7 @@ export function sanitizeJournal(x: unknown): Journal {
   j.endings = Array.isArray(o.endings) ? o.endings.filter((e) => e && typeof e.key === 'string' && e.title && e.summary && e.creature).slice(-MAX_ENDINGS) : [];
   j.biomes = Array.isArray(o.biomes) ? o.biomes.filter((b): b is BiomeId => typeof b === 'string' && b in BIOMES) : [];
   j.achievements = obj(o.achievements);
+  j.stories = obj(o.stories); j.world = obj(o.world);
+  j.memory = Array.isArray(o.memory) ? o.memory.filter((m) => m && Array.isArray(m.fp)).slice(-20) : [];
   return j;
 }

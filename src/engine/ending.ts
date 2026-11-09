@@ -1,3 +1,4 @@
+import { reachedEnding } from './archive';
 // Ending Composer: builds a personalised ending only from facts recorded in the game state.
 // Every ending names the creature, a body part that mattered, a real decision the player made, the clues and
 // discoveries, the route, the twist and (when it happened) the legend glimpse — so it reads as earned, never abrupt.
@@ -297,5 +298,12 @@ export function composeEnding(s: GameState, recentEndings: string[] = []): Endin
     L(`Real-science discoveries: ${s.discoveries.length}`, `الاكتشافات العلمية الحقيقية: ${s.discoveries.length}`),
     ...s.discoveries.slice(0, 3).map((id) => FACT_BY_ID[id]?.text).filter(Boolean) as L10n[],
   ];
+  // Story Archive adventure: its authored, earned ending leads; the composer's personal lines (decisions, creature) follow.
+  const arc = reachedEnding(s);
+  if (arc) {
+    const c = beatContext(s, 0); const e = arc.ending;
+    const sum = fill(e.summary, c);
+    return { id: `${arc.story.id}:${arc.id}`, tone: e.tone, title: fill(e.title, c), summary: { en: `${sum.en} ${summary.en}`, ar: `${sum.ar} ${summary.ar}` }, epilogue: fill(e.epilogue, c), highlights };
+  }
   return { id: top.id, tone, title, summary, epilogue: sub(top.epilogue, s, last), highlights };
 }

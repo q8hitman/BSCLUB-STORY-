@@ -1,0 +1,48 @@
+[
+ {
+  "label": "generated-classic",
+  "code": "WzEsImMiLDc3LDAsImtpcmF6Iiwi2LLYp9im2LEiLCJXeUxaaDlpczJZclpoaURZcU5tSTJZWFlxU0JCTFRFNElpd2liM2RzSWl3aVltbG5SV0Z5Y3lJc0luUnBibmxGZVdWeklpd2lZMnhwYldKRGJHRjNjeUlzSW1ac2RXWm1lU0lzSW1kcGJHeHpJaXdpY0hKbGMzTjFjbVVpTERaZCIsW10sWyJiYWl0Iiwic2hhcmUiLCJuaWdodCIsInNlbGZpZSJdLDEsMCxbXSwwLCJmYiJd.0l7t457",
+  "stage": "outcome",
+  "index": 3,
+  "choices": [
+   "bait",
+   "share",
+   "night",
+   "selfie"
+  ]
+ },
+ {
+  "label": "generated-marine",
+  "code": "WzEsIm0iLDc4LDAsImtpcmF6Iiwi2LLYp9im2LEiLCJXeUxaaDlpczJZclpoaURZck5tRjJZUWdTeTA0TlNJc0ltTmhiV1ZzSWl3aWFHOXlibk1pTENKamFHRnRaV3hsYjI0aUxDSmthV2REYkdGM2N5SXNJbXgxY21VaUxDSmliSFZpWW1WeUlpd2lhVzVySWl3elhRIixbXSxbImRhdGEiLCJyZXN0IiwiY2FsbSIsInNpZ25hbHMiXSwxLDAsW10sMCwiZmIiXQ.0ca1kay",
+  "stage": "outcome",
+  "index": 3,
+  "choices": [
+   "data",
+   "rest",
+   "calm",
+   "signals"
+  ]
+ },
+ {
+  "label": "silent-ridge@1",
+  "code": "WzEsImMiLDUsInNpbGVudC1yaWRnZUAxIiwiYmFzc2FtIiwiIiwiV3lMWmg5aXMyWXJaaGlEWXR0bUIyS19ZdVNCYUxUSXpJaXdpWm5Kdlp5SXNJbUZ1ZEdWdWJtRmxJaXdpWTI5dGNHOTFibVFpTENKa2FXZERiR0YzY3lJc0ltWnNkV1ptZVNJc0ltSnBiMngxYlNJc0ltaGxZWFJRYVhSeklpd3pYUSIsW10sWyJzbmlmZiIsIm1hcmsiLCJzZWFyY2giXSwxLDAsW10sMCwiZmIiXQ.1wir591",
+  "stage": "outcome",
+  "index": 2,
+  "choices": [
+   "sniff",
+   "mark",
+   "search"
+  ]
+ },
+ {
+  "label": "lantern-wreck@1",
+  "code": "WzEsIm0iLDUsImxhbnRlcm4td3JlY2tAMSIsImJhc3NhbSIsIiIsIld5TFpoOWlzMllyWmhpRFl0dG1CMktfWXVTQmFMVEl6SWl3aVpuSnZaeUlzSW1GdWRHVnVibUZsSWl3aVkyOXRjRzkxYm1RaUxDSmthV2REYkdGM2N5SXNJbVpzZFdabWVTSXNJbUpwYjJ4MWJTSXNJbWhsWVhSUWFYUnpJaXd6WFEiLFtdLFsic29uYXIiLCJzYW1wbGUiLCJsaXN0ZW4iXSwxLDAsW10sMCwiZmIiXQ.1lv3pw6",
+  "stage": "outcome",
+  "index": 2,
+  "choices": [
+   "sonar",
+   "sample",
+   "listen"
+  ]
+ }
+]

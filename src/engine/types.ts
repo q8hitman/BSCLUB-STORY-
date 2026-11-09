@@ -91,6 +91,8 @@ export interface Outcome {
   mood: DuckMood;
   /** Visual event shown in the scene for this result. */
   fx?: string;
+  /** Story Archive graphs only: the node this result leads to ("end:<id>" finishes the adventure). */
+  next?: string;
 }
 
 export interface ChoiceCheck { stat: StatKey; caps?: Capability[]; dc: number }
@@ -124,6 +126,11 @@ export interface BeatTemplate {
   choices: Choice[];
   npc?: string;
   weight?: number;
+  /** Story Archive graphs: a fixed painted plate, swapped by Living World state (first matching `plateWhen` wins). */
+  plate?: string;
+  plateWhen?: { when: Cond; plate: string }[];
+  /** Story Archive graphs: present this scene as a cinematic moment (slow push-in, light sweep, caption). */
+  cinematic?: 'reveal' | 'discovery' | 'passage' | 'phenomenon' | 'climax';
   /** Bestiary id of an animal this beat's text names directly (not via {predator}/{critter}), so the UI can show it. */
   featured?: string;
 }
@@ -149,6 +156,8 @@ export interface StoryPlan {
   length?: 'quick';
   /** Mood of the run; absent = balanced. */
   tone?: 'light' | 'mystery';
+  /** Set when the run plays a published Story Archive adventure (id + immutable version). Beats then grow as nodes are visited. */
+  story?: { id: string; v: number };
 }
 
 export interface LogEntry {

@@ -740,3 +740,82 @@ html.reduced-motion .screen { animation: none; }
 @media (max-width: 600px) { .j-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); } .j-body { padding: var(--s2) var(--s3) var(--s3); } .j-body h3 { font-size: .98rem; } .j-fact { font-size: .8rem; } .journal-tabs button { padding: 7px 12px; font-size: .86rem; } }
 .j-card.locked .j-art { aspect-ratio: 16 / 9; }
 .menu-particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .7; }
+
+/* ===== v5: Story Archive, cinematic moments, Living World, Creature Test Lab, layered title ===== */
+/* layered title: far painting + drifting fog + soft glow, gentle pointer parallax (off with reduced motion) */
+.title-layers { position: absolute; inset: 0; overflow: hidden; --px: 0; --py: 0; }
+.title-layers .layer-far { position: absolute; inset: -4%; transform: translate3d(calc(var(--px) * -18px), calc(var(--py) * -12px), 0) scale(1.04); transition: transform .6s ease-out; }
+.title-layers .layer-fog { position: absolute; inset: -10% -20%; background: radial-gradient(60% 40% at 30% 70%, rgba(127,210,224,.10), transparent 70%), radial-gradient(50% 35% at 75% 30%, rgba(216,180,106,.08), transparent 70%);
+  animation: fogDrift 38s ease-in-out infinite alternate; transform: translate3d(calc(var(--px) * 26px), calc(var(--py) * 16px), 0); }
+.title-layers .layer-glow { position: absolute; inset: 0; background: radial-gradient(70% 55% at 50% 45%, transparent 40%, rgba(6,8,11,.82) 100%); }
+@keyframes fogDrift { from { translate: -3% 0; } to { translate: 3% -2%; } }
+
+/* cinematic scene: slow push-in, light sweep, caption; text stays fully readable without any motion */
+.vn.cine .painted-img, .vn.cine canvas { animation: cinePush 14s ease-out both; }
+.vn.cine::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1; background: linear-gradient(105deg, transparent 35%, rgba(255,240,200,.10) 50%, transparent 65%); background-size: 250% 100%; animation: cineSweep 5.5s ease-in-out 1 both; }
+.vn.cine-reveal .letterbox, .vn.cine-climax .letterbox { height: clamp(28px, 7vh, 64px); transition: height 1.2s ease; }
+.vn.cine-phenomenon::after { background: radial-gradient(40% 50% at 50% 40%, rgba(127,210,224,.16), transparent 70%); animation: cineGlow 6s ease-in-out infinite alternate; }
+@keyframes cinePush { from { transform: scale(1.0); } to { transform: scale(1.09); } }
+@keyframes cineSweep { from { background-position: 120% 0; opacity: 0; } 30% { opacity: 1; } to { background-position: -40% 0; opacity: 0; } }
+@keyframes cineGlow { from { opacity: .4; } to { opacity: 1; } }
+.cine-caption { position: absolute; top: clamp(56px, 11vh, 96px); inset-inline: 0; z-index: 3; display: flex; justify-content: center; pointer-events: none; }
+.cine-caption span { font-family: var(--display-en); letter-spacing: .32em; text-transform: uppercase; font-size: .8rem; color: var(--gold-2); padding: 6px 18px; border-block: 1px solid rgba(241,213,149,.35); background: rgba(6,8,11,.45); animation: capIn 1.4s ease both; }
+html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spacing: .06em; font-size: .95rem; }
+@keyframes capIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.world-banner { position: absolute; top: clamp(56px, 11vh, 96px); inset-inline: 0; margin: auto; width: fit-content; max-width: calc(100% - 32px); z-index: 4; padding: 8px 16px; border-radius: 999px;
+  background: rgba(20,40,34,.88); border: 1px solid rgba(143,207,154,.5); color: #d8f3dc; font-weight: 600; box-shadow: 0 8px 30px rgba(0,0,0,.4); animation: capIn .8s ease both; }
+.reduced-motion .vn.cine .painted-img, .reduced-motion .vn.cine canvas, .reduced-motion .vn.cine::after, .reduced-motion .title-layers * { animation: none !important; transition: none !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) { .vn.cine .painted-img, .vn.cine canvas, .vn.cine::after, .title-layers * { animation: none !important; transform: none !important; } }
+
+/* adventure picker (Adventure Memory / generated / archive) */
+.seg.adv-pick { flex-wrap: wrap; justify-content: center; margin: 0 auto var(--s2); max-width: 980px; }
+.seg.adv-pick button small { opacity: .7; font-size: .78em; }
+.seg.adv-pick button small.new { color: var(--leaf); opacity: 1; }
+.seg.adv-pick button.adv-marine { border-color: rgba(127,210,224,.35); }
+.adv-hint { text-align: center; max-width: 720px; margin: 0 auto var(--s4); }
+
+/* Creature Test Lab */
+.screen.test-lab { max-width: 1120px; margin: 0 auto; width: 100%; }
+.lab-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: var(--s4); align-items: start; }
+.lab-stage { position: relative; min-height: 420px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: radial-gradient(80% 70% at 50% 40%, #142028, var(--night)); display: grid; place-items: center; padding: var(--s4); gap: var(--s3); }
+.lab-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .45; filter: saturate(.8); }
+.lab-stage .lab-creature { position: relative; width: min(300px, 70%); z-index: 1; filter: drop-shadow(0 18px 30px rgba(0,0,0,.6)); }
+.lab-stage.anim.res-strong .lab-creature { animation: labHop .9s ease; }
+.lab-stage.anim.res-none .lab-creature { animation: labShake .6s ease; }
+@keyframes labHop { 40% { transform: translateY(-16px) scale(1.03); } }
+@keyframes labShake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.lab-card { position: relative; z-index: 2; width: 100%; max-width: 640px; background: var(--glass-2); border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s4); backdrop-filter: blur(8px); display: grid; gap: var(--s2); }
+.lab-card h3 { margin: 0; font-size: 1.35rem; color: var(--gold-2); }
+.lab-card p { margin: 0; line-height: 1.7; }
+.lab-result { font-size: 1.05rem; }
+.lab-result.r-strong b { color: var(--leaf); } .lab-result.r-partial b { color: var(--gold-2); } .lab-result.r-none b { color: var(--blood); }
+.lab-via { color: var(--paper-dim); font-size: .9rem; }
+.lab-science { display: grid; gap: 6px; padding: var(--s3); border-radius: 10px; background: rgba(255,255,255,.04); font-size: .95rem; }
+.lab-science i { color: var(--paper-dim); font-style: normal; }
+.tag.fiction { background: rgba(208,88,78,.18); color: #f2b1aa; border: 1px solid rgba(208,88,78,.4); }
+.lab-story { color: var(--sea); }
+.lab-pick-hint { position: relative; z-index: 2; color: var(--paper-dim); }
+.lab-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.lab-item { width: 100%; min-height: 52px; display: grid; grid-template-columns: 34px 1fr; grid-template-rows: auto auto; align-items: center; text-align: start; gap: 0 var(--s2); padding: 8px 12px;
+  border-radius: 12px; border: 1px solid var(--line); background: var(--glass); cursor: pointer; transition: border-color .2s, transform .2s; }
+.lab-item:hover, .lab-item.on { border-color: var(--gold); transform: translateY(-1px); }
+.lab-item .lab-icon { grid-row: span 2; font-size: 1.4rem; }
+.lab-item small { color: var(--paper-dim); } .lab-item.r-strong small { color: var(--leaf); } .lab-item.r-none small { color: #f2b1aa; }
+@media (max-width: 760px) {
+  .lab-layout { grid-template-columns: 1fr; }
+  .lab-list { grid-template-columns: repeat(2, minmax(0, 1fr)); order: -1; }
+  .lab-stage { min-height: 360px; }
+}
+
+/* Journal: archive adventures + world changes */
+.j-stories { display: grid; gap: var(--s3); }
+.j-note { color: var(--paper-dim); margin: 0; }
+.j-story { border: 1px solid var(--line); border-radius: var(--radius); padding: var(--s4); background: linear-gradient(135deg, rgba(216,180,106,.07), transparent 60%), var(--glass); }
+.j-story.mode-marine { background: linear-gradient(135deg, rgba(127,210,224,.08), transparent 60%), var(--glass); }
+.j-story.unplayed h3 { color: var(--paper-dim); }
+.j-story h3 { margin: 4px 0; }
+.j-ends { list-style: none; padding: 0; margin: var(--s2) 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.j-ends li { padding: 4px 10px; border-radius: 999px; border: 1px dashed var(--line); color: var(--paper-dim); font-size: .85rem; }
+.j-ends li.found { border-style: solid; border-color: rgba(216,180,106,.5); color: var(--gold-2); }
+.j-sub { margin: var(--s4) 0 0; }
+.j-world { margin: 0; padding-inline-start: 1.2em; line-height: 1.9; }

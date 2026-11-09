@@ -1,0 +1,1168 @@
+{
+ "id": "trench-whispers",
+ "v": 1,
+ "status": "review",
+ "mode": "marine",
+ "source": "factory:gemini-3.5-flash-lite",
+ "title": {
+  "en": "Whispers of the Deep Trench",
+  "ar": "همسات الأخدود العميقة"
+ },
+ "premise": {
+  "en": "An automated deep-sea probe in the Mariana Trench started broadcasting rhythmic biological pulses before going offline. Something down there is generating complex acoustic signals.",
+  "ar": "بدأ مسبار بحري عميق وآلي في أخدود ماريانا ببث نبضات بيولوجية إيقاعية قبل أن ينقطع اتصاله. هناك شيء ما في الأسفل يولد إشارات صوتية معقدة."
+ },
+ "tone": "strange",
+ "tags": {
+  "themes": [
+   "mysterious",
+   "deep-sea",
+   "acoustics"
+  ],
+  "locations": [
+   "trench",
+   "midnight"
+  ],
+  "twist": "natural-explanation",
+  "creatures": [
+   "dumbo-octopus",
+   "amphipod",
+   "snailfish"
+  ]
+ },
+ "world": {
+  "w:sonar": {
+   "en": "Sonar calibration active",
+   "ar": "معايرة السونار نشطة"
+  }
+ },
+ "science": [
+  "trench-pressure",
+  "midnight-light"
+ ],
+ "start": "trench-hook",
+ "nodes": {
+  "trench-hook": {
+   "kind": "hook",
+   "biome": "trench",
+   "props": [
+    "sonar"
+   ],
+   "plate": "trench-edge-drop",
+   "goal": {
+    "en": "Investigate the rhythmic pulses coming from the bottom of the deep trench.",
+    "ar": "استقصاء النبضات الإيقاعية القادمة من قاع الأخدود العميقة."
+   },
+   "text": {
+    "en": "At the edge of the dark trench, {duck} {g:monitors|monitors} the silent sonar screen. A steady, rhythmic pulse echoes from five thousand meters down — not machinery, but something alive. {name} stares into the abyss.",
+    "ar": "على حافة الأخدود المظلم، {g:يراقب|تراقب} {duck} شاشة السونار الصامتة. صدى نبضة ثابتة وإيقاعية يتردد من عمق خمسة آلاف متر - ليست آلة، بل شيء حي. يحدق {name} في الهاوية."
+   },
+   "choices": [
+    {
+     "id": "descend-fast",
+     "label": {
+      "en": "Dive straight down into the current",
+      "ar": "الغوص مباشرة نحو التيار"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} tucks and plunges into the dark water, racing past the twilight zone.",
+       "ar": "{name} يثني جسمه ويغوص في الماء المظلم، مسابقاً منطقة الشفق."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "trench-path-a"
+     }
+    },
+    {
+     "id": "scan-shelf",
+     "label": {
+      "en": "Examine the rocky shelf for anchor points",
+      "ar": "فحص الرف الصخري بحثاً عن نقاط ارتكاز"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "Scratches on the wall show that heavy equipment was recently dragged down.",
+       "ar": "تظهر خدوش على الجدار أن معدات ثقيلة سُحبت مؤخراً نحو الأسفل."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "drag-traces"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-path-a"
+     }
+    },
+    {
+     "id": "listen-sonar",
+     "label": {
+      "en": "Calibrate the sonar frequency",
+      "ar": "معايرة تردد السونار"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The sonar locks onto the pulse, revealing it pulses in sequences like biological communication.",
+       "ar": "يلتقط السونار النبضة، كاشفاً أنها تنبض بتسلسلات تشبه التواصل البيولوجي."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "flag",
+        "id": "w:sonar"
+       },
+       {
+        "t": "evidence",
+        "id": "sonar-seq"
+       }
+      ],
+      "fx": "echo",
+      "next": "trench-path-b"
+     }
+    },
+    {
+     "id": "comfort-duck",
+     "label": {
+      "en": "Reassure {duck} before the descent",
+      "ar": "طمأنة {duck} قبل الهبوط"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{duck} smiles bravely, adjusting {g:his|her} dive gear as the pressure starts to rise.",
+       "ar": "تبتسم {duck} بشجاعة، معدلةً معدات الغوص الخاصة بها بينما يبدأ الضغط في الارتفاع."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "trench-path-b"
+     }
+    },
+    {
+     "id": "echolocate",
+     "label": {
+      "en": "Send out an acoustic ping",
+      "ar": "إرسال إشارة صوتية ارتدادية"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The biological echo bounces back instantly, confirming a massive cavern below.",
+       "ar": "يرتد الصدى البيولوجي على الفور، مؤكداً وجود كهف ضخم في الأسفل."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "cavern-echo"
+       }
+      ],
+      "fx": "echo",
+      "next": "trench-path-a"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation"
+      ]
+     }
+    },
+    {
+     "id": "night-sense",
+     "label": {
+      "en": "Scan the absolute darkness for motion",
+      "ar": "فحص الظلام الدامس بحثاً عن حركة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Faint biological glows weave through the water column far below.",
+       "ar": "تتوهج أضواء بيولوجية خافتة عبر عمود الماء في الأسفل."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bio-glow"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-path-b"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "motionSense"
+      ]
+     }
+    }
+   ]
+  },
+  "trench-path-a": {
+   "kind": "explore",
+   "biome": "trench",
+   "props": [],
+   "plate": "trench-cliff",
+   "text": {
+    "en": "Descending along the sheer basalt cliff, {name} encounters swirling currents carrying strange metallic fragments from the lost probe.",
+    "ar": "أثناء الهبوط على طول الجرف البازلتي الحاد، يواجه {name} تيارات دوامية تحمل شظايا معدنية غريبة من المسبار المفقود."
+   },
+   "choices": [
+    {
+     "id": "inspect-metal",
+     "label": {
+      "en": "Collect a metal fragment",
+      "ar": "جمع شظية معدنية"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The fragment is deeply dented by crushing hydrostatic pressure.",
+       "ar": "الشظية متعرضة لانبعاج عميق بسبب الضغط الهيدروستاتيكي السحق."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "crushed-metal"
+       }
+      ],
+      "fx": "sample",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "push-current",
+     "label": {
+      "en": "Swim hard against the swirling eddy",
+      "ar": "السباحة بقوة عكس الدوامة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} cuts through the turbulence, saving energy for the deep floor.",
+       "ar": "يخترق {name} الاضطرابات، موفراً الطاقة للقاع العميق."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "swim",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "study-vents",
+     "label": {
+      "en": "Observe mineral deposits on the wall",
+      "ar": "ملاحظة الترسبات المعدنية على الجدار"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Thermal traces suggest active vents nearby, warming small pockets of water.",
+       "ar": "تشير الآثار الحرارية إلى وجود فتحات نشطة بالقرب، مما يدفيء جيوباً صغيرة من الماء."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "thermal-trace"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "calm-companion",
+     "label": {
+      "en": "Share air bubbles with {duck}",
+      "ar": "مشاركة فقاعات الهواء مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{duck} appreciates the teamwork as the cold presses in.",
+       "ar": "تقدر {duck} العمل الجماعي بينما يشتد البرد."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "resist-pressure",
+     "label": {
+      "en": "Brace against the extreme pressure zone",
+      "ar": "الاستعداد لمنطقة الضغط الشديد"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} uses sturdy anatomy to withstand the heavy water weight easily.",
+       "ar": "يستخدم {name} تشريحاً متيناً لتحمل وزن الماء الثقيل بسهولة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "pressure-resisted"
+       }
+      ],
+      "fx": "impact",
+      "next": "trench-middle"
+     },
+     "requires": {
+      "capAny": [
+       "pressure",
+       "insulated",
+       "armor"
+      ]
+     }
+    },
+    {
+     "id": "dig-crevice",
+     "label": {
+      "en": "Squeeze through a narrow rock fissure",
+      "ar": "المرور عبر شق صخر ضيق"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The shortcut bypasses the worst of the swirling current.",
+       "ar": "الاختصار يتجاوز أسوأ التيار الدوامي."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "climb",
+      "next": "trench-middle"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "grip",
+       "swim"
+      ]
+     }
+    }
+   ]
+  },
+  "trench-path-b": {
+   "kind": "explore",
+   "biome": "trench",
+   "props": [],
+   "plate": "trench-deep-ping",
+   "text": {
+    "en": "Following the acoustic signals, {name} drifts into a silent zone where floating organic matter gathers in thick veils.",
+    "ar": "متبعاً الإشارات الصوتية، ينجرف {name} إلى منطقة صامتة حيث تتجمع المادة العضوية العائمة في ستائر سميكة."
+   },
+   "choices": [
+    {
+     "id": "taste-water",
+     "label": {
+      "en": "Sample the chemical composition of the veil",
+      "ar": "أخذ عينة من التركيب الكيميائي للستارة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The water is rich in dissolved minerals and sulfur compounds.",
+       "ar": "الماء غني بالمعادن الذائبة والمركبات الكبريتية."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "sulfur-sample"
+       }
+      ],
+      "fx": "sample",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "glide-silent",
+     "label": {
+      "en": "Glide smoothly past the organic debris",
+      "ar": "الانزلاق بسلاسة متجاوزاً الحطام العضوي"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Moving without disturbing the snow creates a clear path ahead.",
+       "ar": "التحرك دون إزعاج الثلج يخلق طريقاً واضحاً للأمام."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "camo",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "observe-creatures",
+     "label": {
+      "en": "Watch tiny amphipods react to the sonar",
+      "ar": "مراقبة مزدوجات الأرجل الصغيرة وهي تتفاعل مع السونار"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The tiny crustaceans synchronize their movements with the mysterious beat.",
+       "ar": "تزامن القشريات الصغيرة حركاتها مع النبضة الغامضة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "amphipod-sync"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "encourage-duck",
+     "label": {
+      "en": "Signal an all-clear to {duck}",
+      "ar": "إرسال إشارة خلو الجو إلى {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{duck} flashes an encouraging light signal back.",
+       "ar": "تومض {duck} بإشارة ضوئية مشجعة بالمقابل."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "flash",
+      "next": "trench-middle"
+     }
+    },
+    {
+     "id": "heat-sense",
+     "label": {
+      "en": "Detect thermal vents through the veil",
+      "ar": "الكشف عن الفتحات الحرارية عبر الستارة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "A warm plume cuts through the freezing abyssal water nearby.",
+       "ar": "تيار دافئ يخترق ماء الأعماق المتجمد القريب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "thermal-plume"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-middle"
+     },
+     "requires": {
+      "capAny": [
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "biolum-flash",
+     "label": {
+      "en": "Flash a greeting pattern with body light",
+      "ar": "إرسال نمط تحية ضوئي بضوء الجسم"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The rhythmic pulses pause briefly, as if surprised by the flash.",
+       "ar": "تتوقف النبضات الإيقاعية لفترة وجيزة، كما لو تفاجأت بالوميض."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "flag",
+        "id": "responded-light"
+       }
+      ],
+      "fx": "flash",
+      "next": "trench-middle"
+     },
+     "requires": {
+      "capAny": [
+       "glow"
+      ]
+     }
+    }
+   ]
+  },
+  "trench-middle": {
+   "kind": "challenge",
+   "biome": "trench",
+   "props": [],
+   "plate": "trench-whalefall",
+   "variants": [
+    {
+     "when": {
+      "flag": [
+       "w:sonar"
+      ]
+     },
+     "text": {
+      "en": "At the trench floor, a massive whale fall rests in the silt. The sonar calibration helps {name} pinpoint where the rhythm originates.",
+      "ar": "في قاع الأخدود، يرقب بقايا حوت عميق في الطمي. تساعد معايرة السونار {name} على تحديد مصدر الإيقاع بدقة."
+     }
+    }
+   ],
+   "text": {
+    "en": "At the trench floor, a massive whale fall rests in the silt. The rhythmic pulses are coming directly from inside the decaying skeletal ribs.",
+    "ar": "في قاع الأخدود، يرقب بقايا حوت عميق في الطمي. النبضات الإيقاعية تأتي مباشرة من داخل الأضلاع الهيكلية المتحللة."
+   },
+   "choices": [
+    {
+     "id": "enter-skeleton",
+     "label": {
+      "en": "Swim cautiously into the ribcage",
+      "ar": "السباحة بحذر داخل القفص الصدري"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} slips between massive bones where the pulse is deafeningly loud.",
+       "ar": "ينزلق {name} بين العظام الضخمة حيث تكون النبضة عالية بشكل يصم الآذان."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "trench-path-c"
+     }
+    },
+    {
+     "id": "push-debris",
+     "label": {
+      "en": "Clear away fallen sediment around the bones",
+      "ar": "إزالة الرواسب المتساقطة حول العظام"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Clearing the silt reveals a series of pulsing natural vents beneath the spine.",
+       "ar": "إزالة الطمي يكشف عن سلسلة من الفتحات الطبيعية النابضة تحت العمود الفقري."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "vent-discovery"
+       }
+      ],
+      "fx": "dig",
+      "next": "trench-path-c"
+     }
+    },
+    {
+     "id": "study-source",
+     "label": {
+      "en": "Analyze the resonance of the sound",
+      "ar": "تحليل صدى الصوت"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The sound is created by superheated gas escaping through oscillating rock channels.",
+       "ar": "الصوت ناتج عن الغاز شديد السخونة الهارب عبر قنوات صخرية متذبذبة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "gas-resonance"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-path-d"
+     }
+    },
+    {
+     "id": "reassure-team",
+     "label": {
+      "en": "Communicate confidence to {duck}",
+      "ar": "توصيل الثقة إلى {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{duck} smiles, ready to document whatever source is making the sound.",
+       "ar": "تبتسم {duck}، مستعدة توثيق أي مصدر يصدر الصوت."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "trench-path-d"
+     }
+    },
+    {
+     "id": "dig-bone",
+     "label": {
+      "en": "Burrow under the ribcage to find an entrance",
+      "ar": "الحفر تحت القفص الصدري لإيجاد مدخل"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} tunnels under the heavy silt, uncovering a hidden chamber.",
+       "ar": "يحفر {name} تحت الطمي الثقيل، كاشفاً عن حجرة مخفية."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "chamber-found"
+       }
+      ],
+      "fx": "dig",
+      "next": "trench-path-c"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "venom-sample",
+     "label": {
+      "en": "Test the water chemistry inside the rib cavity",
+      "ar": "اختبار كيمياء الماء داخل التجويف العظمي"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Specialized sensors reveal unique mineral catalysts at work.",
+       "ar": "تكشف المستشعرات المتخصصة عن محفزات معدنية فريدة تعمل هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "catalyst-found"
+       }
+      ],
+      "fx": "sample",
+      "next": "trench-path-d"
+     },
+     "requires": {
+      "capAny": [
+       "venom",
+       "scent"
+      ]
+     }
+    }
+   ]
+  },
+  "trench-path-c": {
+   "kind": "challenge",
+   "biome": "trench",
+   "props": [],
+   "plate": "trench-amphipods",
+   "text": {
+    "en": "Inside the skeletal chamber, swarms of deep-sea amphipods crawl over a bizarre mechanical-biological hybrid device left by ancient researchers.",
+    "ar": "داخل الحجرة الهيكلية، تزحف أسراب من مزدوجات الأرجل في الأعماق على جهاز هجين ميكانيكي-بيولوجي غريب تركه باحثون قدامى."
+   },
+   "choices": [
+    {
+     "id": "touch-device",
+     "label": {
+      "en": "Examine the strange control panel",
+      "ar": "فحص لوحة التحكم الغريبة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The panel hums back to life, displaying old logs about acoustic geothermal generators.",
+       "ar": "تعود اللوحة إلى الحياة مزمجرة، عارضة سجلات قديمة حول مولدات حرارية أرضية صوتية."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "old-logs"
+       }
+      ],
+      "fx": "screen",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "clear-creatures",
+     "label": {
+      "en": "Gently herd the amphipods away",
+      "ar": "توجيه مزدوجات الأرجل برفق بعيداً"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The tiny creatures scatter harmlessly, revealing the core mechanism.",
+       "ar": "تتفرق الكائنات الصغيرة دون إحداث ضرر، كاشفة عن الآلية الأساسية."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "camo",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "force-panel",
+     "label": {
+      "en": "Force open the jammed housing unit",
+      "ar": "فتح وحدة الإسكان المستعصية بالقوة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} pops the rusted latch, releasing a burst of trapped air and sound.",
+       "ar": "يفتح {name} المزلاج الصدئ، مطلقا تدفقاً من الهواء المحصور والصوت."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "impact",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "analyze-signal",
+     "label": {
+      "en": "Record the harmonic frequency",
+      "ar": "تسجيل التردد التوافقي"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The rhythm matches the natural pulsing of the tectonic plates below.",
+       "ar": "يتطابق الإيقاع مع النبض الطبيعي للصفائح التكتونية في الأسفل."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "tectonic-rhythm"
+       }
+      ],
+      "fx": "scan",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "shock-panel",
+     "label": {
+      "en": "Jumpstart the device with a mild electrical charge",
+      "ar": "إنعاش الجهاز بشحنة كهربائية خفيفة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The electrical surge reactivates the ancient display screen completely.",
+       "ar": "تعمل النبضة الكهربائية على إعادة تنشيط شاشة العرض القديمة بالكامل."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "screen-active"
+       }
+      ],
+      "fx": "flash",
+      "next": "trench-climax"
+     },
+     "requires": {
+      "capAny": [
+       "shock"
+      ]
+     }
+    },
+    {
+     "id": "grip-lever",
+     "label": {
+      "en": "Pull the emergency shutdown lever",
+      "ar": "سحب ذراع الإيقاف الطارئ"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} secures the loose mechanical lever, stabilizing the sound output.",
+       "ar": "يثبت {name} الذراع الميكانيكي السائب، مما يثبت إخراج الصوت."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "climb",
+      "next": "trench-climax"
+     },
+     "requires": {
+      "capAny": [
+       "grip",
+       "climb"
+      ]
+     }
+    }
+   ]
+  },
+  "trench-path-d": {
+   "kind": "challenge",
+   "biome": "trench",
+   "props": [],
+   "plate": "trench-eruption",
+   "text": {
+    "en": "Near the pulsing vents, mineral-rich bubbles surge upward, creating an eerie acoustic chamber that amplifies every sound in the deep trench.",
+    "ar": "بالقرب من الفتحات النابضة، ترتفع فقاعات غنية بالمعادن نحو الأعلى، مما يخلق غرفة صوتية مرعبة تضخم كل صوت في الأخدود العميقة."
+   },
+   "choices": [
+    {
+     "id": "ride-bubbles",
+     "label": {
+      "en": "Ride the ascending bubble current carefully",
+      "ar": "ركوب تيار الفقاعات الصاعدة بحذر"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "{name} navigates the thermal current without disturbing the vent structure.",
+       "ar": "يتنقل {name} عبر التيار الحراري دون إزعاج هيكل الفتحة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "swim",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "block-vent",
+     "label": {
+      "en": "Stabilize the loose rock near the main vent",
+      "ar": "تثبيت الصخر السائب قرب الفتحة الرئيسية"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Securing the rock stops the erratic screeching, leaving a pure rhythmic tone.",
+       "ar": "تثبيت الصخر يوقف الصراخ غير المنتظم، تاركاً نغمة إيقاعية نقية."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "vent-stabilized"
+       }
+      ],
+      "fx": "impact",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "study-bubbles",
+     "label": {
+      "en": "Collect gas samples from the rising plume",
+      "ar": "جمع عينات الغاز من التيار الصاعد"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Analysis shows methane hydrates are feeding the resonant acoustic effect.",
+       "ar": "يُظهر التحليل أن هيدرات الميثان تغذي التأثير الصوتي الرنان."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "methane-data"
+       }
+      ],
+      "fx": "sample",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "help-companion",
+     "label": {
+      "en": "Guide {duck} through the warm water pocket",
+      "ar": "توجيه {duck} عبر جيب الماء الدافئ"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{duck} records clear audio of the phenomenon with {g:his|her} gear.",
+       "ar": "تسجل {duck} صوتاً واضحاً للظاهرة بمعداتها."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "trench-climax"
+     }
+    },
+    {
+     "id": "dig-channel",
+     "label": {
+      "en": "Dig a diversion channel for the hot gas",
+      "ar": "حفر قناة تحويل للغاز الساخن"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The new channel redirects the bubbles safely away from sensitive instruments.",
+       "ar": "توجه القناة الجديدة الفقاعات بعيداً عن الأدوات الحساسة بأمان."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "channel-dug"
+       }
+      ],
+      "fx": "dig",
+      "next": "trench-climax"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "camouflage-vent",
+     "label": {
+      "en": "Blend into the mineral background to observe undisturbed",
+      "ar": "الاندماج في الخلفية المعدنية للمراقبة دون إزعاج"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Remaining unseen lets {name} watch deep-sea fauna use the resonance.",
+       "ar": "البقاء غير مرئي يمكن {name} من مشاهدة حيوانات الأعماق وهي تستخدم الرنين."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fauna-observed"
+       }
+      ],
+      "fx": "camo",
+      "next": "trench-climax"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "trench-climax": {
+   "kind": "climax",
+   "biome": "trench",
+   "props": [],
+   "plate": "trench-snailfish-lander",
+   "text": {
+    "en": "The mystery is fully revealed: the rhythmic pulses are a natural resonance created by geothermal vents interacting with ancient seismic structures, amplified by deep-sea fauna. {duck} prepares to transmit the final discovery.",
+    "ar": "ينكشف اللغز تماماً: النبضات الإيقاعية هي رنين طبيعي ناتج عن تفاعل الفتحات الحرارية الأرضية مع الهياكل الزلزالية القديمة، وتضخمها حيوانات الأعماق. تستعد {duck} لبث الاكتشاف النهائي."
+   },
+   "choices": [
+    {
+     "id": "publish-science",
+     "label": {
+      "en": "Transmit complete geological data to surface labs",
+      "ar": "بث البيانات الجيولوجية الكاملة لمختبرات السطح"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The data packet uploads successfully, solving the mystery of the deep trench signals once and for all.",
+       "ar": "يتم رفع حزمة البيانات بنجاح، مما يحل لغز إشارات الأخدود العميق مرة وإلى الأبد."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "screen",
+      "next": "end:scientific-triumph"
+     }
+    },
+    {
+     "id": "protect-habitat",
+     "label": {
+      "en": "Leave the natural acoustic chamber untouched",
+      "ar": "ترك الغرفة الصوتية الطبيعية دون مساس"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "{name} and {duck} secure the area without disturbing the delicate ecosystem.",
+       "ar": "يؤمن {name} و {duck} المنطقة دون إزعاج النظام البيئي الدقيق."
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:ecological-harmony"
+     }
+    },
+    {
+     "id": "record-rhythm",
+     "label": {
+      "en": "Record a duet with the rhythmic pulse",
+      "ar": "تسجيل دويتو مع النبضة الإيقاعية"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "A harmonious sound wave echoes through the trench, creating an unforgettable acoustic memory.",
+       "ar": "موجة صوتية متناغمة تتردد عبر الأخدود، مما يخلق ذكرى صوتية لا تُنسى."
+      },
+      "mood": "laughing",
+      "effects": [],
+      "fx": "echo",
+      "next": "end:acoustic-melody"
+     }
+    },
+    {
+     "id": "explore-further",
+     "label": {
+      "en": "Venture deeper into uncharted abyssal rifts",
+      "ar": "المغامرة أعمق في الشقوق السحيقة غير المكتشفة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} pushes past the station into even deeper, unknown waters.",
+       "ar": "يخترق {name} المحطة متجهاً نحو مياه أعمق ومجهولة."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "swim",
+      "next": "end:scientific-triumph"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "scientific-triumph": {
+   "tone": "scientific",
+   "title": {
+    "en": "Abyssal Geophysics Solved",
+    "ar": "حل لغز جيوفيزياء الأعماق"
+   },
+   "summary": {
+    "en": "The team successfully mapped the natural geothermal resonance of the trench.",
+    "ar": "نجح الفريق في رسم خريطة الرنين الحراري الأرضي الطبيعي للأخدود."
+   },
+   "epilogue": {
+    "en": "Surface researchers now understand that deep ocean trenches possess their own dynamic acoustic symphony.",
+    "ar": "يفهم باحثو السطح الآن أن أخدود المحيط العميقة تمتلك سمفونيتها الصوتية الديناميكية الخاصة."
+   }
+  },
+  "ecological-harmony": {
+   "tone": "wholesome",
+   "title": {
+    "en": "Guardians of the Deep",
+    "ar": "حراس الأعماق"
+   },
+   "summary": {
+    "en": "The trench ecosystem remains protected and undisturbed by human intervention.",
+    "ar": "يبقى نظام الأخدود البيئي محمياً ودون إزعاج من التدخل البشري."
+   },
+   "epilogue": {
+    "en": "{duck} and {name} leave the abyss in peace, knowing nature keeps its own wondrous secrets.",
+    "ar": "تترك {duck} و {name} الهاوية بسلام، عالمين أن الطبيعة تحتفظ بأسرارها العجيبة."
+   }
+  },
+  "acoustic-melody": {
+   "tone": "comedic",
+   "title": {
+    "en": "Symphony of the Trenches",
+    "ar": "سفونية الأخدود"
+   },
+   "summary": {
+    "en": "The strange biological signals turned out to be an incredible deep-sea concert.",
+    "ar": "تبين أن الإشارات البيولوجية الغريبة هي حفلة موسيقية بحرية عميقة لا تصدق."
+   },
+   "epilogue": {
+    "en": "Recorded tracks of the trench pulse become an instant viral hit back at the marine research club.",
+    "ar": "تصبح المقاطع المسجلة لنبض الأخدود ضجة واسعة الانتشار في نادي الأبحاث البحرية."
+   }
+  }
+ }
+}

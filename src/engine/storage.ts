@@ -33,7 +33,8 @@ export function load(storage: Storage | undefined = globalThis.localStorage): Sa
       muted: !!s.muted, reducedMotion: !!s.reducedMotion, ai: !!s.ai,
     };
     let current: GameState | null = null;
-    if (d.current && isValidConfig(d.current.creature) && d.current.plan?.beats?.every((b) => b.template.startsWith('@') || BEAT_BY_ID[b.template])) {
+    if (d.current?.plan?.story && isValidConfig(d.current.creature)) current = d.current;
+    else if (d.current && isValidConfig(d.current.creature) && d.current.plan?.beats?.every((b) => b.template.startsWith('@') || BEAT_BY_ID[b.template])) {
       try { if (validateState(d.current).length === 0) current = d.current; } catch { current = null; }
     }
     const runs = Array.isArray(d.runs) ? d.runs.filter((r) => r && Array.isArray(r.planTokens) && Array.isArray(r.pathTokens) && typeof r.ending === 'string').slice(-MAX_RUNS) : [];

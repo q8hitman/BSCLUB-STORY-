@@ -1,3 +1,6 @@
+import { nodePlate, storyOf } from '../engine/archive';
+import { derive } from '../engine/creature';
+import { condHolds } from '../engine/story';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { sceneImage } from '../art/painter';
 import { platesForRun, plateUrl } from '../art/plates';
@@ -116,7 +119,20 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, [view, game.stage, typed, confirmQuit, brief, board, onChoose, onContinue]);
 
-  const plate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
+  const autoPlate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Story Archive scenes name their own plate, and Living World state swaps it (power restored, net removed…)
+  const tpl = BEAT_BY_ID[game.plan.beats[game.index]?.template];
+  const d0 = useMemo(() => derive(game.creature), [game.creature]);
+  const fixedPlate = tpl?.plate ? nodePlate(tpl, (c) => condHolds(c, d0, game, tpl.biomes[0])) : undefined;
+  const plate = fixedPlate ? { id: fixedPlate } : autoPlate;
+  const story = storyOf(game);
+  // the world change this result just caused (shown as a banner; also kept in the journal)
+  const worldNow = useMemo(() => {
+    if (game.stage !== 'outcome' || !story || !tpl) return [];
+    const l = game.log[game.log.length - 1]; const c = tpl.choices.find((x) => x.id === l?.choice);
+    const out = c && (l.success || !c.fail ? c.success : c.fail);
+    return (out?.effects ?? []).filter((e) => e.t === 'flag' && e.id.startsWith('w:') && story.world?.[e.id]).map((e) => story.world![(e as { id: string }).id]);
+  }, [game.stage, game.index, story, tpl, game.log]);
 
   const lines = useMemo(() => (view ? radio(game, view.template.kind, view.biome) : []), [game, view]);
   // seen-list is read once per run so the chosen sighting stays stable
@@ -141,12 +157,16 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const isDeep = descendIdx >= 0 && game.index >= descendIdx;
   const phaseLabel = game.mode === 'marine' ? t(isDeep ? 'deep' : 'surface', lang) : null;
   const total = game.plan.beats.length;
+  const cine = game.stage === 'beat' ? view.template.cinematic : undefined;
+  const CINE: Record<string, [string, string]> = { reveal: ['A reveal', 'لحظة كشف'], discovery: ['A discovery', 'اكتشاف'], passage: ['Into the unknown', 'نحو المجهول'], phenomenon: ['A rare phenomenon', 'ظاهرة نادرة'], climax: ['The decisive moment', 'اللحظة الحاسمة'] };
 
   return (
-    <section className={`screen play vn ${isDeep ? 'is-deep' : ''}`}>
+    <section className={`screen play vn ${isDeep ? 'is-deep' : ''} ${cine ? `cine cine-${cine}` : ''}`}>
       <PaintedScene biome={view.biome} props={view.template.props} seed={game.seed + game.index} reduced={reduced} plate={plate ? plateUrl(plate.id) : null} />
       <Particles kind={['reef', 'seagrass', 'mudflat', 'openSea'].includes(view.biome) ? 'bubbles' : ['twilight', 'midnight', 'vents', 'trench', 'cave'].includes(view.biome) ? 'specks' : ['desert', 'ruins', 'mountain'].includes(view.biome) ? 'dust' : 'spores'} count={18} />
       <div className="letterbox top" aria-hidden="true" /><div className="letterbox bottom" aria-hidden="true" />
+      {cine && <div key={`cine${game.index}`} className="cine-caption" role="note"><span>{CINE[cine][lang === 'ar' ? 1 : 0]}</span></div>}
+      {worldNow.length > 0 && <div key={`w${game.index}`} className="world-banner" role="status">🌍 {lang === 'ar' ? 'تغيّر العالم: ' : 'The world changed: '}{worldNow.map((w) => w[lang]).join(' · ')}</div>}
 
       <header className="vn-hud" role="status">
         <div className="vn-loc">
@@ -154,8 +174,9 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           {phaseLabel && <span className={`phase ${isDeep ? 'deep' : ''}`}>{phaseLabel}</span>}
         </div>
         <div className="vn-meter">
+          {story ? <span className="vn-progress" title={story.title[lang]}>{lang === 'ar' ? `المشهد ${game.index + 1}` : `Scene ${game.index + 1}`}</span> : <>
           <span className="vn-progress">{game.index + 1}/{total}</span>
-          <span className="chapter" aria-label={`${game.index + 1}/${total}`}>{Array.from({ length: total }, (_, i) => <i key={i} className={i < game.index ? 'done' : i === game.index ? 'now' : ''} />)}</span>
+          <span className="chapter" aria-label={`${game.index + 1}/${total}`}>{Array.from({ length: total }, (_, i) => <i key={i} className={i < game.index ? 'done' : i === game.index ? 'now' : ''} />)}</span></>}
           <span className="pips" title={t('energy', lang)} aria-label={`${t('energy', lang)} ${game.energy}/${MAX_ENERGY}`}>{Array.from({ length: MAX_ENERGY }, (_, i) => <i key={i} className={i < game.energy ? 'on' : ''} />)}</span>
           <button className="stat stat-btn" title={lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'} onClick={() => setBoard(true)}>◆ {game.evidence.length}</button>
           <span className="stat" title={t('discoveries', lang)}>✦ {game.discoveries.length}</span>

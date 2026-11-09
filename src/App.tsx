@@ -6,7 +6,11 @@ import { composeEnding } from './engine/ending';
 import { Rng, newSeed } from './engine/rng';
 import { load, newVisitor, recordRun, save, type SaveData } from './engine/storage';
 import { BEAT_BY_ID, startGame, type PlanOpts } from './engine/story';
-import { decodeSave, saveFromHash, type DecodeResult } from './engine/save';
+import { decodeSave, peekStory, saveFromHash, type DecodeResult } from './engine/save';
+import { startStory } from './engine/archive';
+import { pickAdventure } from './engine/memory';
+import { currentStories, loadStory } from './stories/index';
+import { TestLab } from './ui/TestLab';
 import { recordToJournal } from './engine/journal';
 import { sightingFor } from './engine/sighting';
 import { platesForRun } from './art/plates';
@@ -24,7 +28,7 @@ import { ambient } from './audio';
 import { LoreBook } from './ui/LoreBook';
 import { u } from './ui/uiText';
 
-type Screen = 'title' | 'lore' | 'journal' | 'restore' | 'duck' | 'player' | 'build' | 'cname' | 'mode' | 'play' | 'ending';
+type Screen = 'title' | 'lore' | 'journal' | 'restore' | 'duck' | 'player' | 'build' | 'cname' | 'lab' | 'mode' | 'play' | 'ending';
 const BASE = import.meta.env.BASE_URL;
 
 function sharedFromHash(): CreatureConfig | null {
@@ -34,11 +38,14 @@ function sharedFromHash(): CreatureConfig | null {
 }
 
 /** A Passport QR link (#s=…). Read once, then removed from the address bar so a shared booth device does not keep it. */
-function restoreFromHash(): DecodeResult | null {
+async function restoreFromHash(): Promise<DecodeResult | null> {
   if (typeof location === 'undefined') return null;
   const code = saveFromHash(location.hash);
   if (!code) return null;
   try { history.replaceState(null, '', location.pathname + location.search); } catch { /* ignore */ }
+  // a Story Archive save needs that exact published version: fetch its chunk first (refused if it is missing)
+  const need = peekStory(code);
+  if (need) await loadStory(need.id, need.v).catch(() => null);
   return decodeSave(code);
 }
 
@@ -87,9 +94,13 @@ export default function App() {
   const [game, setGame] = useState<GameState | null>(null);
   const [ending, setEnding] = useState<Ending | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [restored, setRestored] = useState<DecodeResult | null>(restoreFromHash);
+  const [restored, setRestored] = useState<DecodeResult | null>(null);
   // a second scan while the game is already open only changes the #fragment
-  useEffect(() => { const on = () => { const res = restoreFromHash(); if (res) { setRestored(res); setScreen('restore'); } }; window.addEventListener('hashchange', on); return () => window.removeEventListener('hashchange', on); }, []);
+  useEffect(() => {
+    const on = () => { void restoreFromHash().then((res) => { if (res) { setRestored(res); setScreen('restore'); } }); };
+    on(); window.addEventListener('hashchange', on); return () => window.removeEventListener('hashchange', on);
+  }, []);
+  const [pick, setPick] = useState<string>('auto'); // 'auto' (Adventure Memory) | 'gen' | a Story Archive id (replay / choose)
   const [passport, setPassport] = useState(false);
   const [askNew, setAskNew] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -125,11 +136,14 @@ export default function App() {
     setGame(g); setData((d) => ({ ...d, current: g }));
   };
 
-  const begin = (mode: Mode, c: CreatureConfig = creature) => {
+  const begin = async (mode: Mode, c: CreatureConfig = creature) => {
     const seed = newSeed();
     const mood = tone === 'surprise' ? (['balanced', 'light', 'mystery'] as const)[seed % 3] : tone;
     const opts: PlanOpts = { length: len, tone: mood };
-    let g = startGame({ mode, seed, duck, player, creature: c, history: data.runs, opts });
+    // Adventure Memory picks something this explorer has not lived yet; a chosen archive story is played as asked
+    const choice = pick === 'gen' ? { kind: 'generated' as const } : pickAdventure(mode, data.journal, new Rng(seed), pick === 'auto' ? {} : { replay: pick });
+    const pkg = choice.kind === 'story' ? await loadStory(choice.id, choice.v).catch(() => null) : null;
+    let g = pkg ? startStory({ mode, seed, duck, player, creature: c }, pkg) : startGame({ mode, seed, duck, player, creature: c, history: data.runs, opts });
     // decisions that depend on THIS device's history are made once and pinned, so the run is identical on any device
     const sight = sightingFor(g, data.legendsSeen);
     g = { ...g, pins: { sighting: sight ? [sight.index, sight.legend.id] : null, recentEndings: data.runs.slice(-5).map((x) => x.ending) } };
@@ -147,7 +161,11 @@ export default function App() {
     setCreature(randomCreature(new Rng(newSeed()), lang)); setAskNew(false); setPassport(false); setScreen('title'); setToast(r('nvDone', lang));
     try { history.replaceState(null, '', location.pathname + location.search); } catch { /* ignore */ }
   };
-  const resume = () => { if (data.current) { setGame(data.current); setDuck(data.current.duck); setCreature(data.current.creature); setScreen('play'); } };
+  const resume = async () => {
+    const g = data.current; if (!g) return;
+    if (g.plan.story && !(await loadStory(g.plan.story.id, g.plan.story.v).catch(() => null))) { setData((d) => ({ ...d, current: null })); return; }
+    setGame(g); setDuck(g.duck); setCreature(g.creature); setScreen('play');
+  };
   const quit = () => { setData((d) => ({ ...d, current: null })); setGame(null); setScreen('title'); ambient.stop(); };
   const selectedDuck = DUCKS.find((d) => d.id === duck)!;
 
@@ -168,7 +186,10 @@ export default function App() {
       <main>
         {screen === 'title' && (
           <section className="screen title">
-            <PaintedScene biome="twilight" props={['sub', 'jelly']} seed={1930} reduced={reduced} className="backdrop" plate={plateUrl('twilight-siphonophore')} />
+            <div className="title-layers" aria-hidden="true" onPointerMove={reduced ? undefined : (e) => { const r0 = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--px', `${((e.clientX - r0.left) / r0.width - 0.5).toFixed(3)}`); e.currentTarget.style.setProperty('--py', `${((e.clientY - r0.top) / r0.height - 0.5).toFixed(3)}`); }}>
+              <PaintedScene biome="twilight" props={['sub', 'jelly']} seed={1930} reduced={reduced} className="backdrop layer-far" plate={plateUrl('twilight-siphonophore')} />
+              <div className="layer-fog" /><div className="layer-glow" />
+            </div>
             <Particles kind="spores" />
             <div className="title-inner">
               <Logos />
@@ -180,6 +201,8 @@ export default function App() {
                 <Btn onClick={() => setScreen('duck')}>{t('enterLab', lang)}</Btn>
                 {data.current && <Btn variant="ghost" onClick={resume}>{t('continueRun', lang)}</Btn>}
                 <Btn variant="ghost" onClick={() => setScreen('journal')}>{r('journal', lang)}</Btn>
+                {data.current && <Btn variant="ghost" onClick={async () => { const g = data.current!; if (g.plan.story && !(await loadStory(g.plan.story.id, g.plan.story.v).catch(() => null))) return; setGame(g); setPassport(true); }}>{lang === 'ar' ? 'جواز المستكشف' : 'Explorer Passport'}</Btn>}
+                <Btn variant="ghost" onClick={() => setSettingsOpen(true)}>{lang === 'ar' ? 'الإعدادات' : 'Settings'}</Btn>
                 <Btn variant="ghost" onClick={() => setScreen('lore')}>{lang === 'ar' ? 'كتاب الأساطير' : 'Book of Legends'}</Btn>
               </div>
               <button className="new-visitor" onClick={() => setAskNew(true)}>↺ {r('newVisitor', lang)}</button>
@@ -265,7 +288,8 @@ export default function App() {
         )}
 
         {screen === 'build' && <Builder lang={lang} value={creature} onChange={setCreature} onBack={() => setScreen('player')} onNext={() => setScreen('cname')} />}
-        {screen === 'cname' && <NameCreature lang={lang} value={creature} onChange={setCreature} onBack={() => setScreen('build')} onNext={() => setScreen('mode')} />}
+        {screen === 'cname' && <NameCreature lang={lang} value={creature} onChange={setCreature} onBack={() => setScreen('build')} onNext={() => setScreen('lab')} />}
+        {screen === 'lab' && <TestLab lang={lang} creature={creature} reduced={reduced} onBack={() => setScreen('cname')} onNext={() => setScreen('mode')} />}
 
         {screen === 'mode' && (
           <section className="screen mode-select">
@@ -280,6 +304,18 @@ export default function App() {
                 {(['balanced', 'light', 'mystery', 'surprise'] as const).map((k) => <button key={k} role="radio" aria-checked={tone === k} className={tone === k ? 'on' : ''} onClick={() => setTone(k)}>{k === 'surprise' ? '✨ ' : ''}{r(k, lang)}</button>)}
               </div>
             </div>
+            <div className="seg adv-pick" role="radiogroup" aria-label={lang === 'ar' ? 'المغامرة' : 'Adventure'}>
+              <span className="seg-label">{lang === 'ar' ? 'المغامرة' : 'Adventure'}</span>
+              <button role="radio" aria-checked={pick === 'auto'} className={pick === 'auto' ? 'on' : ''} onClick={() => setPick('auto')}>{lang === 'ar' ? '✨ جديدة عليّ' : '✨ New to me'}</button>
+              <button role="radio" aria-checked={pick === 'gen'} className={pick === 'gen' ? 'on' : ''} onClick={() => setPick('gen')}>{lang === 'ar' ? 'رحلة مولّدة' : 'Generated journey'}</button>
+              {currentStories().map((e) => (
+                <button key={e.id} role="radio" aria-checked={pick === e.id} className={`${pick === e.id ? 'on' : ''} adv-${e.mode}`} onClick={() => setPick(e.id)}
+                  title={e.premise[lang]}>{e.title[lang]}{data.journal.stories?.[e.id] ? <small> · {lang === 'ar' ? 'لعبتها' : 'played'}</small> : <small className="new"> · {lang === 'ar' ? 'جديدة' : 'new'}</small>}</button>
+              ))}
+            </div>
+            <p className="hint adv-hint">{pick === 'auto' ? (lang === 'ar' ? 'يتذكّر الدفتر مغامراتك على هذا الجهاز ويختار لك أماكن وألغازاً لم تعشها بعد.' : 'Your journal remembers your adventures on this device and picks places and mysteries you have not lived yet.')
+              : pick === 'gen' ? (lang === 'ar' ? 'رحلة يبنيها المحرّك من مشاهد كثيرة؛ الطول والمزاج يؤثّران فيها.' : 'A journey the engine builds from many scenes; length and mood apply.')
+              : (lang === 'ar' ? `قصة متفرّعة من الأرشيف (${currentStories().find((x) => x.id === pick)?.mode === 'marine' ? 'بحرية' : 'كلاسيكية'}). اختر وضعها أدناه.` : 'A branching archive story. Pick its mode below.')}</p>
             <div className="mode-grid">
               <button className="mode-card classic" onClick={() => begin('classic')}>
                 <PaintedScene biome="forest" props={[]} seed={11} reduced plate={plateUrl('forest-signal-tree')} />
@@ -304,7 +340,7 @@ export default function App() {
                 </div>
               </button>
             </div>
-            <footer className="screen-foot"><Btn variant="ghost" onClick={() => setScreen('cname')}>{t('back', lang)}</Btn></footer>
+            <footer className="screen-foot"><Btn variant="ghost" onClick={() => setScreen('lab')}>{t('back', lang)}</Btn></footer>
           </section>
         )}
 

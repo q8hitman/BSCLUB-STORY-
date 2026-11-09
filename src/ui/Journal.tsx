@@ -1,3 +1,4 @@
+import { currentStories } from '../stories/index';
 import { useMemo, useState } from 'react';
 import { BESTIARY, type Animal } from '../content/bestiary';
 import { DUCK_BY_ID } from '../content/ducks';
@@ -12,7 +13,7 @@ import type { Lang } from '../engine/types';
 import { Btn, CreatureArt } from './common';
 
 const BASE = import.meta.env.BASE_URL;
-type Tab = 'animals' | 'rare' | 'endings' | 'achievements' | 'notes' | 'facts';
+type Tab = 'stories' | 'animals' | 'rare' | 'endings' | 'achievements' | 'notes' | 'facts';
 const T = {
   title: { en: 'BSC Explorer Journal', ar: 'دفتر مستكشف BSC' },
   sub: { en: 'Everything you have met, finished and noticed on this device.', ar: 'كل ما قابلته وأنهيته ولاحظته على هذا الجهاز.' },
@@ -57,6 +58,7 @@ export function JournalScreen({ lang, journal, onBack }: { lang: Lang; journal: 
   const nAnimals = Object.keys(journal.animals).length;
   const nAch = Object.keys(journal.achievements).length;
   const tabs: [Tab, string][] = [
+    ['stories', `${lang === 'ar' ? 'المغامرات' : 'Adventures'} ${Object.keys(journal.stories ?? {}).length}/${currentStories().length}`],
     ['animals', `${T.animals[lang]} ${nAnimals}/${BESTIARY.length}`],
     ['rare', `${T.rare[lang]} ${Object.keys(journal.rare).length + Object.keys(journal.legends).length}`],
     ['endings', `${T.endings[lang]} ${journal.endings.length}`],
@@ -97,6 +99,26 @@ export function JournalScreen({ lang, journal, onBack }: { lang: Lang; journal: 
             </article>
           ); })}
           {rare.length < RARE.length && <p className="j-foot">{lang === 'ar' ? `${RARE.length - rare.length} كائنات أخرى بانتظار مراجعة رسوماتها.` : `${RARE.length - rare.length} more creatures are waiting for their art to be reviewed.`}</p>}
+        </div>
+      )}
+
+      {tab === 'stories' && (
+        <div className="j-stories">
+          <p className="j-note">{lang === 'ar' ? 'قصص الأرشيف المتفرّعة. كل قرار يغيّر الطريق، وبعض القرارات تغيّر العالم نفسه. هذا الدفتر يتذكّر ما عشته على هذا الجهاز فقط.' : 'Branching archive stories. Every decision changes the path, and some change the world itself. This journal remembers what you lived on this device only.'}</p>
+          {currentStories().map((e) => { const st = journal.stories?.[e.id]; const ends = Object.entries(e.endings); return (
+            <article key={e.id} className={`j-story mode-${e.mode} ${st ? 'played' : 'unplayed'}`}>
+              <div className="j-body">
+                <p className="kicker">{e.mode === 'marine' ? (lang === 'ar' ? 'مغامرة بحرية' : 'Marine') : (lang === 'ar' ? 'بيولاب الكلاسيكية' : 'Classic BioLab')} · v{e.v}</p>
+                <h3>{e.title[lang]}</h3>
+                <p className="j-sum">{e.premise[lang]}</p>
+                <p className="j-meta">{st ? (lang === 'ar' ? `لعبتها ${st.plays} ${st.plays === 1 ? 'مرّة' : 'مرّات'}` : `Played ${st.plays}×`) : (lang === 'ar' ? 'لم تعشها بعد' : 'Not lived yet')}</p>
+                <ul className="j-ends">{ends.map(([id, title]) => <li key={id} className={st?.endings.includes(id) ? 'found' : ''}>{st?.endings.includes(id) ? title[lang] : '？'}</li>)}</ul>
+              </div>
+            </article>); })}
+          {Object.keys(journal.world ?? {}).length > 0 && <>
+            <h3 className="j-sub">🌍 {lang === 'ar' ? 'عالمٌ غيّرته' : 'A world you changed'}</h3>
+            <ul className="j-world">{Object.entries(journal.world!).map(([f, w]) => { const label = currentStories().map((e) => e.world[f]).find(Boolean); return label ? <li key={f}>{label[lang]} <small>· {w.adventure[lang]}</small></li> : null; })}</ul>
+          </>}
         </div>
       )}
 
