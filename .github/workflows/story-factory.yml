@@ -1,0 +1,65 @@
+name: Story Factory (automatic)
+
+# Every Monday 06:00 Kuwait time (03:00 UTC), or by hand from the Actions tab ("Run workflow").
+# Writes 1 Classic + 1 Marine branching story with Gemini (free tier), validates them, has a stricter Gemini
+# editor score them, and publishes ONLY the ones that pass everything. Then tests, commits and deploys.
+# Needs one repository secret: GEMINI_API_KEY (Settings → Secrets and variables → Actions). No PC, no ComfyUI.
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: story-factory
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Write and review new stories
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then echo "::warning::GEMINI_API_KEY secret is not set — nothing to do"; exit 0; fi
+          npx tsx scripts/factory/generate.ts --review-drafts || true
+          npx tsx scripts/factory/generate.ts --auto --mode classic --concepts 1 || echo "::warning::classic story failed"
+          npx tsx scripts/factory/generate.ts --auto --mode marine --concepts 1 || echo "::warning::marine story failed"
+      - name: Update the archive catalog
+        run: npx tsx scripts/factory/publish.ts
+      - name: Full test suite (nothing ships if any test fails)
+        run: npm test
+      - id: commit
+        name: Commit published stories
+        run: |
+          git add src/stories reports/stories.md
+          if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; echo "No story passed this week."; exit 0; fi
+          git config user.name "BSC Story Factory"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Story Factory: new published adventures ($(date -u +%Y-%m-%d))"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Story Factory" >> "$GITHUB_STEP_SUMMARY"
+          tail -n +3 reports/stories.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+
+  deploy:
+    needs: produce
+    if: needs.produce.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml

@@ -8,3 +8,4 @@ reports/*.tmp
 .env.*
 reports/ai-eval/mock-*
 factory/runs/
+factory/rejected/

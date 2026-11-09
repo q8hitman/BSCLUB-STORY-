@@ -94,7 +94,8 @@ export function nodePlate(t: BeatTemplate, holds: (c: Cond) => boolean): string 
 export function contentHash(p: StoryPackage): string {
   const canon = (x: unknown): unknown => Array.isArray(x) ? x.map(canon) : x && typeof x === 'object'
     ? Object.fromEntries(Object.keys(x as object).sort().map((k) => [k, canon((x as Record<string, unknown>)[k])])) : x;
-  const s = JSON.stringify(canon(p));
+  // status is excluded: retiring a story (hiding it from new adventures) must not invalidate its saves
+  const s = JSON.stringify(canon({ ...p, status: undefined }));
   let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
   return h.toString(36).padStart(7, '0');
 }

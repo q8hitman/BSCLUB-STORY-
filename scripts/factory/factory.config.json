@@ -1,16 +1,79 @@
 {
   "_doc": "BSC Story Factory production controls. Only used by scripts/factory/*.ts during a production session you start yourself. Visitors never call Gemini or ComfyUI.",
-  "model": "gemini-3.5-flash-lite",
+  "model": "gemini-3.5-flash",
   "concepts": 2,
-  "modes": { "classic": 0.5, "marine": 0.5 },
-  "tones": { "adventure": 1, "mystery": 1, "suspense": 1, "comedy": 1, "investigation": 1, "strange": 1 },
-  "environments": {
-    "classic": ["forest", "mountain", "desert", "cave", "snow", "swamp", "ruins", "lab"],
-    "marine": ["reef", "mudflat", "seagrass", "openSea", "twilight", "midnight", "vents", "trench"]
+  "modes": {
+    "classic": 0.5,
+    "marine": 0.5
   },
-  "graph": { "minNodes": 5, "maxNodes": 9, "endings": 3, "maxDepth": 7, "choicesPerNode": { "open": 4, "gatedMax": 2 } },
+  "tones": {
+    "adventure": 1,
+    "mystery": 1,
+    "suspense": 1,
+    "comedy": 1,
+    "investigation": 1,
+    "strange": 1
+  },
+  "environments": {
+    "classic": [
+      "forest",
+      "mountain",
+      "desert",
+      "cave",
+      "snow",
+      "swamp",
+      "ruins",
+      "lab"
+    ],
+    "marine": [
+      "reef",
+      "mudflat",
+      "seagrass",
+      "openSea",
+      "twilight",
+      "midnight",
+      "vents",
+      "trench"
+    ]
+  },
+  "graph": {
+    "minNodes": 5,
+    "maxNodes": 9,
+    "endings": 3,
+    "maxDepth": 7,
+    "choicesPerNode": {
+      "open": 4,
+      "gatedMax": 2
+    }
+  },
   "rareEncounterRate": 0.15,
-  "art": { "maxNewPlatesPerStory": 4, "batchSeedStart": 20000, "requireExistingPlates": false },
-  "budget": { "maxRequests": 8, "maxOutputTokensPerRequest": 32000, "maxTotalTokens": 400000, "repairAttempts": 1 },
-  "quality": { "maxErrors": 0, "maxWarnings": 6, "minDistinctPaths": 3, "maxSimilarity": 0.45, "minAvgScenes": 4 }
+  "art": {
+    "maxNewPlatesPerStory": 4,
+    "batchSeedStart": 20000,
+    "requireExistingPlates": false
+  },
+  "budget": {
+    "maxRequests": 12,
+    "maxOutputTokensPerRequest": 32000,
+    "maxTotalTokens": 400000,
+    "repairAttempts": 2
+  },
+  "quality": {
+    "maxErrors": 0,
+    "maxWarnings": 6,
+    "minDistinctPaths": 3,
+    "maxSimilarity": 0.45,
+    "minAvgScenes": 4
+  },
+  "auto": {
+    "_doc": "Used by .github/workflows/story-factory.yml (weekly, no human review). A story is published only with 0 validator errors AND every editor score >= minReviewScore; otherwise it stays hidden in 'review'.",
+    "schedule": "every Monday 06:00 Kuwait time",
+    "perRun": {
+      "classic": 1,
+      "marine": 1
+    },
+    "minReviewScore": 8,
+    "reviseOnce": true
+  },
+  "reviewModel": "gemini-3.5-flash"
 }

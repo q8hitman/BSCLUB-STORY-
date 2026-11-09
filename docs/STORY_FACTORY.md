@@ -131,3 +131,26 @@ npx vitest run
 - **"Generated journey"** forces the planner. Choosing a story by name replays it. Nothing is ever locked.
 - Memory is **per device**. The Passport QR moves one adventure, not the journal, so memory is not synchronised
   across devices.
+
+## Fully automatic mode (no human review)
+
+The GitHub workflow `.github/workflows/story-factory.yml` runs every Monday at 06:00 Kuwait time. It can also be
+started by hand: Actions → Story Factory → Run workflow. It needs only the repository secret `GEMINI_API_KEY`.
+
+1. `generate.ts --review-drafts` gives any leftover drafts their editor pass.
+2. `generate.ts --auto` writes 1 Classic and 1 Marine story.
+   - Mechanical fixes are applied automatically. Existing paintings stand in for new art, since there is no GPU in CI.
+   - The validator runs, with up to 2 repair rounds.
+3. A **stricter editor** (`reviewModel`) scores the story on science, Arabic, age suitability, coherence and variety,
+   quoting the weakest sentence for each. Calibration: typical AI drafts score 5–7.
+   - The story is published only if the validator finds 0 errors **and** every score is ≥ `auto.minReviewScore` (8).
+   - If not, Gemini revises once with the editor's list of problems.
+   - Rejected drafts are not shipped.
+4. The catalog is updated, the **full test suite** runs, then the workflow commits and deploys. If anything fails,
+   nothing is published.
+
+Gemini's free tier often answers 503 (busy) or 429 (rate limit). The script waits and retries up to 3 times, then
+skips that story until next week. Some weeks will publish nothing; that is expected.
+
+To pull a bad story: set its `"status"` to `"retired"` and run `publish.ts`. It disappears from new adventures, but QR
+saves that use it keep working, because `status` is not part of the content hash.

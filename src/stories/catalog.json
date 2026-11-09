@@ -1,67 +1,5 @@
 [
  {
-  "id": "deep-glow-caves",
-  "v": 1,
-  "status": "review",
-  "mode": "classic",
-  "tone": "suspense",
-  "title": {
-   "en": "The Deep Glow Caves",
-   "ar": "كهوف الوهج العميق"
-  },
-  "premise": {
-   "en": "A deep underground lake in the cave system has started emitting a strange, pulsing bioluminescence, luring local wildlife deeper inside.",
-   "ar": "بدأت بحيرة جوفية عميقة في شبكة الكهوف بإصدار تلألؤ بيولوجي غريب نابض بالحياة، مما يجذب الحياة البرية المحلية إلى الأعماق."
-  },
-  "locations": [
-   "cave"
-  ],
-  "themes": [
-   "bioluminescence",
-   "underwater",
-   "exploration"
-  ],
-  "twist": "natural-explanation",
-  "endings": {
-   "scientific": {
-    "en": "Natural Resonance",
-    "ar": "الرنين الطبيعي"
-   },
-   "wholesome": {
-    "en": "Guardian of the Deep",
-    "ar": "حارس الأعماق"
-   },
-   "heroic": {
-    "en": "Heroes of the Crystal Depths",
-    "ar": "أبطال الأعماق البلورية"
-   }
-  },
-  "world": {
-   "w:crystal_resonance": {
-    "en": "Crystals tuned to the glow",
-    "ar": "بلورات متوافقة مع التوهج"
-   }
-  },
-  "nodes": 7,
-  "hash": "1ta3swn",
-  "fingerprint": [
-   "mode:classic",
-   "tone:suspense",
-   "twist:natural-explanation",
-   "theme:bioluminescence",
-   "theme:underwater",
-   "theme:exploration",
-   "loc:cave",
-   "cr:cavefish",
-   "cr:glow-frog",
-   "arc:hook>explore>challenge>encounter>climax",
-   "end:scientific",
-   "end:wholesome",
-   "end:heroic"
-  ],
-  "publishedAt": "2026-11-09"
- },
- {
   "id": "lantern-wreck",
   "v": 1,
   "status": "published",
@@ -113,7 +51,7 @@
    }
   },
   "nodes": 5,
-  "hash": "10lygrc",
+  "hash": "1xg4lh0",
   "fingerprint": [
    "mode:marine",
    "tone:mystery",
@@ -192,7 +130,7 @@
    }
   },
   "nodes": 7,
-  "hash": "14jqq82",
+  "hash": "1bynxda",
   "fingerprint": [
    "mode:classic",
    "tone:investigation",
@@ -259,7 +197,7 @@
    }
   },
   "nodes": 7,
-  "hash": "1281en6",
+  "hash": "1vhn4ue",
   "fingerprint": [
    "mode:marine",
    "tone:strange",
