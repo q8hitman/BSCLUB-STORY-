@@ -242,7 +242,7 @@ html[lang='ar'] .detail-cols b { letter-spacing: 0; font-size: .85rem; }
 .part:hover { border-color: rgba(216, 180, 106, .5); }
 .part strong { color: var(--paper); font-size: 1rem; }
 .part.has-art { padding-top: var(--s2); }
-.part-art { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; display: block; background: #0b0d10; filter: saturate(.9) brightness(.92); transition: filter .2s; }
+.part-art { width: 100%; height: 92px; object-fit: cover; border-radius: 10px; display: block; background: #0b0d10; filter: saturate(.9) brightness(.92); transition: filter .2s; }
 .part:hover .part-art, .part.on .part-art { filter: none; }
 .part.on { border-color: var(--gold); background: rgba(216, 180, 106, .09); } .part.on strong { color: var(--gold-2); }
 .part-desc { font-size: .84rem; color: var(--paper-dim); line-height: 1.5; }

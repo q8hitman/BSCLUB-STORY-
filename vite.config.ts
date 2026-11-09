@@ -11,7 +11,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['ducks/*.webp', 'favicon.svg'],
+      includeAssets: ['ducks/*.webp', 'brand/*.png', 'favicon.svg'],
       manifest: {
         name: 'BSC BioLab: What The Beast?!',
         short_name: 'BioLab',

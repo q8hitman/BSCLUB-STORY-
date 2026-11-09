@@ -1,0 +1,80 @@
+[
+{
+"id": "part-club",
+"biome": "lab",
+"event": "part",
+"tone": "scientific",
+"mystery": 0,
+"style": "specimen",
+"seed": 10100,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, circle frame, border",
+"prompt": "dark painting of the tail of an ankylosaurus dinosaur ending in a big round bony club like a hammer, side view, centred, isolated on a pure black background, dramatic rim light"
+},
+{
+"id": "part-digClaws",
+"biome": "lab",
+"event": "part",
+"tone": "scientific",
+"mystery": 0,
+"style": "specimen",
+"seed": 10105,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, circle frame, border",
+"prompt": "dark painting of the two big pink front paws of a mole with long shovel claws, digging in soil, close-up, centred, isolated on a pure black background, dramatic rim light"
+},
+{
+"id": "part-gills",
+"biome": "lab",
+"event": "part",
+"tone": "scientific",
+"mystery": 0,
+"style": "specimen",
+"seed": 10110,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, circle frame, border",
+"prompt": "dark painting of close-up of the side of a fish head with the gill cover open showing red feathery gills, centred, isolated on a pure black background, dramatic rim light"
+},
+{
+"id": "part-glowEyes",
+"biome": "lab",
+"event": "part",
+"tone": "scientific",
+"mystery": 0,
+"style": "specimen",
+"seed": 10115,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, circle frame, border",
+"prompt": "dark painting of a dark fish with two bright glowing blue-green lights shining under its eyes like lanterns, deep sea, centred, isolated on a pure black background, dramatic rim light"
+},
+{
+"id": "part-stalkEyes",
+"biome": "lab",
+"event": "part",
+"tone": "scientific",
+"mystery": 0,
+"style": "specimen",
+"seed": 10120,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, circle frame, border",
+"prompt": "dark painting of a ghost crab with its two eyes raised high on long thin stalks, close-up, centred, isolated on a pure black background, dramatic rim light"
+},
+{
+"id": "part-ink",
+"biome": "lab",
+"event": "part",
+"tone": "scientific",
+"mystery": 0,
+"style": "specimen",
+"seed": 10200,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, circle frame, border",
+"prompt": "dark painting of a squid jetting away and leaving behind a big billowing cloud of black ink in the water, centred, isolated on a pure black background, dramatic rim light"
+}
+]
