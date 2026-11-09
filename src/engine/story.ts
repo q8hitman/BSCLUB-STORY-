@@ -1,5 +1,6 @@
 // Narrative engine: deterministic planner + state machine. Pure functions over serialisable state.
 import { COMMON_BEATS } from '../content/beatsCommon';
+import { CAMP_BEATS } from '../content/beatsCamp';
 import { CLASSIC_BEATS } from '../content/beatsClassic';
 import { MARINE_BEATS } from '../content/beatsMarine';
 import { DUCK_BY_ID } from '../content/ducks';
@@ -11,7 +12,7 @@ import type {
   Outcome, PlannedBeat, StoryPlan,
 } from './types';
 
-export const ALL_BEATS: BeatTemplate[] = [...COMMON_BEATS, ...CLASSIC_BEATS, ...MARINE_BEATS];
+export const ALL_BEATS: BeatTemplate[] = [...COMMON_BEATS, ...CLASSIC_BEATS, ...MARINE_BEATS, ...CAMP_BEATS];
 export const BEAT_BY_ID: Record<string, BeatTemplate> = Object.fromEntries(ALL_BEATS.map((b) => [b.id, b]));
 
 const LAND: BiomeId[] = ['forest', 'desert', 'mountain', 'cave', 'snow', 'swamp'];
@@ -19,7 +20,7 @@ const SURFACE: BiomeId[] = ['reef', 'mudflat', 'seagrass'];
 const DEEP: BiomeId[] = ['twilight', 'midnight', 'vents'];
 export const START_ENERGY = 5;
 export const MAX_ENERGY = 7;
-const DYNAMIC_KINDS = new Set(['encounter', 'twist', 'climax']);
+export const DYNAMIC_KINDS = new Set(['encounter', 'twist', 'climax']);
 
 // ───────────────────────── conditions ─────────────────────────
 
@@ -42,16 +43,22 @@ export function condHolds(cond: Cond | undefined, d: DerivedCreature, s: Pick<Ga
 
 // ───────────────────────── planning ─────────────────────────
 
-interface Skeleton { kind: BeatTemplate['kind']; biome: BiomeId | 'auto'; template?: string }
+interface Skeleton { kind: BeatTemplate['kind']; biome: BiomeId | 'auto'; template?: string; opt?: boolean }
 
-function pickStatic(rng: Rng, mode: Mode, kind: BeatTemplate['kind'], biome: BiomeId, used: Set<string>, d: DerivedCreature): string | undefined {
-  const pool = ALL_BEATS.filter((b) => b.kind === kind && (b.mode === mode || b.mode === 'both') && b.biomes.includes(biome) && !used.has(b.id)
+/** Story length and mood chosen on the mode screen. Defaults reproduce the original full, balanced adventure. */
+export interface PlanOpts { length?: 'quick' | 'full'; tone?: 'balanced' | 'light' | 'mystery' }
+
+function pickStatic(rng: Rng, mode: Mode, kind: BeatTemplate['kind'], biome: BiomeId, used: Set<string>, d: DerivedCreature, tone?: PlanOpts['tone']): string | undefined {
+  let pool = ALL_BEATS.filter((b) => b.kind === kind && (b.mode === mode || b.mode === 'both') && b.biomes.includes(biome) && !used.has(b.id)
     && condHolds(b.requires, d, { flags: [], evidence: [], mode }, biome));
   if (!pool.length) return undefined;
+  // light-hearted runs get more quiet camp moments
+  if (tone === 'light' && kind === 'explore') { const camp = pool.filter((b) => b.id.startsWith('camp-')); if (camp.length && rng.chance(0.6)) pool = camp; }
+  if (tone === 'mystery' && kind === 'explore') pool = pool.filter((b) => !b.id.startsWith('camp-')).length ? pool.filter((b) => !b.id.startsWith('camp-')) : pool;
   const id = rng.pick(pool).id; used.add(id); return id;
 }
 
-function buildPlan(seed: number, mode: Mode, d: DerivedCreature): StoryPlan {
+function buildPlan(seed: number, mode: Mode, d: DerivedCreature, o: PlanOpts = {}): StoryPlan {
   const rng = Rng.from(seed, 'plan');
   const used = new Set<string>();
   const sk: Skeleton[] = [];
@@ -62,47 +69,48 @@ function buildPlan(seed: number, mode: Mode, d: DerivedCreature): StoryPlan {
 
   if (mode === 'classic') {
     const order = rng.shuffle(LAND);
-    const b3: BiomeId = rng.chance(0.45) ? 'ruins' : order[2];
+    const b3: BiomeId = rng.chance(o.tone === 'mystery' ? 0.7 : 0.45) ? 'ruins' : order[2];
     biomes = [order[0], order[1], b3];
-    sk.push({ kind: 'explore', biome: biomes[0] }, { kind: 'challenge', biome: biomes[0] });
+    sk.push({ kind: 'explore', biome: biomes[0] }, { kind: 'challenge', biome: biomes[0], opt: true });
     sk.push({ kind: 'encounter', biome: rng.chance(0.5) ? biomes[0] : biomes[1] });
-    if (rng.chance(0.6)) sk.push({ kind: 'explore', biome: biomes[1] });
+    if (rng.chance(0.6)) sk.push({ kind: 'explore', biome: biomes[1], opt: true });
     sk.push({ kind: 'challenge', biome: biomes[1] });
     sk.push({ kind: 'twist', biome: biomes[1] });
-    sk.push({ kind: 'explore', biome: biomes[2] });
-    if (rng.chance(0.5)) sk.push({ kind: 'challenge', biome: biomes[2] });
+    sk.push({ kind: 'explore', biome: biomes[2], opt: true });
+    if (rng.chance(0.5)) sk.push({ kind: 'challenge', biome: biomes[2], opt: true });
     sk.push({ kind: 'climax', biome: biomes[2] });
   } else {
     const s = rng.shuffle(SURFACE); const dp = rng.shuffle(DEEP);
-    legend = rng.chance(0.4); // the sailor's legend appears in some runs only
-    let finalDeep: BiomeId = rng.chance(0.35) ? 'trench' : dp[1];
+    legend = rng.chance(o.tone === 'mystery' ? 0.65 : 0.4); // the sailor's legend appears in some runs only
+    let finalDeep: BiomeId = rng.chance(o.tone === 'light' ? 0.15 : 0.35) ? 'trench' : dp[1];
     if (legend && finalDeep === 'vents') finalDeep = 'midnight'; // the legend's payoff lives in the dark
     if (finalDeep === dp[0]) dp[0] = dp.find((x) => x !== finalDeep)!;
     biomes = [s[0], s[1], dp[0], finalDeep];
-    sk.push({ kind: 'explore', biome: s[0] }, { kind: 'challenge', biome: s[0] });
+    sk.push({ kind: 'explore', biome: s[0] }, { kind: 'challenge', biome: s[0], opt: true });
     sk.push({ kind: 'encounter', biome: rng.chance(0.5) ? s[0] : s[1] });
     if (legend) sk.push({ kind: 'legend', biome: s[1] });
-    if (!legend || rng.chance(0.5)) sk.push({ kind: 'explore', biome: s[1] });
+    if (!legend || rng.chance(0.5)) sk.push({ kind: 'explore', biome: s[1], opt: true });
     sk.push({ kind: 'phase', biome: 'openSea', template: 'pm-descend' });
-    sk.push({ kind: 'explore', biome: dp[0] }, { kind: 'challenge', biome: dp[0] });
+    sk.push({ kind: 'explore', biome: dp[0], opt: true }, { kind: 'challenge', biome: dp[0] });
     sk.push({ kind: 'twist', biome: rng.chance(0.5) ? dp[0] : finalDeep });
-    if (finalDeep !== 'trench' && rng.chance(0.5)) sk.push({ kind: 'explore', biome: finalDeep });
-    else sk.push({ kind: 'challenge', biome: finalDeep });
+    if (finalDeep !== 'trench' && rng.chance(0.5)) sk.push({ kind: 'explore', biome: finalDeep, opt: true });
+    else sk.push({ kind: 'challenge', biome: finalDeep, opt: true });
     sk.push({ kind: 'climax', biome: finalDeep });
   }
 
-  const beats: PlannedBeat[] = sk.map((x, i) => {
+  const skel = o.length === 'quick' ? sk.filter((x) => !x.opt) : sk;
+  const beats: PlannedBeat[] = skel.map((x, i) => {
     const biome = x.biome as BiomeId;
     let template = x.template;
     if (!template && !DYNAMIC_KINDS.has(x.kind)) {
       const r = Rng.from(seed, `slot${i}`);
-      template = pickStatic(r, mode, x.kind, biome, used, d)
+      template = pickStatic(r, mode, x.kind, biome, used, d, o.tone)
         // Fallback: any challenge for this biome (should not be needed; tested).
         ?? pickStatic(r, mode, 'challenge', biome, used, d);
     }
     return { template: template ?? `@${x.kind}`, biome };
   });
-  return { mode, seed, hook, biomes, beats, legend };
+  return { mode, seed, hook, biomes, beats, legend, ...(o.length === 'quick' ? { length: 'quick' as const } : {}), ...(o.tone && o.tone !== 'balanced' ? { tone: o.tone } : {}) };
 }
 
 export function planTokens(p: StoryPlan): string[] {
@@ -118,14 +126,20 @@ export function jaccard(a: string[], b: string[]): number {
 
 export interface RunMemory { planTokens: string[]; pathTokens: string[]; ending: string; templates: string[]; mode: Mode }
 
+/** Candidate plan k for a seed. Pure: the same inputs give the same plan on any device (saves store only k). */
+export function planVariant(seed: number, mode: Mode, creature: CreatureConfig, k: number, d: DerivedCreature = derive(creature), o: PlanOpts = {}): StoryPlan {
+  const p = buildPlan(hashString(`${seed}#${k}`), mode, d, o);
+  p.seed = seed; p.variant = k;
+  return p;
+}
+
 /** Generates several candidate plans and keeps the one least similar to recent runs. */
-export function planStory(seed: number, mode: Mode, creature: CreatureConfig, history: RunMemory[] = [], candidates = 8): StoryPlan {
+export function planStory(seed: number, mode: Mode, creature: CreatureConfig, history: RunMemory[] = [], candidates = 8, o: PlanOpts = {}): StoryPlan {
   const d = derive(creature);
   const recent = history.filter((h) => h.mode === mode).slice(-12);
   let best: StoryPlan | null = null; let bestScore = Infinity;
   for (let k = 0; k < candidates; k++) {
-    const p = buildPlan(hashString(`${seed}#${k}`), mode, d);
-    p.seed = seed;
+    const p = planVariant(seed, mode, creature, k, d, o);
     const toks = planTokens(p);
     const score = recent.length ? Math.max(...recent.map((h) => jaccard(toks, h.planTokens))) : 0;
     if (score < bestScore - 1e-9) { best = p; bestScore = score; }
@@ -136,14 +150,21 @@ export function planStory(seed: number, mode: Mode, creature: CreatureConfig, hi
 
 // ───────────────────────── runtime ─────────────────────────
 
-export interface StartOptions { mode: Mode; seed: number; duck: string; player: string; creature: CreatureConfig; history?: RunMemory[] }
+export interface StartOptions { mode: Mode; seed: number; duck: string; player: string; creature: CreatureConfig; history?: RunMemory[]; opts?: PlanOpts }
 
 export function startGame(o: StartOptions): GameState {
-  const plan = planStory(o.seed, o.mode, o.creature, o.history ?? []);
-  const avoid = (o.history ?? []).filter((h) => h.mode === o.mode).slice(-4).flatMap((h) => h.templates);
+  const plan = planStory(o.seed, o.mode, o.creature, o.history ?? [], 8, o.opts);
+  // only runtime-resolved kinds read this list, so keep just those (keeps saves small)
+  const avoid = [...new Set((o.history ?? []).filter((h) => h.mode === o.mode).slice(-4).flatMap((h) => h.templates))].filter((id) => DYNAMIC_KINDS.has(BEAT_BY_ID[id]?.kind ?? ''));
+  return startFromPlan({ ...o, plan, avoid });
+}
+
+/** Starts a run from an explicit plan and anti-repetition list (used to rebuild a saved run on another device). */
+export function startFromPlan(o: Omit<StartOptions, 'history'> & { plan: StoryPlan; avoid: string[]; pins?: GameState['pins'] }): GameState {
   const s: GameState = {
-    version: 1, mode: o.mode, seed: o.seed, duck: o.duck, player: o.player.slice(0, 24), creature: o.creature, plan,
-    index: 0, stage: 'beat', energy: START_ENERGY, trust: 0, flags: [], evidence: [], discoveries: [], rel: {}, log: [], avoid,
+    version: 1, mode: o.mode, seed: o.seed, duck: o.duck, player: o.player.slice(0, 24), creature: o.creature, plan: o.plan,
+    index: 0, stage: 'beat', energy: START_ENERGY, trust: 0, flags: [], evidence: [], discoveries: [], rel: {}, log: [], avoid: o.avoid,
+    ...(o.pins ? { pins: o.pins } : {}),
   };
   return resolveCurrent(s);
 }

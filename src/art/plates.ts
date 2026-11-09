@@ -24,6 +24,7 @@ const KIND_EVENTS: Record<BeatTemplate['kind'], string[]> = {
 const TEMPLATE_EVENTS: Record<string, string[]> = {
   cross: ['challenge'], hide: ['suspense', 'encounter'], rescue: ['challenge', 'encounter'], clue: ['evidence', 'discovery'],
   heat: ['suspense', 'challenge'], cold: ['challenge', 'suspense'], dark: ['suspense'], bog: ['challenge', 'suspense'], pressure: ['suspense'],
+  'camp-land': ['camp', 'discovery'], 'camp-boat': ['camp', 'discovery'], 'camp-sub': ['camp', 'discovery'],
 };
 
 export function plateUrl(id: string) { return `${import.meta.env?.BASE_URL ?? '/'}scenes/${id}.webp`; }

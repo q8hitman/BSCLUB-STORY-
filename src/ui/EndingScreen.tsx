@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { PART_BY_ID } from '../content/parts';
 import { SLOTS, type Ending, type GameState, type Lang } from '../engine/types';
 import { renderShareCard } from '../share/shareCard';
@@ -6,22 +6,33 @@ import { t } from '../i18n';
 import { Btn, CaptureCreature, CreatureArt, Logos } from './common';
 import { TONE_EXPRESSION } from '../share/shareCard';
 import { PaintedScene } from './Play';
-import { platesForRun, plateUrl } from '../art/plates';
+import { PLATE_LIST, platesForRun, plateUrl } from '../art/plates';
 import { BEAT_BY_ID } from '../engine/story';
 import { u } from './uiText';
+import { highlights } from '../engine/clues';
+import { ACHIEVEMENTS } from '../engine/journal';
 
 const TONE: Record<Ending['tone'], { en: string; ar: string }> = {
   heroic: { en: 'Heroic', ar: 'بطولية' }, comedic: { en: 'Comedic', ar: 'كوميدية' }, bittersweet: { en: 'Bittersweet', ar: 'حلوة ومُرّة' },
   mysterious: { en: 'Mysterious', ar: 'غامضة' }, scientific: { en: 'Scientific', ar: 'علمية' }, wholesome: { en: 'Wholesome', ar: 'دافية' },
 };
 
-export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay }: { game: GameState; ending: Ending; lang: Lang; reduced: boolean; onNew: () => void; onReplay: () => void }) {
+export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unlocked = [], onPassport, onJournal }: { game: GameState; ending: Ending; lang: Lang; reduced: boolean; onNew: () => void; onReplay: () => void; unlocked?: string[]; onPassport?: () => void; onJournal?: () => void }) {
   const last = game.plan.beats[game.plan.beats.length - 1];
-  const tonePlate = game.mode === 'marine' && (ending.tone === 'mysterious' || ending.tone === 'bittersweet') ? 'ending-deep-farewell'
-    : ending.tone === 'comedic' || ending.tone === 'scientific' ? 'ending-lab-celebration'
-    : game.mode === 'classic' && (ending.tone === 'heroic' || ending.tone === 'wholesome' || ending.tone === 'mysterious') ? 'ending-sunrise-wild' : null;
+  // ending illustration by mode + tone (several per mood; picked per run, only plates that passed review)
+  const ENDING_ART: Record<string, string[]> = {
+    'marine:mysterious': ['ending-deep-farewell', 'ending-deep-glow'], 'marine:bittersweet': ['ending-deep-farewell'],
+    'marine:heroic': ['ending-reef-healing', 'ending-deep-glow'], 'marine:wholesome': ['ending-reef-healing'],
+    'classic:mysterious': ['ending-mystery-door', 'ending-sunrise-wild', 'ending-starry-desert'], 'classic:heroic': ['ending-sunrise-wild', 'ending-starry-desert'],
+    'classic:wholesome': ['ending-sunrise-wild', 'ending-lab-return'], 'classic:bittersweet': ['ending-starry-desert', 'ending-lab-return'],
+    'any:comedic': ['ending-lab-celebration', 'ending-fair-trophy'], 'any:scientific': ['ending-lab-celebration', 'ending-lab-return', 'ending-fair-trophy'],
+  };
+  const pool = (ENDING_ART[`${game.mode}:${ending.tone}`] ?? ENDING_ART[`any:${ending.tone}`] ?? []).filter((id) => PLATE_LIST.some((p) => p.id === id));
+  const tonePlate = pool.length ? pool[game.seed % pool.length] : null;
   const runPlate = platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.plan.beats.length - 1).filter(Boolean).pop() ?? null;
   const [showName, setShowName] = useState(!!game.player);
+  const memories = useMemo(() => highlights(game, 6), [game]);
+  const runPlates = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.plan.beats.length - 1), [game]);
   const [busy, setBusy] = useState(false);
   const [png, setPng] = useState<{ url: string; blob: Blob } | null>(null);
   const [err, setErr] = useState<string | null>(null);
@@ -63,6 +74,22 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay }: {
             <ul className="highlights">{ending.highlights.map((h, i) => <li key={i} className={i < 2 ? 'stat' : 'sci'}>{h[lang]}</li>)}</ul>
           </div>
         </div>
+        <section className="memories" aria-label={lang === 'ar' ? 'ذكريات المغامرة' : 'Adventure memories'}>
+          <p className="kicker">{lang === 'ar' ? 'ذكريات المغامرة' : 'Adventure memories'}</p>
+          <ol className="mem-strip">{memories.map((m) => (
+            <li key={m.index} className={m.success ? 'ok' : 'no'}>
+              <div className="mem-img">{runPlates[m.index] ? <img src={plateUrl(runPlates[m.index]!.id)} alt="" loading="lazy" /> : <span aria-hidden="true">✦</span>}</div>
+              <b>{m.place[lang]}</b>
+              <small>{m.choice[lang]}</small>
+              <i aria-label={m.success ? t('success', lang) : t('setback', lang)}>{m.success ? '✓' : '↯'}{m.clues.length ? ` ◆${m.clues.length}` : ''}</i>
+            </li>
+          ))}</ol>
+        </section>
+        {unlocked.length > 0 && (
+          <section className="unlocked" aria-live="polite">
+            {unlocked.map((id) => { const a = ACHIEVEMENTS.find((x) => x.id === id); return a && <span key={id} className="ach-pop">★ {a.title[lang]}</span>; })}
+          </section>
+        )}
         <footer className="ending-credits">
           <Logos marine={game.mode === 'marine'} />
           {game.mode === 'marine' && <p className="credit-marine">{t('collab', lang)}</p>}
@@ -88,6 +115,10 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay }: {
               </div>
             </div>
           )}
+        </div>
+        <div className="keep-row">
+          {onPassport && <Btn onClick={onPassport}>▦ {lang === 'ar' ? 'جواز المستكشف (QR)' : 'Explorer Passport (QR)'}</Btn>}
+          {onJournal && <Btn variant="ghost" onClick={onJournal}>{lang === 'ar' ? 'دفتر المستكشف' : 'Explorer Journal'}</Btn>}
         </div>
         <div className="replay">
           <Btn variant="ghost" onClick={onReplay}>{t('sameCreature', lang)}</Btn>

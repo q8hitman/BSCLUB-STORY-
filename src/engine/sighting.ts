@@ -17,3 +17,26 @@ export function sightingFor(s: GameState, recentlySeen: string[] = []): { index:
   if (!candidates.length) return null;
   return r.weighted(candidates, (c) => (recentlySeen.includes(c.legend.id) ? 0.3 : 1));
 }
+
+// ── Hidden encounters (content/rare.ts) ──
+import { availableRare, type RareCreature } from '../content/rare';
+import { derive } from './creature';
+export const RARE_CHANCE = 0.035; // ≈ 1 run in 5 has a hidden encounter
+
+/** The run's hidden encounter, if any: at most one per run, only where the place fits AND the player's creature has a
+ *  sense or body part that could notice it. Pure (seed + resolved beats), so it is identical on every device. */
+export function rareFor(s: GameState): { index: number; rare: RareCreature } | null {
+  const pool = availableRare(); if (!pool.length) return null;
+  const caps = derive(s.creature).caps;
+  const upto = s.stage === 'ending' ? s.log.length : s.stage === 'outcome' ? s.index + 1 : s.index;
+  const legendAt = s.pins?.sighting?.[0] ?? -1;
+  for (let i = 2; i < upto; i++) {
+    if (i === legendAt) continue;
+    const r = Rng.from(s.seed, `rare${i}`);
+    if (!r.chance(RARE_CHANCE)) continue;
+    const biome = s.plan.beats[i].biome;
+    const fits = pool.filter((c) => c.biomes.includes(biome) && c.notice.some((n) => caps.has(n)));
+    if (fits.length) return { index: i, rare: r.pick(fits) };
+  }
+  return null;
+}

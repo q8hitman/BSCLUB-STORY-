@@ -143,41 +143,65 @@ describe('Duck Radio help (no perks)', () => {
     const d = (await import('../src/content/ducks')).DUCKS[0] as unknown as Record<string, unknown>;
     expect(d.bonusStat).toBeUndefined(); expect(d.perk).toBeUndefined();
   });
-  it('every hint points at a choice with the best real odds', async () => {
-    const { hintFor } = await import('../src/engine/radio');
-    let hints = 0;
+  it('hunches come from the duck’s temperament, are hedged, and are sometimes NOT the best option', async () => {
+    const { hunchFor } = await import('../src/engine/radio');
+    const { TEMPERAMENT } = await import('../src/content/duckRadio');
+    let hunches = 0, notBest = 0;
     for (let i = 0; i < 300; i++) {
       let s = startGame({ mode: i % 2 ? 'marine' : 'classic', seed: i, duck: 'camel', player: '', creature: simulateRun(i, 'classic').state.creature });
       while (s.stage !== 'ending') {
         const v = currentBeat(s);
-        for (const duck of ['abdullah', 'camel', 'roaa', 'zahra']) {
-          const h = hintFor(s, duck);
+        for (const duck of ['abdullah', 'camel', 'roaa', 'zahra', 'kiraz']) {
+          const h = hunchFor(s, duck);
           if (!h) continue;
-          hints++;
+          hunches++;
           const best = Math.max(...v.choices.map((c) => c.odds ?? 1));
-          const hinted = v.choices.find((c) => c.choice.id === h.choice)!;
-          expect(hinted.odds ?? 1, `${v.template.id}`).toBeCloseTo(best, 9);
+          const picked = v.choices.find((c) => c.choice.id === h.choice)!;
+          expect(picked.choice.style).toBe(TEMPERAMENT[duck]);
+          if ((picked.odds ?? 1) < best - 1e-9) notBest++;
           expect(h.text.en + h.text.ar).not.toMatch(/[{}]/);
         }
         s = advance(choose(s, v.choices[i % v.choices.length].choice.id));
       }
     }
-    expect(hints).toBeGreaterThan(200);
+    expect(hunches).toBeGreaterThan(200);
+    expect(notBest / hunches).toBeGreaterThan(0.1); // predictions can be wrong: no guaranteed answers
   });
-  it('struggling players get hints; thriving players get praise or real facts', async () => {
+  it('specialty field notes are deterministic, from the speaking duck’s own field, and never change the outcome', async () => {
+    const { fieldNotes, radio } = await import('../src/engine/radio');
+    let notes = 0;
+    for (let i = 0; i < 200; i++) {
+      let s = startGame({ mode: i % 2 ? 'marine' : 'classic', seed: i, duck: DUCKS[i % DUCKS.length].id, player: '', creature: simulateRun(i, 'classic').state.creature });
+      const plain = s;
+      while (s.stage !== 'ending') {
+        const v = currentBeat(s);
+        s = choose(s, v.choices[(i + s.index) % v.choices.length].choice.id);
+        const n = fieldNotes(s)[s.index];
+        const lines = radio(s, v.template.kind, v.biome);
+        if (n) { notes++; expect(lines[0]).toMatchObject({ kind: 'note', noteId: n.id, duck: n.duck }); expect(n.id.startsWith(n.duck)).toBe(true); }
+        s = advance(s);
+      }
+      const all = Object.values(fieldNotes(s)).map((n) => n.id);
+      expect(new Set(all).size).toBe(all.length);
+      expect(plain.energy).toBe(5); // notes live in the journal only; game state has no note fields
+    }
+    expect(notes).toBeGreaterThan(150);
+  });
+  it('struggling players sometimes hear a hunch; thriving players get praise or real facts', async () => {
     const { radio, struggling, thriving } = await import('../src/engine/radio');
     let strugglingBeats = 0, helped = 0, thrivingOutcomes = 0, cheered = 0;
     for (let i = 0; i < 300; i++) {
       let s = startGame({ mode: i % 2 ? 'marine' : 'classic', seed: i, duck: 'kiraz', player: '', creature: simulateRun(i, 'classic').state.creature });
       while (s.stage !== 'ending') {
         const v = currentBeat(s);
-        if (struggling(s)) { strugglingBeats++; if (radio(s, v.template.kind, v.biome).some((l) => l.kind === 'hint')) helped++; }
+        if (struggling(s)) { strugglingBeats++; if (radio(s, v.template.kind, v.biome).some((l) => l.kind === 'hunch')) helped++; }
         s = choose(s, v.choices[(i + s.index) % v.choices.length].choice.id);
-        if (thriving(s)) { thrivingOutcomes++; if (radio(s, v.template.kind, v.biome).some((l) => l.kind === 'praise' || l.kind === 'fact')) cheered++; }
+        if (thriving(s)) { thrivingOutcomes++; if (radio(s, v.template.kind, v.biome).some((l) => l.kind === 'praise' || l.kind === 'fact' || l.kind === 'note')) cheered++; }
         s = advance(s);
       }
     }
-    expect(helped / strugglingBeats).toBeGreaterThan(0.4);
+    expect(helped / strugglingBeats).toBeGreaterThan(0.15);
+    expect(helped / strugglingBeats).toBeLessThan(0.7); // not constant interruptions
     expect(cheered / thrivingOutcomes).toBeGreaterThan(0.5);
   });
 });

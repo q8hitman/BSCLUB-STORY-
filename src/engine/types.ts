@@ -143,6 +143,12 @@ export interface StoryPlan {
   beats: PlannedBeat[];
   twist?: string;
   legend: boolean;
+  /** Which candidate plan (0..7) planStory kept for this seed; lets a save rebuild the plan from (seed, k). */
+  variant?: number;
+  /** 'quick' = Quick Story (fewer scenes); absent = Full Adventure. */
+  length?: 'quick';
+  /** Mood of the run; absent = balanced. */
+  tone?: 'light' | 'mystery';
 }
 
 export interface LogEntry {
@@ -175,6 +181,10 @@ export interface GameState {
   /** Template ids used in recent runs; runtime picks avoid them (anti-repetition). */
   avoid?: string[];
   lastOutcome?: { text: L10n; mood: DuckMood; fx?: string; success: boolean; partLine?: L10n };
+  /** Things decided from this device's history at the start of the run, pinned so the run plays out the same on any device. */
+  pins?: { sighting: [number, string] | null; recentEndings: string[] };
+  /** AI re-wording of the outcome on screen (beat index + language + text), kept so a restored save shows the same words. */
+  ai?: { i: number; lang: Lang; text: string };
 }
 
 export interface Ending {

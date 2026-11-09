@@ -77,7 +77,7 @@ export const ARCHETYPES: Archetype[] = [
     epilogue: L('The crew gives {name} a medal made from a bottle cap. It wears it every day.', 'منح الطاقمُ {name} وساماً مصنوعاً من غطاء قارورة، وهو يرتديه كل يوم.') },
   { id: 'eye-to-eye', mode: 'marine', tone: 'wholesome', score: (s) => (has(s, 'twist:squid') ? 5 : 0) + (has(s, 'squid-wave') ? 2 : 0),
     titles: [L('Eye to Eye', 'عيناً بعين'), L('The Squid Said Hi', 'الحبّار ألقى التحية')],
-    epilogue: L('Your squid footage becomes the most-watched video in Marine Science Club history. {name} narrates the sequel.', 'صار مقطع الحبّار الأكثر مشاهدةً في تاريخ نادي علوم البحار، وسيتولّى {name} التعليق على الجزء الثاني.') },
+    epilogue: L('Your squid footage becomes the most-watched video in Marine Science Club history. {name} stars in the sequel.', 'صار مقطع الحبّار الأكثر مشاهدةً في تاريخ نادي علوم البحار، وسيكون {name} نجم الجزء الثاني.') },
   { id: 'vent-day', mode: 'marine', tone: 'scientific', score: (s) => (s.evidence.includes('new-vent-sample') ? 6 : 0) + (has(s, 'twist:probe') ? 3 : 0),
     titles: [L('Born Today: One Hydrothermal Vent', 'وُلدت اليوم: فتحةٌ حرارية'), L('Deep Data Drop', 'كنزٌ من بيانات الأعماق')],
     epilogue: L('Scientists around the world ask for your samples. The BSC and Marine Science Club start a joint deep-sea project.', 'طلب علماء من أنحاء العالم عيّناتكم، وبدأ النادي ونادي علوم البحار مشروعاً مشتركاً لدراسة الأعماق.') },
@@ -202,7 +202,9 @@ function decisionAt(s: GameState, i: number): L10n | null {
 /** recentEndings lowers (never removes) the chance of repeating an ending the player just saw. */
 export function composeEnding(s: GameState, recentEndings: string[] = []): Ending {
   const rng = Rng.from(s.seed, 'ending');
-  const elig = eligibleArchetypes(s).map((x) => ({ ...x, score: x.score * (recentEndings.includes(x.a.id) ? 0.6 : 1) }));
+  // the run's chosen mood nudges (never forces) which kind of ending fits best
+  const moodBoost = (tone: string) => (s.plan.tone === 'light' && (tone === 'comedic' || tone === 'wholesome')) || (s.plan.tone === 'mystery' && (tone === 'mysterious' || tone === 'bittersweet')) ? 1.35 : 1;
+  const elig = eligibleArchetypes(s).map((x) => ({ ...x, score: x.score * (recentEndings.includes(x.a.id) ? 0.6 : 1) * moodBoost(x.a.tone) }));
   elig.sort((a, b) => b.score - a.score);
   const top = elig[0].a;
   const pb = s.plan.beats;

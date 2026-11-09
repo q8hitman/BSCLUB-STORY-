@@ -61,3 +61,16 @@ export function CaptureCreature({ creature, lang }: { creature: CreatureConfig; 
     </button>
   );
 }
+
+/** Soft ambient particles (spores, dust, bubbles or glowing specks). Pure CSS; hidden when motion is reduced. */
+export function Particles({ kind = 'spores', count = 26 }: { kind?: 'spores' | 'dust' | 'bubbles' | 'specks'; count?: number }) {
+  const dots = useMemo(() => Array.from({ length: count }, (_, i) => {
+    const r = (n: number) => ((Math.sin((i + 1) * 9301 + n * 49297) + 1) / 2);
+    return { left: `${(r(1) * 100).toFixed(1)}%`, delay: `${(-r(2) * 18).toFixed(1)}s`, dur: `${(12 + r(3) * 14).toFixed(1)}s`, size: `${(2 + r(4) * 4).toFixed(1)}px`, drift: `${((r(5) - 0.5) * 80).toFixed(0)}px`, o: (0.25 + r(6) * 0.6).toFixed(2) };
+  }), [count]);
+  return (
+    <div className={`particles p-${kind}`} aria-hidden="true">
+      {dots.map((d, i) => <i key={i} style={{ left: d.left, animationDelay: d.delay, animationDuration: d.dur, width: d.size, height: d.size, ['--drift' as string]: d.drift, ['--o' as string]: d.o }} />)}
+    </div>
+  );
+}

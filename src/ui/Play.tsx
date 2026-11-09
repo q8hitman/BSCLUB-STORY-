@@ -6,7 +6,10 @@ import { ambient } from '../audio';
 import { DUCK_BY_ID, resolveDuckId } from '../content/ducks';
 import { radio } from '../engine/radio';
 import { CreaturePanel } from './CreaturePanel';
-import { sightingFor } from '../engine/sighting';
+import { rareFor, sightingFor } from '../engine/sighting';
+import { LEGENDS } from '../content/legends';
+import { rareArt } from '../content/rare';
+import { CLUE_KIND, clueKind, moments } from '../engine/clues';
 import { BIOMES, FACT_BY_ID } from '../content/world';
 import { aiAvailable, narrate } from '../engine/ai';
 import { Rng } from '../engine/rng';
@@ -14,7 +17,7 @@ import { MAX_ENERGY, advance, choose, currentBeat } from '../engine/story';
 import type { BiomeId, DuckMood, GameState, Lang, Style } from '../engine/types';
 import type { Settings } from '../engine/storage';
 import { t } from '../i18n';
-import { Btn, CreatureArt, Logos, Typewriter } from './common';
+import { Btn, CreatureArt, Logos, Particles, Typewriter } from './common';
 import { animalArt } from '../art/animalArt';
 import { ANIMAL_BY_ID } from '../content/bestiary';
 import { ROLE_LABEL, u } from './uiText';
@@ -69,10 +72,13 @@ export function PaintedScene({ biome, props, seed, reduced, className = '', plat
   );
 }
 
-export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], onSighting }: { game: GameState; setGame: (g: GameState) => void; settings: Settings; lang: Lang; onQuit: () => void; legendsSeen?: string[]; onSighting?: (id: string) => void }) {
+export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], onSighting, onPassport }: { game: GameState; setGame: (g: GameState) => void; settings: Settings; lang: Lang; onQuit: () => void; legendsSeen?: string[]; onSighting?: (id: string) => void; onPassport?: () => void }) {
   const view = useMemo(() => (game.stage === 'beat' || game.stage === 'outcome' ? currentBeat(game) : null), [game]);
   const [typed, setTyped] = useState(false);
-  const [aiText, setAiText] = useState<string | null>(null);
+  // AI wording lives in the game state, so a Passport save carries exactly the words on screen
+  const aiText = game.ai && game.ai.i === game.index && game.stage === 'outcome' && game.ai.lang === lang ? game.ai.text : null;
+  const latest = useRef(game); latest.current = game;
+  const [board, setBoard] = useState(false);
   const [newFacts, setNewFacts] = useState<string[]>([]);
   const [confirmQuit, setConfirmQuit] = useState(false);
   // Mission briefing before the first scene: premise, the run's goal and how to play (the marine collaboration is introduced here too).
@@ -89,33 +95,40 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
     const before = new Set(game.discoveries);
     const next = choose(game, id);
     setNewFacts(next.discoveries.filter((d) => !before.has(d)));
-    setAiText(null);
     if (!settings.muted) ambient.blip(!!next.lastOutcome?.success);
     setGame(next);
     if (settings.ai && aiAvailable() && next.lastOutcome) {
       const base = next.lastOutcome.text[lang];
       narrate({ lang, creature: next.creature, place: BIOMES[currentBeat(next).biome].name[lang], base, success: next.lastOutcome.success, recent: recent.current }, base)
-        .then((r) => { if (r.source === 'ai') setAiText(r.text); recent.current.push(r.text); });
+        .then((r) => { if (r.source === 'ai' && latest.current.index === next.index && latest.current.stage === 'outcome') setGame({ ...latest.current, ai: { i: next.index, lang, text: r.text } }); recent.current.push(r.text); });
     }
   }, [game, setGame, settings.ai, settings.muted, lang]);
 
-  const onContinue = useCallback(() => { setNewFacts([]); setAiText(null); setGame(advance(game)); }, [game, setGame]);
+  const onContinue = useCallback(() => { setNewFacts([]); setGame(advance(game)); }, [game, setGame]);
 
   // Keyboard: 1–4 pick a choice, Enter/Space continues.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!view || confirmQuit || brief || (e.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (!view || confirmQuit || brief || board || (e.target as HTMLElement)?.tagName === 'INPUT') return;
       if (game.stage === 'beat' && typed) { const n = Number(e.key); if (n >= 1 && n <= view.choices.length) onChoose(view.choices[n - 1].choice.id); }
       else if (game.stage === 'outcome' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onContinue(); }
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
-  }, [view, game.stage, typed, confirmQuit, brief, onChoose, onContinue]);
+  }, [view, game.stage, typed, confirmQuit, brief, board, onChoose, onContinue]);
 
   const plate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const lines = useMemo(() => (view ? radio(game, view.template.kind, view.biome) : []), [game, view]);
   // seen-list is read once per run so the chosen sighting stays stable
-  const sighting = useMemo(() => sightingFor(game, legendsSeen), [game.seed, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
+  // pinned at the start of the run (same on every device); older saves fall back to this device's history
+  const sighting = useMemo(() => {
+    const pin = game.pins?.sighting;
+    if (game.pins) { const lg = pin && LEGENDS.find((l) => l.id === pin[1]); return lg ? { index: pin![0], legend: lg } : null; }
+    return sightingFor(game, legendsSeen);
+  }, [game.seed, game.plan, game.pins]); // eslint-disable-line react-hooks/exhaustive-deps
+  const rare = useMemo(() => rareFor(game), [game]);
+  const rareNow = rare && game.stage === 'outcome' && game.index === rare.index ? rare.rare : null;
+  const clues = useMemo(() => moments(game).filter((m) => m.clues.length), [game]);
   const glimpse = sighting && game.stage === 'outcome' && game.index === sighting.index ? sighting.legend : null;
   useEffect(() => { if (glimpse) onSighting?.(glimpse.id); }, [glimpse?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -132,6 +145,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   return (
     <section className={`screen play vn ${isDeep ? 'is-deep' : ''}`}>
       <PaintedScene biome={view.biome} props={view.template.props} seed={game.seed + game.index} reduced={reduced} plate={plate ? plateUrl(plate.id) : null} />
+      <Particles kind={['reef', 'seagrass', 'mudflat', 'openSea'].includes(view.biome) ? 'bubbles' : ['twilight', 'midnight', 'vents', 'trench', 'cave'].includes(view.biome) ? 'specks' : ['desert', 'ruins', 'mountain'].includes(view.biome) ? 'dust' : 'spores'} count={18} />
       <div className="letterbox top" aria-hidden="true" /><div className="letterbox bottom" aria-hidden="true" />
 
       <header className="vn-hud" role="status">
@@ -143,8 +157,9 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           <span className="vn-progress">{game.index + 1}/{total}</span>
           <span className="chapter" aria-label={`${game.index + 1}/${total}`}>{Array.from({ length: total }, (_, i) => <i key={i} className={i < game.index ? 'done' : i === game.index ? 'now' : ''} />)}</span>
           <span className="pips" title={t('energy', lang)} aria-label={`${t('energy', lang)} ${game.energy}/${MAX_ENERGY}`}>{Array.from({ length: MAX_ENERGY }, (_, i) => <i key={i} className={i < game.energy ? 'on' : ''} />)}</span>
-          <span className="stat" title={t('evidence', lang)}>◆ {game.evidence.length}</span>
+          <button className="stat stat-btn" title={lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'} onClick={() => setBoard(true)}>◆ {game.evidence.length}</button>
           <span className="stat" title={t('discoveries', lang)}>✦ {game.discoveries.length}</span>
+          {onPassport && <button className="ghost-icon passport-btn" aria-label={lang === 'ar' ? 'جواز المستكشف' : 'Explorer Passport'} title={lang === 'ar' ? 'جواز المستكشف · امسح وأكمل من جوالك' : 'Explorer Passport · scan to continue on your phone'} onClick={onPassport}>▦</button>}
           <button className="ghost-icon" aria-label={t('quit', lang)} onClick={() => setConfirmQuit(true)}>✕</button>
         </div>
       </header>
@@ -173,6 +188,27 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         );
       })()}
 
+      {board && (() => {
+        const goal = BEAT_BY_ID[game.plan.beats[0].template]?.goal;
+        return (
+          <div className="mystery-board" role="dialog" aria-modal="true" aria-label={lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'} onClick={() => setBoard(false)}>
+            <div className="mb-inner" onClick={(e) => e.stopPropagation()}>
+              <header><p className="kicker">{lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'}</p>{goal && <h3>{goal[lang].replace(/\{name\}/g, game.creature.name)}</h3>}</header>
+              {clues.length ? (
+                <ol className="mb-pins">{clues.map((m) => m.clues.map((id) => { const k = CLUE_KIND[clueKind(id)]; return (
+                  <li key={id} className={`pin kind-${clueKind(id)}`}>
+                    <span className="pin-ico" aria-hidden="true">{k.icon}</span>
+                    <div><b>{k.label[lang]} · {m.place[lang]}</b><small>{lang === 'ar' ? 'وُجد حين: ' : 'Found when: '}{m.choice[lang]}</small></div>
+                  </li>
+                ); }))}</ol>
+              ) : <p className="hint">{lang === 'ar' ? 'لا أدلة بعد. كل دليل تجدونه سيُثبَّت هنا.' : 'No clues yet. Every clue you find will be pinned here.'}</p>}
+              <p className="mb-q">{lang === 'ar' ? `الأسئلة المفتوحة: ما الذي يربط هذه الأدلة؟ النهاية ستعتمد على ما جمعتموه (${game.evidence.length} أدلة).` : `Open question: what links these clues? The ending depends on what you collect (${game.evidence.length} so far).`}</p>
+              <Btn variant="ghost" onClick={() => setBoard(false)}>{t('close', lang)}</Btn>
+            </div>
+          </div>
+        );
+      })()}
+
       {confirmQuit && (
         <div className="vn-confirm" role="alertdialog">
           <p>{t('confirmQuit', lang)}</p>
@@ -191,9 +227,9 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         {lines.length > 0 && (
           <div className="duck-radio" aria-label="BSC Duck Radio">
             {lines.map((l, i) => { const d = DUCK_BY_ID[l.duck]; return d && (
-              <div key={i} className={`radio-line kind-${l.kind} ${i ? 'reply' : ''}`}>
+              <div key={`${game.index}${game.stage}${i}`} className={`radio-line kind-${l.kind} ${i ? 'reply' : ''}`}>
                 <img src={`${import.meta.env.BASE_URL}ducks/${d.expressions[l.expression]}`} alt="" width={56} height={64} />
-                <div><b>{d.name[lang]}</b><span>{l.text[lang]}</span></div>
+                <div><b>{d.name[lang]}{l.kind === 'note' && <em className="radio-tag">{lang === 'ar' ? 'ملاحظة ميدانية · أُضيفت إلى الدفتر' : 'Field note · added to journal'}</em>}{l.kind === 'hunch' && <em className="radio-tag hunch">{lang === 'ar' ? 'مجرّد تخمين' : 'Just a hunch'}</em>}</b><span>{l.text[lang]}</span></div>
               </div>
             ); })}
           </div>
@@ -214,6 +250,16 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           </div>
         ) : (
           <>
+            {rareNow && (
+              <aside className="glimpse rare-glimpse" aria-label={rareNow.name[lang]}>
+                <img src={`${import.meta.env.BASE_URL}scenes/${rareArt(rareNow.id)}.webp`} alt="" width={512} height={512} />
+                <div>
+                  <span className={`tag fiction-tag kind-${rareNow.kind}`}>{lang === 'ar' ? (rareNow.kind === 'real' ? 'لقاء نادر · حيوان حقيقي' : rareNow.kind === 'myth' ? 'لقاء نادر · مستوحى من الأساطير' : 'لقاء نادر · كائن خيالي') : (rareNow.kind === 'real' ? 'Rare encounter · real animal' : rareNow.kind === 'myth' ? 'Rare encounter · myth-inspired' : 'Rare encounter · fantasy')}</span>
+                  <p>{rareNow.glimpse[lang].replace(/\{name\}/g, game.creature.name)}</p>
+                  <small>{lang === 'ar' ? `${rareNow.name.ar}، لاحظه ${game.creature.name} بحواسّه. سيُسجَّل في الدفتر.` : `${rareNow.name.en} — ${game.creature.name}’s senses noticed it. It will go into the journal.`}</small>
+                </div>
+              </aside>
+            )}
             {glimpse && (
               <aside className="glimpse" aria-label={glimpse.name[lang]}>
                 <img src={`${import.meta.env.BASE_URL}scenes/${glimpse.art}.webp`} alt="" width={672} height={384} />

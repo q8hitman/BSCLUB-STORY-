@@ -11,7 +11,7 @@ const U = {
   briefHow: { en: 'How to play', ar: 'طريقة اللعب' },
   briefHow1: { en: 'Each scene gives you four choices. {name}’s body parts make some choices easier and others harder.', ar: 'في كل مشهد أربعة خيارات. أعضاء {name} تجعل بعض الخيارات أسهل وبعضها أصعب.' },
   briefHow2: { en: 'Collect evidence ◆ and discoveries ✦. The ending is built from your decisions and what you found.', ar: 'اجمعوا الأدلة ◆ والاكتشافات ✦. النهاية تُبنى على قراراتكم وعلى ما وجدتموه.' },
-  briefHow3: { en: 'Watch the energy bar. Club members (the ducks) follow you over the radio with comments and hints — but the decisions are yours.', ar: 'انتبهوا لشريط الطاقة. أعضاء النادي (البط) يرافقونكم عبر اللاسلكي بالتعليقات والتلميحات، لكن القرار قراركم.' },
+  briefHow3: { en: 'Watch the energy bar. Club members (the ducks) follow you over the radio: they react, guess (sometimes wrongly) and note real science — but the decisions are yours. Tap ▦ any time for your Explorer Passport QR.', ar: 'انتبهوا لشريط الطاقة. أعضاء النادي (البط) يرافقونكم عبر اللاسلكي: يتفاعلون ويخمّنون (وقد يخطئون) ويدوّنون حقائق علمية، لكن القرار قراركم. اضغطوا ▦ في أي وقت للحصول على رمز جواز المستكشف.' },
   briefStart: { en: 'Start the mission', ar: 'ابدأ المهمة' },
   // companion select
   companion: { en: 'Companion', ar: 'الرفيق' },
@@ -41,6 +41,8 @@ const U = {
   sea: { en: 'Sea expedition', ar: 'رحلة بحرية' },
   classicScenes: { en: '8–10 scenes', ar: '٨–١٠ مشاهد' },
   marineScenes: { en: '11–12 scenes', ar: '١١–١٢ مشهدًا' },
+  classicScenesQ: { en: '6 scenes', ar: '٦ مشاهد' },
+  marineScenesQ: { en: '7–8 scenes', ar: '٧–٨ مشاهد' },
   classicPlaces: { en: '3 habitats', ar: '٣ بيئات' },
   marineJourney: { en: 'Surface → The Deep', ar: 'السطح ← الأعماق' },
   fourChoices: { en: '4 choices each', ar: '٤ خيارات لكل مشهد' },

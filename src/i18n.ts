@@ -9,7 +9,7 @@ const S = {
   club: { en: 'Biological Sciences Club · Kuwait University', ar: 'نادي العلوم البيولوجية · جامعة الكويت' },
   credit: { en: 'تصميم اللعبة: عبدالله شويع - نادي العلوم البيولوجية', ar: 'تصميم اللعبة: عبدالله شويع - نادي العلوم البيولوجية' },
   chooseDuck: { en: 'Choose your companion', ar: 'اختر رفيقك في الرحلة' },
-  chooseDuckHint: { en: 'Companions don’t change your odds — each one simply comments, reacts and wonders aloud in their own way, and may drop a small hint when you need it.', ar: 'الرفقاء لا يغيّرون فرصك؛ كلٌّ منهم يعلّق ويتفاعل ويطرح تخميناته بأسلوبه الخاص، وقد يقدّم تلميحاً صغيراً عندما تحتاج إليه.' },
+  chooseDuckHint: { en: 'Companions don’t change your odds. Each one comments, wonders aloud, shares hunches that can be wrong, and adds field notes from their own science speciality to your journal.', ar: 'الرفقاء لا يغيّرون فرصك. كلٌّ منهم يعلّق ويتساءل، ويطرح تخمينات قد تخطئ، ويضيف إلى دفترك ملاحظاتٍ ميدانية من تخصّصه العلمي.' },
   yourName: { en: 'What should the lab call you?', ar: 'بأي اسمٍ يناديك المختبر؟' },
   yourNameHint: { en: 'Display name only — no account, saved on this device.', ar: 'اسمٌ للعرض فقط، بلا حساب، ويُحفظ على جهازك.' },
   namePlaceholder: { en: 'Your name', ar: 'اسمك' },

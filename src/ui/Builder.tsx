@@ -9,6 +9,7 @@ import type { Expression } from '../art/creatureSvg';
 
 const PREVIEW_MOODS: Expression[] = ['neutral', 'curious', 'happy', 'frightened', 'suspicious', 'tired'];
 import PART_ART_LIST from '../content/part-art.json';
+import { CAP_LABEL, PART_SOURCE } from '../content/partSources';
 
 /** Painted picture of the real animal behind each option (public/parts/<id>.webp), so players see what they pick. */
 const PART_ART = new Set<string>(PART_ART_LIST as string[]);
@@ -92,9 +93,12 @@ export function Builder({ lang, value, onChange, onNext, onBack }: { lang: Lang;
           <div className="part-list" role="radiogroup" aria-label={SLOT_LABEL[slot][lang]}>
             {partsFor(slot).map((p) => (
               <button key={p.id} role="radio" aria-checked={value[slot] === p.id} className={`part ${value[slot] === p.id ? 'on' : ''} ${PART_ART.has(p.id) ? 'has-art' : ''}`} onClick={() => set(slot, p.id)}>
+                {value[slot] === p.id && <span className="part-check" aria-hidden="true">✓</span>}
                 {PART_ART.has(p.id) && <img className="part-art" src={`${import.meta.env.BASE_URL}parts/${p.id}.webp`} alt="" loading="lazy" width={320} height={240} />}
+                {PART_SOURCE[p.id] && <span className="part-src">{lang === 'ar' ? 'مستوحى من' : 'From the'} <b>{PART_SOURCE[p.id][lang]}</b></span>}
                 <strong>{p.name[lang]}</strong>
                 <span className="part-desc">{p.desc[lang]}</span>
+                {p.caps && p.caps.length > 0 && <span className="part-caps">{p.caps.map((c) => <i key={c}>✦ {CAP_LABEL[c][lang]}</i>)}</span>}
                 <span className="part-stats">{Object.entries(p.stats).map(([k, v]) => <i key={k} className={v! < 0 ? 'neg' : 'pos'}>{v! > 0 ? '+' : ''}{v} {STAT_LABEL[k][lang]}</i>)}</span>
               </button>
             ))}

@@ -6,13 +6,13 @@ import { Btn } from './common';
 
 const T = {
   title: { en: 'Book of Legends', ar: 'كتاب الأساطير' },
-  intro: { en: 'Stories whispered by divers, herders, rangers and club members. Every creature here is FICTION, invented for BSC BioLab — but you might glimpse one on an expedition.', ar: 'قصص يتهامس فيها الغواصين والرعاة والحرّاس وأعضاء النادي. كل كائن هني **خيالي** ومخترع للعبة BSC BioLab… بس يمكن تلمح واحد منهم برحلتك.' },
+  intro: { en: 'Stories whispered by divers, herders, rangers and club members. Every creature here is FICTION, invented for BSC BioLab — but you might glimpse one on an expedition.', ar: 'حكاياتٌ يتهامس بها الغوّاصون والرعاة والحرّاس وأعضاء النادي. كل كائن هنا خياليّ ابتُكر للعبة BSC BioLab… لكنك قد تلمح واحداً منها في رحلتك.' },
   land: { en: 'Land legends', ar: 'أساطير البر' },
   sea: { en: 'Sea legends', ar: 'أساطير البحر' },
   signs: { en: 'Signs', ar: 'العلامات' },
   rule: { en: 'The old advice', ar: 'وصية الأولين' },
-  seen: { en: 'Sighted', ar: 'شفته' },
-  unseen: { en: 'Not yet sighted', ar: 'للحين ما شفته' },
+  seen: { en: 'Sighted', ar: 'شوهد' },
+  unseen: { en: 'Not yet sighted', ar: 'لم يُشاهَد بعد' },
   where: { en: 'Haunts', ar: 'أماكنه' },
   fiction: { en: 'Fiction', ar: 'خيال' },
   back: { en: 'Back', ar: 'رجوع' },

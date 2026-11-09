@@ -2,20 +2,21 @@
 import { isValidConfig } from './creature';
 import { BEAT_BY_ID, pathTokens, planTokens, validateState, type RunMemory } from './story';
 import type { CreatureConfig, Ending, GameState, Lang } from './types';
+import { emptyJournal, sanitizeJournal, type Journal } from './journal';
 
 const KEY = 'bsc-biolab:v1';
 const MAX_RUNS = 40;
 
 export interface Settings { lang: Lang; textSpeed: number; muted: boolean; reducedMotion: boolean; ai: boolean }
 export interface RunRecord extends RunMemory { at: number; title: Ending['title']; creature: CreatureConfig; player: string; duck: string }
-export interface SaveData { settings: Settings; current: GameState | null; runs: RunRecord[]; endingsSeen: string[]; legendsSeen: string[] }
+export interface SaveData { settings: Settings; current: GameState | null; runs: RunRecord[]; endingsSeen: string[]; legendsSeen: string[]; journal: Journal }
 
 export function defaultSettings(): Settings {
   const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
   return { lang: 'ar', textSpeed: 60, muted: true, reducedMotion: reduced, ai: false };
 }
 
-function empty(): SaveData { return { settings: defaultSettings(), current: null, runs: [], endingsSeen: [], legendsSeen: [] }; }
+function empty(): SaveData { return { settings: defaultSettings(), current: null, runs: [], endingsSeen: [], legendsSeen: [], journal: emptyJournal() }; }
 
 /** Defensive load: anything malformed is dropped instead of crashing the game. */
 export function load(storage: Storage | undefined = globalThis.localStorage): SaveData {
@@ -38,7 +39,7 @@ export function load(storage: Storage | undefined = globalThis.localStorage): Sa
     const runs = Array.isArray(d.runs) ? d.runs.filter((r) => r && Array.isArray(r.planTokens) && Array.isArray(r.pathTokens) && typeof r.ending === 'string').slice(-MAX_RUNS) : [];
     const endingsSeen = Array.isArray(d.endingsSeen) ? d.endingsSeen.filter((x) => typeof x === 'string') : [];
     const legendsSeen = Array.isArray(d.legendsSeen) ? d.legendsSeen.filter((x) => typeof x === 'string') : [];
-    return { settings, current, runs, endingsSeen, legendsSeen };
+    return { settings, current, runs, endingsSeen, legendsSeen, journal: sanitizeJournal(d.journal) };
   } catch {
     return base;
   }
@@ -58,5 +59,18 @@ export function recordRun(data: SaveData, s: GameState, ending: Ending): SaveDat
     ...data, current: null,
     runs: [...data.runs, rec].slice(-MAX_RUNS),
     endingsSeen: data.endingsSeen.includes(ending.id) ? data.endingsSeen : [...data.endingsSeen, ending.id],
+  };
+}
+
+/**
+ * "New Visitor" on a shared booth device: forgets everything personal on THIS device (current adventure, names,
+ * creatures, journal) so the next visitor cannot open the previous visitor's adventure. Settings stay, and so does an
+ * anonymous memory of which story templates were used recently (no names or creatures) so stories keep varying.
+ * Passport QR codes already handed out keep working: they carry the adventure themselves.
+ */
+export function newVisitor(d: SaveData): SaveData {
+  return {
+    settings: d.settings, current: null, endingsSeen: d.endingsSeen, legendsSeen: [], journal: emptyJournal(),
+    runs: d.runs.map((r) => ({ ...r, player: '', creature: { ...r.creature, name: '' } })),
   };
 }

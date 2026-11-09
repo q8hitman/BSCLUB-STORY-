@@ -36,7 +36,7 @@ function metrics(mode: Mode, results: SimResult[], baseline: SimResult[]) {
   const tones = tally(results.map((r) => r.ending.tone));
   const templates = new Set(results.flatMap((r) => r.memory.templates));
   const modeTemplates = ALL_BEATS.filter((b) => b.mode === mode || b.mode === 'both').map((b) => b.id);
-  const reachable = modeTemplates.filter((id) => id !== 'pressure' || mode === 'marine');
+  const reachable = modeTemplates.filter((id) => (id !== 'pressure' || mode === 'marine') && (id !== 'camp-land' || mode === 'classic')); // the land camp needs land biomes
   const biomes = tally(results.flatMap((r) => [...new Set(r.state.plan.beats.map((b) => b.biome))]));
   const twists = tally(results.map((r) => r.state.plan.beats.find((b) => BEAT_BY_ID[b.template]?.kind === 'twist')?.template ?? 'none'));
   const climaxes = tally(results.map((r) => r.state.plan.beats[r.state.plan.beats.length - 1].template));

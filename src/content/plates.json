@@ -2198,5 +2198,309 @@
   "tone": "mysterious",
   "mystery": 1,
   "style": "abyss"
+ },
+ {
+  "id": "specimen-rare-abyssal-ray",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-cave-salamander",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-coelacanth",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-coral-stag",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-crystal-beetle",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-dawn-firebird",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-dune-basilisk",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-ember-moth",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-frost-owl",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-ghost-jelly",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-kraken-squid",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-glow-seahare",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-griffin-eagle",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-kelp-serpent",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-kelpie-seahorse",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-lantern-whale",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-mirror-eel",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-mist-stag",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-moon-moth",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-moss-wolf",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-phantom-nautilus",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-root-serpent",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-sand-manticore",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-sea-serpent",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-swamp-lurker",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-trench-watcher",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-vent-guardian",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "camp-boat-sunset",
+  "biome": "seagrass",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-cave-mushrooms",
+  "biome": "cave",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-desert-stars",
+  "biome": "desert",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-forest-fireflies",
+  "biome": "forest",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-lab-night-tea",
+  "biome": "lab",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-mountain-ledge",
+  "biome": "mountain",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-mudflat-sunrise",
+  "biome": "mudflat",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-snow-cocoa",
+  "biome": "snow",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "camp-sub-porthole",
+  "biome": "midnight",
+  "event": "camp",
+  "tone": "wholesome",
+  "mystery": 0,
+  "style": "nocturne"
+ },
+ {
+  "id": "specimen-rare-horned-hare",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
+ },
+ {
+  "id": "specimen-rare-stoneback-fox",
+  "biome": "lab",
+  "event": "rare",
+  "tone": "mysterious",
+  "mystery": 2,
+  "style": "specimen"
  }
 ]

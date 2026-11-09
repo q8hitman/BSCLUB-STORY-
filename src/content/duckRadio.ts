@@ -1,17 +1,17 @@
 // BSC Duck Radio — the ducks are story companions with distinct voices, not gameplay powers.
-// They speak occasionally, react to context and sometimes disagree. Chat lines never assume which approach the player chose.
+// They speak occasionally, react to context, make predictions that can be wrong and sometimes disagree.
+// Chat lines never assume which approach the player chose, never reveal what comes next, and never control the creature.
 import type { L10n } from '../engine/types';
 
 const L = (en: string, ar: string): L10n => ({ en, ar });
 
 export type RadioCue = 'arrive' | 'danger' | 'deep' | 'success' | 'fail' | 'discovery' | 'theory' | 'comic' | 'disagree';
 
-/** Help & encouragement. {part} = a body part of the player's creature, {approach} = a way of acting.
- *  These are filled from the engine's real odds, so a hint always points at a genuinely good option. */
-export interface DuckHelp { hintPart: L10n; hintApproach: L10n; praise: L10n[]; fact: L10n }
+/** Help & encouragement. Ducks are companions, not oracles: when the team is struggling a duck may share a HUNCH
+ *  shaped by their own temperament ({approach} = the way of acting they personally favour). It is never computed from
+ *  the real odds, so it can be wrong — that is the point. {approach} is a complete imperative addressed to the team. */
+export interface DuckHelp { hunch: L10n; praise: L10n[]; fact: L10n; note: L10n }
 
-/** {approach} is a complete instruction (imperative, addressed to the whole team), so every template stays grammatical
- *  in Arabic whatever approach is inserted. Templates never use a pronoun that would have to agree with {part}. */
 export const APPROACH: Record<string, L10n> = {
   bold: L('go in boldly', 'تقدّموا بجرأة'),
   careful: L('take it slow and careful', 'تمهّلوا وتحرّكوا بحذر'),
@@ -20,23 +20,71 @@ export const APPROACH: Record<string, L10n> = {
   silly: L('try something nobody expects', 'جرّبوا شيئاً لا يتوقّعه أحد'),
 };
 
-export const HELP: Record<string, DuckHelp> = {
-  abdullah: { hintPart: L('Guys — this is the moment for your {part}!', 'يا رفاق، هذه لحظة {part}!'), hintApproach: L('Honestly? My gut says: {approach}.', 'بصراحة؟ حدسي يقول: {approach}.'),
-    praise: [L('You’re on fire today!', 'أنتم في أفضل حالاتكم اليوم!'), L('That’s the energy I’m talking about!', 'هذه هي الحماسة التي أريدها!')], fact: L('Okay, science moment:', 'حسناً، لحظة علمية:') },
-  ahmed: { hintPart: L('If I were out here alone, I’d rely on your {part}.', 'لو كنت وحدي في الميدان، لاعتمدت على {part}.'), hintApproach: L('From field experience: {approach}.', 'من خبرتي في الميدان: {approach}.'),
-    praise: [L('Textbook field work!', 'عمل ميداني نموذجي!'), L('Keep that pace!', 'حافظوا على هذا الإيقاع!')], fact: L('Field note:', 'ملاحظة ميدانية:') },
-  camel: { hintPart: L('Hypothesis: the key variable here is your {part}.', 'فرضية: المتغيّر الحاسم هنا هو {part}.'), hintApproach: L('I ran the model. Best move: {approach}.', 'أجريت الحساب على النموذج… أفضل خطوة: {approach}.'),
-    praise: [L('Elegant work. Truly.', 'عمل أنيق… حقاً.'), L('The data agrees with you.', 'البيانات في صفّكم.')], fact: L('Did you know?', 'هل تعلمون؟') },
-  bassam: { hintPart: L('Use your {part}. Safest bet.', 'استخدموا {part}… هذا أضمن خيار.'), hintApproach: L('Listen to me: {approach}. Trust me.', 'اسمعوني: {approach}… ثقوا بي.'),
-    praise: [L('Smooth. Nobody got hurt.', 'بسلاسة… ولم يُصَب أحد.'), L('I’d sign off on that.', 'هذه أوقّع عليها.')], fact: L('Safety briefing, but make it science:', 'إحاطة سلامة… بنكهة علمية:') },
-  kiraz: { hintPart: L('It would be a crime not to use your {part} here.', 'من الظلم ألّا تستخدموا {part} هنا.'), hintApproach: L('Just this once: {approach}. The chaos can wait.', 'لمرة واحدة فقط: {approach}… والفوضى يمكنها الانتظار.'),
-    praise: [L('Look at you. Terrifyingly competent.', 'انظروا إلى أنفسكم… كفاءة مخيفة.'), L('Delicious success.', 'نجاح لذيذ.')], fact: L('A weird fact, just for you:', 'حقيقة غريبة… لكم وحدكم:') },
-  roaa: { hintPart: L('I noticed something — this place calls for your {part}.', 'لاحظت أمراً… هذا المكان يحتاج إلى {part}.'), hintApproach: L('Gently… {approach}. That feels right to me.', 'بهدوء… {approach}. أشعر أن هذا هو الصواب.'),
-    praise: [L('That was lovely work. Thank you.', 'عمل جميل جداً… شكراً لكم.'), L('You’re doing beautifully.', 'أنتم تُبدعون.')], fact: L('Look closer — something real:', 'اقتربوا… هذه حقيقة علمية:') },
-  zahra: { hintPart: L('With your {part}, the odds here are clearly better.', 'مع {part}، الاحتمالات هنا أعلى بوضوح.'), hintApproach: L('The numbers are clear: {approach}.', 'الأرقام واضحة: {approach}.'),
-    praise: [L('Consistent results. I like it.', 'نتائج ثابتة… تعجبني.'), L('That’s above the expected curve.', 'هذا أعلى من المنحنى المتوقَّع.')], fact: L('A data point worth keeping:', 'معلومة تستحق الحفظ:') },
+/** The way of acting each companion personally leans towards (flavour only — it says nothing about the real odds). */
+export const TEMPERAMENT: Record<string, keyof typeof APPROACH> = {
+  abdullah: 'clever', ahmed: 'bold', camel: 'clever', bassam: 'careful', kiraz: 'silly', roaa: 'kind', zahra: 'careful',
 };
 
+export const HELP: Record<string, DuckHelp> = {
+  abdullah: { hunch: L('Just a guess, but… {approach}. Could be totally wrong.', 'مجرّد تخمين… {approach}. وقد أكون مخطئاً تماماً.'),
+    praise: [L('You’re on fire today!', 'أنتم في أفضل حالاتكم اليوم!'), L('That’s the energy I’m talking about!', 'هذه هي الحماسة التي أريدها!')], fact: L('Okay, science moment:', 'حسناً، لحظة علمية:'), note: L('Microbiology note:', 'ملاحظة في الأحياء الدقيقة:') },
+  ahmed: { hunch: L('My field instinct says {approach}… though instinct isn’t data.', 'حدسي الميداني يقول: {approach}… لكن الحدس ليس دليلاً.'),
+    praise: [L('Textbook field work!', 'عمل ميداني نموذجي!'), L('Keep that pace!', 'حافظوا على هذا الإيقاع!')], fact: L('Field note:', 'ملاحظة ميدانية:'), note: L('From my field notebook:', 'من دفتري الميداني:') },
+  camel: { hunch: L('My working hypothesis: {approach}. Untested, of course.', 'فرضيتي المبدئية: {approach}. لم أختبرها بعد طبعاً.'),
+    praise: [L('Elegant work. Truly.', 'عمل أنيق… حقاً.'), L('The data agrees with you.', 'البيانات في صفّكم.')], fact: L('Did you know?', 'هل تعلمون؟'), note: L('Molecular biology note:', 'ملاحظة في الأحياء الجزيئية:') },
+  bassam: { hunch: L('If it were up to me: {approach}. But it’s your call.', 'لو كان القرار لي: {approach}. لكن القرار قراركم.'),
+    praise: [L('Smooth. Nobody got hurt.', 'بسلاسة… ولم يُصَب أحد.'), L('I’d sign off on that.', 'هذه أوقّع عليها.')], fact: L('Safety briefing, but make it science:', 'إحاطة سلامة… بنكهة علمية:'), note: L('Safety note:', 'ملاحظة سلامة:') },
+  kiraz: { hunch: L('Wild idea: {approach}. It might be brilliant. It might not.', 'فكرة مجنونة: {approach}. قد تكون عبقرية… وقد لا تكون.'),
+    praise: [L('Look at you. Terrifyingly competent.', 'انظروا إلى أنفسكم… كفاءة مخيفة.'), L('Delicious success.', 'نجاح لذيذ.')], fact: L('A weird fact, just for you:', 'حقيقة غريبة… لكم وحدكم:'), note: L('Biochemistry note:', 'ملاحظة في الكيمياء الحيوية:') },
+  roaa: { hunch: L('I might be wrong, but… {approach}?', 'قد أكون مخطئة، لكن… {approach}؟'),
+    praise: [L('That was lovely work. Thank you.', 'عمل جميل جداً… شكراً لكم.'), L('You’re doing beautifully.', 'أنتم تُبدعون.')], fact: L('Look closer — something real:', 'اقتربوا… هذه حقيقة علمية:'), note: L('Under the microscope:', 'تحت المجهر:') },
+  zahra: { hunch: L('Not enough data to be sure, but I lean towards: {approach}.', 'البيانات لا تكفي للجزم، لكنني أميل إلى: {approach}.'),
+    praise: [L('Consistent results. I like it.', 'نتائج ثابتة… تعجبني.'), L('That’s above the expected curve.', 'هذا أعلى من المنحنى المتوقَّع.')], fact: L('A data point worth keeping:', 'معلومة تستحق الحفظ:'), note: L('Bioinformatics note:', 'ملاحظة في المعلوماتية الحيوية:') },
+};
+
+/** Specialty Field Notes: each companion notices real science from their own field. They go into the Explorer
+ *  Journal and give no gameplay advantage — the companion you pick changes what you learn, not whether you win.
+ *  realm: where the note fits (land / sea / anywhere). Keep them short, real and uncontroversial. */
+export interface FieldNote { id: string; duck: string; realm: 'land' | 'sea' | 'any'; text: L10n }
+const N = (duck: string, n: number, realm: FieldNote['realm'], en: string, ar: string): FieldNote => ({ id: `${duck}-${n}`, duck, realm, text: L(en, ar) });
+export const FIELD_NOTES: FieldNote[] = [
+  N('abdullah', 1, 'land', 'A single gram of soil can hold around a billion bacteria.', 'قد يحتوي غرامٌ واحد من التربة على نحو مليار خلية بكتيرية.'),
+  N('abdullah', 2, 'sea', 'Prochlorococcus, an ocean bacterium too small to see, is thought to be the most abundant photosynthetic organism on Earth.', 'يُعتقد أن بكتيريا «بروكلوروكوكس» البحرية، التي لا تُرى بالعين، هي أكثر الكائنات القادرة على البناء الضوئي عدداً على الأرض.'),
+  N('abdullah', 3, 'any', 'In ideal conditions some bacteria divide about every 20 minutes — that is why a lab culture can grow overnight.', 'في الظروف المثالية تنقسم بعض البكتيريا كل ٢٠ دقيقة تقريباً، ولهذا تنمو المزرعة البكتيرية في المختبر خلال ليلة واحدة.'),
+  N('abdullah', 4, 'sea', 'Around deep-sea vents, bacteria make food from chemicals instead of sunlight. This is called chemosynthesis.', 'حول الفتحات الحرارية في أعماق البحر تصنع البكتيريا غذاءها من مواد كيميائية بدلاً من ضوء الشمس، وتُسمّى هذه العملية «التخليق الكيميائي».'),
+  N('abdullah', 5, 'land', 'A lichen is a partnership: a fungus and an alga or cyanobacterium living together as one.', 'الأشنة شراكة بين كائنين: فطر وطحلب أو بكتيريا زرقاء يعيشان معاً ككائن واحد.'),
+  N('ahmed', 1, 'land', 'Field biologists often identify animals from tracks, droppings and feathers without ever seeing them.', 'كثيراً ما يتعرّف علماء الأحياء الميدانيون على الحيوانات من آثارها وفضلاتها وريشها دون أن يروها.'),
+  N('ahmed', 2, 'any', 'Camera traps let scientists record shy animals day and night without disturbing them.', 'تتيح كاميرات المراقبة الآلية للعلماء تصوير الحيوانات الخجولة ليلاً ونهاراً دون إزعاجها.'),
+  N('ahmed', 3, 'sea', 'Scientists can tell which fish live in an area by sampling the DNA they shed into the water, called environmental DNA.', 'يستطيع العلماء معرفة الأسماك التي تعيش في منطقة ما من خلال عيّنات الحمض النووي التي تتركها في الماء، ويُسمّى «الحمض النووي البيئي».'),
+  N('ahmed', 4, 'land', 'Many desert animals are nocturnal: they come out at night to avoid the heat of the day.', 'كثير من حيوانات الصحراء ليلية النشاط، فهي تخرج ليلاً لتتجنّب حرارة النهار.'),
+  N('ahmed', 5, 'any', 'Good field notes record the date, time, place and weather — details that keep an observation useful for decades.', 'تسجّل الملاحظات الميدانية الجيدة التاريخ والوقت والمكان والطقس، وهي تفاصيل تُبقي الملاحظة مفيدة لعقود.'),
+  N('camel', 1, 'any', 'Almost every cell in your body carries the same DNA — about two metres of it, folded tightly.', 'تحمل كل خلية تقريباً في جسمك الحمض النووي نفسه، وطوله نحو مترين مطويّين بإحكام.'),
+  N('camel', 2, 'sea', 'The green glow of the jellyfish Aequorea comes from green fluorescent protein (GFP), now a key tool in labs worldwide.', 'يأتي الوهج الأخضر لقنديل البحر «إيكوريا» من البروتين الفلوري الأخضر، الذي صار أداة أساسية في مختبرات العالم.'),
+  N('camel', 3, 'any', 'Many of the genes that build bodies are similar in flies, fish and people.', 'كثير من الجينات المسؤولة عن بناء الجسم متشابهة في الذباب والأسماك والبشر.'),
+  N('camel', 4, 'any', 'DNA barcoding reads one short standard gene to tell apart species that look almost identical.', 'يعتمد «الترميز الشريطي للحمض النووي» على قراءة جين قصير معياري للتمييز بين أنواع تكاد تتطابق في الشكل.'),
+  N('camel', 5, 'land', 'PCR lets a lab copy a tiny piece of DNA millions of times in a few hours.', 'تتيح تقنية «تفاعل البوليميراز المتسلسل» نسخ قطعة صغيرة من الحمض النووي ملايين المرات خلال ساعات قليلة.'),
+  N('bassam', 1, 'any', 'Field scientists keep their distance from wild animals: getting close stresses them and can spread disease both ways.', 'يحافظ العلماء في الميدان على مسافة من الحيوانات البرية، فالاقتراب يوترها وقد ينقل الأمراض في الاتجاهين.'),
+  N('bassam', 2, 'any', 'A biosafety cabinet pulls air inwards and through HEPA filters so microbes do not escape into the lab.', 'تسحب خزانة السلامة الحيوية الهواء إلى الداخل وتمرّره عبر مرشحات «هيبا» كي لا تتسرّب الميكروبات إلى المختبر.'),
+  N('bassam', 3, 'sea', 'Divers rise slowly so the gas dissolved in their blood can leave safely; rising too fast can cause decompression sickness.', 'يصعد الغواصون ببطء كي تخرج الغازات الذائبة في دمائهم بأمان، فالصعود السريع قد يسبّب «داء تخفيف الضغط».'),
+  N('bassam', 4, 'any', 'Gloves protect the samples too: skin carries microbes and DNA that can spoil results.', 'القفازات تحمي العيّنات أيضاً، فالجلد يحمل ميكروبات وحمضاً نووياً قد يُفسد النتائج.'),
+  N('bassam', 5, 'land', 'Bright colours on frogs or caterpillars often warn that they are toxic. Look, but do not touch.', 'الألوان الزاهية على الضفادع أو اليرقات كثيراً ما تكون تحذيراً من أنها سامّة. انظروا… ولا تلمسوا.'),
+  N('kiraz', 1, 'land', 'Poison dart frogs get much of their toxin from what they eat; many raised in captivity are not toxic at all.', 'تحصل ضفادع السهام السامّة على معظم سمّها من غذائها، وكثير منها لا يكون ساماً عندما يُربّى في الأسر.'),
+  N('kiraz', 2, 'sea', 'Pufferfish carry tetrodotoxin, a toxin made by bacteria rather than by the fish itself.', 'تحمل السمكة المنتفخة مادة «التيترودوتوكسين»، وهي سمّ تصنعه البكتيريا لا السمكة نفسها.'),
+  N('kiraz', 3, 'any', 'Venom is injected by a bite or sting; poison works when touched or eaten. A snake is venomous, a toxic frog is poisonous.', 'السمّ الذي يُحقن بعضّة أو لسعة يختلف عن السمّ الذي يؤثّر عند لمسه أو أكله؛ فالأفعى تحقن سمّها، والضفدع السام يؤذي من يلمسه أو يأكله.'),
+  N('kiraz', 4, 'any', 'Enzymes are proteins that speed up the chemical reactions in cells, some by millions of times.', 'الإنزيمات بروتينات تُسرّع التفاعلات الكيميائية داخل الخلايا، وبعضها يسرّعها ملايين المرات.'),
+  N('kiraz', 5, 'sea', 'Cone snails fire a harpoon-like tooth loaded with venom, and one of their toxins became a pain medicine.', 'تطلق حلزونات المخروط سنّاً تشبه الحربة محمّلة بالسمّ، وقد تحوّل أحد سمومها إلى دواء لتسكين الألم.'),
+  N('roaa', 1, 'any', 'Tardigrades, about half a millimetre long, can survive drying out for years by entering a state called cryptobiosis.', 'تستطيع بطيئات المشية، وطولها نحو نصف ملّيمتر، أن تنجو من الجفاف لسنوات بدخولها حالة تُسمّى «السبات الخفي».'),
+  N('roaa', 2, 'sea', 'Diatoms are single-celled algae with glass-like shells of silica, and they make a large share of Earth’s oxygen.', 'الدياتومات طحالب وحيدة الخلية لها أصداف زجاجية من السيليكا، وهي تنتج جزءاً كبيراً من أكسجين الأرض.'),
+  N('roaa', 3, 'any', 'A good light microscope magnifies up to about 1,000–1,500 times; electron microscopes reveal far smaller details.', 'يكبّر المجهر الضوئي الجيد حتى ١٠٠٠–١٥٠٠ مرة تقريباً، أما المجهر الإلكتروني فيكشف تفاصيل أصغر بكثير.'),
+  N('roaa', 4, 'land', 'Many butterfly colours come from microscopic wing scales that bend light, not only from pigment.', 'كثير من ألوان الفراشات يأتي من حراشف مجهرية على أجنحتها تكسر الضوء، لا من الأصباغ وحدها.'),
+  N('roaa', 5, 'sea', 'A single drop of seawater can hold thousands of plankton cells, far too small to see.', 'قد تحتوي قطرة واحدة من ماء البحر على آلاف الخلايا من العوالق، وهي أصغر من أن تُرى.'),
+  N('zahra', 1, 'any', 'Reading the first human genome took about 13 years; today a genome can be sequenced in about a day.', 'استغرقت قراءة أول جينوم بشري نحو ١٣ عاماً، أما اليوم فيمكن قراءة جينوم كامل في يوم واحد تقريباً.'),
+  N('zahra', 2, 'any', 'By comparing DNA from many species, scientists build family trees that show how all life is related.', 'بمقارنة الحمض النووي لأنواع كثيرة يبني العلماء أشجار قرابة تبيّن صلة الكائنات الحية بعضها ببعض.'),
+  N('zahra', 3, 'any', 'Biologists use statistics to tell a real pattern from luck: one observation is a story, many are data.', 'يستخدم علماء الأحياء الإحصاء للتمييز بين النمط الحقيقي والمصادفة؛ فالملاحظة الواحدة حكاية، والملاحظات الكثيرة بيانات.'),
+  N('zahra', 4, 'sea', 'Satellite tags on sea turtles and sharks send back locations, letting researchers map migrations across oceans.', 'ترسل أجهزة التتبّع عبر الأقمار الصناعية مواقع السلاحف البحرية وأسماك القرش، فيرسم الباحثون خرائط هجرتها عبر المحيطات.'),
+  N('zahra', 5, 'land', 'Public databases such as GenBank hold DNA sequences from hundreds of thousands of species, free for anyone to search.', 'تضمّ قواعد البيانات العامة مثل «جين بانك» تسلسلات الحمض النووي لمئات الآلاف من الأنواع، ويمكن لأي شخص البحث فيها مجاناً.'),
+];
+export const NOTE_BY_ID: Record<string, FieldNote> = Object.fromEntries(FIELD_NOTES.map((n) => [n.id, n]));
 
 export const RADIO: Record<string, Partial<Record<RadioCue, L10n[]>>> = {
   abdullah: {

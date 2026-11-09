@@ -1,0 +1,54 @@
+[
+{
+"id": "specimen-rare-horned-hare",
+"biome": "lab",
+"event": "rare",
+"tone": "mysterious",
+"mystery": 2,
+"style": "specimen",
+"seed": 13000,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, human, person, cartoon",
+"prompt": "dark painting of a jackalope, a brown desert hare with two clearly visible curved antelope horns growing from its forehead between its long ears, isolated on a pure black background, dramatic rim light, full body visible, anatomically coherent"
+},
+{
+"id": "specimen-rare-snowhorn-hare",
+"biome": "lab",
+"event": "rare",
+"tone": "mysterious",
+"mystery": 2,
+"style": "specimen",
+"seed": 13029,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, human, person, cartoon",
+"prompt": "dark painting of a white arctic hare with two clearly visible spiral frosted horns growing from its head, ice crystals, isolated on a pure black background, dramatic rim light, full body visible, anatomically coherent"
+},
+{
+"id": "specimen-rare-stoneback-fox",
+"biome": "lab",
+"event": "rare",
+"tone": "mysterious",
+"mystery": 2,
+"style": "specimen",
+"seed": 13058,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, human, person, cartoon",
+"prompt": "dark painting of a fox whose entire back is covered with overlapping grey stone plates like an armadillo shell, lichen on the stones, isolated on a pure black background, dramatic rim light, full body visible, anatomically coherent"
+},
+{
+"id": "specimen-rare-cavern-hound",
+"biome": "lab",
+"event": "rare",
+"tone": "mysterious",
+"mystery": 2,
+"style": "specimen",
+"seed": 13087,
+"w": 1024,
+"h": 1024,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, text, letters, human, person, cartoon, eyes",
+"prompt": "dark painting of a pale hairless cave dog with NO eyes, smooth skin where the eyes should be, huge bat-like ears and long whiskers, sniffing, isolated on a pure black background, dramatic rim light, full body visible, anatomically coherent"
+}
+]
