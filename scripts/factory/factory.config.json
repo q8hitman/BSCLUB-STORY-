@@ -68,7 +68,7 @@
   },
   "auto": {
     "_doc": "Used by .github/workflows/story-factory.yml (weekly, no human review). A story is published only with 0 validator errors AND every editor score >= minReviewScore; otherwise it stays hidden in 'review'.",
-    "schedule": "every day 06:00 Kuwait time",
+    "schedule": "every day 12:00 Kuwait time (after the quota reset)",
     "perRun": {
       "classic": 3,
       "marine": 3

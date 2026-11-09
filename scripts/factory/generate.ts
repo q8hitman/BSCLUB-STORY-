@@ -9,6 +9,7 @@
 import fs from 'node:fs';
 import { jsonrepair } from 'jsonrepair';
 import { gemini } from '../ai-eval/providers';
+import { buildSkeleton, mergeSkeleton } from './skeleton';
 import { BESTIARY } from '../../src/content/bestiary';
 import { FACTS } from '../../src/content/world';
 import { contentHash, type StoryPackage } from '../../src/engine/archive';
@@ -40,6 +41,7 @@ type Node = {kind:'hook'|'explore'|'challenge'|'encounter'|'twist'|'climax', bio
 type Story = {id:string /*kebab-case*/, v:1, status:'review', mode, source:'factory', title:L10n, premise:L10n, tone, tags:{themes:string[], locations:Biome[], twist:string, creatures:AnimalId[]}, world:Record<string /* "w:..." */, L10n>, science:FactId[], start:string, nodes:Record<string,Node>, endings:Record<string,{tone:'heroic'|'comedic'|'bittersweet'|'mysterious'|'scientific'|'wholesome', title:L10n, summary:L10n, epilogue:L10n}>}
 HARD RULES:
 - ${cfg.graph.minNodes}–${cfg.graph.maxNodes} nodes, exactly ${cfg.graph.endings} endings, no cycles, every node reachable, every ending reachable.
+- When a SKELETON is given: keep every node id, kind, biome, plate, cinematic and every choice's position and "next" EXACTLY; fill every TODO; choice 5 of each node is the anatomy-gated one.
 - REQUIRED SHAPE (node ids are yours): hook → (choices split) → pathA OR pathB → both lead to a shared middle node M → M splits → pathC OR pathD → both lead to the climax → 3 endings chosen by climax choices.
   So in the hook, 2+ choices go to pathA and 2+ to pathB; in M, 2+ choices go to pathC and 2+ to pathD. Linear stories are rejected.
 - Every node: at least 4 choices WITHOUT "requires" + 1–2 choices that require an anatomy capability (capAny). Choices must lead to DIFFERENT results; not every choice may go to the same next node.
@@ -109,6 +111,7 @@ Typical AI drafts score 5-7. A score of 9-10 requires that you could not find a 
 For EVERY criterion, first quote the weakest sentence you found (Arabic or English), then give the score.
 Return ONLY JSON: {"weakest":{"science":"...","arabic":"...","age":"...","coherence":"...","variety":"..."},"scores":{"science":n,"arabic":n,"age":n,"coherence":n,"variety":n},"issues":["concrete problems with node ids"]}`;
 type Review = { scores: Record<string, number>; issues: string[]; pass: boolean };
+const reviews: Record<string, Review> = {};
 async function review(p: StoryPackage): Promise<Review> {
   if (requests >= cfg.budget.maxRequests) throw new Error('Gemini budget reached for this session');
   requests++;
@@ -118,7 +121,8 @@ async function review(p: StoryPackage): Promise<Review> {
   const j = JSON.parse(r.text.replace(/^```json\s*|```\s*$/g, '')) as { scores?: Record<string, number>; issues?: string[] };
   const keys = ['science', 'arabic', 'age', 'coherence', 'variety'];
   const scores = Object.fromEntries(keys.map((k) => [k, Number(j.scores?.[k] ?? 0)]));
-  return { scores, issues: (j.issues ?? []).map(String).slice(0, 20), pass: keys.every((k) => scores[k] >= cfg.auto.minReviewScore) };
+  const out = { scores, issues: (j.issues ?? []).map(String).slice(0, 20), pass: keys.every((k) => scores[k] >= cfg.auto.minReviewScore) };
+  reviews[p.id] = out; return out;
 }
 const meetsQuality = (r: ReturnType<typeof validateStory>) => !r.errors.length && r.warnings.length <= cfg.quality.maxWarnings
   && r.stats.paths >= cfg.quality.minDistinctPaths && r.stats.avgScenes >= cfg.quality.minAvgScenes;
@@ -143,14 +147,14 @@ function useExistingArt(p: StoryPackage) {
     if (alt) { w.plate = alt.id; used.add(alt.id); }
   }
 }
-async function autoApprove(pkg: StoryPackage, user: string | null): Promise<StoryPackage> {
+async function autoApprove(pkg: StoryPackage, user: string | null, shape: (x: StoryPackage) => StoryPackage = (x) => x): Promise<StoryPackage> {
   const check = () => validateStory(pkg, { plates: plateIds, others: existing.filter((x) => x.id !== pkg.id) });
   let rep = check();
   if (!meetsQuality(rep)) { console.log(`  stays in review (quality): ${rep.errors[0] ?? `${rep.stats.paths} paths, ${rep.warnings.length} warnings`}`); return pkg; }
   let rv = await review(pkg);
   console.log(`  editor scores ${JSON.stringify(rv.scores)}`);
   if (!rv.pass && user && cfg.auto.reviseOnce) {
-    const fixed = await ask(`${user}\n\nAn editor found these problems. Fix ALL of them and return the corrected full JSON (same id).\nPROBLEMS:\n${rv.issues.join('\n')}\n\nCURRENT:\n${JSON.stringify(pkg)}`);
+    const fixed = shape(await ask(`${user}\n\nAn editor found these problems. Fix ALL of them and return the corrected full JSON (same id).\nPROBLEMS:\n${rv.issues.join('\n')}\n\nCURRENT:\n${JSON.stringify(pkg)}`));
     pkg = { ...fixed, id: pkg.id, v: 1, status: 'review', source: pkg.source }; normalize(pkg); useExistingArt(pkg); rep = check();
     if (meetsQuality(rep)) { rv = await review(pkg); console.log(`  editor scores after revision ${JSON.stringify(rv.scores)}`); }
   }
@@ -172,10 +176,12 @@ if (process.argv.includes('--review-drafts')) {
 } else for (let i = 0; i < concepts; i++) {
   const mode = (arg('mode') ?? weighted(cfg.modes)) as 'classic' | 'marine';
   const tone = arg('tone') ?? weighted(cfg.tones);
-  const user = `${lists(mode)}\nTone: ${tone}. Invent ONE original concept, then write the full branching story.\nStyle reference (structure only, do not copy):\n${JSON.stringify(example?.nodes[example.start]).slice(0, 3500)}`;
-  let pkg: StoryPackage | null = null; let report = null;
+  const { places, skeleton } = buildSkeleton(mode, cfg.environments[mode], plates, rng);
+  const user = `${lists(mode)}\nTone: ${tone}. Places in order: ${places.join(' → ')}. Invent ONE original concept set in these places, then write the full story INTO THIS SKELETON (the branching is fixed; you write everything else, in both languages):\n${JSON.stringify(skeleton)}\nStyle reference for one finished node (do not copy):\n${JSON.stringify(example?.nodes[example.start]).slice(0, 3000)}`;
+  const shape = (x: StoryPackage): StoryPackage => { const m = mergeSkeleton(skeleton, x); return { ...m, tags: { ...(m.tags ?? { themes: [], twist: 'unknown', creatures: [] }), locations: places as never } }; };
+  let pkg: StoryPackage | null = null; let report = null; let failure = '';
   try {
-    pkg = await ask(user);
+    pkg = shape(await ask(user));
     pkg = { ...pkg, v: 1, status: 'review', source: `factory:${cfg.model}` };
     // never reuse an existing id (published versions are immutable)
     if (!/^[a-z0-9-]{3,36}$/.test(pkg.id ?? '')) pkg.id = `story-${rng.int(1e6)}`;
@@ -188,15 +194,19 @@ if (process.argv.includes('--review-drafts')) {
     const check = () => validateStory(pkg!, { plates: new Set([...plateIds, ...wanted]), others: existing });
     report = check();
     for (let a = 0; a < cfg.budget.repairAttempts && report.errors.length; a++) {
-      pkg = { ...(await ask(`${user}\n\nYour previous JSON had these validation errors. Return the corrected full JSON.\nERRORS:\n${report.errors.slice(0, 40).join('\n')}\n\nPREVIOUS:\n${JSON.stringify(pkg)}`)), id: pkg.id, v: 1, status: 'review', source: `factory:${cfg.model}` };
+      pkg = { ...shape(await ask(`${user}\n\nYour previous JSON had these validation errors. Return the corrected full JSON.\nERRORS:\n${report.errors.slice(0, 40).join('\n')}\n\nPREVIOUS:\n${JSON.stringify(pkg)}`)), id: pkg.id, v: 1, status: 'review', source: `factory:${cfg.model}` };
       normalize(pkg); if (auto) useExistingArt(pkg);
       report = check();
     }
     console.log(`${pkg.id}: ${report.errors.length} errors, ${report.warnings.length} warnings, ${report.stats.paths} paths, endings ${JSON.stringify(report.stats.endingsReached)}; new art ${wanted.size}; hash ${contentHash(pkg)}`);
     for (const e of report.errors.slice(0, 20)) console.log('  ✗', e);
-    if (auto && !report.errors.length) pkg = await autoApprove(pkg, user);
+    let waitingForEditor = false;
+    if (auto && !report.errors.length) {
+      try { pkg = await autoApprove(pkg, user, shape); }
+      catch (e) { if (!(e instanceof QuotaExhausted)) throw e; waitingForEditor = true; failure = 'valid story kept for the editor (quota) — reviewed next run'; console.log('  editor quota used up — keeping the valid draft for the next run'); }
+    }
     // unattended runs only ship approved stories; rejected drafts go to factory/rejected/ (not committed)
-    const dir = auto && pkg.status !== 'published' ? 'factory/rejected' : 'src/stories';
+    const dir = auto && pkg.status !== 'published' && !waitingForEditor ? 'factory/rejected' : 'src/stories';
     fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(`${dir}/${pkg.id}@1.json`, JSON.stringify(pkg, null, 1));
     if (wanted.size) {
       const batch = [...wanted].slice(0, cfg.art.maxNewPlatesPerStory).map((id, k) => {
@@ -207,8 +217,20 @@ if (process.argv.includes('--review-drafts')) {
       });
       fs.writeFileSync(`scripts/comfy/plates-factory-${pkg.id}.json`, JSON.stringify(batch, null, 1));
     }
-  } catch (e) { console.log(`concept ${i + 1}: failed — ${(e as Error).message}`); if (e instanceof QuotaExhausted) break; }
-  log.push({ concept: i + 1, mode, tone, id: pkg?.id, status: pkg?.status, errors: report?.errors, warnings: report?.warnings, stats: report?.stats });
+  } catch (e) { console.log(`concept ${i + 1}: failed — ${(e as Error).message}`); failure = (e as Error).message; if (e instanceof QuotaExhausted) { log.push({ concept: i + 1, mode, tone, failure }); break; } }
+  log.push({ concept: i + 1, mode, tone, id: pkg?.id, status: pkg?.status, failure, errors: report?.errors, warnings: report?.warnings, stats: report?.stats });
 }
 fs.writeFileSync(`factory/runs/${new Date().toISOString().replace(/[:.]/g, '-')}.json`, JSON.stringify({ requests, tokens, log }, null, 1));
 console.log(`\nGemini requests: ${requests}/${cfg.budget.maxRequests}, tokens ≈ ${tokens}`);
+
+// public, human-readable report (committed by the workflow even when nothing was published)
+if (process.argv.includes('--report')) {
+  const rows = (log as { concept?: number; mode?: string; tone?: string; id?: string; status?: string; failure?: string; errors?: string[]; stats?: { paths: number } }[]).filter((x) => x.concept);
+  const md = rows.map((x) => {
+    const rv = x.id ? reviews[x.id] : undefined;
+    const why = x.failure ? `failed: ${x.failure}` : x.errors?.length ? `validator: ${x.errors.slice(0, 2).join('; ')}` : rv && !rv.pass ? `editor: ${rv.issues.slice(0, 2).join('; ')}` : x.status === 'published' ? 'published ✅' : 'stayed in review';
+    return `| ${x.mode} · ${x.tone} | ${x.id ?? '—'} | ${rv ? Object.entries(rv.scores).map(([k, v]) => `${k} ${v}`).join(', ') : '—'} | ${why.replace(/\|/g, '/').slice(0, 300)} |`;
+  });
+  fs.mkdirSync('reports', { recursive: true });
+  fs.appendFileSync('reports/factory-latest.md', md.join('\n') + (md.length ? '\n' : '') + `\n_Gemini requests this step: ${requests}, tokens ≈ ${tokens}_\n\n`);
+}

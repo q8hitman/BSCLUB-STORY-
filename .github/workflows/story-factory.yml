@@ -1,12 +1,12 @@
 name: Story Factory (automatic)
 
-# Every day 06:00 Kuwait time (03:00 UTC), or by hand from the Actions tab ("Run workflow").
+# Every day 12:00 Kuwait time (09:00 UTC), just after the free Gemini quota resets (midnight Pacific), or by hand from the Actions tab ("Run workflow").
 # Tries 3 Classic + 3 Marine branching stories (stops early if the free daily quota runs out) with Gemini (free tier), validates them, has a stricter Gemini
 # editor score them, and publishes ONLY the ones that pass everything. Then tests, commits and deploys.
 # Needs one repository secret: GEMINI_API_KEY (Settings → Secrets and variables → Actions). No PC, no ComfyUI.
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 9 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -33,9 +33,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           if [ -z "$GEMINI_API_KEY" ]; then echo "::warning::GEMINI_API_KEY secret is not set — nothing to do"; exit 0; fi
+          printf '# Story Factory — last run %s UTC\n\n| Attempt | Story | Editor scores | Result |\n|---|---|---|---|\n' "$(date -u '+%Y-%m-%d %H:%M')" > reports/factory-latest.md
           npx tsx scripts/factory/generate.ts --review-drafts || true
-          npx tsx scripts/factory/generate.ts --auto --mode classic --concepts 3 || echo "::warning::classic story failed"
-          npx tsx scripts/factory/generate.ts --auto --mode marine --concepts 3 || echo "::warning::marine story failed"
+          npx tsx scripts/factory/generate.ts --auto --report --mode classic --concepts 3 || echo "::warning::classic story failed"
+          npx tsx scripts/factory/generate.ts --auto --report --mode marine --concepts 3 || echo "::warning::marine story failed"
       - name: Update the archive catalog
         run: npx tsx scripts/factory/publish.ts
       - name: Full test suite (nothing ships if any test fails)
@@ -43,18 +44,19 @@ jobs:
       - id: commit
         name: Commit published stories
         run: |
-          git add src/stories reports/stories.md
-          if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; echo "No story passed this week."; exit 0; fi
           git config user.name "BSC Story Factory"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Story Factory: new published adventures ($(date -u +%Y-%m-%d))"
+          git add src/stories reports/stories.md
+          if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+          git add reports/factory-latest.md
+          git diff --cached --quiet && exit 0
+          git commit -m "Story Factory run $(date -u +%Y-%m-%d) [skip ci]"
           git push
-          echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Summary
         if: always()
         run: |
           echo "### Story Factory" >> "$GITHUB_STEP_SUMMARY"
-          tail -n +3 reports/stories.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          cat reports/factory-latest.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
   deploy:
     needs: produce

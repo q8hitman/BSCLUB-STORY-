@@ -134,7 +134,7 @@ npx vitest run
 
 ## Fully automatic mode (no human review)
 
-The GitHub workflow `.github/workflows/story-factory.yml` runs every day at 06:00 Kuwait time (up to 3 Classic + 3 Marine attempts; writer gemini-3.5-flash-lite, editor gemini-3.5-flash, 20 s between requests, stops cleanly when the free daily quota is used up). It can also be
+The GitHub workflow `.github/workflows/story-factory.yml` runs every day at 12:00 Kuwait time, just after the free quota resets (up to 3 Classic + 3 Marine attempts; writer gemini-3.5-flash-lite, editor gemini-3.5-flash, 20 s between requests, stops cleanly when the free daily quota is used up). It can also be
 started by hand: Actions → Story Factory → Run workflow. It needs only the repository secret `GEMINI_API_KEY`.
 
 1. `generate.ts --review-drafts` gives any leftover drafts their editor pass.
@@ -154,3 +154,12 @@ skips that story until next week. Some weeks will publish nothing; that is expec
 
 To pull a bad story: set its `"status"` to `"retired"` and run `publish.ts`. It disappears from new adventures, but QR
 saves that use it keep working, because `status` is not part of the content hash.
+
+**Structure by code, words by Gemini.** `scripts/factory/skeleton.ts` builds every automatic story's branching graph:
+hook → 2 paths → a shared twist → 2 paths → climax → 3 endings. It also picks the places and the paintings, with 4 open
+choices plus 1 anatomy-gated choice per scene. Gemini fills in the content only, and anything structural it changes is
+overwritten. So structure errors such as loops or too few paths can no longer happen.
+
+**Report.** Each run writes `reports/factory-latest.md` (public) with every attempt, the editor's scores and the reason
+it was rejected. A valid story that is waiting only because the editor's daily quota ran out is kept as `review` and
+re-checked in the next run.

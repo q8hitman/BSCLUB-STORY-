@@ -61,7 +61,7 @@ export function validateStory(p: StoryPackage, opts: { plates?: Set<string>; oth
     if (n.featured && !BESTIARY.some((b) => b.id === n.featured)) E(`${nid}: featured ${n.featured} not in bestiary`);
     for (const pl of [n.plate, ...(n.plateWhen ?? []).map((w) => w.plate)]) if (pl && opts.plates && !opts.plates.has(pl)) E(`${nid}: missing plate ${pl}`);
     if (!n.plate) W(`${nid}: no plate (falls back to the painter)`);
-    const conds = [...n.choices.map((c) => c.requires), ...(n.variants ?? []).map((v) => v.when), ...(n.plateWhen ?? []).map((w) => w.when)];
+    const conds = [...n.choices.map((c) => c.requires), ...(Array.isArray(n.variants) ? n.variants : []).map((v) => v?.when), ...(n.plateWhen ?? []).map((w) => w.when)];
     for (const c of conds) {
       for (const cap of c?.capAny ?? []) if (!KNOWN_CAPS.has(cap)) E(`${nid}: unknown capability ${cap}`);
       for (const f of condFlags(c)) if (!setFlags.has(f)) E(`${nid}: condition flag ${f} is never set`);
@@ -73,14 +73,15 @@ export function validateStory(p: StoryPackage, opts: { plates?: Set<string>; oth
   for (const s of p.science ?? []) if (!FACT_BY_ID[s]) E(`unknown science ref ${s}`);
   // ---- language: MSA, both languages present, creature never speaks ----
   const texts: { where: string; en: string; ar: string }[] = [];
+  const T = (x: unknown) => (x && typeof x === 'object' ? x as { en: string; ar: string } : { en: undefined as unknown as string, ar: undefined as unknown as string });
   for (const [nid, n] of Object.entries(p.nodes)) {
-    texts.push({ where: nid, ...n.text }); for (const v of n.variants ?? []) texts.push({ where: `${nid}.variant`, ...v.text });
-    for (const c of n.choices) { texts.push({ where: `${nid}.${c.id}.label`, ...c.label }); for (const o of [c.success, c.fail].filter(Boolean) as Outcome[]) texts.push({ where: `${nid}.${c.id}`, ...o.text }); }
+    texts.push({ where: nid, ...T(n.text) }); for (const v of Array.isArray(n.variants) ? n.variants : []) texts.push({ where: `${nid}.variant`, ...T(v?.text) });
+    for (const c of n.choices) { texts.push({ where: `${nid}.${c.id}.label`, ...T(c.label) }); for (const o of [c.success, c.fail].filter(Boolean) as Outcome[]) texts.push({ where: `${nid}.${c.id}`, ...T(o.text) }); }
   }
-  for (const [eid, e] of Object.entries(p.endings)) texts.push({ where: `end:${eid}`, ...e.title }, { where: `end:${eid}`, ...e.summary }, { where: `end:${eid}`, ...e.epilogue });
-  texts.push({ where: 'title', ...p.title }, { where: 'premise', ...p.premise });
+  for (const [eid, e] of Object.entries(p.endings)) texts.push({ where: `end:${eid}`, ...T(e?.title) }, { where: `end:${eid}`, ...T(e?.summary) }, { where: `end:${eid}`, ...T(e?.epilogue) });
+  texts.push({ where: 'title', ...T(p.title) }, { where: 'premise', ...T(p.premise) });
   for (const t of texts) {
-    if (!t.en?.trim() || !t.ar?.trim()) E(`${t.where}: missing text`);
+    if (typeof t.en !== 'string' || typeof t.ar !== 'string' || !t.en.trim() || !t.ar.trim()) { E(`${t.where}: missing text (needs {en, ar} strings)`); continue; }
     if (t.ar && !/[؀-ۿ]/.test(t.ar)) E(`${t.where}: Arabic text is not Arabic`);
     if (t.ar && /[A-Za-z]{3,}/.test(t.ar.replace(/\{[^}]*\}/g, ''))) E(`${t.where}: Latin letters in Arabic text`);
     if (t.ar && DIALECT.test(t.ar)) E(`${t.where}: colloquial word in Arabic (use Modern Standard Arabic)`);
