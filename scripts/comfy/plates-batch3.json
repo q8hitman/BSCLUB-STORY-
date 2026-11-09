@@ -1,0 +1,962 @@
+[
+{
+"id": "cave-echo-pulse",
+"biome": "cave",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9300,
+"prompt": "a vast dark cave chamber, a faint rhythmic blue glow pulsing from deep inside a narrow crack in the far wall, dripping stalactites, ripples on a black pool"
+},
+{
+"id": "cave-glow-worms",
+"biome": "cave",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9301,
+"prompt": "a cave ceiling covered in thousands of glowing blue glow-worm threads like a starry sky, a small underground stream below, a lantern on a rock"
+},
+{
+"id": "cave-narrow-squeeze",
+"biome": "cave",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9302,
+"prompt": "an extremely narrow cave passage between dark wet rock walls, a single torch beam, long spindly shadows of something with many legs on the wall ahead"
+},
+{
+"id": "cave-bat-hang",
+"biome": "cave",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "storybook",
+"seed": 9303,
+"prompt": "a cave full of sleeping bats hanging upside down, one small bat hanging the wrong way up looking confused, a dropped field notebook on the floor, warm lamplight"
+},
+{
+"id": "desert-night-glow",
+"biome": "desert",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9304,
+"prompt": "Arabian desert at night, a faint pulsing green light behind a dune ridge, starry sky, a thin line of footprints leading toward it"
+},
+{
+"id": "desert-quick-sand",
+"biome": "desert",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9305,
+"prompt": "a sinkhole of loose sliding sand opening in the desert floor, sand pouring down into darkness, a rope and backpack at the edge, harsh sunset light"
+},
+{
+"id": "desert-burrow-eyes",
+"biome": "desert",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9306,
+"prompt": "desert night, small burrows in the sand with tiny reflective eyes watching from every hole, moonlight, long shadows of dry shrubs"
+},
+{
+"id": "desert-jerboa-hat",
+"biome": "desert",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "storybook",
+"seed": 9307,
+"prompt": "a tiny jerboa wearing a researcher's dropped bucket hat, hopping across moonlit sand dunes, a startled lizard watching, playful"
+},
+{
+"id": "forest-fungus-ring",
+"biome": "forest",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9308,
+"prompt": "a perfect ring of glowing pale mushrooms in a dark mossy forest clearing, fireflies, mist between tall trunks"
+},
+{
+"id": "forest-claw-bark",
+"biome": "forest",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9309,
+"prompt": "deep fresh claw marks gouged high up a forest tree trunk, sap running, tufts of brown fur stuck in the bark, torchlight"
+},
+{
+"id": "forest-fog-eyes",
+"biome": "forest",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9310,
+"prompt": "a dense foggy forest at night, two pairs of glowing eyes far between the trees, a broken branch on the path"
+},
+{
+"id": "forest-silent-birds",
+"biome": "forest",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9311,
+"prompt": "a dark forest where every bird sits silent on bare branches staring the same direction, an empty clearing beyond, eerie dusk light"
+},
+{
+"id": "lab-alarm-light",
+"biome": "lab",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9312,
+"prompt": "a dim university biology laboratory at night, a single red alarm light spinning, glass tanks glowing green, papers scattered on the floor"
+},
+{
+"id": "lab-glow-tank",
+"biome": "lab",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9313,
+"prompt": "a laboratory aquarium tank glowing faintly, a strange small hybrid creature silhouette inside pressed against the glass, bubbles, dark lab"
+},
+{
+"id": "lab-microscope",
+"biome": "lab",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9314,
+"prompt": "a microscope on a cluttered lab bench lit by a desk lamp, a glowing sample slide, notes and sketches of strange creatures pinned to the wall"
+},
+{
+"id": "lab-vent-eyes",
+"biome": "lab",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9315,
+"prompt": "a dark laboratory corridor, an air vent grille with small glowing eyes peering out, a toppled specimen jar on the floor"
+},
+{
+"id": "lab-broken-jar",
+"biome": "lab",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9316,
+"prompt": "a shattered specimen jar on a lab floor, a trail of glowing slimy footprints leading toward a half-open door, emergency lighting"
+},
+{
+"id": "lab-flooded-lab",
+"biome": "lab",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9317,
+"prompt": "a laboratory flooding with water from a burst pipe, floating papers and sample boxes, sparks from a ceiling light, tanks about to tip"
+},
+{
+"id": "lab-locked-door",
+"biome": "lab",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9318,
+"prompt": "a heavy laboratory security door with a glowing keypad, scratch marks on the inside of the door, dim corridor"
+},
+{
+"id": "lab-dark-corridor",
+"biome": "lab",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9319,
+"prompt": "a long dark university lab corridor, flickering ceiling lights, a shadow of something with a long tail at the far end"
+},
+{
+"id": "lab-cage-empty",
+"biome": "lab",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9320,
+"prompt": "a row of animal cages in a dark lab, one cage door bent open from inside, straw scattered, a single feather"
+},
+{
+"id": "lab-containment",
+"biome": "lab",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9321,
+"prompt": "a laboratory at dawn after a storm, broken glass and overturned desks, a large glass containment tank glowing in the centre, light breaking through the window"
+},
+{
+"id": "midnight-blinking-lights",
+"biome": "midnight",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9322,
+"prompt": "the black midnight zone, a sequence of blinking blue bioluminescent lights in the distance forming a pattern, tiny drifting particles"
+},
+{
+"id": "midnight-marine-snow",
+"biome": "midnight",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "abyss",
+"seed": 9323,
+"prompt": "black deep ocean with drifting marine snow falling like a blizzard, small glowing creatures among the flakes"
+},
+{
+"id": "midnight-glass-octopus",
+"biome": "midnight",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "abyss",
+"seed": 9324,
+"prompt": "a nearly invisible transparent glass octopus drifting in black water, only its eyes and gut visible, faint glow"
+},
+{
+"id": "midnight-spotlight-fail",
+"biome": "midnight",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "abyss",
+"seed": 9325,
+"prompt": "a small submersible in the black deep ocean with one searchlight flickering out, warning lights, dark shapes circling at the edge of the beam"
+},
+{
+"id": "midnight-giant-glow",
+"biome": "midnight",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9326,
+"prompt": "an enormous swirling cloud of bioluminescent creatures lighting up the black abyss like fireworks around a tiny submersible"
+},
+{
+"id": "mountain-high-meadow",
+"biome": "mountain",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9327,
+"prompt": "a hidden high mountain meadow at dawn with wildflowers, a cold spring, ibex silhouettes on the ridge above, mist in the valley"
+},
+{
+"id": "mountain-fossil-ledge",
+"biome": "mountain",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9328,
+"prompt": "a rocky mountain ledge with large spiral ammonite fossils embedded in the cliff, golden evening light, a hammer and notebook"
+},
+{
+"id": "mountain-leopard-ledge",
+"biome": "mountain",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9329,
+"prompt": "a leopard resting on a high rocky ledge, tail hanging down, watching the valley below at twilight"
+},
+{
+"id": "mountain-storm-ridge",
+"biome": "mountain",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9330,
+"prompt": "a narrow mountain ridge path in a lightning storm, wind whipping snow and rain, a rope tied between rocks"
+},
+{
+"id": "mountain-cave-mouth",
+"biome": "mountain",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9331,
+"prompt": "a dark cave mouth high on a mountain cliff, scattered bones at the entrance, cold mist flowing out, sunset"
+},
+{
+"id": "mudflat-low-tide-lights",
+"biome": "mudflat",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9332,
+"prompt": "Kuwaiti mudflats at night at low tide, small pulsing lights scattered across the wet mud, a distant city skyline glow"
+},
+{
+"id": "mudflat-crab-city",
+"biome": "mudflat",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9333,
+"prompt": "wet tidal mudflats covered in thousands of tiny crab burrows and crabs waving claws, golden sunset reflected in pools"
+},
+{
+"id": "mudflat-flamingo-flock",
+"biome": "mudflat",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9334,
+"prompt": "a flock of pink flamingos standing in shallow water on mudflats at dawn, soft pastel light, reflections"
+},
+{
+"id": "mudflat-strange-tracks",
+"biome": "mudflat",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9335,
+"prompt": "a trail of strange large three-toed tracks across shiny wet mud leading toward the sea, low sun, long shadows"
+},
+{
+"id": "mudflat-tide-rising",
+"biome": "mudflat",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9336,
+"prompt": "the tide rushing in fast over flat mudflats, channels filling with water, a stranded backpack on a small mound, grey stormy sky"
+},
+{
+"id": "mudflat-mud-bubbles",
+"biome": "mudflat",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9337,
+"prompt": "dark mudflats at dusk, bubbles rising from the mud in a line as if something is moving underneath, fog over the water"
+},
+{
+"id": "mudflat-sunrise-flats",
+"biome": "mudflat",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9338,
+"prompt": "a golden sunrise over the Kuwaiti mudflats, birds taking flight, mudskippers on the mud, glistening water channels"
+},
+{
+"id": "opensea-sonar-ping",
+"biome": "openSea",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9339,
+"prompt": "the open sea at night, a small research boat with a glowing sonar screen, a huge faint shape outlined beneath the dark water"
+},
+{
+"id": "opensea-plankton-bloom",
+"biome": "openSea",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9340,
+"prompt": "the open sea at night glowing bright blue with bioluminescent plankton around the bow of a small boat, stars above"
+},
+{
+"id": "opensea-floating-island",
+"biome": "openSea",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9341,
+"prompt": "a floating raft of seaweed in the open sea seen from below, small fish and baby turtles sheltering under it, sun rays"
+},
+{
+"id": "opensea-whale-eye",
+"biome": "openSea",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9342,
+"prompt": "an underwater view of an enormous whale eye close to a tiny diver, deep blue water, light rays from the surface"
+},
+{
+"id": "opensea-tagged-fin",
+"biome": "openSea",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9343,
+"prompt": "a large shark fin with a research tag cutting through calm sea at dusk, an orange buoy floating nearby"
+},
+{
+"id": "opensea-storm-waves",
+"biome": "openSea",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9344,
+"prompt": "a small research boat climbing a huge storm wave at night, rain, lightning, spray"
+},
+{
+"id": "opensea-net-tangle",
+"biome": "openSea",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9345,
+"prompt": "underwater, a huge abandoned fishing net drifting in the open sea, a sea turtle tangled in it, light from above"
+},
+{
+"id": "opensea-fog-sea",
+"biome": "openSea",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9346,
+"prompt": "a small boat in thick fog on a flat calm sea, a dark shape just below the surface beside the boat, a lantern"
+},
+{
+"id": "opensea-deep-shadow",
+"biome": "openSea",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9347,
+"prompt": "underwater looking down into the deep blue, a gigantic dark shadow rising from below toward a small diver"
+},
+{
+"id": "opensea-dolphin-hat",
+"biome": "openSea",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "storybook",
+"seed": 9348,
+"prompt": "a playful dolphin leaping out of the sea wearing a researcher's lost cap, a surprised seagull, sunny, splashing"
+},
+{
+"id": "opensea-dawn-breach",
+"biome": "openSea",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9349,
+"prompt": "a whale breaching at golden dawn beside a small research boat, spray glittering, calm sea"
+},
+{
+"id": "reef-coral-spawn",
+"biome": "reef",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9350,
+"prompt": "a coral reef at night releasing clouds of tiny pink coral eggs rising like snow, torchlight beams"
+},
+{
+"id": "reef-cleaning-station",
+"biome": "reef",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9351,
+"prompt": "a coral reef cleaning station, small cleaner fish picking at a large grouper's open mouth, blue light"
+},
+{
+"id": "reef-octopus-den",
+"biome": "reef",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9352,
+"prompt": "an octopus peeking out from a coral den holding a shell like a door, curious eye, dappled sunlight"
+},
+{
+"id": "reef-current-sweep",
+"biome": "reef",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9353,
+"prompt": "a strong underwater current sweeping sand and small fish across a coral reef, a diver clinging to a rock"
+},
+{
+"id": "reef-dark-crevice",
+"biome": "reef",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9354,
+"prompt": "a deep dark crevice in a coral reef, a pair of eyes and sharp teeth faintly visible inside, small fish fleeing"
+},
+{
+"id": "reef-reef-recovery",
+"biome": "reef",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9355,
+"prompt": "a coral reef full of colour and fish, sunbeams, a sea turtle swimming over regrowing coral, hopeful"
+},
+{
+"id": "ruins-radio-hum",
+"biome": "ruins",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9356,
+"prompt": "an abandoned research station at night, an old radio set glowing and humming on a dusty desk, broken windows, moonlight"
+},
+{
+"id": "ruins-old-journal",
+"biome": "ruins",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9357,
+"prompt": "a dusty old field journal open on a ruined lab desk, sketches of a strange creature, a cracked lamp, vines through the window"
+},
+{
+"id": "ruins-owl-rafters",
+"biome": "ruins",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9358,
+"prompt": "a barn owl on rusted metal rafters of an abandoned building, pale face, moonlight through holes in the roof"
+},
+{
+"id": "ruins-flicker-hall",
+"biome": "ruins",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9359,
+"prompt": "a collapsed corridor of an abandoned research building, one flickering light, scratch marks along the wall"
+},
+{
+"id": "ruins-raccoon-desk",
+"biome": "ruins",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "storybook",
+"seed": 9360,
+"prompt": "a small curious animal sitting in an old office chair in a ruined lab, wearing safety goggles, papers flying, warm light"
+},
+{
+"id": "seagrass-dugong-call",
+"biome": "seagrass",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9361,
+"prompt": "a seagrass meadow at dusk underwater, a faint ripple of sound waves through the water, a dugong silhouette in the distance"
+},
+{
+"id": "seagrass-seahorse-garden",
+"biome": "seagrass",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9362,
+"prompt": "a seagrass meadow with several seahorses holding onto blades with their tails, soft green light"
+},
+{
+"id": "seagrass-feeding-trail",
+"biome": "seagrass",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9363,
+"prompt": "a long trail of eaten seagrass carved through a meadow, sandy bottom showing, sunbeams"
+},
+{
+"id": "seagrass-murky-water",
+"biome": "seagrass",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9364,
+"prompt": "murky brown water over a seagrass meadow after a storm, low visibility, a diver with a torch searching"
+},
+{
+"id": "seagrass-hidden-ray",
+"biome": "seagrass",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9365,
+"prompt": "a sandy patch between seagrass with two eyes and a barbed tail just visible under the sand"
+},
+{
+"id": "seagrass-barracuda-school",
+"biome": "seagrass",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9366,
+"prompt": "a silver school of barracuda hanging motionless above a seagrass meadow, all facing the viewer"
+},
+{
+"id": "seagrass-crab-hat",
+"biome": "seagrass",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "storybook",
+"seed": 9367,
+"prompt": "a small crab wearing a seashell as a hat dancing on seagrass, curious fish watching, sunny"
+},
+{
+"id": "seagrass-meadow-dawn",
+"biome": "seagrass",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9368,
+"prompt": "a lush seagrass meadow at dawn, a dugong and calf grazing, sea turtles, light rays"
+},
+{
+"id": "snow-ice-cave",
+"biome": "snow",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9369,
+"prompt": "a glowing blue ice cave with frozen bubbles and ancient leaves trapped in the ice"
+},
+{
+"id": "snow-giant-pawprint",
+"biome": "snow",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9370,
+"prompt": "a huge pawprint in fresh snow next to a small boot print for scale, tufts of white fur, blue dusk"
+},
+{
+"id": "snow-whiteout",
+"biome": "snow",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9371,
+"prompt": "a blizzard whiteout on the tundra, a faint dark shape of a large animal barely visible through the snow"
+},
+{
+"id": "snow-cracking-ice",
+"biome": "snow",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9372,
+"prompt": "a frozen lake at night with cracks spreading across the ice, a dark shadow moving beneath"
+},
+{
+"id": "swamp-glow-swamp",
+"biome": "swamp",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9373,
+"prompt": "a swamp at night with glowing fungi on cypress knees and fireflies over black water"
+},
+{
+"id": "swamp-frog-chorus",
+"biome": "swamp",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9374,
+"prompt": "a swamp pond full of frogs on lily pads with puffed vocal sacs, moonlight, mist"
+},
+{
+"id": "swamp-heron-hunt",
+"biome": "swamp",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9375,
+"prompt": "a grey heron standing perfectly still in swamp water, a fish in its beak, misty dawn"
+},
+{
+"id": "swamp-eyes-water",
+"biome": "swamp",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9376,
+"prompt": "black swamp water with only two eyes and nostrils above the surface, reeds, fog"
+},
+{
+"id": "trench-deep-ping",
+"biome": "trench",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9377,
+"prompt": "the black hadal trench, a lone research lander with a blinking light, faint rhythmic glow far below"
+},
+{
+"id": "trench-snailfish-lander",
+"biome": "trench",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "abyss",
+"seed": 9378,
+"prompt": "pale snailfish gathering around a bait lander on a deep trench floor, floodlights"
+},
+{
+"id": "trench-huge-trail",
+"biome": "trench",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9379,
+"prompt": "a huge winding drag trail across grey silt of a deep trench floor, lit by a submersible searchlight"
+},
+{
+"id": "trench-pressure-crack",
+"biome": "trench",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "abyss",
+"seed": 9380,
+"prompt": "the inside of a tiny submersible porthole with a hairline crack, black water outside, warning lights"
+},
+{
+"id": "trench-edge-drop",
+"biome": "trench",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "abyss",
+"seed": 9381,
+"prompt": "the edge of a deep trench wall dropping into total blackness, a submersible light fading downward"
+},
+{
+"id": "trench-sea-pig-parade",
+"biome": "trench",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9382,
+"prompt": "a line of pink sea pigs walking in a row across the deep sea floor like a parade, a curious fish watching, cute"
+},
+{
+"id": "twilight-flash-code",
+"biome": "twilight",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9383,
+"prompt": "deep blue twilight zone, a squid flashing red patterns like signals, other faint lights answering"
+},
+{
+"id": "twilight-hatchet-school",
+"biome": "twilight",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "abyss",
+"seed": 9384,
+"prompt": "a school of silver hatchetfish with glowing bellies in deep blue water, a submersible light"
+},
+{
+"id": "twilight-sucker-marks",
+"biome": "twilight",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9385,
+"prompt": "the hull of a submersible with large circular sucker marks, deep blue water"
+},
+{
+"id": "twilight-migration-rush",
+"biome": "twilight",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "abyss",
+"seed": 9386,
+"prompt": "a massive vertical migration of glowing animals rushing upward past a submersible in dim blue water"
+},
+{
+"id": "twilight-jelly-bump",
+"biome": "twilight",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9387,
+"prompt": "a small jellyfish bumping into a submersible window with a surprised face reflection, cute, glow"
+},
+{
+"id": "twilight-light-show",
+"biome": "twilight",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9388,
+"prompt": "a dazzling display of bioluminescent creatures in the twilight zone around a submersible"
+},
+{
+"id": "vents-shimmer",
+"biome": "vents",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9389,
+"prompt": "shimmering heat haze rising from a black smoker chimney on the seafloor, faint red glow, particles"
+},
+{
+"id": "vents-yeti-swarm",
+"biome": "vents",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "abyss",
+"seed": 9390,
+"prompt": "a swarm of white yeti crabs on a hydrothermal vent chimney, waving hairy claws, searchlight"
+},
+{
+"id": "vents-mineral-bones",
+"biome": "vents",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9391,
+"prompt": "bones encrusted with yellow mineral crystals near a hydrothermal vent, deep sea"
+},
+{
+"id": "vents-boiling-vent",
+"biome": "vents",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "abyss",
+"seed": 9392,
+"prompt": "a hydrothermal vent erupting black smoke and heat in front of a submersible, shimmering water"
+},
+{
+"id": "vents-chimney-maze",
+"biome": "vents",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "abyss",
+"seed": 9393,
+"prompt": "a maze of tall black smoker chimneys on the seafloor, narrow gaps, a submersible light"
+},
+{
+"id": "vents-pale-shapes",
+"biome": "vents",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "abyss",
+"seed": 9394,
+"prompt": "pale eel-like shapes lurking among red-tipped tube worms at a hydrothermal vent, dark water"
+},
+{
+"id": "vents-worm-tickle",
+"biome": "vents",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9395,
+"prompt": "red-tipped giant tube worms all pulling back into their tubes at once as a small fish passes, funny, deep sea"
+}
+]

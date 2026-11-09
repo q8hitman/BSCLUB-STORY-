@@ -1,6 +1,7 @@
 // Animal & creature registry. Stories (authored or AI) may only summon ids from here, so the UI can
 // show every summoned animal (plates, specimen plates or a painter drawing). Animals still waiting for art are in ART_PENDING.
 import type { BiomeId, L10n } from '../engine/types';
+import PLATES from './plates.json';
 
 const L = (en: string, ar: string): L10n => ({ en, ar });
 
@@ -62,7 +63,7 @@ export const BESTIARY: Animal[] = [
   { id: 'axolotl', name: L('Axolotl', 'أكسولوتل'), kind: 'real', category: 'amphibian', biomes: ['lab', 'swamp', 'ruins'], roles: ['comic'], tags: ['regenerates'], art: { plates: [], specimen: 'specimen-axolotl' } },
   { id: 'pangolin', name: L('Pangolin', 'بنغول'), kind: 'real', category: 'mammal', biomes: ['forest'], roles: ['ally'], tags: ['scales'], art: { plates: [], specimen: 'specimen-pangolin' } },
   // ── Added in the narrative pass: real animals named by story beats ({predator}/{critter}). No art yet → plates: [];
-  //    the art worker paints them (listed in ART_PENDING). animalArt() returns null until then.
+  //    Their specimen close-ups (specimen-<id>) are attached automatically below from plates.json.
   { id: 'brown-bear', name: L('Brown bear', 'الدب البني'), kind: 'real', category: 'mammal', biomes: ['forest'], roles: ['predator'], tags: ['huge', 'curious'], art: { plates: [] } },
   { id: 'wild-boar', name: L('Wild boar', 'الخنزير البري'), kind: 'real', category: 'mammal', biomes: ['forest'], roles: ['predator'], tags: ['tusks', 'charges'], art: { plates: [] } },
   { id: 'eagle-owl', name: L('Eurasian eagle-owl', 'البوم النسري'), kind: 'real', category: 'bird', biomes: ['forest'], roles: ['predator', 'mystery'], tags: ['orange-eyes', 'night'], art: { plates: [] } },
@@ -106,6 +107,10 @@ export const BESTIARY: Animal[] = [
   { id: 'sea-pig', name: L('Sea pig', 'خنزير البحر'), kind: 'real', category: 'invertebrate', biomes: ['trench'], roles: ['comic', 'rescue'], tags: ['sea-cucumber', 'walks'], art: { plates: [] } },
   { id: 'deep-giant', name: L('The unknown giant', 'العملاق المجهول'), kind: 'fictional', category: 'cryptid', biomes: ['openSea', 'trench', 'midnight'], roles: ['mystery'], tags: ['legend', 'plate-sized-eye'], art: { plates: ['opensea-sailor-tale'], painter: 'leviathan' } },
 ];
+
+// Specimen close-ups painted for an animal are named `specimen-<id>`: attach any that shipped in plates.json.
+const PLATE_IDS = new Set((PLATES as { id: string }[]).map((p) => p.id));
+for (const a of BESTIARY) if (!a.art.specimen && PLATE_IDS.has(`specimen-${a.id}`)) a.art.specimen = `specimen-${a.id}`;
 
 export const ANIMAL_BY_ID = Object.fromEntries(BESTIARY.map((a) => [a.id, a]));
 

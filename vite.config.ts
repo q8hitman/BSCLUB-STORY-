@@ -21,7 +21,16 @@ export default defineConfig({
         display: 'standalone',
         icons: [{ src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml' }],
       },
-      workbox: { globPatterns: ['**/*.{js,css,html,webp,svg,woff,woff2}'] },
+      // The ~190 painted scene plates (25 MB+) are not precached on install; each one is cached the first time it is shown.
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,webp,svg,woff,woff2}'],
+        globIgnores: ['**/scenes/**'],
+        runtimeCaching: [{
+          urlPattern: /\/scenes\/.*\.webp$/,
+          handler: 'CacheFirst',
+          options: { cacheName: 'scene-plates', expiration: { maxEntries: 400 } },
+        }],
+      },
     }),
   ],
   test: {

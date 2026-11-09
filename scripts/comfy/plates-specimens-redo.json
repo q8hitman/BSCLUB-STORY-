@@ -1,0 +1,68 @@
+[
+{
+"id": "specimen-dumbo-octopus",
+"biome": "midnight",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9700,
+"prompt": "dark painting of a small dumbo octopus, round pale pink bell-shaped head with two large flapping ear-like fins on top, short webbed umbrella arms underneath, no long tentacles, isolated on a pure black background, dramatic rim light",
+"negative": "white background, cream background, beige paper, parchment, light background, pale background"
+},
+{
+"id": "specimen-fiddler-crab",
+"biome": "mudflat",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9701,
+"prompt": "dark painting of a male fiddler crab, ONE enormous oversized bright orange claw much bigger than its body, the other claw tiny, two eyes on long thin stalks, small square shell, isolated on a pure black background, dramatic rim light",
+"negative": "white background, cream background, beige paper, parchment, light background, pale background"
+},
+{
+"id": "specimen-hatchetfish",
+"biome": "twilight",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9702,
+"prompt": "dark painting of a deep-sea marine hatchetfish, very thin flat silver body shaped like an axe blade, deep belly, huge upward-looking tubular eyes, a row of glowing blue light organs along the belly, isolated on a pure black background, dramatic rim light",
+"negative": "white background, cream background, beige paper, parchment, light background, pale background"
+},
+{
+"id": "specimen-tiger-shark",
+"biome": "openSea",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9703,
+"prompt": "dark painting of a tiger shark with bold dark tiger stripes and spots along its grey back, short wide blunt square snout, full body side view, isolated on a pure black background, dramatic rim light",
+"negative": "white background, cream background, beige paper, parchment, light background, pale background"
+},
+{
+"id": "specimen-giant-squid",
+"biome": "midnight",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9704,
+"prompt": "dark painting of a giant squid with a long torpedo-shaped red mantle with fins at the tip, one enormous eye, eight arms and two very long feeding tentacles trailing behind, isolated on a pure black background, dramatic rim light",
+"negative": "white background, cream background, beige paper, parchment, light background, pale background"
+},
+{
+"id": "specimen-swordfish",
+"biome": "twilight",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9705,
+"prompt": "dark painting of a swordfish with a long flat sword bill, dark purple-blue back and silver belly, tall crescent dorsal fin, full body side view, isolated on a pure black background, dramatic rim light",
+"negative": "white background, cream background, beige paper, parchment, light background, pale background"
+}
+]

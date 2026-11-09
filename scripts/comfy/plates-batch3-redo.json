@@ -1,0 +1,214 @@
+[
+{
+"id": "seagrass-dugong-call",
+"biome": "seagrass",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9800,
+"prompt": "underwater view beneath the sea surface, a dugong silhouette far away in green water above a seagrass meadow, faint ripples of sound rings spreading through the water"
+},
+{
+"id": "seagrass-feeding-trail",
+"biome": "seagrass",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9803,
+"prompt": "underwater view beneath the sea surface, a long bare sandy trail eaten through a dense green seagrass meadow on the seabed, sun rays from above"
+},
+{
+"id": "seagrass-hidden-ray",
+"biome": "seagrass",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9806,
+"prompt": "underwater view beneath the sea surface, a stingray hidden under sand on the seabed between seagrass, only its two eyes and long barbed tail visible"
+},
+{
+"id": "seagrass-murky-water",
+"biome": "seagrass",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9809,
+"prompt": "underwater view beneath the sea surface, cloudy murky brown-green water over a seagrass meadow, a diver torch beam barely cutting through the haze"
+},
+{
+"id": "reef-current-sweep",
+"biome": "reef",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9812,
+"prompt": "underwater view beneath the sea surface, a strong current sweeping sand and small fish sideways across a coral reef, bent sea fans, a diver gripping a rock"
+},
+{
+"id": "reef-dark-crevice",
+"biome": "reef",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9815,
+"prompt": "underwater view beneath the sea surface, a deep black crevice in a coral reef with a pair of glinting eyes and sharp teeth inside, small fish fleeing"
+},
+{
+"id": "opensea-floating-island",
+"biome": "openSea",
+"event": "discovery",
+"tone": "scientific",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9818,
+"prompt": "underwater view beneath the sea surface, looking up at a floating mat of golden sargassum seaweed at the surface, small fish and baby sea turtles hiding below it, sun rays"
+},
+{
+"id": "opensea-sonar-ping",
+"biome": "openSea",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9821,
+"prompt": "the glowing green circular sonar screen inside a dark research boat cabin at night, a huge unknown shape blip on the screen"
+},
+{
+"id": "desert-burrow-eyes",
+"biome": "desert",
+"event": "suspense",
+"tone": "eerie",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9824,
+"prompt": "close view of sand burrows in Arabian desert at night, small glowing reflective eyes peeking out from many holes, moonlight"
+},
+{
+"id": "desert-quick-sand",
+"biome": "desert",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9827,
+"prompt": "a collapsing sand sinkhole in the desert, sand pouring down into a dark funnel, a rope tied to a stake at the edge, sunset"
+},
+{
+"id": "forest-claw-bark",
+"biome": "forest",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "nocturne",
+"seed": 9830,
+"prompt": "close-up of a tree trunk in a dark forest with five deep fresh claw marks gouged into the bark, torchlight, tufts of brown fur"
+},
+{
+"id": "lab-flooded-lab",
+"biome": "lab",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "ink",
+"seed": 9833,
+"prompt": "a university laboratory flooded knee-deep with water, floating papers and sample boxes, sparking ceiling lamp, reflections"
+},
+{
+"id": "lab-vent-eyes",
+"biome": "lab",
+"event": "encounter",
+"tone": "mysterious",
+"mystery": 1,
+"style": "nocturne",
+"seed": 9836,
+"prompt": "close-up of a metal air vent grille in a dark laboratory wall with two small glowing eyes peering out between the slats"
+},
+{
+"id": "trench-deep-ping",
+"biome": "trench",
+"event": "signal",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9839,
+"prompt": "the black deep seafloor of a trench, a small yellow research lander on three legs with a blinking light, total darkness around"
+},
+{
+"id": "trench-sea-pig-parade",
+"biome": "trench",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9842,
+"prompt": "deep-sea seafloor, a line of small translucent pink sea cucumbers called sea pigs with tiny tube legs walking across grey silt, a submersible light"
+},
+{
+"id": "twilight-sucker-marks",
+"biome": "twilight",
+"event": "evidence",
+"tone": "mysterious",
+"mystery": 2,
+"style": "abyss",
+"seed": 9845,
+"prompt": "close-up of the scratched metal hull of a deep submersible with large round squid sucker marks, dim blue water"
+},
+{
+"id": "vents-boiling-vent",
+"biome": "vents",
+"event": "challenge",
+"tone": "tense",
+"mystery": 1,
+"style": "abyss",
+"seed": 9848,
+"prompt": "a black smoker hydrothermal vent chimney on the deep seafloor erupting a column of black smoke, shimmering hot water, a small submersible light nearby"
+},
+{
+"id": "midnight-giant-glow",
+"biome": "midnight",
+"event": "finale",
+"tone": "heroic",
+"mystery": 1,
+"style": "abyss",
+"seed": 9851,
+"prompt": "the black deep ocean far below the surface lit by a swirling cloud of thousands of glowing bioluminescent jellyfish and fish around a tiny submersible"
+},
+{
+"id": "desert-jerboa-hat",
+"biome": "desert",
+"event": "comic",
+"tone": "comic",
+"mystery": 1,
+"style": "storybook",
+"seed": 9854,
+"prompt": "a small real jerboa with long hind legs and a long tufted tail hopping over moonlit sand dunes beside a dropped bucket hat, playful mood"
+},
+{
+"id": "specimen-dumbo-octopus",
+"biome": "midnight",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9900,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background, jellyfish, squid",
+"prompt": "dark painting of a Grimpoteuthis dumbo octopus, a small soft round pale pink octopus with two big rounded fins sticking out from the top of its head like elephant ears, a skirt of short webbed arms like an umbrella, isolated on a pure black background"
+},
+{
+"id": "specimen-hatchetfish",
+"biome": "twilight",
+"event": "bestiary",
+"tone": "scientific",
+"mystery": 1,
+"style": "specimen",
+"seed": 9910,
+"negative": "white background, cream background, beige paper, parchment, light background, pale background",
+"prompt": "dark painting of an Argyropelecus deep-sea hatchetfish, tiny fish with a very tall thin silver mirror body shaped like the blade of a hatchet, deep keel-shaped belly with a row of glowing blue light dots, big eyes pointing upward, isolated on a pure black background"
+}
+]
