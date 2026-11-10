@@ -202,8 +202,11 @@ html[lang='ar'] .text-in { font-family: var(--display-ar); }
   /* phones/tablets: creature first, then colour, then the part picker; the stat profile comes last */
   .builder-grid { display: flex; flex-direction: column; gap: var(--s3); }
   .builder-preview { display: contents; }
-  .builder-preview .stage { order: 1; min-height: 230px; position: sticky; top: calc(58px + env(safe-area-inset-top)); z-index: 3; box-shadow: 0 -70px 0 0 var(--ink), 0 16px 30px rgba(0, 0, 0, .55); }
+  .builder-preview .stage { order: 1; min-height: 230px; position: sticky; top: calc(58px + env(safe-area-inset-top)); z-index: 3; box-shadow: 0 16px 30px rgba(0, 0, 0, .55); }
+  /* a solid bar instead of a shadow above the pinned creature: the shadow used to cover the screen heading */
+  .screen-build .topbar { background: var(--ink); }
   .builder-preview .stage .stage-creature { width: min(70%, 300px); padding: var(--s4) 0 var(--s5); }
+  .builder-preview .mood-strip { order: 2; }
   .builder-tools { order: 2; }
   .builder-parts { order: 3; margin-top: var(--s3); }
   .builder-preview .profile { order: 4; }
@@ -365,7 +368,9 @@ html[lang='ar'] .typewriter { line-height: 1.95; }
 .fx-trophy, .fx-phone, .fx-climb, .fx-dig, .fx-chase, .fx-tumble, .fx-fly, .fx-camo, .fx-still, .fx-swim, .fx-jump { --fx: rgba(255, 245, 210, .18); }
 
 /* ───────── Ending ───────── */
-.screen.ending { display: grid; gap: var(--s5); justify-items: center; padding-bottom: var(--s6); }
+.screen.ending { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); justify-items: center; padding-bottom: var(--s6); }
+/* the memories strip scrolls sideways inside the card; without these it stretched the whole ending to 980px on phones */
+.ending-card > *, .ending-actions > * { min-width: 0; max-width: 100%; }
 .ending-card { position: relative; z-index: 1; width: min(100%, 980px); background: linear-gradient(180deg, rgba(12, 15, 19, .9), rgba(8, 10, 13, .94)); border: 1px solid var(--line); border-radius: 26px; padding: var(--s6); display: flex; flex-direction: column; gap: var(--s5); box-shadow: 0 40px 100px rgba(0, 0, 0, .6); animation: rise .7s ease both; }
 .ending-head { display: flex; flex-direction: column; align-items: center; gap: var(--s2); text-align: center; }
 .ending-head .tag { margin: 0; }
@@ -551,11 +556,13 @@ html[lang='ar'] .featured figcaption b { font-family: var(--display-ar); }
 .mood-strip .mood { background: var(--glass-2, rgba(255,255,255,.04)); border: 1px solid var(--line); border-radius: 12px; padding: 4px 2px 6px; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--paper-dim); cursor: pointer; }
 .mood-strip .mood.on { border-color: var(--gold, #e3c27a); color: var(--paper, #f1e6cf); }
 .mood-strip .mood .creature-art { width: 100%; }
+/* the face crop only moves the viewBox: without clipping, the whole body spills out of the small cell */
+.mood-strip .mood .creature-art svg { overflow: hidden; }
 .mood-strip small { font-size: .68rem; }
-@media (max-width: 520px) { .mood-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .mood-strip { gap: 4px; margin-top: 0; } .mood-strip small { font-size: .62rem; } }
 
 /* ───────── Mission briefing (before the first scene) ───────── */
-.briefing { position: absolute; inset: 0; z-index: 12; overflow-y: auto; display: flex; padding: calc(var(--s5) + 60px) var(--s4) var(--s5); background: radial-gradient(circle at 50% 35%, rgba(18, 24, 22, .96), rgba(3, 5, 8, .99)); animation: fade-in .5s both; }
+.briefing { position: absolute; inset: 0; z-index: 12; overflow-y: auto; display: flex; padding: calc(var(--s5) + 60px) var(--s4) var(--s5); background: radial-gradient(circle at 50% 35%, #121816, #030508); animation: fade-in .5s both; }
 .briefing .inner { margin: auto; width: min(100%, 620px); display: flex; flex-direction: column; align-items: center; gap: var(--s3); text-align: center; animation: rise .7s ease .05s both; }
 .briefing .logos img { height: clamp(56px, 11vw, 88px); }
 .briefing .kicker { margin: 0; }
@@ -819,3 +826,7 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
 .j-ends li.found { border-style: solid; border-color: rgba(216,180,106,.5); color: var(--gold-2); }
 .j-sub { margin: var(--s4) 0 0; }
 .j-world { margin: 0; padding-inline-start: 1.2em; line-height: 1.9; }
+
+/* booth pass (2026-11-10) */
+.mode-card:disabled { opacity: .32; filter: grayscale(.7); cursor: not-allowed; }
+.ending-actions .new-visitor { justify-self: center; grid-column: 1 / -1; }

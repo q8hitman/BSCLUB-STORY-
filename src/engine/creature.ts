@@ -47,6 +47,17 @@ export function randomName(rng: Rng, lang: 'ar' | 'en', base = 'fennec'): string
   return lang === 'ar' ? `هجين ${s.ar} ${code}` : `${s.en} Hybrid ${code}`;
 }
 
+/** Keep an untouched lab designation in step with the base animal (a name the player typed is never changed). */
+export function renameForBase(name: string, from: string, to: string): string {
+  const a = SHORT[from], b = SHORT[to];
+  if (!a || !b) return name;
+  const ar = /^هجين (.+) ([A-Z]-\d+)$/.exec(name);
+  if (ar && ar[1] === a.ar) return `هجين ${b.ar} ${ar[2]}`;
+  const en = /^(.+) Hybrid ([A-Z]-\d+)$/.exec(name);
+  if (en && en[1] === a.en) return `${b.en} Hybrid ${en[2]}`;
+  return name;
+}
+
 export function randomCreature(rng: Rng, lang: 'ar' | 'en' = 'en'): CreatureConfig {
   const c: Record<string, unknown> = {};
   for (const slot of SLOTS) c[slot] = rng.pick(partsFor(slot)).id;

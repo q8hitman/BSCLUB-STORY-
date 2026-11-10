@@ -90,3 +90,12 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
   - Creature Test Lab (`src/ui/TestLab.tsx`, `src/content/testLab.ts`). Layered title screen with Passport and Settings buttons; Journal "Adventures" tab.
   - QR saves carry `id@v`; codes from before the update are tested in `tests/fixtures/saves-2026-11-09.json`. 130 tests.
   - NOT done: dedicated before/after ComfyUI art (existing plates reused), the full redesign of all 16 screens, a real phone-camera scan.
+- 2026-11-10 — **Booth pass before the Thursday event (2026-11-12)**, found by playing the live site at phone size (375×812) and at 1366×768. NOT pushed yet (ask first).
+  - Fixed: the ending screen was 980px wide on phones (the memories strip stretched the card), so the ending, share card and buttons were cut off sideways.
+  - Fixed: builder on phones — the six mood previews drew the whole creature outside their cells and sat on top of the pinned creature stage; the stage's shadow also hid the screen heading.
+  - Default creature name now follows the base animal when it is changed (`renameForBase`; a typed name is never touched). Test added (131 tests).
+  - Mode screen: Quick story is the default length; picking an archive story switches off the other mode's card (before, the pick was silently ignored).
+  - Ending screen: a "New visitor" button (same confirm dialog as the title).
+  - Bridge lines between scenes: more variants (the same sentence used to repeat 3–4 times in one run). Display text only; saves replay the same.
+  - Arabic: «انضافت لكتاب الأساطير» → «أُضيفت هذه الأسطورة إلى كتاب الأساطير». Briefing background made opaque (HUD text showed through).
+  - Still open: a real phone-camera scan of the Passport QR; auto-names can wrap at the hyphen ("R-" / "32") in narrow choice cards.

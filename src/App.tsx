@@ -104,7 +104,7 @@ export default function App() {
   const [passport, setPassport] = useState(false);
   const [askNew, setAskNew] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
-  const [len, setLen] = useState<'quick' | 'full'>('full');
+  const [len, setLen] = useState<'quick' | 'full'>('quick');
   const [tone, setTone] = useState<'balanced' | 'light' | 'mystery' | 'surprise'>('balanced');
   const [unlocked, setUnlocked] = useState<string[]>([]);
   useEffect(() => { if (restored) setScreen('restore'); }, [restored]);
@@ -168,6 +168,8 @@ export default function App() {
   };
   const quit = () => { setData((d) => ({ ...d, current: null })); setGame(null); setScreen('title'); ambient.stop(); };
   const selectedDuck = DUCKS.find((d) => d.id === duck)!;
+  // an archive story belongs to one mode: the other mode's card is switched off instead of silently playing something else
+  const pickMode = currentStories().find((x) => x.id === pick)?.mode;
 
   return (
     <div className={`app lang-${lang} screen-${screen}`}>
@@ -317,7 +319,7 @@ export default function App() {
               : pick === 'gen' ? (lang === 'ar' ? 'رحلة يبنيها المحرّك من مشاهد كثيرة؛ الطول والمزاج يؤثّران فيها.' : 'A journey the engine builds from many scenes; length and mood apply.')
               : (lang === 'ar' ? `قصة متفرّعة من الأرشيف (${currentStories().find((x) => x.id === pick)?.mode === 'marine' ? 'بحرية' : 'كلاسيكية'}). اختر وضعها أدناه.` : 'A branching archive story. Pick its mode below.')}</p>
             <div className="mode-grid">
-              <button className="mode-card classic" onClick={() => begin('classic')}>
+              <button className="mode-card classic" disabled={pickMode === 'marine'} onClick={() => begin('classic')}>
                 <PaintedScene biome="forest" props={[]} seed={11} reduced plate={plateUrl('forest-signal-tree')} />
                 <div className="mode-brand"><Logos /><span>{u('bscOriginal', lang)}</span></div>
                 <div className="mode-text">
@@ -328,7 +330,7 @@ export default function App() {
                   <span className="mode-cta">{u('begin', lang)} <b aria-hidden="true">{lang === 'ar' ? '←' : '→'}</b></span>
                 </div>
               </button>
-              <button className="mode-card marine" onClick={() => begin('marine')}>
+              <button className="mode-card marine" disabled={pickMode === 'classic'} onClick={() => begin('marine')}>
                 <PaintedScene biome="midnight" props={['angler']} seed={12} reduced plate={plateUrl('midnight-angler')} />
                 <div className="mode-brand"><Logos marine /><span>{u('collabWith', lang)}</span></div>
                 <div className="mode-text">
@@ -347,7 +349,7 @@ export default function App() {
         {screen === 'play' && game && <Play game={game} setGame={updateGame} settings={data.settings} lang={lang} onQuit={quit} legendsSeen={data.legendsSeen} onPassport={() => setPassport(true)}
             onSighting={(id) => setData((d) => (d.legendsSeen.includes(id) ? d : { ...d, legendsSeen: [...d.legendsSeen, id] }))} />}
         {screen === 'ending' && game && ending && (
-          <EndingScreen game={game} ending={ending} lang={lang} reduced={reduced} unlocked={unlocked} onPassport={() => setPassport(true)} onJournal={() => setScreen('journal')}
+          <EndingScreen game={game} ending={ending} lang={lang} reduced={reduced} unlocked={unlocked} onPassport={() => setPassport(true)} onJournal={() => setScreen('journal')} onNewVisitor={() => setAskNew(true)}
             onReplay={() => begin(game.mode, game.creature)}
             onNew={() => { setCreature(randomCreature(new Rng(newSeed()), lang)); setScreen('build'); }} />
         )}

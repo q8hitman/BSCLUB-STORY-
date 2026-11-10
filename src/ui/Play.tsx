@@ -287,7 +287,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
                 <div>
                   <span className="tag fiction-tag">{lang === 'ar' ? 'أسطورة' : 'Legend'}</span>
                   <p>{glimpse.glimpse[lang]}</p>
-                  <small>{lang === 'ar' ? `${glimpse.name.ar}؟ انضافت لكتاب الأساطير.` : `${glimpse.name.en}? Added to the Book of Legends.`}</small>
+                  <small>{lang === 'ar' ? `${glimpse.name.ar}؟ أُضيفت هذه الأسطورة إلى كتاب الأساطير.` : `${glimpse.name.en}? Added to the Book of Legends.`}</small>
                 </div>
               </aside>
             )}

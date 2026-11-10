@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { HUES, partsFor } from '../content/parts';
-import { derive, randomCreature, randomName } from '../engine/creature';
+import { derive, randomCreature, randomName, renameForBase } from '../engine/creature';
 import { Rng, newSeed } from '../engine/rng';
 import { SLOTS, STAT_KEYS, type CreatureConfig, type Lang, type Slot } from '../engine/types';
 import { SLOT_LABEL, STAT_LABEL, t } from '../i18n';
@@ -29,7 +29,7 @@ function Stage({ children, className = '' }: { children: React.ReactNode; classN
 export function Builder({ lang, value, onChange, onNext, onBack }: { lang: Lang; value: CreatureConfig; onChange: (c: CreatureConfig) => void; onNext: () => void; onBack: () => void }) {
   const [slot, setSlot] = useState<Slot>('base');
   const d = useMemo(() => derive(value), [value]);
-  const set = (k: Slot, id: string) => onChange({ ...value, [k]: id });
+  const set = (k: Slot, id: string) => onChange({ ...value, [k]: id, ...(k === 'base' ? { name: renameForBase(value.name, value.base, id) } : {}) });
   const current = d.parts[slot];
   const [mood, setMood] = useState<Expression>('neutral');
   return (

@@ -18,7 +18,7 @@ const TONE: Record<Ending['tone'], { en: string; ar: string }> = {
   mysterious: { en: 'Mysterious', ar: 'غامضة' }, scientific: { en: 'Scientific', ar: 'علمية' }, wholesome: { en: 'Wholesome', ar: 'دافية' },
 };
 
-export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unlocked = [], onPassport, onJournal }: { game: GameState; ending: Ending; lang: Lang; reduced: boolean; onNew: () => void; onReplay: () => void; unlocked?: string[]; onPassport?: () => void; onJournal?: () => void }) {
+export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unlocked = [], onPassport, onJournal, onNewVisitor }: { game: GameState; ending: Ending; lang: Lang; reduced: boolean; onNew: () => void; onReplay: () => void; unlocked?: string[]; onPassport?: () => void; onJournal?: () => void; onNewVisitor?: () => void }) {
   const last = game.plan.beats[game.plan.beats.length - 1];
   // ending illustration by mode + tone (several per mood; picked per run, only plates that passed review)
   const ENDING_ART: Record<string, string[]> = {
@@ -126,6 +126,7 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unl
           <Btn variant="ghost" onClick={onReplay}>{t('sameCreature', lang)}</Btn>
           <Btn onClick={onNew}>{t('playAgain', lang)}</Btn>
         </div>
+        {onNewVisitor && <button className="new-visitor" onClick={onNewVisitor}>↺ {lang === 'ar' ? 'زائر جديد (امسح بيانات هذا الجهاز)' : 'New visitor (clear this device)'}</button>}
       </div>
     </section>
   );

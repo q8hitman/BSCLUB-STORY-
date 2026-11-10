@@ -248,10 +248,20 @@ const B = (en: string, ar: string): L10n => ({ en, ar });
 const AFTER_WIN: L10n[] = [
   B('Still riding that success, the team presses on.', 'ما زال أثر ذلك النجاح حاضراً، فيمضي الفريق قُدُماً.'),
   B('With that behind them, {name} moves on, more sure-footed now.', 'بعد ما جرى، يتقدّم {name} بخطى أثبت من ذي قبل.'),
+  B('The team allows itself a quick smile, then walks on.', 'يسمح الفريق لنفسه بابتسامةٍ سريعة، ثم يواصل السير.'),
+  B('{name} looks back once, then leads the way.', 'يلتفت {name} إلى الخلف مرةً واحدة، ثم يتقدّم الجميع.'),
+  B('Spirits are high, and the path ahead looks a little less strange.', 'المعنويات مرتفعة، والطريق أمامكم يبدو أقلّ غرابةً بقليل.'),
 ];
 const AFTER_LOSS: L10n[] = [
   B('Still shaking off that setback, {name} keeps going.', 'ما زال {name} ينفض عنه أثر تلك العثرة، لكنه يواصل الطريق.'),
   B('Bruised but not beaten, the team regroups and carries on.', 'يجمع الفريق شتاته بعد تلك الانتكاسة ويمضي، متعَباً لكن غير مهزوم.'),
+  B('Nobody mentions what just happened. {name} sets off again, more carefully.', 'لا أحد يذكر ما حدث قبل قليل. يتحرّك {name} من جديد، بحذرٍ أكبر هذه المرة.'),
+  B('A deep breath, a quick check of the gear, and the team moves on.', 'نَفَسٌ عميق، وفحصٌ سريع للمعدّات، ثم يمضي الفريق.'),
+];
+const CLUE_SAVED: L10n[] = [
+  B('The new clue is safely in the field notebook.', 'والدليل الجديد محفوظٌ الآن في الدفتر الميداني.'),
+  B('One more clue has been added to the notebook.', 'وقد أُضيف دليلٌ آخر إلى الدفتر.'),
+  B('The notebook is a page heavier now.', 'وازداد الدفتر الميداني صفحةً جديدة.'),
 ];
 
 /**
@@ -278,7 +288,7 @@ export function bridgeLine(s: GameState, idx = s.index): L10n | null {
   const prevChoice = prevTpl?.choices.find((c) => c.id === prev.choice);
   const prevOut = prevChoice && (prev.success || !prevChoice.fail ? prevChoice.success : prevChoice.fail);
   if (prevOut?.effects.some((e) => e.t === 'evidence') && t.kind !== 'climax') {
-    parts.push(B('The new clue is safely in the field notebook.', 'والدليل الجديد محفوظٌ الآن في الدفتر الميداني.'));
+    parts.push(r.pick(CLUE_SAVED));
   }
   if (t.kind === 'twist' && s.evidence.length >= 2) {
     parts.push(B('And then the clues gathered so far begin to fit together.', 'ثم تبدأ الأدلة التي جمعتموها حتى الآن بالتكامل.'));

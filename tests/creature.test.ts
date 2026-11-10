@@ -80,3 +80,13 @@ describe('sharing creatures', () => {
     expect(isValidConfig({ name: '', base: 'owl' } as never)).toBe(false);
   });
 });
+
+describe('default name follows the base animal', () => {
+  it('renames an untouched lab designation, keeps its code, and never touches a typed name', async () => {
+    const { renameForBase } = await import('../src/engine/creature');
+    expect(renameForBase('هجين فنك D-42', 'fennec', 'octopus')).toBe('هجين أخطبوط D-42');
+    expect(renameForBase('Fennec Hybrid D-42', 'fennec', 'owl')).toBe('Owl Hybrid D-42');
+    expect(renameForBase('زعفران', 'fennec', 'owl')).toBe('زعفران');
+    expect(renameForBase('هجين جمل D-42', 'fennec', 'owl')).toBe('هجين جمل D-42');
+  });
+});
