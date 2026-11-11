@@ -229,6 +229,20 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         <div className="vn-loc">
           <span className="place">{view.ctx.place[lang]}</span>
           {phaseLabel && <span className={`phase ${isDeep ? 'deep' : ''}`}>{phaseLabel}</span>}
+          {game.mode === 'marine' && (
+            <span className="guest-dock">
+              {Object.values(GUESTS).map((gs) => {
+                const here = (gs.id === 'faisal') === isDeep;
+                return (
+                  <button key={gs.id} type="button" className={`guest-chip ${here ? 'here' : ''}`} onClick={() => setZoom(guestZoom(gs, lang))}
+                    aria-label={gs.name[lang]} title={`${gs.name[lang]} · ${gs.role[lang]}`}>
+                    <img src={`${import.meta.env.BASE_URL}guests/${gs.id}-happy.webp`} alt="" width={40} height={36} />
+                    <b>{gs.name[lang]}</b>
+                  </button>
+                );
+              })}
+            </span>
+          )}
         </div>
         <div className="vn-meter">
           {story ? <span className="vn-progress" title={story.title[lang]}>{lang === 'ar' ? `المشهد ${game.index + 1}` : `Scene ${game.index + 1}`}</span> : <>

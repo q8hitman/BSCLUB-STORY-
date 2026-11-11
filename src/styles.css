@@ -976,3 +976,15 @@ html[lang='en'] .ending-part h3 { font-family: inherit; }
 .radio-line.kind-guest::before { background: var(--sea); }
 .radio-line.kind-guest img { width: 64px; height: 56px; object-fit: cover; object-position: center; border-radius: 12px; }
 .radio-tag.guest-tag { color: var(--sea); border-color: rgba(127, 210, 224, .45); }
+
+/* ═══ guests stay visible: faces beside the place name (Marine mode) and on the Marine mode card ═══ */
+.guest-dock { display: inline-flex; align-items: center; gap: 6px; }
+.guest-chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px 2px 2px; border-radius: 999px; border: 1px solid rgba(127, 210, 224, .35); background: rgba(6, 8, 11, .6); color: var(--paper-dim); font: inherit; font-size: .82rem; cursor: zoom-in; opacity: .6; min-height: 40px; }
+[dir="rtl"] .guest-chip { padding: 2px 2px 2px 10px; }
+.guest-chip.here { opacity: 1; border-color: var(--sea); color: var(--sea); box-shadow: 0 0 0 2px rgba(127, 210, 224, .18); }
+.guest-chip img { width: 40px; height: 36px; object-fit: cover; border-radius: 999px; background: rgba(127, 210, 224, .12); }
+.guest-chip b { font-weight: 600; }
+@media (max-width: 520px) { .guest-chip b { display: none; } .guest-chip, [dir="rtl"] .guest-chip { padding: 2px; } }
+.mode-guests { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.mode-guests img { width: 56px; height: 50px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(127, 210, 224, .5); background: rgba(127, 210, 224, .1); }
+.mode-guests em { font-style: normal; font-size: .85rem; color: var(--sea); line-height: 1.4; }

@@ -141,3 +141,4 @@ Designer: four archive stories are too few; the story must actually change betwe
 - Ending: trailing punctuation is stripped from a story goal before it is put inside the mission sentence.
 - `scripts/factory/example-story-generator.py`: the Python pattern used to write a story package; new stories were each generated this way and checked with `publish.ts --check`.
 - Verified: 132 tests, build, and full browser playthroughs of reef-queue, quiet-cave and false-seabed to the ending screen. Not verified by ear/eye on the designer's devices.
+- Guests visibility (designer: "the characters do not show on the site"): Misk and Faisal now stay on screen for the whole Marine run as two tappable faces beside the place name (the one travelling with the team is lit: Misk near the surface, Faisal in the deep), and both faces appear on the Marine mode card. Before this they only appeared in the mission briefing and in one radio line per new place.

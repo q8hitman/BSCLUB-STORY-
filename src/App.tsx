@@ -357,6 +357,11 @@ export default function App() {
                   <span className="kicker sea">{u('sea', lang)}</span>
                   <strong>{t('marine', lang)}</strong>
                   <span className="mode-desc">{t('marineDesc', lang)}</span>
+                  <span className="mode-guests">
+                    <img src={`${import.meta.env.BASE_URL}guests/misk-happy.webp`} alt="" width={56} height={50} />
+                    <img src={`${import.meta.env.BASE_URL}guests/faisal-happy.webp`} alt="" width={56} height={50} />
+                    <em>{lang === 'ar' ? 'مع الضيفين مسك وفيصل من نادي علوم البحار' : 'With guests Misk and Faisal from the Marine Science Club'}</em>
+                  </span>
                   <span className="mode-facts"><i>{u(len === 'quick' ? 'marineScenesQ' : 'marineScenes', lang)}</i><i className="journey">{u('marineJourney', lang)}</i><i>{u('fourChoices', lang)}</i></span>
                   <span className="mode-cta">{u('begin', lang)} <b aria-hidden="true">{lang === 'ar' ? '←' : '→'}</b></span>
                 </div>
