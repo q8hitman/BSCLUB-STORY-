@@ -918,3 +918,9 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
 /* phones: the scene bar keeps each counter on one line and wraps as a row when it runs out of room */
 .vn-meter .stat, .vn-meter .vn-progress { white-space: nowrap; }
 @media (max-aspect-ratio: 1/1) { .vn-meter { flex-wrap: wrap; row-gap: 4px; border-radius: 22px; justify-content: flex-end; } }
+
+/* look at the painting: everything over the scene steps aside until the next tap */
+.vn.peek .vn-panel, .vn.peek .creature-panel, .vn.peek .featured, .vn.peek .vn-hud, .vn.peek .letterbox, .vn.peek .cine-caption, .vn.peek .world-banner { visibility: hidden; }
+.vn.peek .painted-img { filter: none; }
+.peek-back { position: fixed; inset: 0; z-index: 40; display: grid; place-items: end center; padding: 0 16px calc(28px + env(safe-area-inset-bottom)); background: none; border: 0; color: var(--paper); font: inherit; font-size: 1rem; cursor: pointer; text-shadow: 0 2px 10px #000, 0 0 3px #000; }
+.vn.peek .creature-panel, .vn.peek .featured, .vn.peek .vn-panel { display: none; }

@@ -14,7 +14,7 @@ const U = {
   briefHow: { en: 'How to play', ar: 'طريقة اللعب' },
   briefHow1: { en: 'Each scene gives you four choices. {name}’s body parts make some choices easier and others harder.', ar: 'في كل مشهد أربعة خيارات. أعضاء {name} تجعل بعض الخيارات أسهل وبعضها أصعب.' },
   briefHow2: { en: 'Collect evidence ◆ and discoveries ✦. The ending is built from your decisions and what you found.', ar: 'اجمعوا الأدلة ◆ والاكتشافات ✦. النهاية تُبنى على قراراتكم وعلى ما وجدتموه.' },
-  briefHow3: { en: 'Watch the energy bar. Club members (the ducks) follow you over the radio: they react, guess (sometimes wrongly) and note real science — but the decisions are yours. Tap 📜 to re-read what happened so far, and ▦ any time for your Explorer Passport QR.', ar: 'انتبهوا لشريط الطاقة. أعضاء النادي (البط) يرافقونكم عبر اللاسلكي: يتفاعلون ويخمّنون (وقد يخطئون) ويدوّنون حقائق علمية، لكن القرار قراركم. اضغطوا 📜 لقراءة ما حدث حتى الآن، و▦ في أي وقت للحصول على رمز جواز المستكشف.' },
+  briefHow3: { en: 'Watch the energy bar. Club members (the ducks) follow you over the radio: they react, guess (sometimes wrongly) and note real science — but the decisions are yours. Tap 👁 to see the whole painting, 📜 to re-read what happened so far, and ▦ any time for your Explorer Passport QR.', ar: 'انتبهوا لشريط الطاقة. أعضاء النادي (البط) يرافقونكم عبر اللاسلكي: يتفاعلون ويخمّنون (وقد يخطئون) ويدوّنون حقائق علمية، لكن القرار قراركم. اضغطوا 👁 لمشاهدة اللوحة كاملة، و📜 لقراءة ما حدث حتى الآن، و▦ في أي وقت للحصول على رمز جواز المستكشف.' },
   briefStart: { en: 'Start the mission', ar: 'ابدأ المهمة' },
   // companion select
   companion: { en: 'Companion', ar: 'الرفيق' },

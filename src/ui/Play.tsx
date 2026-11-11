@@ -105,6 +105,8 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   // Story log (backlog): every scene so far — where, what happened, what the team chose and how it went — rebuilt
   // from the run itself, so it is complete after a refresh or a Passport scan too.
   const [logOpen, setLogOpen] = useState(false);
+  // "look at the painting": hides the text and cards until the next tap, so the scene can be seen whole
+  const [peek, setPeek] = useState(false);
   const history = useMemo(() => game.log.map((l, i) => {
     try {
       const t = BEAT_BY_ID[l.beat]; const c = t?.choices.find((x) => x.id === l.choice);
@@ -142,12 +144,12 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   // Keyboard: 1–4 pick a choice, Enter/Space continues.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!view || confirmQuit || brief || board || zoom || logOpen || (e.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (!view || confirmQuit || brief || board || zoom || logOpen || peek || (e.target as HTMLElement)?.tagName === 'INPUT') return;
       if (game.stage === 'beat' && typed) { const n = Number(e.key); if (n >= 1 && n <= view.choices.length) onChoose(view.choices[n - 1].choice.id); }
       else if (game.stage === 'outcome' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onContinue(); }
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
-  }, [view, game.stage, typed, confirmQuit, brief, board, zoom, logOpen, onChoose, onContinue]);
+  }, [view, game.stage, typed, confirmQuit, brief, board, zoom, logOpen, peek, onChoose, onContinue]);
 
   const autoPlate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
   // Story Archive scenes name their own plate, and Living World state swaps it (power restored, net removed…)
@@ -195,7 +197,8 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const CINE: Record<string, [string, string]> = { reveal: ['A reveal', 'لحظة كشف'], discovery: ['A discovery', 'اكتشاف'], passage: ['Into the unknown', 'نحو المجهول'], phenomenon: ['A rare phenomenon', 'ظاهرة نادرة'], climax: ['The decisive moment', 'اللحظة الحاسمة'] };
 
   return (
-    <section className={`screen play vn ${isDeep ? 'is-deep' : ''} ${cine ? `cine cine-${cine}` : ''}`}>
+    <section className={`screen play vn ${isDeep ? 'is-deep' : ''} ${cine ? `cine cine-${cine}` : ''} ${peek ? 'peek' : ''}`}>
+      {peek && <button className="peek-back" onClick={() => setPeek(false)} autoFocus>{lang === 'ar' ? 'اضغط في أي مكان للرجوع إلى القصة' : 'Tap anywhere to return to the story'}</button>}
       <PaintedScene biome={view.biome} props={view.template.props} seed={game.seed + game.index} reduced={reduced} plate={plate ? plateUrl(plate.id) : null} />
       <Particles kind={['reef', 'seagrass', 'mudflat', 'openSea'].includes(view.biome) ? 'bubbles' : ['twilight', 'midnight', 'vents', 'trench', 'cave'].includes(view.biome) ? 'specks' : ['desert', 'ruins', 'mountain'].includes(view.biome) ? 'dust' : 'spores'} count={18} />
       <div className="letterbox top" aria-hidden="true" /><div className="letterbox bottom" aria-hidden="true" />
@@ -214,6 +217,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           <span className="pips" title={t('energy', lang)} aria-label={`${t('energy', lang)} ${game.energy}/${MAX_ENERGY}`}>{Array.from({ length: MAX_ENERGY }, (_, i) => <i key={i} className={i < game.energy ? 'on' : ''} />)}</span>
           <button key={`ev${game.evidence.length}`} className="stat stat-btn bump" title={lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'} onClick={() => setBoard(true)}>◆ {game.evidence.length}</button>
           <span key={`di${game.discoveries.length}`} className="stat bump" title={t('discoveries', lang)}>✦ {game.discoveries.length}</span>
+          <button className="stat stat-btn log-btn" aria-label={lang === 'ar' ? 'شاهد اللوحة كاملة' : 'See the whole painting'} title={lang === 'ar' ? 'شاهد اللوحة كاملة' : 'See the whole painting'} onClick={() => setPeek(true)}>👁</button>
           <button className="stat stat-btn log-btn" aria-label={lang === 'ar' ? 'سجل القصة' : 'Story log'} title={lang === 'ar' ? 'سجل القصة: اقرأ ما حدث حتى الآن' : 'Story log: read what happened so far'} onClick={() => setLogOpen(true)} disabled={!history.length}>📜</button>
           {onPassport && <button className="ghost-icon passport-btn" aria-label={lang === 'ar' ? 'جواز المستكشف' : 'Explorer Passport'} title={lang === 'ar' ? 'جواز المستكشف · امسح وأكمل من جوالك' : 'Explorer Passport · scan to continue on your phone'} onClick={onPassport}>▦</button>}
           <button className="ghost-icon" aria-label={t('quit', lang)} onClick={() => setConfirmQuit(true)}>✕</button>
