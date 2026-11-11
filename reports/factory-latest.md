@@ -1,16 +1,16 @@
-# Story Factory — last run 2026-11-10 16:50 UTC
+# Story Factory — last run 2026-11-11 16:56 UTC
 
 | Attempt | Story | Editor scores | Result |
 |---|---|---|---|
+| classic · investigation | cave-echo-mystery | — | failed: Gemini HTTP 503 |
 | classic · comedy | — | — | failed: Gemini HTTP 503 |
-| classic · mystery | — | — | failed: Gemini HTTP 503 |
-| classic · suspense | — | — | failed: Gemini HTTP 503 |
+| classic · comedy | — | — | failed: Gemini HTTP 503 |
 
-_Gemini requests this step: 4, tokens ≈ 14512_
+_Gemini requests this step: 4, tokens ≈ 15601_
 
-| marine · adventure | bioluminescent-tide | science 5, arabic 5, age 9, coherence 5, variety 6 | failed: Gemini HTTP 503 |
-| marine · suspense | — | — | failed: Gemini HTTP 503 |
-| marine · investigation | — | — | failed: Gemini HTTP 503 |
+| marine · adventure | — | — | failed: Gemini HTTP 503 |
+| marine · strange | — | — | failed: Gemini HTTP 503 |
+| marine · comedy | — | — | failed: Gemini HTTP 503 |
 
-_Gemini requests this step: 5, tokens ≈ 20436_
+_Gemini requests this step: 3, tokens ≈ 0_
 
