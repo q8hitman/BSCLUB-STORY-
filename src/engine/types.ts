@@ -128,6 +128,8 @@ export interface BeatTemplate {
   weight?: number;
   /** Story Archive graphs: a fixed painted plate, swapped by Living World state (first matching `plateWhen` wins). */
   plate?: string;
+  /** Story Archive scenes: the scene's own place name (shown in the scene bar and the ending), instead of the biome's generic name. */
+  place?: L10n;
   plateWhen?: { when: Cond; plate: string }[];
   /** Story Archive graphs: present this scene as a cinematic moment (slow push-in, light sweep, caption). */
   cinematic?: 'reveal' | 'discovery' | 'passage' | 'phenomenon' | 'climax';

@@ -1,0 +1,1175 @@
+{
+ "id": "giant-footprints",
+ "v": 1,
+ "status": "published",
+ "mode": "classic",
+ "source": "hand-written 2026-11-11",
+ "title": {
+  "en": "The Giant Footprints",
+  "ar": "آثار الأقدام العملاقة"
+ },
+ "premise": {
+  "en": "Scientists at a snowy research hut find a line of huge footprints beside their hut and fear that a giant beast is walking around.",
+  "ar": "يجد علماء في كوخ للأبحاث بين الثلوج صفاً من آثار أقدام ضخمة بجانب كوخهم، ويخافون أن وحشاً عملاقاً يتجوّل حولهم."
+ },
+ "tone": "investigation",
+ "tags": {
+  "themes": [
+   "animal-tracks",
+   "melting-snow",
+   "field-evidence"
+  ],
+  "locations": [
+   "snow"
+  ],
+  "twist": "melted-tracks",
+  "creatures": [
+   "arctic-hare",
+   "arctic-fox",
+   "polar-bear"
+  ]
+ },
+ "world": {},
+ "science": [
+  "snow-frog"
+ ],
+ "start": "hut-hook",
+ "nodes": {
+  "hut-hook": {
+   "kind": "hook",
+   "biome": "snow",
+   "props": [],
+   "plate": "snow-giant-pawprint",
+   "place": {
+    "en": "The research hut",
+    "ar": "كوخ الأبحاث"
+   },
+   "goal": {
+    "en": "Find out what animal made the giant footprints in the snow.",
+    "ar": "اعرفوا ما الحيوان الذي ترك آثار الأقدام الضخمة في الثلج."
+   },
+   "text": {
+    "en": "The club is visiting a small research hut on the frozen plains. This morning the scientists found a line of huge footprints in the snow beside the hut. Each print is bigger than a dinner plate, and the prints come in groups of four. One scientist whispers: “A giant beast walked here!” The team is here with {name}, and {name} sniffs the edge of the biggest print. So what animal left these prints?",
+    "ar": "يزور النادي كوخاً صغيراً للأبحاث في السهول الجليدية. هذا الصباح وجد العلماء صفاً من آثار أقدام ضخمة في الثلج بجانب الكوخ. كل أثر أكبر من صحن العشاء، والآثار تأتي في مجموعات من أربعة. يهمس أحد العلماء: «مرّ من هنا وحش عملاق!» الفريق هنا ومعه {name}، و{name} يشمّ طرف أكبر أثر. فما الحيوان الذي ترك هذه الآثار؟"
+   },
+   "choices": [
+    {
+     "id": "follow-line",
+     "label": {
+      "en": "Follow the line of prints",
+      "ar": "اتبعوا صف الآثار"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The prints lead away from the hut toward the frozen lake, where the sun shines on the open snow.",
+       "ar": "تقود الآثار الفريق بعيداً عن الكوخ نحو البحيرة المتجمدة، حيث تلمع الشمس على الثلج المكشوف."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "lake-shore"
+     }
+    },
+    {
+     "id": "measure-print",
+     "label": {
+      "en": "Measure one print and look at its edges",
+      "ar": "قيسوا أثراً واحداً وانظروا إلى أطرافه"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The print is 30 centimetres wide, but its edges are soft and round, not sharp. A fresh print has sharp edges, so these prints are not new. The line goes on toward the sunny frozen lake, so the team follows it.",
+       "ar": "عرض الأثر ثلاثون سنتيمتراً، لكن أطرافه ناعمة ومستديرة وليست حادة. الأثر الجديد تكون أطرافه حادة، إذن هذه الآثار ليست جديدة. والصف يستمر نحو البحيرة المتجمدة المشمسة، فيتبعه الفريق."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "round-edges"
+       }
+      ],
+      "fx": "sample",
+      "next": "lake-shore"
+     }
+    },
+    {
+     "id": "check-log",
+     "label": {
+      "en": "Read the hut’s weather notebook",
+      "ar": "اقرؤوا دفتر الطقس في الكوخ"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "For three days the weather was the same: warm sun in the afternoon and very cold nights. The team takes the notebook to the big window to compare.",
+       "ar": "منذ ثلاثة أيام والطقس نفسه: شمس دافئة بعد الظهر، وليال باردة جداً. يأخذ الفريق الدفتر إلى النافذة الكبيرة ليقارن."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "weather-log"
+       }
+      ],
+      "fx": "scan",
+      "next": "hut-window"
+     }
+    },
+    {
+     "id": "calm-scientist",
+     "label": {
+      "en": "Calm the scared scientist with {duck}",
+      "ar": "هدّئوا العالِم الخائف مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team makes a warm drink and listens. The scientist points at the window: “I watch the prints from there every day. I think they are growing!”",
+       "ar": "يحضّر الفريق مشروباً دافئاً ويستمع. يشير العالِم إلى النافذة: «أراقب الآثار من هنا كل يوم. أظن أنها تكبر!»"
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "hut-window"
+     }
+    },
+    {
+     "id": "sniff-print",
+     "label": {
+      "en": "Let {name} sniff the big print",
+      "ar": "دعوا {name} يشمّ الأثر الكبير"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs the print calmly and is not afraid at all. The smell is weak and old, the smell of a small animal, not a big one. It leads toward the lake.",
+       "ar": "يشمّ {name} الأثر بهدوء، ولا يخاف أبداً. الرائحة ضعيفة وقديمة، رائحة حيوان صغير وليس حيواناً كبيراً. وهي تقود نحو البحيرة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "small-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "lake-shore"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "scratch-print",
+     "label": {
+      "en": "Let {name} scratch inside the print",
+      "ar": "دعوا {name} يخدش داخل الأثر"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} scratches the inside of the print: it is hard ice, not soft snow. Something melted it and then froze it again. The team goes inside to check the weather notebook.",
+       "ar": "يخدش {name} داخل الأثر: إنه جليد قاس، وليس ثلجاً ليناً. شيء ما أذابه ثم جمّده من جديد. يدخل الفريق الكوخ ليفحص دفتر الطقس."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "ice-crust"
+       }
+      ],
+      "fx": "dig",
+      "next": "hut-window"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "lake-shore": {
+   "kind": "explore",
+   "biome": "snow",
+   "props": [],
+   "plate": "snow-frozen-lake",
+   "place": {
+    "en": "The frozen lake",
+    "ar": "البحيرة المتجمدة"
+   },
+   "text": {
+    "en": "The team follows the prints to the edge of the frozen lake. Here the sun shines all afternoon. The prints are even bigger here, and inside each one the snow has turned into shiny ice, like glass. Why are the prints in the sun the biggest of all?",
+    "ar": "يتبع الفريق الآثار حتى طرف البحيرة المتجمدة. هنا تشرق الشمس طوال فترة بعد الظهر. الآثار هنا أكبر من قبل، وداخل كل أثر صار الثلج جليداً لامعاً مثل الزجاج. لماذا الآثار تحت الشمس هي الأكبر؟"
+   },
+   "choices": [
+    {
+     "id": "count-steps",
+     "label": {
+      "en": "Measure the space between the groups",
+      "ar": "قيسوا المسافة بين المجموعات"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The groups are only about one metre apart. A giant beast would take much longer steps. These look like the hops of a small animal. The prints go on toward a shady ice cave.",
+       "ar": "المسافة بين كل مجموعة والتي تليها متر واحد تقريباً. الوحش العملاق خطواته أطول كثيراً. هذه تشبه قفزات حيوان صغير. والآثار تستمر نحو كهف جليدي في الظل."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "short-hops"
+       }
+      ],
+      "fx": "sample",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "walk-shore",
+     "label": {
+      "en": "Walk fast along the shore",
+      "ar": "امشوا بسرعة على طرف البحيرة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team hurries along the shore. Out of the sun, near a small ice cave, the prints suddenly look smaller. The team stops to find out why.",
+       "ar": "يسرع الفريق على طرف البحيرة. وبعيداً عن الشمس، قرب كهف جليدي صغير، تبدو الآثار فجأة أصغر. يتوقف الفريق ليعرف السبب."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "touch-edges",
+     "label": {
+      "en": "Compare a print in the sun with the snow around it",
+      "ar": "قارنوا أثراً تحت الشمس بالثلج حوله"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The snow around the print is dry and soft, but the edges of the print are wet. The sun melts the edges a little, so the hole grows wider. The team wants to see a print in the shade, so it walks to the ice cave.",
+       "ar": "الثلج حول الأثر جاف ولين، لكن أطراف الأثر مبلولة. الشمس تذيب الأطراف قليلاً، فتتسع الحفرة. يريد الفريق أن يرى أثراً في الظل، فيمشي إلى الكهف الجليدي."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "wet-edges"
+       }
+      ],
+      "fx": "scan",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "share-hat",
+     "label": {
+      "en": "Lend {duck} a spare warm hat",
+      "ar": "أعيروا {duck} قبعة دافئة إضافية"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Everyone is warm now, {duck} too. Together the team follows the prints to a shady ice cave.",
+       "ar": "صار الجميع دافئين، ومنهم {duck}. ويتبع الفريق الآثار معاً حتى كهف جليدي في الظل."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "feel-warmth",
+     "label": {
+      "en": "Let {name} feel which snow is warmer",
+      "ar": "دعوا {name} يتحسّس أي ثلج أدفأ"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} stays longer on the sunny prints: the snow there is warmer and wetter. In the shade of the ice cave it is much colder, so the team goes there to compare.",
+       "ar": "يبقى {name} مدة أطول فوق الآثار المشمسة: الثلج هناك أدفأ وأكثر بللاً. وفي ظل الكهف الجليدي البرد أشد كثيراً، فيذهب الفريق إلى هناك ليقارن."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "sun-warm"
+       }
+      ],
+      "fx": "scan",
+      "next": "ice-cave"
+     },
+     "requires": {
+      "capAny": [
+       "heatSense",
+       "insulated"
+      ]
+     }
+    },
+    {
+     "id": "jump-test",
+     "label": {
+      "en": "Let {name} jump in fresh snow",
+      "ar": "دعوا {name} يقفز في ثلج جديد"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} jumps and leaves a fresh print. It is small and has sharp edges. So the giant prints must be old prints that changed. Then {name} hops toward the ice cave.",
+       "ar": "يقفز {name} فيترك أثراً جديداً. الأثر صغير وأطرافه حادة. إذن الآثار الضخمة آثار قديمة تغيّرت. ثم يقفز {name} نحو الكهف الجليدي."
+      },
+      "mood": "laughing",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fresh-print"
+       }
+      ],
+      "fx": "jump",
+      "next": "ice-cave"
+     },
+     "requires": {
+      "capAny": [
+       "jump",
+       "climb"
+      ]
+     }
+    }
+   ]
+  },
+  "hut-window": {
+   "kind": "explore",
+   "biome": "snow",
+   "props": [],
+   "plate": "snow-station-window",
+   "place": {
+    "en": "The big window",
+    "ar": "النافذة الكبيرة"
+   },
+   "text": {
+    "en": "Inside the warm hut, the team looks out of the big window. From here they can see the whole line of prints. On the table there are photos the scientists took each morning, and a small thermometer (a tool that measures how hot or cold it is). Did the prints really grow?",
+    "ar": "داخل الكوخ الدافئ ينظر الفريق من النافذة الكبيرة. من هنا يظهر صف الآثار كله. وعلى الطاولة صور التقطها العلماء كل صباح، وميزان حرارة صغير (أداة تقيس البرد والحر). هل كبرت الآثار حقاً؟"
+   },
+   "choices": [
+    {
+     "id": "compare-photos",
+     "label": {
+      "en": "Put the photos in order by day",
+      "ar": "رتّبوا الصور بحسب الأيام"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "Day one: the prints are the size of a hand. Day three: the size of a plate. The prints really grew, but no new animal came! Only the prints in the shade near the ice cave stayed small, so the team goes there.",
+       "ar": "في اليوم الأول الآثار بحجم اليد. وفي اليوم الثالث بحجم الصحن. الآثار كبرت حقاً، لكن لم يأت حيوان جديد! وحدها الآثار في الظل قرب الكهف الجليدي بقيت صغيرة، فيذهب الفريق إلى هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "growing-prints"
+       }
+      ],
+      "fx": "camera",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "run-outside",
+     "label": {
+      "en": "Run out to the prints near the window",
+      "ar": "اخرجوا بسرعة إلى الآثار القريبة من النافذة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Outside, the prints in the sunlight are huge. But the line goes on into the shade of an ice cave, so the team follows it there.",
+       "ar": "في الخارج تبدو الآثار تحت الشمس ضخمة. لكن الصف يستمر حتى ظل كهف جليدي، فيتبعه الفريق إلى هناك."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "read-thermometer",
+     "label": {
+      "en": "Read the thermometer record",
+      "ar": "اقرؤوا سجل ميزان الحرارة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "In the afternoon the sun warms the snow surface and melts it a little. At night it falls to 20 degrees below zero and everything freezes again. Melting by day and freezing by night could change the prints. The team goes out to check prints in the shade.",
+       "ar": "بعد الظهر تدفّئ الشمس سطح الثلج فيذوب قليلاً. وفي الليل تنزل الحرارة إلى عشرين درجة تحت الصفر فيتجمد كل شيء من جديد. الذوبان في النهار والتجمد في الليل قد يغيّران شكل الآثار. يخرج الفريق ليفحص الآثار في الظل."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "melt-freeze"
+       }
+      ],
+      "fx": "scan",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "listen-scientist",
+     "label": {
+      "en": "Listen to the scared scientist with {duck}",
+      "ar": "استمعوا مع {duck} إلى العالِم الخائف"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The scientist feels better after talking. Everyone agrees to search together, step by step, starting at the shady ice cave where the line ends.",
+       "ar": "يرتاح العالِم بعد الكلام. ويتفق الجميع على البحث معاً خطوة بخطوة، بدءاً من الكهف الجليدي في الظل حيث ينتهي الصف."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "ice-cave"
+     }
+    },
+    {
+     "id": "dusk-watch",
+     "label": {
+      "en": "Let {name} watch the window at sunset",
+      "ar": "دعوا {name} يراقب النافذة عند الغروب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "At sunset {name} stares at the window and makes a soft sound: a small shape, the colour of snow, hops past and goes toward the ice cave. It is small, not giant!",
+       "ar": "عند الغروب يحدّق {name} في النافذة ويصدر صوتاً خفيفاً: شكل صغير بلون الثلج يقفز ويمضي نحو الكهف الجليدي. إنه صغير، وليس عملاقاً!"
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "small-shape"
+       }
+      ],
+      "fx": "scan",
+      "next": "ice-cave"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "roof-look",
+     "label": {
+      "en": "Let {name} climb onto the roof to look",
+      "ar": "دعوا {name} يتسلّق السقف لينظر"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} climbs onto the roof, and the team follows by the ladder. From above they see it clearly: the line of prints ends at a shady ice cave.",
+       "ar": "يتسلّق {name} السقف، ويتبعه الفريق على السلّم. ومن فوق يظهر الأمر بوضوح: صف الآثار ينتهي عند كهف جليدي في الظل."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "line-ends"
+       }
+      ],
+      "fx": "climb",
+      "next": "ice-cave"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "ice-cave": {
+   "kind": "challenge",
+   "biome": "snow",
+   "props": [],
+   "plate": "snow-ice-cave",
+   "place": {
+    "en": "The ice cave",
+    "ar": "الكهف الجليدي"
+   },
+   "text": {
+    "en": "The line of prints ends at a small ice cave. The sun never shines inside. And here is a surprise: in the cold shade the prints are small, about the size of a child’s hand! Near them there are small round droppings (animal poo) and a tuft of soft fur, the colour of snow. Why are the prints small here and huge in the sun?",
+    "ar": "ينتهي صف الآثار عند كهف جليدي صغير. الشمس لا تدخل إليه أبداً. وهنا مفاجأة: في الظل البارد الآثار صغيرة، بحجم يد طفل تقريباً! وبجانبها فضلات صغيرة مستديرة (براز الحيوان)، وخصلة من فرو ناعم بلون الثلج. لماذا الآثار صغيرة هنا وضخمة تحت الشمس؟"
+   },
+   "choices": [
+    {
+     "id": "study-droppings",
+     "label": {
+      "en": "Look at the droppings with a magnifying glass",
+      "ar": "افحصوا الفضلات بعدسة مكبّرة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The droppings are full of tiny bits of chewed plants. This animal eats plants, not meat. Behind the cave, the team sees a snowy hill with fresh hops on it.",
+       "ar": "الفضلات مليئة بقطع صغيرة من نباتات ممضوغة. هذا الحيوان يأكل النباتات وليس اللحم. وخلف الكهف يرى الفريق تلاً ثلجياً عليه آثار قفزات جديدة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "plant-droppings"
+       }
+      ],
+      "fx": "sample",
+      "next": "hare-hill"
+     }
+    },
+    {
+     "id": "compare-sizes",
+     "label": {
+      "en": "Compare a shade print with a sun print",
+      "ar": "قارنوا أثراً في الظل بأثر تحت الشمس"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Same shape, same four marks, same space between groups. Only the size is different. So it is the same small animal, and the sun made the prints bigger. Fresh small prints go up the hill behind the cave.",
+       "ar": "الشكل نفسه، والعلامات الأربع نفسها، والمسافة نفسها بين المجموعات. الحجم وحده مختلف. إذن هو الحيوان الصغير نفسه، والشمس هي التي كبّرت الآثار. وآثار صغيرة جديدة تصعد التل خلف الكهف."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shade-small"
+       }
+      ],
+      "fx": "scan",
+      "next": "hare-hill"
+     }
+    },
+    {
+     "id": "check-shore",
+     "label": {
+      "en": "Go with the scientist to check the shore",
+      "ar": "اذهبوا مع العالِم لتفحصوا الشاطئ"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The scientist says: “Polar bears have huge feet. Maybe it was a bear!” The team walks to the shore to look, staying together and far from the ice.",
+       "ar": "يقول العالِم: «للدب القطبي أقدام ضخمة. ربما كان دباً!» يمشي الفريق إلى الشاطئ لينظر، ويبقى الجميع معاً وبعيداً عن جليد البحر."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "bear-shore"
+     }
+    },
+    {
+     "id": "save-fur",
+     "label": {
+      "en": "Keep the fur safe in a sample bag with {duck}",
+      "ar": "احفظوا الفرو في كيس عينات مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The fur is safe in the bag, with a label. Then the scientist points to the shore: “A polar bear has pale fur too!” So the team goes to look.",
+       "ar": "صار الفرو محفوظاً في الكيس وعليه بطاقة. ثم يشير العالِم إلى الشاطئ: «الدب القطبي فروه فاتح أيضاً!» فيذهب الفريق لينظر."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "bear-shore"
+     }
+    },
+    {
+     "id": "dig-cave",
+     "label": {
+      "en": "Let {name} dig at the back of the cave",
+      "ar": "دعوا {name} يحفر في آخر الكهف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} finds a small round hollow pressed into the snow and lined with fur: a resting place for a small animal. A trail of hops leaves it and goes up the hill.",
+       "ar": "يجد {name} حفرة صغيرة مستديرة مضغوطة في الثلج وفيها فرو: مكان يرتاح فيه حيوان صغير. ومنها تخرج آثار قفزات تصعد التل."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "resting-hollow"
+       }
+      ],
+      "fx": "dig",
+      "next": "hare-hill"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "sniff-fur",
+     "label": {
+      "en": "Let {name} sniff the fur",
+      "ar": "دعوا {name} يشمّ الفرو"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs the fur, then turns toward the shore, where the wind brings the strong smell of a big animal. The team goes to check, slowly and carefully.",
+       "ar": "يشمّ {name} الفرو، ثم يلتفت نحو الشاطئ، حيث تحمل الريح رائحة قوية لحيوان كبير. يذهب الفريق ليتأكد، ببطء وحذر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fur-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "bear-shore"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "heatSense"
+      ]
+     }
+    }
+   ]
+  },
+  "hare-hill": {
+   "kind": "challenge",
+   "biome": "snow",
+   "props": [],
+   "plate": "snow-comic-slide",
+   "featured": "arctic-hare",
+   "place": {
+    "en": "The snowy hill",
+    "ar": "التل الثلجي"
+   },
+   "text": {
+    "en": "On the snowy hill behind the cave, the team finally meets the “giant”: an arctic hare! It is the colour of snow, with big hairy back feet. It hops, slips on the icy slope and slides down a little, looking very surprised. Its fresh prints are small and come in groups of four. Is this little hare really the beast?",
+    "ar": "على التل الثلجي خلف الكهف يلتقي الفريق أخيراً «العملاق»: إنه أرنب قطبي! لونه بلون الثلج، وقدماه الخلفيتان كبيرتان ومغطاتان بالشعر. يقفز ثم ينزلق قليلاً على المنحدر الجليدي وهو يبدو متفاجئاً جداً. آثاره الجديدة صغيرة، وتأتي في مجموعات من أربعة. فهل هذا الأرنب الصغير هو الوحش حقاً؟"
+   },
+   "choices": [
+    {
+     "id": "match-print",
+     "label": {
+      "en": "Measure the hare’s fresh prints",
+      "ar": "قيسوا آثار الأرنب الجديدة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The fresh prints have the same shape as the giant ones: two long marks in front from the big back feet, and two small marks behind from the front feet. When a hare hops, its back feet land in front of its front feet. It is a perfect match.",
+       "ar": "للآثار الجديدة شكل الآثار الضخمة نفسه: علامتان طويلتان في الأمام من القدمين الخلفيتين الكبيرتين، وعلامتان صغيرتان في الخلف من القدمين الأماميتين. حين يقفز الأرنب تهبط قدماه الخلفيتان أمام قدميه الأماميتين. التطابق تام."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "perfect-match"
+       }
+      ],
+      "fx": "sample",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "stay-quiet",
+     "label": {
+      "en": "Stay still so the hare is not scared",
+      "ar": "ابقوا بلا حركة حتى لا يخاف الأرنب"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The hare calms down and chews a small plant poking out of the snow. Now the team knows who leaves the droppings full of plants.",
+       "ar": "يهدأ الأرنب ويبدأ يمضغ نبتة صغيرة تخرج من الثلج. الآن عرف الفريق من يترك الفضلات المليئة بالنباتات."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "follow-hare",
+     "label": {
+      "en": "Follow the hare up the hill",
+      "ar": "اتبعوا الأرنب إلى أعلى التل"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The hare is much faster than the team. From the top of the hill, the team sees its trail going past the hut again and again. That is why there are so many prints.",
+       "ar": "الأرنب أسرع كثيراً من الفريق. ومن أعلى التل يرى الفريق طريقه يمرّ بجانب الكوخ مرة بعد مرة. لهذا السبب الآثار كثيرة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "look-feet",
+     "label": {
+      "en": "Look closely at the hare’s big feet",
+      "ar": "انظروا جيداً إلى قدمي الأرنب الكبيرتين"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Thick fur covers the bottom of its feet. The feet work like snowshoes (wide shoes for walking on snow): the hare does not sink, and its feet stay warm.",
+       "ar": "فرو كثيف يغطي باطن قدميه. القدمان تعملان مثل أحذية الثلج (أحذية عريضة للمشي فوق الثلج): فلا يغوص الأرنب، وتبقى قدماه دافئتين."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "snowshoe-feet"
+       }
+      ],
+      "fx": "scan",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "hide-watch",
+     "label": {
+      "en": "Let {name} hide and watch",
+      "ar": "دعوا {name} يختبئ ويراقب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Hidden in the snow, {name} spots a second animal: an arctic fox following the hare from far away. The fox leaves small prints too, in one straight line.",
+       "ar": "وهو مختبئ في الثلج يلمح {name} حيواناً آخر: ثعلباً قطبياً يتبع الأرنب من بعيد. والثعلب يترك آثاراً صغيرة أيضاً، في خط واحد مستقيم."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fox-follows"
+       }
+      ],
+      "fx": "camo",
+      "next": "hut-cocoa"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "dig-plants",
+     "label": {
+      "en": "Let {name} dig where the hare was chewing",
+      "ar": "دعوا {name} يحفر حيث كان الأرنب يمضغ"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} digs a little and finds small willow plants (tiny low bushes) under the snow. The hare comes here to eat them, so it passes the hut every day.",
+       "ar": "يحفر {name} قليلاً فيجد نباتات صفصاف صغيرة (شجيرات قصيرة جداً) تحت الثلج. يأتي الأرنب ليأكلها، ولذلك يمرّ بجانب الكوخ كل يوم."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "willow-food"
+       }
+      ],
+      "fx": "dig",
+      "next": "hut-cocoa"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    }
+   ]
+  },
+  "bear-shore": {
+   "kind": "challenge",
+   "biome": "snow",
+   "props": [],
+   "plate": "snow-polar-bear",
+   "featured": "polar-bear",
+   "place": {
+    "en": "The icy shore",
+    "ar": "الشاطئ الجليدي"
+   },
+   "text": {
+    "en": "At the shore, very far away on the sea ice, a real polar bear is walking slowly away from the hut. The team stays together, far back, and looks through binoculars. Near the shore there are also some old bear prints. Could the bear have made the giant prints by the hut?",
+    "ar": "عند الشاطئ، وبعيداً جداً فوق جليد البحر، يمشي دب قطبي حقيقي ببطء مبتعداً عن الكوخ. يبقى الفريق مجتمعاً وبعيداً، وينظر بالمنظار. وقرب الشاطئ آثار قديمة للدب أيضاً. فهل الدب هو الذي ترك الآثار الضخمة قرب الكوخ؟"
+   },
+   "choices": [
+    {
+     "id": "watch-bear",
+     "label": {
+      "en": "Watch how the bear walks",
+      "ar": "راقبوا كيف يمشي الدب"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The bear puts one foot after the other and leaves a single line of prints. It never hops. The prints by the hut come in groups of four, so the bear did not make them.",
+       "ar": "يضع الدب قدماً بعد قدم، ويترك خطاً واحداً من الآثار. هو لا يقفز أبداً. أما الآثار قرب الكوخ فتأتي في مجموعات من أربعة، إذن الدب لم يتركها."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bear-line"
+       }
+      ],
+      "fx": "binoculars",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "measure-bear",
+     "label": {
+      "en": "Measure the bear’s old prints on the shore",
+      "ar": "قيسوا آثار الدب القديمة على الشاطئ"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The bear prints are huge and show five toes and claw marks. The giant prints by the hut have no claw marks and no five toes. They belong to another animal.",
+       "ar": "آثار الدب ضخمة، وتظهر فيها خمس أصابع وعلامات مخالب. أما الآثار الضخمة قرب الكوخ فليس فيها مخالب ولا خمس أصابع. إنها لحيوان آخر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "claw-marks"
+       }
+      ],
+      "fx": "sample",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "walk-back",
+     "label": {
+      "en": "Walk back to the hut quietly",
+      "ar": "ارجعوا إلى الكوخ بهدوء"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team walks back calmly, always away from the bear. On the way, everyone notices that none of the bear prints go near the hut.",
+       "ar": "يرجع الفريق بهدوء، مبتعداً دائماً عن الدب. وفي الطريق يلاحظ الجميع أن آثار الدب كلها لا تقترب من الكوخ."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "still",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "tell-scientist",
+     "label": {
+      "en": "Show the scientist what you saw, with {duck}",
+      "ar": "أروا العالِم ما رأيتم، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The scientist looks through the binoculars and smiles: “The bear is far away and walks in a line. It is not our giant.” Now the scientist is not afraid any more.",
+       "ar": "ينظر العالِم بالمنظار ويبتسم: «الدب بعيد، ويمشي في خط واحد. ليس هو عملاقنا.» والآن لم يعد العالِم خائفاً."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "hut-cocoa"
+     }
+    },
+    {
+     "id": "smell-wind",
+     "label": {
+      "en": "Let {name} smell the wind from the sea",
+      "ar": "دعوا {name} يشمّ الريح القادمة من البحر"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} smells the bear far away on the ice. But near the giant prints by the hut there was no bear smell at all, only the smell of a small animal.",
+       "ar": "يشمّ {name} رائحة الدب بعيداً فوق الجليد. لكن قرب الآثار الضخمة عند الكوخ لم تكن هناك أي رائحة دب، فقط رائحة حيوان صغير."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "no-bear-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "hut-cocoa"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "fly-look",
+     "label": {
+      "en": "Let {name} fly up and look along the shore",
+      "ar": "دعوا {name} يطير ويرى الشاطئ من فوق"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "From above, {name} sees the whole bear path: it follows the sea ice and never turns toward the hut.",
+       "ar": "من فوق يرى {name} طريق الدب كله: إنه يمشي مع جليد البحر ولا يتجه أبداً نحو الكوخ."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "no-bear-path"
+       }
+      ],
+      "fx": "climb",
+      "next": "hut-cocoa"
+     },
+     "requires": {
+      "capAny": [
+       "fly",
+       "glide"
+      ]
+     }
+    }
+   ]
+  },
+  "hut-cocoa": {
+   "kind": "climax",
+   "biome": "snow",
+   "props": [],
+   "plate": "camp-snow-cocoa",
+   "cinematic": "reveal",
+   "place": {
+    "en": "Inside the warm hut",
+    "ar": "داخل الكوخ الدافئ"
+   },
+   "text": {
+    "en": "Back in the warm hut, everyone holds a cup of hot cocoa. Now the team can explain the giant. An arctic hare hopped past and left small prints. Every afternoon the sun melted the edges of the prints a little, so they grew wider. Every night the cold froze them hard again. After a few days, a print the size of a hand looked like the foot of a giant. In the shade, where the sun never reached, the prints stayed small. The scientist asks: “So how do we tell everyone?”",
+    "ar": "رجع الجميع إلى الكوخ الدافئ، وفي يد كل واحد كوب من الكاكاو الساخن. الآن يستطيع الفريق أن يشرح سر «العملاق». مرّ أرنب قطبي من هنا وترك آثاراً صغيرة. وكل يوم بعد الظهر كانت الشمس تذيب أطراف الآثار قليلاً فتتسع. وكل ليلة كان البرد يجمّدها من جديد. وبعد أيام صار الأثر الذي بحجم اليد يشبه قدم عملاق. أما في الظل، حيث لا تصل الشمس، فبقيت الآثار صغيرة. يسأل العالِم: «وكيف نخبر الجميع؟»"
+   },
+   "choices": [
+    {
+     "id": "melt-test",
+     "label": {
+      "en": "Make new prints and watch them for three days",
+      "ar": "اصنعوا آثاراً جديدة وراقبوها ثلاثة أيام"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The team presses small prints into sunny snow and into shady snow. After three days the sunny prints are twice as big, and the shady ones have not changed. The test proves it.",
+       "ar": "يضغط الفريق آثاراً صغيرة في ثلج مشمس وفي ثلج في الظل. بعد ثلاثة أيام صارت الآثار المشمسة أكبر مرتين، أما آثار الظل فلم تتغير. التجربة تثبت الجواب."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "sample",
+      "next": "end:melt-proof"
+     }
+    },
+    {
+     "id": "show-photos",
+     "label": {
+      "en": "Show the scientists the photos and measurements",
+      "ar": "اعرضوا على العلماء الصور والقياسات"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The scientists look at the photos day by day and nod. The giant was only melting by day and freezing by night.",
+       "ar": "ينظر العلماء إلى الصور يوماً بعد يوم ويهزّون رؤوسهم موافقين. العملاق كان مجرد ذوبان في النهار وتجمد في الليل."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "screen",
+      "next": "end:melt-proof"
+     }
+    },
+    {
+     "id": "protect-hare",
+     "label": {
+      "en": "Ask the scientists to keep the hare’s path clear",
+      "ar": "اطلبوا من العلماء أن يتركوا طريق الأرنب مفتوحاً"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The scientists agree to walk around the hare path and not to block it. The hare keeps visiting its plants near the hut.",
+       "ar": "يوافق العلماء على المشي حول طريق الأرنب وألا يسدّوه. ويستمر الأرنب في زيارة نباتاته قرب الكوخ."
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:hare-neighbour"
+     }
+    },
+    {
+     "id": "funny-sign",
+     "label": {
+      "en": "Make a funny sign for the hut",
+      "ar": "اصنعوا لوحة طريفة للكوخ"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The team writes on a sign: “Careful: Giant Beast (it is really a hare)”. Everyone laughs, and the scientist laughs the loudest.",
+       "ar": "يكتب الفريق على لوحة: «انتبهوا: وحش عملاق (هو في الحقيقة أرنب)». يضحك الجميع، والعالِم يضحك أعلى من الكل."
+      },
+      "mood": "laughing",
+      "effects": [],
+      "fx": "stars",
+      "next": "end:giant-hare"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "melt-proof": {
+   "tone": "scientific",
+   "title": {
+    "en": "The Growing Footprints",
+    "ar": "الآثار التي تكبر"
+   },
+   "summary": {
+    "en": "The team proved that the giant footprints were small arctic hare prints, made bigger by the sun melting them by day and the cold freezing them at night.",
+    "ar": "أثبت الفريق أن الآثار الضخمة آثار صغيرة لأرنب قطبي، كبّرتها الشمس حين أذابتها في النهار، والبرد حين جمّدها في الليل."
+   },
+   "epilogue": {
+    "en": "The scientists added the melt test to the hut notebook. The club used the photos in a poster called “How a Hare Became a Giant”, with {name} in the corner.",
+    "ar": "أضاف العلماء تجربة الذوبان إلى دفتر الكوخ. واستعمل النادي الصور في ملصق عنوانه «كيف صار الأرنب عملاقاً»، وفي زاويته صورة {name}."
+   }
+  },
+  "hare-neighbour": {
+   "tone": "wholesome",
+   "title": {
+    "en": "The Hare Next Door",
+    "ar": "الأرنب الجار"
+   },
+   "summary": {
+    "en": "The team found that the “giant” was an arctic hare that visits the plants near the hut, and helped the scientists share the place with it.",
+    "ar": "اكتشف الفريق أن «العملاق» أرنب قطبي يزور النباتات قرب الكوخ، وساعد العلماء على أن يعيشوا معه في المكان نفسه."
+   },
+   "epilogue": {
+    "en": "The scientists now keep the hare path clear and count its visits each morning. In their last message to the club, they wrote that the hare came twelve times that week.",
+    "ar": "صار العلماء يتركون طريق الأرنب مفتوحاً، ويعدّون زياراته كل صباح. وفي آخر رسالة إلى النادي كتبوا أن الأرنب جاء اثنتي عشرة مرة في ذلك الأسبوع."
+   }
+  },
+  "giant-hare": {
+   "tone": "comedic",
+   "title": {
+    "en": "Beware the Giant Hare",
+    "ar": "احذروا الأرنب العملاق"
+   },
+   "summary": {
+    "en": "The “giant beast” turned out to be one small arctic hare, and the scientists laughed at their own fright.",
+    "ar": "تبيّن أن «الوحش العملاق» أرنب قطبي صغير واحد، وضحك العلماء من خوفهم."
+   },
+   "epilogue": {
+    "en": "The funny sign still hangs on the hut door. Visitors read it, then laugh when the “giant” hops past, no bigger than a large cat.",
+    "ar": "ما زالت اللوحة الطريفة معلّقة على باب الكوخ. يقرؤها الزوار، ثم يضحكون حين يمرّ «العملاق» قافزاً، وهو ليس أكبر من قطة كبيرة."
+   }
+  }
+ }
+}

@@ -58,6 +58,182 @@
   "publishedAt": "2026-11-11"
  },
  {
+  "id": "false-seabed",
+  "v": 1,
+  "status": "published",
+  "mode": "marine",
+  "tone": "strange",
+  "title": {
+   "en": "The Seabed That Rises",
+   "ar": "القاع الذي يصعد"
+  },
+  "premise": {
+   "en": "Every evening the depth scanner of the research ship shows the seabed rising hundreds of metres toward the ship, and every morning it sinks back. Is the scanner broken, or is the sea floor moving?",
+   "ar": "كل مساء يُظهر جهاز كشف الأعماق في السفينة البحثية أن قاع البحر يصعد مئات الأمتار نحو السفينة، وكل صباح ينزل من جديد. هل الجهاز معطّل، أم أن قاع البحر يتحرّك؟"
+  },
+  "locations": [
+   "twilight",
+   "openSea"
+  ],
+  "themes": [
+   "sonar-echo",
+   "night-migration",
+   "living-light"
+  ],
+  "twist": "living-layer",
+  "endings": {
+   "seabed-swims": {
+    "en": "The Seabed That Swims",
+    "ar": "القاع الذي يسبح"
+   },
+   "sea-stars": {
+    "en": "Stars Under the Sea",
+    "ar": "نجوم تحت البحر"
+   },
+   "down-with-dawn": {
+    "en": "Down With the Dawn",
+    "ar": "نزول مع الفجر"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "1hmm1l7",
+  "fingerprint": [
+   "mode:marine",
+   "tone:strange",
+   "twist:living-layer",
+   "theme:sonar-echo",
+   "theme:night-migration",
+   "theme:living-light",
+   "loc:twilight",
+   "loc:openSea",
+   "cr:lanternfish",
+   "cr:hatchetfish",
+   "cr:siphonophore",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:heroic"
+  ],
+  "publishedAt": "2026-11-11"
+ },
+ {
+  "id": "giant-footprints",
+  "v": 1,
+  "status": "published",
+  "mode": "classic",
+  "tone": "investigation",
+  "title": {
+   "en": "The Giant Footprints",
+   "ar": "آثار الأقدام العملاقة"
+  },
+  "premise": {
+   "en": "Scientists at a snowy research hut find a line of huge footprints beside their hut and fear that a giant beast is walking around.",
+   "ar": "يجد علماء في كوخ للأبحاث بين الثلوج صفاً من آثار أقدام ضخمة بجانب كوخهم، ويخافون أن وحشاً عملاقاً يتجوّل حولهم."
+  },
+  "locations": [
+   "snow"
+  ],
+  "themes": [
+   "animal-tracks",
+   "melting-snow",
+   "field-evidence"
+  ],
+  "twist": "melted-tracks",
+  "endings": {
+   "melt-proof": {
+    "en": "The Growing Footprints",
+    "ar": "الآثار التي تكبر"
+   },
+   "hare-neighbour": {
+    "en": "The Hare Next Door",
+    "ar": "الأرنب الجار"
+   },
+   "giant-hare": {
+    "en": "Beware the Giant Hare",
+    "ar": "احذروا الأرنب العملاق"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "0umb2hn",
+  "fingerprint": [
+   "mode:classic",
+   "tone:investigation",
+   "twist:melted-tracks",
+   "theme:animal-tracks",
+   "theme:melting-snow",
+   "theme:field-evidence",
+   "loc:snow",
+   "cr:arctic-hare",
+   "cr:arctic-fox",
+   "cr:polar-bear",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:comedic"
+  ],
+  "publishedAt": "2026-11-11"
+ },
+ {
+  "id": "glowing-forest",
+  "v": 1,
+  "status": "published",
+  "mode": "classic",
+  "tone": "mystery",
+  "title": {
+   "en": "The Glowing Forest",
+   "ar": "الغابة المضيئة"
+  },
+  "premise": {
+   "en": "Villagers say a ring of trees deep in the forest glows green at night, and they think it is haunted.",
+   "ar": "يقول أهل قرية إن حلقة من الأشجار في عمق الغابة تضيء باللون الأخضر في الليل، ويظنون أنها مسكونة بالأشباح."
+  },
+  "locations": [
+   "forest"
+  ],
+  "themes": [
+   "bioluminescence",
+   "decomposers",
+   "night-forest"
+  ],
+  "twist": "glowing-fungus",
+  "endings": {
+   "foxfire-proof": {
+    "en": "The Fungus That Glows",
+    "ar": "الفطر الذي يضيء"
+   },
+   "village-walk": {
+    "en": "A Night Walk for Everyone",
+    "ar": "نزهة ليلية للجميع"
+   },
+   "mushroom-sign": {
+    "en": "The Ghost Was a Mushroom",
+    "ar": "الشبح كان فطرا"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "1d9im3f",
+  "fingerprint": [
+   "mode:classic",
+   "tone:mystery",
+   "twist:glowing-fungus",
+   "theme:bioluminescence",
+   "theme:decomposers",
+   "theme:night-forest",
+   "loc:forest",
+   "cr:owl",
+   "cr:lynx",
+   "cr:roe-deer",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:comedic"
+  ],
+  "publishedAt": "2026-11-11"
+ },
+ {
   "id": "lantern-wreck",
   "v": 1,
   "status": "published",
@@ -131,6 +307,180 @@
    "end:mysterious"
   ],
   "publishedAt": "2026-11-09"
+ },
+ {
+  "id": "quiet-cave",
+  "v": 1,
+  "status": "published",
+  "mode": "classic",
+  "tone": "suspense",
+  "title": {
+   "en": "The Quiet Cave",
+   "ar": "الكهف الصامت"
+  },
+  "premise": {
+   "en": "Every evening, thousands of bats flew out of the Echo Cave. Two weeks ago they stopped, and now insects are eating the farms nearby.",
+   "ar": "كل مساء كانت آلاف الخفافيش تطير من كهف الصدى. قبل أسبوعين توقّفت، والآن تأكل الحشرات المزارع القريبة."
+  },
+  "locations": [
+   "cave"
+  ],
+  "themes": [
+   "light-pollution",
+   "pest-control",
+   "night-hunters"
+  ],
+  "twist": "disturbed-bats",
+  "endings": {
+   "bats-fly-again": {
+    "en": "The Bats Fly Again",
+    "ar": "الخفافيش تطير من جديد"
+   },
+   "bat-count": {
+    "en": "Five Thousand Hunters",
+    "ar": "خمسة آلاف صيّاد"
+   },
+   "quiet-please": {
+    "en": "A Sign for Visitors",
+    "ar": "لوحة للزوّار"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "0o6uj0s",
+  "fingerprint": [
+   "mode:classic",
+   "tone:suspense",
+   "twist:disturbed-bats",
+   "theme:light-pollution",
+   "theme:pest-control",
+   "theme:night-hunters",
+   "loc:cave",
+   "cr:bat",
+   "cr:cave-centipede",
+   "cr:cavefish",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:heroic",
+   "end:scientific",
+   "end:wholesome"
+  ],
+  "publishedAt": "2026-11-11"
+ },
+ {
+  "id": "reef-queue",
+  "v": 1,
+  "status": "published",
+  "mode": "marine",
+  "tone": "comedy",
+  "title": {
+   "en": "The Queue on the Reef",
+   "ar": "طابور في الشعاب"
+  },
+  "premise": {
+   "en": "Divers say that big fish, even a shark and a moray eel, wait in a line at one rock on the coral reef with their mouths open, as if they were ill.",
+   "ar": "يقول الغوّاصون إن أسماكاً كبيرة، ومنها قرش وثعبان موراي، تقف في طابور عند صخرة واحدة في الشعاب المرجانية وأفواهها مفتوحة، كأنها مريضة."
+  },
+  "locations": [
+   "reef"
+  ],
+  "themes": [
+   "symbiosis",
+   "parasites",
+   "reef-health"
+  ],
+  "twist": "cleaning-station",
+  "endings": {
+   "cleaning-explained": {
+    "en": "The Cleaning Station",
+    "ar": "محطة التنظيف"
+   },
+   "station-open": {
+    "en": "The Station Stays Open",
+    "ar": "المحطة تبقى مفتوحة"
+   },
+   "next-in-line": {
+    "en": "Next in Line",
+    "ar": "التالي في الطابور"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "0fbh71i",
+  "fingerprint": [
+   "mode:marine",
+   "tone:comedy",
+   "twist:cleaning-station",
+   "theme:symbiosis",
+   "theme:parasites",
+   "theme:reef-health",
+   "loc:reef",
+   "cr:reef-shark",
+   "cr:moray-eel",
+   "cr:parrotfish",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:comedic"
+  ],
+  "publishedAt": "2026-11-11"
+ },
+ {
+  "id": "seagrass-trails",
+  "v": 1,
+  "status": "published",
+  "mode": "marine",
+  "tone": "adventure",
+  "title": {
+   "en": "Trails in the Seagrass",
+   "ar": "دروب في الأعشاب البحرية"
+  },
+  "premise": {
+   "en": "A fisherman finds long, winding bare paths cut through a green seagrass meadow, as if something ploughed the seabed at night. He thinks it is a machine or a sea monster.",
+   "ar": "يجد صيّاد دروباً طويلة ملتوية خالية تقطع مرجاً أخضر من الأعشاب البحرية، كأن شيئاً حرث قاع البحر في الليل. ويظن أنها آلة أو وحش بحري."
+  },
+  "locations": [
+   "seagrass"
+  ],
+  "themes": [
+   "sea-cows",
+   "seagrass-meadows",
+   "boat-safety"
+  ],
+  "twist": "feeding-trails",
+  "endings": {
+   "trail-map": {
+    "en": "A Map of Feeding Trails",
+    "ar": "خريطة دروب الطعام"
+   },
+   "gentle-neighbours": {
+    "en": "Gentle Neighbours",
+    "ar": "جيران لطفاء"
+   },
+   "meadow-guardians": {
+    "en": "Guardians of the Meadow",
+    "ar": "حرّاس المرج"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "13vy3t2",
+  "fingerprint": [
+   "mode:marine",
+   "tone:adventure",
+   "twist:feeding-trails",
+   "theme:sea-cows",
+   "theme:seagrass-meadows",
+   "theme:boat-safety",
+   "loc:seagrass",
+   "cr:dugong",
+   "cr:seahorse",
+   "cr:stingray",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:heroic"
+  ],
+  "publishedAt": "2026-11-11"
  },
  {
   "id": "silent-ridge",

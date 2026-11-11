@@ -1,0 +1,1177 @@
+{
+ "id": "seagrass-trails",
+ "v": 1,
+ "status": "published",
+ "mode": "marine",
+ "source": "hand-written 2026-11-11",
+ "title": {
+  "en": "Trails in the Seagrass",
+  "ar": "دروب في الأعشاب البحرية"
+ },
+ "premise": {
+  "en": "A fisherman finds long, winding bare paths cut through a green seagrass meadow, as if something ploughed the seabed at night. He thinks it is a machine or a sea monster.",
+  "ar": "يجد صيّاد دروباً طويلة ملتوية خالية تقطع مرجاً أخضر من الأعشاب البحرية، كأن شيئاً حرث قاع البحر في الليل. ويظن أنها آلة أو وحش بحري."
+ },
+ "tone": "adventure",
+ "tags": {
+  "themes": [
+   "sea-cows",
+   "seagrass-meadows",
+   "boat-safety"
+  ],
+  "locations": [
+   "seagrass"
+  ],
+  "twist": "feeding-trails",
+  "creatures": [
+   "dugong",
+   "seahorse",
+   "stingray"
+  ]
+ },
+ "world": {},
+ "science": [
+  "seagrass-dugong"
+ ],
+ "start": "meadow-hook",
+ "nodes": {
+  "meadow-hook": {
+   "kind": "hook",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-meadow-dawn",
+   "place": {
+    "en": "The seagrass meadow",
+    "ar": "مرج الأعشاب البحرية"
+   },
+   "goal": {
+    "en": "Find out what is cutting the long bare paths through the seagrass.",
+    "ar": "اعرفوا ما الذي يصنع الدروب الطويلة الخالية في الأعشاب البحرية."
+   },
+   "text": {
+    "en": "Early in the morning, the club boat floats over a green seagrass meadow in the shallow sea. An old fisherman calls from his boat: “Look down! Long bare paths cut through the grass, as if something dragged a plough across the seabed at night. A secret machine? A sea monster?” Misk leans over the side with her magnifying glass, and {duck} is on the boat too. {name} is ready in its small diving suit, made by the Marine Science Club. What is making these paths?",
+    "ar": "في الصباح الباكر يطفو قارب النادي فوق مرج أخضر من الأعشاب البحرية في البحر الضحل. ينادي صيّاد عجوز من قاربه: «انظروا إلى الأسفل! دروب طويلة خالية تقطع العشب، كأن شيئاً جرّ محراثاً (آلة تشقّ الأرض) فوق قاع البحر في الليل. هل هي آلة سرّية؟ هل هو وحش بحري؟» تنحني مسك من جانب القارب ومعها عدستها المكبّرة، ومعهم {duck} أيضاً. و{name} جاهز في بدلة الغوص الصغيرة التي صنعها له نادي علوم البحار. ما الذي يصنع هذه الدروب؟"
+   },
+   "choices": [
+    {
+     "id": "dive-down",
+     "label": {
+      "en": "Dive down to the nearest path",
+      "ar": "انزلوا إلى أقرب درب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team jumps into the clear water and swims down. The nearest path is right below the boat, and it is not straight at all.",
+       "ar": "يقفز الفريق في الماء الصافي ويسبح إلى الأسفل. أقرب درب تحت القارب مباشرة، وهو ليس مستقيماً أبداً."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "winding-trails"
+     }
+    },
+    {
+     "id": "look-shape",
+     "label": {
+      "en": "Look at the shape of the paths from the boat",
+      "ar": "انظروا إلى شكل الدروب من القارب"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "From above, the paths curve left and right like snakes. A machine usually moves in straight lines, so the team dives down to look closer.",
+       "ar": "من فوق تبدو الدروب ملتوية يميناً ويساراً مثل الأفاعي. الآلة تمشي عادة في خطوط مستقيمة، فينزل الفريق ليرى عن قرب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "winding-shape"
+       }
+      ],
+      "fx": "binoculars",
+      "next": "winding-trails"
+     }
+    },
+    {
+     "id": "ask-where",
+     "label": {
+      "en": "Ask the fisherman where he saw the first mark",
+      "ar": "اسألوا الصيّاد أين رأى أول أثر"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The fisherman says: “The first one was near the boat channel, the way boats take to the harbour. Come, I will show you.”",
+       "ar": "يقول الصيّاد: «أول أثر رأيته كان قرب ممر القوارب، الطريق الذي تأخذه القوارب إلى الميناء. تعالوا، سأريكم.»"
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fisherman-story"
+       }
+      ],
+      "fx": "scan",
+      "next": "boat-channel"
+     }
+    },
+    {
+     "id": "calm-fisherman",
+     "label": {
+      "en": "Listen to the worried fisherman with {duck}",
+      "ar": "استمعوا إلى الصيّاد القلق مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team listens carefully. The fisherman feels better and offers to guide them to the mark that scares him most, near the boat channel.",
+       "ar": "يستمع الفريق إليه باهتمام. يرتاح الصيّاد قليلاً، ويعرض أن يأخذهم إلى الأثر الذي يخيفه أكثر، قرب ممر القوارب."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "boat-channel"
+     }
+    },
+    {
+     "id": "swim-path",
+     "label": {
+      "en": "Let {name} swim along a path",
+      "ar": "دعوا {name} يسبح فوق أحد الدروب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} swims low over a path. Its edges are soft and uneven, not cut clean like by a blade.",
+       "ar": "يسبح {name} قريباً من أحد الدروب. حوافّه ناعمة وغير منتظمة، وليست مقطوعة بشكل نظيف كأنها بسكّين."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "soft-edges"
+       }
+      ],
+      "fx": "swim",
+      "next": "winding-trails"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "breatheWater"
+      ]
+     }
+    },
+    {
+     "id": "hear-engine",
+     "label": {
+      "en": "Let {name} listen to the water",
+      "ar": "دعوا {name} يستمع إلى الماء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} turns its head toward a deep humming sound: a boat engine, far away near the boat channel. The team goes there to check.",
+       "ar": "يدير {name} رأسه نحو صوت طنين عميق: محرّك قارب بعيد قرب ممر القوارب. فيذهب الفريق إلى هناك ليتأكّد."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "engine-sound"
+       }
+      ],
+      "fx": "echo",
+      "next": "boat-channel"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    }
+   ]
+  },
+  "winding-trails": {
+   "kind": "explore",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-feeding-trail",
+   "place": {
+    "en": "The winding paths",
+    "ar": "الدروب الملتوية"
+   },
+   "text": {
+    "en": "Under the water, the team is right beside one of the paths. It is a strip of bare sand, about as wide as a big book, and it winds through the green grass like a snake. Misk floats at the surface and looks down through her mask. At the edges of the path, the seagrass is missing, roots and all. What kind of machine moves like a snake and takes the roots too?",
+    "ar": "تحت الماء يقف الفريق بجانب أحد الدروب. إنه شريط من الرمل الخالي، عرضه مثل كتاب كبير تقريباً، ويلتوي بين العشب الأخضر مثل الأفعى. تطفو مسك على سطح الماء وتنظر إلى الأسفل من خلال قناعها. على حواف الدرب اختفت الأعشاب البحرية مع جذورها. أي آلة تمشي مثل الأفعى وتأخذ الجذور أيضاً؟"
+   },
+   "choices": [
+    {
+     "id": "measure-path",
+     "label": {
+      "en": "Measure the path",
+      "ar": "قيسوا الدرب"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The path is only a few centimetres deep. A heavy machine would dig much deeper. This was something light and gentle.",
+       "ar": "عمق الدرب بضعة سنتيمترات فقط. الآلة الثقيلة تحفر أعمق بكثير. إذن الذي صنعه شيء خفيف ولطيف."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shallow-path"
+       }
+      ],
+      "fx": "sample",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "follow-path",
+     "label": {
+      "en": "Follow the path to its end",
+      "ar": "اتبعوا الدرب حتى نهايته"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The path does not end at an anchor or a boat. It ends where the grass is thick and green, and joins many other paths in the middle of the meadow.",
+       "ar": "الدرب لا ينتهي عند مرساة أو قارب. ينتهي حيث العشب كثيف وأخضر، ويلتقي بدروب أخرى كثيرة في وسط المرج."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "check-edges",
+     "label": {
+      "en": "Look closely at the edge of the path",
+      "ar": "افحصوا حافة الدرب عن قرب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The plants were not cut. They were pulled out, roots and all, like someone pulling carrots from a garden. Something was eating them.",
+       "ar": "النباتات لم تُقطع. لقد سُحبت من الرمل مع جذورها، مثل من يقلع الجزر من الحديقة. شيء ما كان يأكلها."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "roots-pulled"
+       }
+      ],
+      "fx": "scan",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "wave-misk",
+     "label": {
+      "en": "Swim up and tell Misk what you see, with {duck}",
+      "ar": "اسبحوا إلى الأعلى وأخبروا مسك بما رأيتم، مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Misk listens and smiles: “Good work. Let us meet in the middle of the meadow, where all the paths cross.”",
+       "ar": "تستمع مسك وتبتسم: «عمل رائع. لنلتقِ في وسط المرج، حيث تتقاطع كل الدروب.»"
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "feel-sand",
+     "label": {
+      "en": "Let {name} feel the sand in the path",
+      "ar": "دعوا {name} يتحسّس الرمل في الدرب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} touches the soft sand. There are holes where roots used to be, and tiny bitten bits of grass float up.",
+       "ar": "يلمس {name} الرمل الناعم. فيه حفر صغيرة مكان الجذور، وتطفو قطع صغيرة من العشب المقضوم."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "dug-roots"
+       }
+      ],
+      "fx": "dig",
+      "next": "grazing-clues"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "grip"
+      ]
+     }
+    },
+    {
+     "id": "watch-fish",
+     "label": {
+      "en": "Let {name} hide in the grass and watch",
+      "ar": "دعوا {name} يختبئ في العشب ويراقب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Hidden, {name} sees small fish picking at the fresh sand of the path. Something big stirred this sand not long ago, and the fish are eating the tiny animals it uncovered.",
+       "ar": "من مكانه المخفي يرى {name} أسماكاً صغيرة تنقر الرمل الطري في الدرب. شيء كبير حرّك هذا الرمل قبل وقت قصير، والأسماك تأكل الحيوانات الصغيرة التي ظهرت."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fish-follow"
+       }
+      ],
+      "fx": "camo",
+      "next": "grazing-clues"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "boat-channel": {
+   "kind": "explore",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-murky-water",
+   "place": {
+    "en": "The boat channel",
+    "ar": "ممر القوارب"
+   },
+   "text": {
+    "en": "The fisherman leads the team to the edge of the meadow, where boats pass on their way to the harbour. The water here is cloudy, because boats stir up the sand. In the grass there is a long mark, and the fisherman points: “See? A machine did this!” But this mark looks different from the others. Is it the same thing?",
+    "ar": "يأخذ الصيّاد الفريق إلى طرف المرج، حيث تمرّ القوارب في طريقها إلى الميناء. الماء هنا عكر (فيه رمل كثير)، لأن القوارب تحرّك الرمل. وفي العشب أثر طويل، فيشير الصيّاد إليه: «أرأيتم؟ آلة صنعت هذا!» لكن هذا الأثر يختلف عن الدروب الأخرى. هل هو الشيء نفسه؟"
+   },
+   "choices": [
+    {
+     "id": "compare-mark",
+     "label": {
+      "en": "Compare this mark with the winding paths",
+      "ar": "قارنوا هذا الأثر بالدروب الملتوية"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "This mark is straight like a ruler, narrow and deep. The other paths are wide, shallow and curvy. They are two different things.",
+       "ar": "هذا الأثر مستقيم مثل المسطرة، ضيّق وعميق. أما الدروب الأخرى فعريضة وقليلة العمق وملتوية. إنهما شيئان مختلفان."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "straight-scar"
+       }
+      ],
+      "fx": "scan",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "ask-misk",
+     "label": {
+      "en": "Ask Misk what made the straight mark",
+      "ar": "اسألوا مسك ما الذي صنع الأثر المستقيم"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Misk says: “When a boat goes fast in very shallow water, its propeller (the spinning blades at the back) cuts the seagrass. It leaves a straight, deep scar. The winding paths are something else.”",
+       "ar": "تقول مسك: «حين يسرع قارب في ماء ضحل جداً، تقطع مروحته (الشفرات التي تدور في آخره) الأعشاب البحرية. فتترك أثراً مستقيماً وعميقاً. أما الدروب الملتوية فشيء آخر.»"
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "propeller-scar"
+       }
+      ],
+      "fx": "scan",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "swim-start",
+     "label": {
+      "en": "Swim to where the mark begins",
+      "ar": "اسبحوا إلى بداية الأثر"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The straight mark begins right where boats turn into the channel. The winding paths begin far away, in the middle of the meadow. The team swims there.",
+       "ar": "يبدأ الأثر المستقيم عند المكان الذي تدخل فيه القوارب إلى الممر. أما الدروب الملتوية فتبدأ بعيداً، في وسط المرج. فيسبح الفريق إلى هناك."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "help-anchor",
+     "label": {
+      "en": "Help the fisherman move his boat to deeper water",
+      "ar": "ساعدوا الصيّاد على نقل قاربه إلى ماء أعمق"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team and {duck} help him move his boat away from the shallow grass. He nods: “So my own boat can hurt the meadow too.” Then they all head to the middle of the meadow.",
+       "ar": "يساعده الفريق ومعهم {duck} على إبعاد قاربه عن العشب الضحل. يهزّ رأسه ويقول: «إذن قاربي أيضاً قد يؤذي المرج.» ثم يتّجه الجميع إلى وسط المرج."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "grazing-clues"
+     }
+    },
+    {
+     "id": "listen-boat",
+     "label": {
+      "en": "Let {name} listen for passing boats",
+      "ar": "دعوا {name} يستمع إلى القوارب المارّة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} hears a boat go by. After it passes, the water turns cloudy again. Boats make this mark at the edge, but there is no sound of any machine in the middle of the meadow.",
+       "ar": "يسمع {name} قارباً يمرّ. وبعد مروره يصير الماء عكراً من جديد. القوارب تصنع هذا الأثر عند الطرف، لكن لا يوجد صوت أي آلة في وسط المرج."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "boat-noise"
+       }
+      ],
+      "fx": "echo",
+      "next": "grazing-clues"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "dig-scar",
+     "label": {
+      "en": "Let {name} look inside the deep mark",
+      "ar": "دعوا {name} يفحص داخل الأثر العميق"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} digs a little at the bottom of the mark. The roots here are cut cleanly in half, as if by a knife. In the winding paths, the roots were pulled out whole.",
+       "ar": "يحفر {name} قليلاً في قاع الأثر. الجذور هنا مقطوعة نصفين بشكل نظيف، كأنها قُطعت بسكّين. أما في الدروب الملتوية فقد سُحبت الجذور كاملة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "cut-roots"
+       }
+      ],
+      "fx": "dig",
+      "next": "grazing-clues"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "grazing-clues": {
+   "kind": "challenge",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-clue",
+   "place": {
+    "en": "The middle of the meadow",
+    "ar": "وسط المرج"
+   },
+   "text": {
+    "en": "In the middle of the meadow, many winding paths cross each other. Misk floats at the surface and studies short pieces of seagrass floating on the water with her magnifying glass. The fisherman remembers something: “At night I sometimes hear a soft puff, like a big breath, from the water.” Who eats seagrass, breathes air, and leaves winding paths behind?",
+    "ar": "في وسط المرج تتقاطع دروب ملتوية كثيرة. تطفو مسك على سطح الماء، وتفحص بعدستها المكبّرة قطعاً قصيرة من الأعشاب البحرية تطفو فوق الماء. ويتذكّر الصيّاد شيئاً: «في الليل أسمع أحياناً نفخة خفيفة من الماء، مثل نَفَس كبير.» من يأكل الأعشاب البحرية، ويتنفّس الهواء، ويترك خلفه دروباً ملتوية؟"
+   },
+   "choices": [
+    {
+     "id": "study-bites",
+     "label": {
+      "en": "Look at the bite marks on the floating grass",
+      "ar": "افحصوا آثار العضّ على العشب الطافي"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The bites are wide and flat, from a big mouth with no sharp teeth. And they are fresh. The team follows the freshest path to the sandy edge.",
+       "ar": "آثار العضّ عريضة ومسطّحة، من فم كبير بلا أسنان حادّة. وهي جديدة. فيتبع الفريق أحدث درب حتى الطرف الرملي."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "big-bites"
+       }
+      ],
+      "fx": "sample",
+      "next": "ray-sand"
+     }
+    },
+    {
+     "id": "follow-fresh",
+     "label": {
+      "en": "Follow the freshest path",
+      "ar": "اتبعوا أحدث درب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The freshest path still has loose sand and bits of grass in it. It leads toward a sandy patch at the edge of the meadow.",
+       "ar": "في أحدث درب ما زال الرمل مفكّكاً وفيه قطع من العشب. وهو يقود نحو بقعة رملية عند طرف المرج."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "ray-sand"
+     }
+    },
+    {
+     "id": "old-new",
+     "label": {
+      "en": "Compare old paths with new ones",
+      "ar": "قارنوا الدروب القديمة بالجديدة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Some paths are bare sand, but others are full of short new grass. The old paths are growing back! The team swims to look at them.",
+       "ar": "بعض الدروب رمل بلا عشب، لكن دروباً أخرى فيها عشب جديد قصير. الدروب القديمة تنمو من جديد! فيسبح الفريق ليراها."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "old-trails"
+       }
+      ],
+      "fx": "scan",
+      "next": "seahorse-garden"
+     }
+    },
+    {
+     "id": "count-paths",
+     "label": {
+      "en": "Help Misk count the paths, with {duck}",
+      "ar": "ساعدوا مسك على عدّ الدروب، مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Together they count twenty-three paths. Misk notices that the oldest ones have little animals living in the new grass, so the team goes to look.",
+       "ar": "يعدّون معاً ثلاثة وعشرين درباً. تلاحظ مسك أن في أقدم الدروب حيوانات صغيرة تعيش في العشب الجديد، فيذهب الفريق ليراها."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "seahorse-garden"
+     }
+    },
+    {
+     "id": "sniff-leaf",
+     "label": {
+      "en": "Let {name} sniff a floating leaf",
+      "ar": "دعوا {name} يشمّ ورقة طافية"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs the leaf through its suit and turns at once toward the sandy edge. The leaf was bitten this morning, and the smell comes from there.",
+       "ar": "يشمّ {name} الورقة من خلال بدلته، ثم يلتفت فوراً نحو الطرف الرملي. الورقة قُضمت هذا الصباح، والرائحة تأتي من هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bitten-today"
+       }
+      ],
+      "fx": "sniff",
+      "next": "ray-sand"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "fast-swim",
+     "label": {
+      "en": "Let {name} swim fast over the whole meadow",
+      "ar": "دعوا {name} يسبح بسرعة فوق المرج كله"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} swims over the meadow. All the paths in the middle are curvy, and the oldest ones are turning green again. The team goes to see them.",
+       "ar": "يسبح {name} فوق المرج. كل الدروب في الوسط ملتوية، وأقدمها بدأ يخضرّ من جديد. فيذهب الفريق ليراها."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "all-curvy"
+       }
+      ],
+      "fx": "swim",
+      "next": "seahorse-garden"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "breatheWater"
+      ]
+     }
+    }
+   ]
+  },
+  "seahorse-garden": {
+   "kind": "challenge",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-seahorse-garden",
+   "featured": "seahorse",
+   "place": {
+    "en": "The old paths",
+    "ar": "الدروب القديمة"
+   },
+   "text": {
+    "en": "In the old paths, short new seagrass is growing. Seahorses hold on to the leaves with their curly tails, and tiny fish hide between them. The paths did not ruin the meadow: the grass grows back. So the animal that makes them is not a monster. It comes back again and again, like a gardener. Where is it now?",
+    "ar": "في الدروب القديمة ينمو عشب بحري جديد قصير. أحصنة البحر تمسك أوراقه بذيولها الملتفّة، وأسماك صغيرة جداً تختبئ بينها. الدروب لم تُفسد المرج: العشب ينمو من جديد. إذن الحيوان الذي يصنعها ليس وحشاً. إنه يرجع مرة بعد مرة، مثل البستاني. أين هو الآن؟"
+   },
+   "choices": [
+    {
+     "id": "measure-growth",
+     "label": {
+      "en": "Measure the new grass",
+      "ar": "قيسوا العشب الجديد"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The new grass is as long as a finger. Misk explains that roots left nearby spread into the bare sand, so a path turns green again after some months. The newest grass points the way to the freshest path.",
+       "ar": "العشب الجديد بطول الإصبع. تشرح مسك أن الجذور القريبة تمتدّ في الرمل الخالي، فيخضرّ الدرب من جديد بعد بضعة أشهر. وأقصر عشب يدلّ على أحدث درب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "grows-back"
+       }
+      ],
+      "fx": "sample",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "race-trail",
+     "label": {
+      "en": "Swim from the old paths to the newest one",
+      "ar": "اسبحوا من الدروب القديمة إلى أحدثها"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The paths get fresher and fresher: green, then short grass, then bare sand. At the end, the sand is still floating in the water.",
+       "ar": "تصير الدروب أحدث فأحدث: خضراء، ثم عشب قصير، ثم رمل بلا عشب. وفي النهاية ما زال الرمل يطفو في الماء."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "nursery",
+     "label": {
+      "en": "Ask Misk why so many baby animals live here",
+      "ar": "اسألوا مسك لماذا تعيش هنا حيوانات صغيرة كثيرة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Misk says: “Seagrass meadows are nurseries: safe places where baby fish and seahorses grow. And they are also food for one big, gentle animal.” She points to the newest path.",
+       "ar": "تقول مسك: «مروج الأعشاب البحرية حضانات: أماكن آمنة تكبر فيها صغار الأسماك وأحصنة البحر. وهي أيضاً طعام لحيوان كبير لطيف.» وتشير إلى أحدث درب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "nursery"
+       }
+      ],
+      "fx": "scan",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "slow-swim",
+     "label": {
+      "en": "Move slowly so the seahorses are not scared",
+      "ar": "تحرّكوا ببطء حتى لا تخاف أحصنة البحر"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team moves gently, and {duck} stays close. The seahorses do not let go of the grass. In the quiet, everyone hears a soft puff from the water ahead.",
+       "ar": "يتحرّك الفريق بلطف، ومعه {duck} قريباً. لا تترك أحصنة البحر العشب. وفي الهدوء يسمع الجميع نفخة خفيفة من الماء أمامهم."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "hear-chirp",
+     "label": {
+      "en": "Let {name} listen carefully",
+      "ar": "دعوا {name} يستمع جيداً"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} stays very still and listens: far away, something makes soft chirps and whistles, like a bird under the water. It turns toward the sound.",
+       "ar": "يثبت {name} في مكانه ويستمع: من بعيد يصدر شيء أصوات زقزقة وصفير خفيفة، مثل طائر تحت الماء. فيلتفت نحو الصوت."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "chirp-heard"
+       }
+      ],
+      "fx": "echo",
+      "next": "sea-cows"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "still-watch",
+     "label": {
+      "en": "Let {name} hold still in the grass and watch",
+      "ar": "دعوا {name} يثبت في العشب ويراقب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} holds on to the grass and waits. A big, slow shadow passes over the meadow and goes up to the surface for a moment. Something big is breathing air.",
+       "ar": "يمسك {name} العشب وينتظر. يمرّ ظلّ كبير بطيء فوق المرج، ويصعد إلى السطح لحظة. شيء كبير يتنفّس الهواء."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "big-shadow"
+       }
+      ],
+      "fx": "camo",
+      "next": "sea-cows"
+     },
+     "requires": {
+      "capAny": [
+       "grip",
+       "camouflage"
+      ]
+     }
+    }
+   ]
+  },
+  "ray-sand": {
+   "kind": "challenge",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-hidden-ray",
+   "featured": "stingray",
+   "place": {
+    "en": "The sandy edge of the meadow",
+    "ar": "الطرف الرملي من المرج"
+   },
+   "text": {
+    "en": "The fresh path reaches a sandy patch at the edge of the meadow. Something flat is hiding under the sand, with only its eyes showing: a stingray (a flat fish with a long tail). The fisherman shouts from his boat: “Is that the monster?” Could this ray have made the long paths?",
+    "ar": "يصل الدرب الجديد إلى بقعة رملية عند طرف المرج. شيء مسطّح يختبئ تحت الرمل، ولا تظهر إلا عيناه: إنها اللخمة (سمكة مسطّحة لها ذيل طويل). يصيح الصيّاد من قاربه: «هل هذا هو الوحش؟» هل يمكن أن تكون اللخمة هي التي صنعت الدروب الطويلة؟"
+   },
+   "choices": [
+    {
+     "id": "ray-holes",
+     "label": {
+      "en": "Look at the holes near the ray",
+      "ar": "افحصوا الحفر قرب اللخمة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "Near the ray there are round pits, where it flaps its fins to dig for shellfish. Round pits, not long paths. The ray is not the answer, so the team keeps following the path.",
+       "ar": "قرب اللخمة حفر مستديرة، تحفرها حين تحرّك زعانفها لتبحث عن الصدف. حفر مستديرة وليست دروباً طويلة. اللخمة ليست الجواب، فيتابع الفريق الدرب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "ray-pits"
+       }
+      ],
+      "fx": "scan",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "give-space",
+     "label": {
+      "en": "Give the ray space",
+      "ar": "اتركوا مسافة للخمة"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team and {duck} swim around it slowly. The ray is calm and glides away. Behind it, the fresh path goes on into deeper grass.",
+       "ar": "يسبح الفريق ومعهم {duck} حولها ببطء. تبقى اللخمة هادئة وتنساب بعيداً. وخلفها يستمر الدرب الجديد نحو عشب أعمق."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "past-ray",
+     "label": {
+      "en": "Follow the path past the ray",
+      "ar": "اتبعوا الدرب بعد اللخمة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "After the sandy patch, the path goes on. Here the bits of grass are still sinking slowly. Whatever made it is very close.",
+       "ar": "بعد البقعة الرملية يستمر الدرب. وهنا ما زالت قطع العشب تنزل ببطء. الذي صنعه قريب جداً."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "very-fresh"
+       }
+      ],
+      "fx": "swim",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "count-breaths",
+     "label": {
+      "en": "Ask Misk to watch the surface",
+      "ar": "اطلبوا من مسك أن تراقب سطح الماء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Misk watches and counts: every few minutes, a round ripple appears ahead and she hears a puff. Fish breathe under water, so this must be an animal with lungs, a mammal (an animal that breathes air and feeds its baby milk).",
+       "ar": "تراقب مسك وتعدّ: كل بضع دقائق تظهر دائرة على الماء أمامهم وتسمع نفخة. الأسماك تتنفّس تحت الماء، إذن هذا حيوان له رئتان، أي حيوان ثديي (يتنفّس الهواء ويرضع صغيره الحليب)."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "breaths"
+       }
+      ],
+      "fx": "scan",
+      "next": "sea-cows"
+     }
+    },
+    {
+     "id": "feel-ahead",
+     "label": {
+      "en": "Let {name} feel the water ahead",
+      "ar": "دعوا {name} يتحسّس الماء أمامه"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} feels slow, gentle waves coming from ahead: something big is moving there, very slowly, like a cow in a field.",
+       "ar": "يحسّ {name} بموجات بطيئة لطيفة تأتي من الأمام: شيء كبير يتحرّك هناك ببطء شديد، مثل بقرة في حقل."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "big-slow"
+       }
+      ],
+      "fx": "echo",
+      "next": "sea-cows"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "dig-shells",
+     "label": {
+      "en": "Let {name} dig beside the ray’s pit",
+      "ar": "دعوا {name} يحفر بجانب حفرة اللخمة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} digs gently and finds broken shells. The ray eats shellfish, not grass. The grass-eater is somewhere else, farther along the path.",
+       "ar": "يحفر {name} بلطف فيجد أصدافاً مكسورة. اللخمة تأكل الصدف، ولا تأكل العشب. آكل العشب في مكان آخر، أبعد على الدرب."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "ray-food"
+       }
+      ],
+      "fx": "dig",
+      "next": "sea-cows"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "sea-cows": {
+   "kind": "climax",
+   "biome": "seagrass",
+   "props": [],
+   "plate": "seagrass-dugong",
+   "cinematic": "reveal",
+   "place": {
+    "en": "The end of the freshest path",
+    "ar": "نهاية أحدث درب"
+   },
+   "text": {
+    "en": "At the end of the freshest path, a big grey animal is eating slowly. It is a dugong, also called a “sea cow”! Beside it swims a small calf, its baby. The mother pushes her soft, wide lips into the sand, pulls up the seagrass with its roots, and eats it. Behind her, a new winding path appears. Every few minutes they both rise to breathe: that is the puff the fisherman heard. The fisherman laughs: “My monster is a mother and her baby!” Misk asks: “So what shall we do now?”",
+    "ar": "في نهاية أحدث درب يأكل حيوان كبير رمادي ببطء. إنه الأطوم، ويسمّى أيضاً «بقرة البحر»! وبجانبه يسبح صغيره. تدفع الأم شفتيها العريضتين الناعمتين في الرمل، وتسحب الأعشاب البحرية مع جذورها، وتأكلها. وخلفها يظهر درب جديد يلتوي. وكل بضع دقائق يصعدان معاً ليتنفّسا: هذه هي النفخة التي سمعها الصيّاد. يضحك الصيّاد: «الوحش الذي خفت منه أمّ وصغيرها!» وتسأل مسك: «وماذا نفعل الآن؟»"
+   },
+   "choices": [
+    {
+     "id": "send-map",
+     "label": {
+      "en": "Draw a map of the paths and send it to marine scientists",
+      "ar": "ارسموا خريطة للدروب وأرسلوها إلى علماء البحار"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team draws every path on a map, with photos of the dugongs. Misk sends it to the marine scientists that same day.",
+       "ar": "يرسم الفريق كل الدروب على خريطة، ومعها صور الأطوم. وترسلها مسك إلى علماء البحار في اليوم نفسه."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "screen",
+      "next": "end:trail-map"
+     }
+    },
+    {
+     "id": "slow-boats",
+     "label": {
+      "en": "Ask the fisherman to go slowly over the meadow",
+      "ar": "اطلبوا من الصيّاد أن يسير ببطء فوق المرج"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The fisherman agrees at once. He turns off his engine and lets his boat drift as the mother and calf swim under it.",
+       "ar": "يوافق الصيّاد فوراً. يطفئ محرّك قاربه ويتركه يطفو، بينما تسبح الأم وصغيرها تحته."
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:gentle-neighbours"
+     }
+    },
+    {
+     "id": "photo-calf",
+     "label": {
+      "en": "Take photos to recognise this mother and calf again",
+      "ar": "التقطوا صوراً لتعرفوا هذه الأم وصغيرها مرة أخرى"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The mother has a small scar on her tail, so the team can know her again. The calf comes close to look at {name}, then swims back to its mother.",
+       "ar": "على ذيل الأم أثر جرح صغير، فيستطيع الفريق أن يعرفها مرة أخرى. ويقترب الصغير لينظر إلى {name}، ثم يسبح راجعاً إلى أمه."
+      },
+      "mood": "laughing",
+      "effects": [],
+      "fx": "camera",
+      "next": "end:trail-map"
+     }
+    },
+    {
+     "id": "place-buoys",
+     "label": {
+      "en": "Mark the meadow with floats so fast boats go around it",
+      "ar": "ضعوا عوّامات حول المرج حتى تدور القوارب السريعة حوله"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "With the fisherman’s help, the team ties yellow floats around the meadow. Now boats can see where the shallow seagrass is.",
+       "ar": "بمساعدة الصيّاد يربط الفريق عوّامات صفراء حول المرج. الآن تعرف القوارب أين توجد الأعشاب البحرية الضحلة."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "impact",
+      "next": "end:meadow-guardians"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "trail-map": {
+   "tone": "scientific",
+   "title": {
+    "en": "A Map of Feeding Trails",
+    "ar": "خريطة دروب الطعام"
+   },
+   "summary": {
+    "en": "The team proved that the winding paths were feeding trails left by dugongs pulling up seagrass, and that the straight scar was made by a boat propeller.",
+    "ar": "أثبت الفريق أن الدروب الملتوية دروب طعام يتركها الأطوم حين يسحب الأعشاب البحرية، وأن الأثر المستقيم صنعته مروحة قارب."
+   },
+   "epilogue": {
+    "en": "The marine scientists added the map to their study of dugongs in the Gulf. Every month the fisherman now sends them a photo of the newest trails.",
+    "ar": "أضاف علماء البحار الخريطة إلى دراستهم عن الأطوم في الخليج. والآن يرسل لهم الصيّاد كل شهر صورة لأحدث الدروب."
+   }
+  },
+  "gentle-neighbours": {
+   "tone": "wholesome",
+   "title": {
+    "en": "Gentle Neighbours",
+    "ar": "جيران لطفاء"
+   },
+   "summary": {
+    "en": "The team found that the “monster” was a dugong mother and her calf eating seagrass, and the fisherman learned to share the meadow with them.",
+    "ar": "وجد الفريق أن «الوحش» أمّ أطوم وصغيرها يأكلان الأعشاب البحرية، وتعلّم الصيّاد أن يشاركهما المرج."
+   },
+   "epilogue": {
+    "en": "The fisherman painted a small dugong on his boat and always slows down over the meadow. Sometimes he sees the calf, now bigger, and waves to it with {duck}.",
+    "ar": "رسم الصيّاد أطوماً صغيراً على قاربه، وصار يسير ببطء دائماً فوق المرج. وأحياناً يرى الصغير وقد كبر، فيلوّح له مع {duck}."
+   }
+  },
+  "meadow-guardians": {
+   "tone": "heroic",
+   "title": {
+    "en": "Guardians of the Meadow",
+    "ar": "حرّاس المرج"
+   },
+   "summary": {
+    "en": "The team solved the mystery of the dugong feeding trails and protected the meadow from fast boats and their propeller scars.",
+    "ar": "حلّ الفريق لغز دروب طعام الأطوم، وحمى المرج من القوارب السريعة ومن آثار مراوحها."
+   },
+   "epilogue": {
+    "en": "A month later, Misk checked the meadow: no new propeller scars, three new feeding trails, and the old ones turning green. The club put a photo of {name} beside the floats on its notice board.",
+    "ar": "بعد شهر فحصت مسك المرج: لا آثار مراوح جديدة، وثلاثة دروب طعام جديدة، والدروب القديمة تخضرّ. ووضع النادي صورة {name} بجانب العوّامات على لوحة الإعلانات."
+   }
+  }
+ }
+}

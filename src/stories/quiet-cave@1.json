@@ -1,0 +1,1175 @@
+{
+ "id": "quiet-cave",
+ "v": 1,
+ "status": "published",
+ "mode": "classic",
+ "source": "hand-written 2026-11-11",
+ "title": {
+  "en": "The Quiet Cave",
+  "ar": "الكهف الصامت"
+ },
+ "premise": {
+  "en": "Every evening, thousands of bats flew out of the Echo Cave. Two weeks ago they stopped, and now insects are eating the farms nearby.",
+  "ar": "كل مساء كانت آلاف الخفافيش تطير من كهف الصدى. قبل أسبوعين توقّفت، والآن تأكل الحشرات المزارع القريبة."
+ },
+ "tone": "suspense",
+ "tags": {
+  "themes": [
+   "light-pollution",
+   "pest-control",
+   "night-hunters"
+  ],
+  "locations": [
+   "cave"
+  ],
+  "twist": "disturbed-bats",
+  "creatures": [
+   "bat",
+   "cave-centipede",
+   "cavefish"
+  ]
+ },
+ "world": {},
+ "science": [
+  "cave-troglo"
+ ],
+ "start": "cave-hook",
+ "nodes": {
+  "cave-hook": {
+   "kind": "hook",
+   "biome": "cave",
+   "props": [],
+   "plate": "cave-wall-carving",
+   "place": {
+    "en": "The cave mouth",
+    "ar": "مدخل الكهف"
+   },
+   "goal": {
+    "en": "Find out where the bats of the cave have gone, and why.",
+    "ar": "اعرفوا أين ذهبت خفافيش الكهف، ولماذا."
+   },
+   "text": {
+    "en": "Farmers near the old Echo Cave called the club. For many years, thousands of bats flew out of this cave every evening. Two weeks ago they stopped, and now insects are eating the vegetables on the farms. This afternoon the team stands just inside the cave mouth with {name}. In the torchlight, beside very old animal paintings, someone has scratched new names and a date into the wall. Footprints lead deeper. Where did the bats go, and why?",
+    "ar": "اتصل بالنادي مزارعون يعيشون قرب كهف الصدى القديم. منذ سنوات طويلة كانت آلاف الخفافيش تطير من هذا الكهف كل مساء. قبل أسبوعين توقّفت، والآن تأكل الحشرات الخضار في المزارع. بعد الظهر يقف الفريق داخل مدخل الكهف ومعه {name}. في ضوء المصباح اليدوي، بجانب رسوم حيوانات قديمة جداً، كتب أحدهم على الجدار أسماء جديدة وتاريخاً بحجر حاد. وآثار أقدام تدخل إلى عمق الكهف. أين ذهبت الخفافيش؟ ولماذا؟"
+   },
+   "choices": [
+    {
+     "id": "follow-steps",
+     "label": {
+      "en": "Follow the footprints into the cave",
+      "ar": "اتبعوا آثار الأقدام إلى داخل الكهف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The footprints are from shoes, big and small, and there are many of them. They lead into a narrow passage.",
+       "ar": "آثار الأقدام آثار أحذية، كبيرة وصغيرة، وهي كثيرة. وتقود الفريق إلى ممرّ ضيّق."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "narrow-pass"
+     }
+    },
+    {
+     "id": "read-wall",
+     "label": {
+      "en": "Read the names and the date on the wall",
+      "ar": "اقرؤوا الأسماء والتاريخ على الجدار"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The names are new, and the date is from two weeks ago: the same week the bats stopped. People were here. Their footprints go into a narrow passage.",
+       "ar": "الأسماء جديدة، والتاريخ من قبل أسبوعين: نفس الأسبوع الذي توقّفت فيه الخفافيش. كان هنا ناس. وآثارهم تدخل ممرّاً ضيّقاً."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fresh-names"
+       }
+      ],
+      "fx": "scan",
+      "next": "narrow-pass"
+     }
+    },
+    {
+     "id": "ask-farmers",
+     "label": {
+      "en": "Ask the farmers what they think happened",
+      "ar": "اسألوا المزارعين ماذا يظنون أنه حدث"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "One farmer thinks a monster is eating the bats. Another thinks the water in the cave has gone bad. The team decides to check the water first, so they take the path down to the pool.",
+       "ar": "مزارع يظن أن وحشاً يأكل الخفافيش. ومزارع آخر يظن أن الماء في الكهف صار فاسداً. يقرّر الفريق أن يفحص الماء أولاً، فينزل في الطريق إلى البركة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "farmer-ideas"
+       }
+      ],
+      "fx": "scan",
+      "next": "black-pool"
+     }
+    },
+    {
+     "id": "calm-farmers",
+     "label": {
+      "en": "Calm the worried farmers with {duck}",
+      "ar": "طمئنوا المزارعين القلقين مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team promises to look for the real cause. The farmers feel better and show the team a path that goes down to a pool inside the cave.",
+       "ar": "يعد الفريق المزارعين بأن يبحث عن السبب الحقيقي. يرتاح المزارعون قليلاً، ويدلّون الفريق على طريق ينزل إلى بركة داخل الكهف."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "black-pool"
+     }
+    },
+    {
+     "id": "sniff-entrance",
+     "label": {
+      "en": "Let {name} sniff the cave air",
+      "ar": "دعوا {name} يشمّ هواء الكهف"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs and sneezes. The bat smell near the entrance is old and weak: bats have not slept here for many days. {name} turns toward a narrow passage.",
+       "ar": "يشمّ {name} الهواء ثم يعطس. رائحة الخفافيش قرب المدخل قديمة وضعيفة: الخفافيش لم تنم هنا منذ أيام كثيرة. ويلتفت {name} نحو ممرّ ضيّق."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "old-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "narrow-pass"
+     },
+     "requires": {
+      "capAny": [
+       "scent"
+      ]
+     }
+    },
+    {
+     "id": "check-dark",
+     "label": {
+      "en": "Let {name} check the dark ahead",
+      "ar": "دعوا {name} يفحص الظلام أمامه"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} finds two ways in the dark: a narrow passage, and a slope down to water. It walks toward the water first.",
+       "ar": "يجد {name} طريقين في الظلام: ممرّاً ضيّقاً، ومنحدراً ينزل إلى الماء. فيمشي نحو الماء أولاً."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "two-ways"
+       }
+      ],
+      "fx": "scan",
+      "next": "black-pool"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "narrow-pass": {
+   "kind": "explore",
+   "biome": "cave",
+   "props": [],
+   "plate": "cave-narrow-squeeze",
+   "featured": "cave-centipede",
+   "place": {
+    "en": "The narrow passage",
+    "ar": "الممرّ الضيّق"
+   },
+   "text": {
+    "en": "The passage is so narrow that the team walks sideways between wet rock walls. The torch makes one beam of light. On the wall ahead, long thin shadows move: something with many legs! One farmer said a monster eats the bats. Is he right?",
+    "ar": "الممرّ ضيّق جداً، فيمشي الفريق جانبياً بين جدران صخرية رطبة. المصباح اليدوي يصنع شعاعاً واحداً من الضوء. وعلى الجدار أمامهم تتحرّك ظلال طويلة ورفيعة: شيء له أرجل كثيرة! قال أحد المزارعين إن وحشاً يأكل الخفافيش. هل هو على حق؟"
+   },
+   "choices": [
+    {
+     "id": "step-closer",
+     "label": {
+      "en": "Step closer to the shadow",
+      "ar": "اقتربوا من الظل"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The “monster” is a giant cave centipede, about as long as a school ruler. It looked huge only because its shadow was big. The team squeezes past and reaches a dry ledge.",
+       "ar": "«الوحش» حريش كهوف عملاق، طوله تقريباً مثل مسطرة المدرسة. بدا كبيراً لأن ظله كان كبيراً فقط. يمرّ الفريق بجانبه بهدوء ويصل إلى رفّ صخري جاف."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "still",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "look-floor",
+     "label": {
+      "en": "Look on the floor for bat bones",
+      "ar": "ابحثوا عن عظام خفافيش على الأرض"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "There are no bones and no wings anywhere. If something had eaten thousands of bats, the team would find remains. The monster idea is wrong.",
+       "ar": "لا توجد عظام ولا أجنحة في أي مكان. لو أكل شيء آلاف الخفافيش لوجد الفريق بقاياها. فكرة الوحش غير صحيحة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "no-bat-bones"
+       }
+      ],
+      "fx": "scan",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "measure-shadow",
+     "label": {
+      "en": "Compare the shadow with the animal",
+      "ar": "قارنوا الظل بالحيوان نفسه"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "When the torch is close to a small animal, its shadow becomes very big. The centipede hunts insects and sometimes a bat, but one centipede cannot make thousands of bats disappear.",
+       "ar": "حين يكون المصباح قريباً من حيوان صغير يصير ظله كبيراً جداً. الحريش يصطاد الحشرات وأحياناً خفاشاً، لكن حريشاً واحداً لا يستطيع أن يُخفي آلاف الخفافيش."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "small-centipede"
+       }
+      ],
+      "fx": "sample",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "let-pass",
+     "label": {
+      "en": "Wait and let the centipede go, with {duck}",
+      "ar": "انتظروا حتى يمرّ الحريش، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team waits quietly with {duck}. The centipede walks into a crack and disappears. It is part of cave life, not a monster. The way ahead is open.",
+       "ar": "ينتظر الفريق بهدوء مع {duck}. يدخل الحريش في شقّ ويختفي. إنه جزء من حياة الكهف، وليس وحشاً. والطريق أمامهم صار مفتوحاً."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "feel-movement",
+     "label": {
+      "en": "Let {name} feel for moving animals",
+      "ar": "دعوا {name} يبحث عن حيوانات تتحرّك"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} stays very still and feels only one moving animal in the whole passage: the centipede. There is no big hunter here.",
+       "ar": "يقف {name} بلا حركة، فلا يشعر إلا بحيوان واحد يتحرّك في الممرّ كله: الحريش. لا يوجد هنا صيّاد كبير."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "only-one-hunter"
+       }
+      ],
+      "fx": "scan",
+      "next": "visitor-camp"
+     },
+     "requires": {
+      "capAny": [
+       "motionSense",
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "climb-over",
+     "label": {
+      "en": "Let {name} climb above the passage",
+      "ar": "دعوا {name} يتسلّق فوق الممرّ"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "From up high, {name} sees the end of the passage: a dry ledge with sleeping bags on it. Someone camped there.",
+       "ar": "من الأعلى يرى {name} نهاية الممرّ: رفّاً صخرياً جافاً عليه أكياس نوم. أحدهم خيّم هناك."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "camp-ahead"
+       }
+      ],
+      "fx": "climb",
+      "next": "visitor-camp"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "black-pool": {
+   "kind": "explore",
+   "biome": "cave",
+   "props": [],
+   "plate": "cave-pool-eyes",
+   "featured": "cavefish",
+   "place": {
+    "en": "The black pool",
+    "ar": "البركة السوداء"
+   },
+   "text": {
+    "en": "The path goes down to an underground pool. The water is black and very still. Above it, many small pale dots shine in pairs, like eyes looking at the team. At the edge lies a camping lantern that someone dropped. One farmer thinks the water went bad and made the bats sick. Is the water poisoned?",
+    "ar": "ينزل الطريق إلى بركة تحت الأرض. الماء أسود وساكن جداً. وفوقه نقاط صغيرة فاتحة اللون تلمع اثنتين اثنتين، مثل عيون تنظر إلى الفريق. وعلى حافة البركة فانوس تخييم سقط من أحدهم. أحد المزارعين يظن أن الماء فسد وأمرض الخفافيش. هل الماء مسموم؟"
+   },
+   "choices": [
+    {
+     "id": "walk-edge",
+     "label": {
+      "en": "Walk to the edge of the pool",
+      "ar": "امشوا إلى حافة البركة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The dots do not move and do not blink, so they are not eyes. In the water, small pale fish swim calmly. Then the team climbs a path up to a dry ledge.",
+       "ar": "النقاط لا تتحرّك ولا ترمش، إذن هي ليست عيوناً. وفي الماء تسبح أسماك صغيرة شاحبة بهدوء. ثم يصعد الفريق في طريق إلى رفّ صخري جاف."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "still",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "torch-test",
+     "label": {
+      "en": "Switch the torch off, then on",
+      "ar": "أطفئوا المصباح ثم أشعلوه"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "Torch off: the dots disappear. Torch on: they come back. They are drops of water hanging on the rock and shining in the light. No eyes at all.",
+       "ar": "المصباح مطفأ: تختفي النقاط. المصباح مشتعل: ترجع. إنها قطرات ماء معلّقة على الصخر تلمع في الضوء. لا توجد عيون أبداً."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "water-drops"
+       }
+      ],
+      "fx": "flash",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "study-fish",
+     "label": {
+      "en": "Look closely at the fish in the water",
+      "ar": "افحصوا الأسماك في الماء جيداً"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "They are blind cave fish: pale, with no eyes, because they live in total darkness. They swim well and look healthy. Healthy fish mean clean water, so poison is not the answer.",
+       "ar": "إنها أسماك الكهوف العمياء: شاحبة وبلا عيون، لأنها تعيش في ظلام تام. تسبح جيداً وتبدو بصحة جيدة. والأسماك السليمة تعني أن الماء نظيف، إذن السمّ ليس هو الجواب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "healthy-fish"
+       }
+      ],
+      "fx": "scan",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "pick-lantern",
+     "label": {
+      "en": "Pick up the dropped lantern with {duck}",
+      "ar": "ارفعوا الفانوس الساقط مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team takes the lantern so it does not fall into the water, and it goes into the bag with {duck}. It is new. Visitors were here not long ago. Their path goes up to a dry ledge.",
+       "ar": "يأخذ الفريق الفانوس حتى لا يسقط في الماء، ويوضع في الحقيبة مع {duck}. الفانوس جديد. إذن كان هنا زوّار قبل وقت قصير. وطريقهم يصعد إلى رفّ صخري جاف."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "visitor-camp"
+     }
+    },
+    {
+     "id": "swim-under",
+     "label": {
+      "en": "Let {name} swim under the water",
+      "ar": "دعوا {name} يسبح تحت الماء"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} swims slowly through the clear water. There are healthy fish, and no dead bats at all. The water is clean.",
+       "ar": "يسبح {name} ببطء في الماء الصافي. هناك أسماك سليمة، ولا يوجد أي خفاش ميت. الماء نظيف."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "clean-pool"
+       }
+      ],
+      "fx": "scan",
+      "next": "visitor-camp"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "breatheWater"
+      ]
+     }
+    },
+    {
+     "id": "sniff-lantern",
+     "label": {
+      "en": "Let {name} sniff the lantern",
+      "ar": "دعوا {name} يشمّ الفانوس"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs the lantern, then the ground. The smell of people and food leads up a path to a dry ledge.",
+       "ar": "يشمّ {name} الفانوس، ثم الأرض. رائحة الناس والطعام تصعد في طريق إلى رفّ صخري جاف."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "people-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "visitor-camp"
+     },
+     "requires": {
+      "capAny": [
+       "scent"
+      ]
+     }
+    }
+   ]
+  },
+  "visitor-camp": {
+   "kind": "challenge",
+   "biome": "cave",
+   "props": [],
+   "plate": "camp-cave-mushrooms",
+   "place": {
+    "en": "The visitors’ camp",
+    "ar": "مخيّم الزوّار"
+   },
+   "text": {
+    "en": "Both ways meet at a dry ledge not far from the cave mouth. Someone used it as a camp: there are sleeping bags, a kettle, and glowing mushrooms that light the rock softly. Nobody is here. Outside, the sun sets. Suddenly a very bright lamp at the cave mouth switches on by itself! It is a solar lamp: it charges in the sun and shines all night. But where are the bats?",
+    "ar": "يلتقي الطريقان عند رفّ صخري جاف قريب من مدخل الكهف. استعمله أحدهم مخيّماً: فيه أكياس نوم وإبريق، وفطر مضيء ينير الصخر بضوء خفيف. لا يوجد أحد هنا. في الخارج تغرب الشمس. وفجأة يشتعل مصباح قوي جداً عند مدخل الكهف وحده! إنه مصباح شمسي: يشحن من الشمس في النهار ويضيء طوال الليل. لكن أين الخفافيش؟"
+   },
+   "choices": [
+    {
+     "id": "follow-air",
+     "label": {
+      "en": "Follow the cool air deeper into the cave",
+      "ar": "اتبعوا الهواء البارد إلى عمق الكهف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The air gets cooler, and a strong smell comes from deep inside, like old wet soil. It is the smell of bat droppings, and it is fresh.",
+       "ar": "يصير الهواء أبرد، وتأتي من الداخل رائحة قوية مثل تراب قديم مبلول. إنها رائحة فضلات الخفافيش، وهي رائحة جديدة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "bat-chamber"
+     }
+    },
+    {
+     "id": "check-droppings",
+     "label": {
+      "en": "Check the droppings under the ceiling",
+      "ar": "افحصوا الفضلات تحت السقف"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "Near the entrance, all the bat droppings are dry and old. Nothing is fresh. The bats stopped sleeping here, so the team looks deeper.",
+       "ar": "قرب المدخل كل فضلات الخفافيش جافة وقديمة. لا شيء جديد. الخفافيش توقّفت عن النوم هنا، فيبحث الفريق في العمق."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "old-droppings"
+       }
+      ],
+      "fx": "sample",
+      "next": "bat-chamber"
+     }
+    },
+    {
+     "id": "read-lamp",
+     "label": {
+      "en": "Read the label on the lamp",
+      "ar": "اقرؤوا الورقة الملصقة على المصباح"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The label says: “Turns on at dark, stays on all night.” The lamp points right at the cave mouth, so the bats’ door is bright as day every night. The team goes deeper to see how far the light reaches.",
+       "ar": "تقول الورقة: «يشتعل عند الظلام، ويبقى مضيئاً طوال الليل». والمصباح موجّه إلى مدخل الكهف مباشرة، فباب الخفافيش مضيء مثل النهار كل ليلة. يدخل الفريق إلى العمق ليرى إلى أين يصل الضوء."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "all-night-lamp"
+       }
+      ],
+      "fx": "scan",
+      "next": "echo-hall"
+     }
+    },
+    {
+     "id": "tidy-camp",
+     "label": {
+      "en": "Collect the visitors’ rubbish with {duck}",
+      "ar": "اجمعوا قمامة الزوّار مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "While cleaning with {duck}, the team finds an empty box for a big music speaker. But the speaker is not here. Far inside, a small blue light blinks.",
+       "ar": "أثناء التنظيف مع {duck} يجد الفريق علبة فارغة لمكبّر صوت كبير للموسيقى. لكن المكبّر نفسه ليس هنا. وفي العمق يرمش ضوء أزرق صغير."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "echo-hall"
+     }
+    },
+    {
+     "id": "click-listen",
+     "label": {
+      "en": "Let {name} send out clicks and listen",
+      "ar": "دعوا {name} يصدر نقرات ويستمع"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} clicks, and the echoes come back from a big room deep inside. With them come tiny high squeaks. Something lives there.",
+       "ar": "يصدر {name} نقرات، فيرجع صداها من قاعة كبيرة في العمق. ومعها أصوات صغيرة حادة. شيء ما يعيش هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "big-room-deep"
+       }
+      ],
+      "fx": "scan",
+      "next": "bat-chamber"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "look-deep",
+     "label": {
+      "en": "Let {name} look into the dark passage",
+      "ar": "دعوا {name} ينظر في الممرّ المظلم"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} sees what the team cannot: a big hall far away, and a blue light blinking slowly in its wall.",
+       "ar": "يرى {name} ما لا يراه الفريق: قاعة كبيرة بعيدة، وضوءاً أزرق يرمش ببطء في جدارها."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "blue-blink"
+       }
+      ],
+      "fx": "flash",
+      "next": "echo-hall"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "glow"
+      ]
+     }
+    }
+   ]
+  },
+  "bat-chamber": {
+   "kind": "challenge",
+   "biome": "cave",
+   "props": [],
+   "plate": "cave-bat-hang",
+   "featured": "bat",
+   "place": {
+    "en": "The bat chamber",
+    "ar": "قاعة الخفافيش"
+   },
+   "text": {
+    "en": "Deep in the cave, the team turns the torch down low and enters a high chamber. The ceiling is covered with thousands of bats hanging upside down! One small bat hangs the wrong way up and looks confused. On the floor lies a field notebook that someone dropped. The bats did not disappear: they moved here. But why do they not fly out to the farms any more?",
+    "ar": "في عمق الكهف يخفّف الفريق ضوء المصباح ويدخل قاعة عالية. السقف مغطّى بآلاف الخفافيش المعلّقة ورؤوسها إلى الأسفل! وخفاش صغير معلّق بالعكس، ويبدو محتاراً. وعلى الأرض دفتر ملاحظات سقط من أحدهم. الخفافيش لم تختفِ: انتقلت إلى هنا. لكن لماذا لم تعد تطير إلى المزارع؟"
+   },
+   "choices": [
+    {
+     "id": "read-notebook",
+     "label": {
+      "en": "Read the notebook",
+      "ar": "اقرؤوا الدفتر"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The visitors wrote: “Night 1: big lamp at the cave mouth, loud music! Night 3: no bats coming out. Night 5: going home, we leave the lamp.” Light and noise came first, then the bats stopped.",
+       "ar": "كتب الزوّار: «الليلة الأولى: مصباح كبير عند مدخل الكهف، وموسيقى عالية! الليلة الثالثة: لا خفافيش تخرج. الليلة الخامسة: سنرجع إلى البيت ونترك المصباح.» جاء الضوء والضجيج أولاً، ثم توقّفت الخفافيش."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "visitor-notes"
+       }
+      ],
+      "fx": "scan",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "look-closer",
+     "label": {
+      "en": "Climb a rock quietly to look closer",
+      "ar": "اصعدوا صخرة بهدوء لتنظروا عن قرب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Under the bats, the fresh droppings are full of tiny shiny bits of insect wings. These bats eat insects, many insects.",
+       "ar": "تحت الخفافيش الفضلات الجديدة مليئة بقطع صغيرة لامعة من أجنحة الحشرات. هذه الخفافيش تأكل الحشرات، وتأكل منها الكثير."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "insect-wings"
+       }
+      ],
+      "fx": "climb",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "count-bats",
+     "label": {
+      "en": "Count the bats in one square of ceiling",
+      "ar": "عُدّوا الخفافيش في مربّع واحد من السقف"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "About fifty bats fill one square, and the ceiling has about one hundred squares: around five thousand bats. One bat can eat hundreds of insects in one night, so together they eat millions!",
+       "ar": "في المربّع الواحد تقريباً خمسون خفاشاً، وفي السقف تقريباً مئة مربّع: أي حوالي خمسة آلاف خفاش. والخفاش الواحد يستطيع أن يأكل مئات الحشرات في ليلة واحدة، فهي معاً تأكل الملايين!"
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bat-count"
+       }
+      ],
+      "fx": "sample",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "whisper",
+     "label": {
+      "en": "Make the torch dimmer and whisper, with {duck}",
+      "ar": "خفّفوا ضوء المصباح أكثر وتكلّموا همساً، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team and {duck} whisper and dim the light. The bats stay calm, and the confused little bat turns the right way and sleeps. Bats sleep in the day, and light and noise wake them.",
+       "ar": "يتكلّم الفريق همساً مع {duck} ويخفّف الضوء. تبقى الخفافيش هادئة، والخفاش الصغير المحتار ينقلب إلى الوضع الصحيح وينام. الخفافيش تنام في النهار، والضوء والضجيج يوقظانها."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "hear-calls",
+     "label": {
+      "en": "Let {name} listen to the bats’ calls",
+      "ar": "دعوا {name} يستمع إلى أصوات الخفافيش"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} hears very high calls that people cannot hear. Bats use the echoes of these calls to find insects in the dark.",
+       "ar": "يسمع {name} أصواتاً حادة جداً لا يسمعها الناس. الخفافيش تستعمل صدى هذه الأصوات لتجد الحشرات في الظلام."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bat-echo"
+       }
+      ],
+      "fx": "scan",
+      "next": "crystal-passage"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation"
+      ]
+     }
+    },
+    {
+     "id": "follow-bat",
+     "label": {
+      "en": "Let {name} follow a bat that is awake",
+      "ar": "دعوا {name} يتبع خفاشاً مستيقظاً"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The bat flies toward the cave mouth, sees the bright lamp, and turns back at once. {name} saw it clearly: the light keeps the bats inside.",
+       "ar": "يطير الخفاش نحو مدخل الكهف، فيرى المصباح القوي ويرجع فوراً. رأى {name} ذلك بوضوح: الضوء يُبقي الخفافيش في الداخل."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "turns-at-light"
+       }
+      ],
+      "fx": "chase",
+      "next": "crystal-passage"
+     },
+     "requires": {
+      "capAny": [
+       "fly",
+       "glide"
+      ]
+     }
+    }
+   ]
+  },
+  "echo-hall": {
+   "kind": "challenge",
+   "biome": "cave",
+   "props": [],
+   "plate": "cave-echo-pulse",
+   "place": {
+    "en": "The echo hall",
+    "ar": "قاعة الصدى"
+   },
+   "text": {
+    "en": "The team enters a huge dark hall. Water drips from the stalactites, rocks that hang from the ceiling like long fingers, into a black pool. In a crack in the far wall, a blue light blinks slowly: on, off, on. The farmers once said the cave has a ghost. What is this light?",
+    "ar": "يدخل الفريق قاعة كبيرة جداً ومظلمة. يقطر الماء من الهوابط، وهي صخور تتدلّى من السقف مثل أصابع طويلة، في بركة سوداء. وفي شقّ في الجدار البعيد يرمش ضوء أزرق ببطء: يضيء، ينطفئ، يضيء. قال المزارعون مرة إن في الكهف شبحاً. ما هذا الضوء؟"
+   },
+   "choices": [
+    {
+     "id": "torch-crack",
+     "label": {
+      "en": "Shine the torch into the crack",
+      "ar": "وجّهوا المصباح إلى داخل الشقّ"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "It is a music speaker that fell into the crack. Its blue light blinks because the battery is almost empty. The visitors played loud music in the cave.",
+       "ar": "إنه مكبّر صوت للموسيقى سقط في الشقّ. ضوؤه الأزرق يرمش لأن البطارية قاربت أن تنتهي. الزوّار شغّلوا موسيقى عالية في الكهف."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "lost-speaker"
+       }
+      ],
+      "fx": "flash",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "pull-speaker",
+     "label": {
+      "en": "Pull the speaker out of the crack",
+      "ar": "اسحبوا مكبّر الصوت من الشقّ"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The speaker plays a loud song for a second. From deep inside, hundreds of bats squeak and wake up! The team switches it off fast. Now they know: noise wakes the bats.",
+       "ar": "يشتغل المكبّر بأغنية عالية لحظة واحدة. ومن العمق تصرخ مئات الخفافيش وتستيقظ! يطفئه الفريق بسرعة. الآن عرفوا: الضجيج يوقظ الخفافيش."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "noise-wakes"
+       }
+      ],
+      "fx": "impact",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "fresh-trail",
+     "label": {
+      "en": "Check the droppings on the floor",
+      "ar": "افحصوا الفضلات على الأرض"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Here the bat droppings are fresh, and they make a line toward a side tunnel that goes deeper. The bats now live far from the cave mouth.",
+       "ar": "هنا فضلات الخفافيش جديدة، وتصنع خطاً نحو نفق جانبي يدخل إلى العمق. الخفافيش تعيش الآن بعيداً عن مدخل الكهف."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fresh-trail"
+       }
+      ],
+      "fx": "scan",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "rest-pool",
+     "label": {
+      "en": "Rest quietly by the pool with {duck}",
+      "ar": "استريحوا بهدوء قرب البركة مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "While everyone rests with {duck}, the hall becomes very quiet. In the quiet, the team hears tiny squeaks from deep inside: the bats are close.",
+       "ar": "بينما يستريح الجميع مع {duck} تصير القاعة هادئة جداً. وفي الهدوء يسمع الفريق أصواتاً صغيرة حادة من العمق: الخفافيش قريبة."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "crystal-passage"
+     }
+    },
+    {
+     "id": "listen-quiet",
+     "label": {
+      "en": "Let {name} listen in the quiet",
+      "ar": "دعوا {name} يستمع في الهدوء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} turns its ears toward a side tunnel. Behind it, thousands of bats are moving and calling softly. They are hiding deep in the cave.",
+       "ar": "يوجّه {name} أذنيه نحو نفق جانبي. خلفه آلاف الخفافيش تتحرّك وتصدر أصواتاً خفيفة. إنها تختبئ في عمق الكهف."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "squeaks-deep"
+       }
+      ],
+      "fx": "scan",
+      "next": "crystal-passage"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "claw-speaker",
+     "label": {
+      "en": "Let {name} take the speaker out gently",
+      "ar": "دعوا {name} يُخرج مكبّر الصوت بلطف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} reaches into the crack with its claws and pulls the speaker out without a sound. The team switches it off for good. One problem is gone.",
+       "ar": "يُدخل {name} مخالبه في الشقّ ويُخرج المكبّر دون صوت. يطفئه الفريق نهائياً. انتهت مشكلة واحدة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "speaker-off"
+       }
+      ],
+      "fx": "dig",
+      "next": "crystal-passage"
+     },
+     "requires": {
+      "capAny": [
+       "dig",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "crystal-passage": {
+   "kind": "climax",
+   "biome": "cave",
+   "props": [],
+   "plate": "cave-crystal-passage",
+   "cinematic": "reveal",
+   "place": {
+    "en": "The crystal passage",
+    "ar": "ممرّ البلّورات"
+   },
+   "text": {
+    "en": "The team walks back toward the cave mouth through a passage between big crystals that shine in the torchlight. A visitor carved an arrow on the rock here. Now the team knows the answer. Visitors put a bright lamp and loud music at the cave mouth. Bats sleep in the day and fly out at night to hunt insects, and they avoid bright light and noise. So the bats moved deeper and stopped flying out. One bat eats hundreds of insects in a night, so without the bats, the insects ate the farms. Outside, the lamp is shining. What will the team do?",
+    "ar": "يرجع الفريق نحو مدخل الكهف في ممرّ بين بلّورات كبيرة تلمع في ضوء المصباح. هنا حفر أحد الزوّار سهماً على الصخر. الآن عرف الفريق الجواب. وضع الزوّار مصباحاً قوياً وموسيقى عالية عند مدخل الكهف. الخفافيش تنام في النهار وتخرج في الليل لتصطاد الحشرات، وهي تبتعد عن الضوء القوي والضجيج. لذلك انتقلت الخفافيش إلى العمق وتوقّفت عن الخروج. والخفاش الواحد يأكل مئات الحشرات في الليلة، فلما غابت الخفافيش أكلت الحشرات المزارع. في الخارج ما زال المصباح مضيئاً. ماذا سيفعل الفريق؟"
+   },
+   "choices": [
+    {
+     "id": "lamp-out",
+     "label": {
+      "en": "Switch off the lamp and carry it out of the cave",
+      "ar": "أطفئوا المصباح وأخرجوه من الكهف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The cave mouth becomes dark and quiet. The team waits. After a while, the first bat flies out into the night, then ten, then a river of bats.",
+       "ar": "يصير مدخل الكهف مظلماً وهادئاً. ينتظر الفريق. وبعد قليل يخرج أول خفاش إلى الليل، ثم عشرة، ثم نهر من الخفافيش."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "stars",
+      "next": "end:bats-fly-again"
+     }
+    },
+    {
+     "id": "count-out",
+     "label": {
+      "en": "Turn the lamp off and count the bats that fly out",
+      "ar": "أطفئوا المصباح وعُدّوا الخفافيش التي تخرج"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "With the lamp off, the bats start to fly out. The team counts them in groups of ten and writes every number down.",
+       "ar": "بعد إطفاء المصباح تبدأ الخفافيش بالخروج. يعدّها الفريق في مجموعات من عشرة، ويكتب كل رقم."
+      },
+      "mood": "thinking",
+      "effects": [],
+      "fx": "scan",
+      "next": "end:bat-count"
+     }
+    },
+    {
+     "id": "night-camera",
+     "label": {
+      "en": "Turn the lamp off and film the cave mouth with a night camera",
+      "ar": "أطفئوا المصباح وصوّروا مدخل الكهف بكاميرا ليلية"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The night camera films the cave mouth in the dark without bright light. On the screen, thousands of bats pour out toward the farms.",
+       "ar": "تصوّر الكاميرا الليلية مدخل الكهف في الظلام دون ضوء قوي. وعلى الشاشة تخرج آلاف الخفافيش نحو المزارع."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "camera",
+      "next": "end:bat-count"
+     }
+    },
+    {
+     "id": "make-sign",
+     "label": {
+      "en": "Switch off the lamp and make a sign with the farmers",
+      "ar": "أطفئوا المصباح واصنعوا لوحة مع المزارعين"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The lamp goes off. Then the team and the farmers paint a big sign for the cave mouth, with a sleeping bat drawn by {duck}.",
+       "ar": "يُطفأ المصباح. ثم يرسم الفريق والمزارعون لوحة كبيرة لمدخل الكهف، وعليها رسم خفاش نائم من {duck}."
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:quiet-please"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "bats-fly-again": {
+   "tone": "heroic",
+   "title": {
+    "en": "The Bats Fly Again",
+    "ar": "الخفافيش تطير من جديد"
+   },
+   "summary": {
+    "en": "The team found that a bright lamp and loud music had pushed the bats deep into the cave, and removed them.",
+    "ar": "اكتشف الفريق أن مصباحاً قوياً وموسيقى عالية دفعا الخفافيش إلى عمق الكهف، فأزال المصباح والموسيقى."
+   },
+   "epilogue": {
+    "en": "That same night, the bats hunted over the farms again. A month later, the farmers found far fewer insects on their vegetables and sent the club a box of tomatoes.",
+    "ar": "في نفس الليلة رجعت الخفافيش تصطاد فوق المزارع. وبعد شهر وجد المزارعون حشرات أقل بكثير على خضارهم، وأرسلوا إلى النادي صندوق طماطم."
+   }
+  },
+  "bat-count": {
+   "tone": "scientific",
+   "title": {
+    "en": "Five Thousand Hunters",
+    "ar": "خمسة آلاف صيّاد"
+   },
+   "summary": {
+    "en": "The team proved with a count that thousands of bats leave the cave to hunt insects when its mouth is dark and quiet.",
+    "ar": "أثبت الفريق بالعدّ أن آلاف الخفافيش تخرج من الكهف لتصطاد الحشرات حين يكون مدخله مظلماً وهادئاً."
+   },
+   "epilogue": {
+    "en": "The club counted the bats every evening for a month and shared the numbers with the farmers. Their chart, with {name} in the corner, now hangs in the club room.",
+    "ar": "عدّ النادي الخفافيش كل مساء مدة شهر، وأعطى الأرقام للمزارعين. ورسمهم البياني، وفي زاويته صورة {name}، معلّق الآن في غرفة النادي."
+   }
+  },
+  "quiet-please": {
+   "tone": "wholesome",
+   "title": {
+    "en": "A Sign for Visitors",
+    "ar": "لوحة للزوّار"
+   },
+   "summary": {
+    "en": "The team solved the mystery and, with the farmers, made sure visitors keep the cave dark and quiet for the bats.",
+    "ar": "حلّ الفريق اللغز، وساعد المزارعين على أن يبقى الكهف مظلماً وهادئاً من أجل الخفافيش."
+   },
+   "epilogue": {
+    "en": "The sign says: “Bats sleeping inside: no lamps, no music.” Visitors now camp outside, and on Fridays the farmers bring their children to watch the bats fly out at sunset.",
+    "ar": "تقول اللوحة: «الخفافيش نائمة في الداخل: ممنوع المصابيح والموسيقى.» الزوّار الآن يخيّمون في الخارج، وفي أيام الجمعة يأتي المزارعون بأطفالهم كي يشاهدوا الخفافيش تطير عند الغروب."
+   }
+  }
+ }
+}

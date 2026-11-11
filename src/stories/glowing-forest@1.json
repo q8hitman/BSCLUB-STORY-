@@ -1,0 +1,1177 @@
+{
+ "id": "glowing-forest",
+ "v": 1,
+ "status": "published",
+ "mode": "classic",
+ "source": "hand-written 2026-11-11",
+ "title": {
+  "en": "The Glowing Forest",
+  "ar": "الغابة المضيئة"
+ },
+ "premise": {
+  "en": "Villagers say a ring of trees deep in the forest glows green at night, and they think it is haunted.",
+  "ar": "يقول أهل قرية إن حلقة من الأشجار في عمق الغابة تضيء باللون الأخضر في الليل، ويظنون أنها مسكونة بالأشباح."
+ },
+ "tone": "mystery",
+ "tags": {
+  "themes": [
+   "bioluminescence",
+   "decomposers",
+   "night-forest"
+  ],
+  "locations": [
+   "forest"
+  ],
+  "twist": "glowing-fungus",
+  "creatures": [
+   "owl",
+   "lynx",
+   "roe-deer"
+  ]
+ },
+ "world": {},
+ "science": [
+  "forest-myco"
+ ],
+ "start": "forest-hook",
+ "nodes": {
+  "forest-hook": {
+   "kind": "hook",
+   "biome": "forest",
+   "props": [],
+   "plate": "camp-forest-fireflies",
+   "place": {
+    "en": "The camp at the edge of the forest",
+    "ar": "المخيّم على طرف الغابة"
+   },
+   "goal": {
+    "en": "Find out what makes the ring of trees glow green at night.",
+    "ar": "اعرفوا ما الذي يجعل حلقة الأشجار تضيء باللون الأخضر في الليل."
+   },
+   "text": {
+    "en": "The people of a small village called the club. They say that deep in the forest there is a ring of trees that glows green at night, and they call it haunted. Tonight the team camps at the edge of the forest with {name}. Small insects blink on and off around the tents. Far away between the trees there is a soft green light. What is making it?",
+    "ar": "اتصل أهل قرية صغيرة بالنادي. يقولون إن في عمق الغابة حلقة من الأشجار تضيء باللون الأخضر في الليل، ويقولون إنها مسكونة بالأشباح. الليلة يخيّم الفريق على طرف الغابة ومعه {name}. حول الخيام حشرات صغيرة تضيء وتنطفئ. ومن بعيد، بين الأشجار، ضوء أخضر خفيف. ما الذي يصنع هذا الضوء؟"
+   },
+   "choices": [
+    {
+     "id": "walk-in",
+     "label": {
+      "en": "Walk straight toward the green light",
+      "ar": "امشوا مباشرة نحو الضوء الأخضر"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team walks into the trees and fog rises around them. In the fog, two shining dots appear and move. But the green light far away does not move at all.",
+       "ar": "يدخل الفريق بين الأشجار، فيرتفع الضباب حولهم. في الضباب تظهر نقطتان لامعتان وتتحرّكان. لكن الضوء الأخضر البعيد لا يتحرّك أبدا."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "fog-path"
+     }
+    },
+    {
+     "id": "compare-blink",
+     "label": {
+      "en": "Compare the blinking insects with the far light",
+      "ar": "قارنوا الحشرات المضيئة بالضوء البعيد"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The insects are fireflies: they blink and fly around. The far light stays on all the time and stays in one place. So it is not fireflies. The path toward it passes an old oak tree.",
+       "ar": "هذه الحشرات يراعات (خنافس صغيرة تضيء): تضيء وتنطفئ وتطير هنا وهناك. أما الضوء البعيد فيبقى مضيئا طوال الوقت وفي مكان واحد. إذن هو ليس يراعات. والطريق إليه يمر بشجرة بلوط قديمة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "steady-glow"
+       }
+      ],
+      "fx": "scan",
+      "next": "owl-oak"
+     }
+    },
+    {
+     "id": "ask-villagers",
+     "label": {
+      "en": "Ask an old villager when the ring glows",
+      "ar": "اسألوا رجلا كبيرا من القرية متى تضيء الحلقة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The old man says: “It glows most after rain. And near the old oak, a voice calls hoo-hoo all night.” The team writes down both clues and goes to the oak.",
+       "ar": "يقول الرجل: «تضيء أكثر بعد المطر. وقرب شجرة البلوط القديمة صوت ينادي هوو هوو طوال الليل.» يكتب الفريق المعلومتين، ويذهب نحو الشجرة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "after-rain"
+       }
+      ],
+      "fx": "scan",
+      "next": "owl-oak"
+     }
+    },
+    {
+     "id": "calm-kids",
+     "label": {
+      "en": "Calm the village children with {duck}",
+      "ar": "هدّئوا أطفال القرية مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team tells the children that scientists look for causes, not ghosts. The children feel braver and show the path through the fog that leads to the ring.",
+       "ar": "يقول الفريق للأطفال إن العلماء يبحثون عن السبب ولا يخافون من الأشباح. يشعر الأطفال بشجاعة أكبر، ويدلّون الفريق على طريق الضباب الذي يصل إلى الحلقة."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "fog-path"
+     }
+    },
+    {
+     "id": "dark-look",
+     "label": {
+      "en": "Let {name} look into the dark",
+      "ar": "دعوا {name} ينظر في الظلام"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} sees what the team cannot: the green light is low, near the ground, not up in the leaves.",
+       "ar": "يرى {name} ما لا يراه الفريق: الضوء الأخضر منخفض قرب الأرض، وليس فوق بين أوراق الشجر."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "low-glow"
+       }
+      ],
+      "fx": "scan",
+      "next": "fog-path"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "echolocation"
+      ]
+     }
+    },
+    {
+     "id": "sniff-wind",
+     "label": {
+      "en": "Let {name} sniff the wind",
+      "ar": "دعوا {name} يشمّ الهواء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The wind comes from the green light. {name} sniffs and sneezes: it smells of wet earth and mushrooms. {name} trots toward the old oak.",
+       "ar": "الهواء يأتي من جهة الضوء الأخضر. يشمّ {name} ويعطس: الرائحة رائحة تراب رطب وفطر. ثم يمشي {name} نحو شجرة البلوط القديمة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "mushroom-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "owl-oak"
+     },
+     "requires": {
+      "capAny": [
+       "scent"
+      ]
+     }
+    }
+   ]
+  },
+  "fog-path": {
+   "kind": "explore",
+   "biome": "forest",
+   "props": [],
+   "plate": "forest-fog-eyes",
+   "featured": "roe-deer",
+   "place": {
+    "en": "The foggy path",
+    "ar": "طريق الضباب"
+   },
+   "text": {
+    "en": "The path goes into thick fog. Between the trees, two pairs of shining eyes look at the team. Are these the ghost lights? Behind them, far ahead, the green light is still there, low and still. Whose eyes are these?",
+    "ar": "يدخل الطريق في ضباب كثيف. بين الأشجار زوجان من العيون اللامعة ينظران إلى الفريق. هل هذه أضواء الشبح؟ وخلفها، بعيدا إلى الأمام، ما زال الضوء الأخضر هناك، منخفضا وثابتا. لمن هذه العيون؟"
+   },
+   "choices": [
+    {
+     "id": "torch-off",
+     "label": {
+      "en": "Switch the torch off, then on",
+      "ar": "أطفئوا المصباح اليدوي ثم أشعلوه"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "Torch off: the eyes disappear, but the far green light stays. Torch on: the eyes shine again. Eyes only send back the torch light. The green light makes its own light.",
+       "ar": "حين ينطفئ المصباح تختفي العيون، لكن الضوء الأخضر البعيد يبقى. وحين يشتعل تلمع العيون من جديد. العيون تعكس ضوء المصباح فقط، أما الضوء الأخضر فيصنع ضوءه بنفسه."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "own-light"
+       }
+      ],
+      "fx": "flash",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "step-closer",
+     "label": {
+      "en": "Step closer to the eyes",
+      "ar": "اقتربوا من العيون"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "A small shy deer with a brown coat jumps away into the fog: a roe deer. The team follows its path and reaches an old clearing.",
+       "ar": "يقفز ظبي صغير خجول، لونه بني، ويهرب في الضباب: إنه الظبي الأوروبي. يمشي الفريق في طريقه فيصل إلى ساحة قديمة بين الأشجار."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "eye-height",
+     "label": {
+      "en": "Check how high the eyes are",
+      "ar": "انظروا على أي ارتفاع توجد العيون"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The eyes are at the height of a deer’s head, and they move when the deer moves. The green light never moves. They are two different things.",
+       "ar": "العيون على ارتفاع رأس ظبي، وتتحرّك حين يتحرّك. أما الضوء الأخضر فلا يتحرّك أبدا. هذان شيئان مختلفان."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "eyes-move"
+       }
+      ],
+      "fx": "scan",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "quiet-wait",
+     "label": {
+      "en": "Wait quietly together with {duck}",
+      "ar": "انتظروا بهدوء مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Nobody moves, {duck} included. The deer calms down and keeps eating leaves. Then the team walks on slowly to the clearing.",
+       "ar": "لا يتحرّك أحد، ومنهم {duck}. يهدأ الظبي ويكمل أكل الأوراق. ثم يمشي الفريق ببطء نحو الساحة."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "feel-warm",
+     "label": {
+      "en": "Let {name} feel for warm bodies",
+      "ar": "دعوا {name} يبحث عن أجسام دافئة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} turns its head to the eyes: they belong to warm animals. Then it turns to the green light: nothing warm there. The light is cold.",
+       "ar": "يدير {name} رأسه نحو العيون: إنها لحيوانات دافئة. ثم يديره نحو الضوء الأخضر: لا شيء دافئ هناك. هذا ضوء بارد."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "cold-glow"
+       }
+      ],
+      "fx": "scan",
+      "next": "antler-ring"
+     },
+     "requires": {
+      "capAny": [
+       "heatSense",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "climb-look",
+     "label": {
+      "en": "Let {name} climb above the fog",
+      "ar": "دعوا {name} يتسلّق فوق الضباب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "From the top of a tree, {name} looks down and calls. The green light makes a ring on the ground, past an old clearing.",
+       "ar": "من أعلى شجرة ينظر {name} إلى الأسفل ويصدر صوتا. الضوء الأخضر يصنع حلقة على الأرض، بعد ساحة قديمة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "ring-shape"
+       }
+      ],
+      "fx": "climb",
+      "next": "antler-ring"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "jump",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "owl-oak": {
+   "kind": "explore",
+   "biome": "forest",
+   "props": [],
+   "plate": "forest-comic-owl",
+   "featured": "owl",
+   "place": {
+    "en": "The old oak tree",
+    "ar": "شجرة البلوط القديمة"
+   },
+   "text": {
+    "en": "Under the old oak, a loud “hoo-hoo!” comes from the branches. The villagers say this is the ghost’s voice. On a low branch sits an owl with a piece of old string caught on its foot. It flaps and hoots. Is this the ghost voice?",
+    "ar": "تحت شجرة البلوط القديمة يأتي صوت عال من الأغصان: «هوو هوو!». يقول أهل القرية إنه صوت الشبح. على غصن منخفض تجلس بومة، وفي رجلها قطعة خيط قديم عالقة. ترفرف البومة وتصيح. هل هذا هو صوت الشبح؟"
+   },
+   "choices": [
+    {
+     "id": "listen-call",
+     "label": {
+      "en": "Listen carefully to the call",
+      "ar": "استمعوا إلى الصوت جيدا"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "It is the call of an owl. Owls are awake at night, and they call to say “this is my place”. The ghost voice is a bird.",
+       "ar": "إنه صوت بومة. البوم يستيقظ في الليل، ويصيح ليقول للآخرين «هذا مكاني». صوت الشبح هو صوت طائر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "owl-voice"
+       }
+      ],
+      "fx": "scan",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "climb-oak",
+     "label": {
+      "en": "Climb the lowest branch to see farther",
+      "ar": "اصعدوا إلى أقرب غصن لتروا أبعد"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "From the branch, the team sees the green light clearly. It is on the ground, past an old clearing. The team climbs down and walks there.",
+       "ar": "من فوق الغصن يرى الفريق الضوء الأخضر بوضوح. إنه على الأرض، بعد ساحة قديمة. ينزل الفريق ويمشي إلى هناك."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "climb",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "owl-pellet",
+     "label": {
+      "en": "Look at the grey lumps under the tree",
+      "ar": "افحصوا الكتل الرمادية تحت الشجرة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "These are owl pellets: the owl swallows mice whole and spits out the bones and fur in a small lump. So small bones in a forest are often just owl food.",
+       "ar": "هذه كتل يخرجها البوم من فمه: يبلع البوم الفئران كاملة، ثم يخرج العظام والفرو في كتلة صغيرة. إذن العظام الصغيرة في الغابة غالبا بقايا طعام البوم."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "owl-pellet"
+       }
+      ],
+      "fx": "sample",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "free-owl",
+     "label": {
+      "en": "Free the owl from the string with {duck}",
+      "ar": "حرّروا البومة من الخيط مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "With gloves and slow hands, the team and {duck} cut the string. The owl stops flapping, flies to a higher branch and goes quiet. The team walks on toward the light.",
+       "ar": "بقفازات وحركة بطيئة يقصّ الفريق الخيط، ومعه {duck}. تتوقف البومة عن الرفرفة، وتطير إلى غصن أعلى وتهدأ. ثم يمشي الفريق نحو الضوء."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "antler-ring"
+     }
+    },
+    {
+     "id": "glide-over",
+     "label": {
+      "en": "Let {name} glide over the trees",
+      "ar": "دعوا {name} ينزلق في الهواء فوق الأشجار"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} glides over the trees and comes back excited. Down in the forest, the green light makes a ring on the ground.",
+       "ar": "ينزلق {name} في الهواء فوق الأشجار، ثم يرجع متحمسا. في الأسفل، الضوء الأخضر يصنع حلقة على أرض الغابة."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "ring-from-air"
+       }
+      ],
+      "fx": "jump",
+      "next": "antler-ring"
+     },
+     "requires": {
+      "capAny": [
+       "fly",
+       "glide"
+      ]
+     }
+    },
+    {
+     "id": "see-logs",
+     "label": {
+      "en": "Let {name} look closely at the light",
+      "ar": "دعوا {name} ينظر إلى الضوء عن قرب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sees in the dark much better than people. It stares and growls softly: the light is not in the living trees. It is in old fallen logs on the ground.",
+       "ar": "يرى {name} في الظلام أفضل كثيرا من الناس. ينظر ويصدر صوتا خفيفا: الضوء ليس في الأشجار الحية، بل في جذوع قديمة ساقطة على الأرض."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "glow-in-logs"
+       }
+      ],
+      "fx": "scan",
+      "next": "antler-ring"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "echolocation"
+      ]
+     }
+    }
+   ]
+  },
+  "antler-ring": {
+   "kind": "challenge",
+   "biome": "forest",
+   "props": [],
+   "plate": "forest-bone-circle",
+   "place": {
+    "en": "The circle of antlers",
+    "ar": "دائرة القرون"
+   },
+   "text": {
+    "en": "The team reaches an old clearing. On the green moss lies a circle of old deer antlers and small bones. The villagers call it “the ghost’s circle”. Past the clearing, the green light shines in the ring of trees. One way goes over big rocks, the other crosses a small stream. Who made this circle, and which way should the team go?",
+    "ar": "يصل الفريق إلى ساحة قديمة. على الطحلب الأخضر دائرة من قرون ظباء قديمة وعظام صغيرة. يسمّيها أهل القرية «دائرة الشبح». وبعد الساحة يلمع الضوء الأخضر في حلقة الأشجار. طريق يمر فوق صخور كبيرة، وطريق آخر يعبر جدولا صغيرا (نهرا صغيرا جدا). من صنع هذه الدائرة، وأي طريق يسلك الفريق؟"
+   },
+   "choices": [
+    {
+     "id": "study-antlers",
+     "label": {
+      "en": "Look closely at the antlers",
+      "ar": "افحصوا القرون عن قرب"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The antlers were not cut. Male deer drop their antlers every year and grow new ones. Mice and squirrels chew them for calcium. Nothing ghostly here. The team takes the stream path.",
+       "ar": "القرون غير مقطوعة. ذكور الظباء تفقد قرونها كل سنة وتنبت لها قرون جديدة. والفئران والسناجب تقضمها لتأخذ منها الكالسيوم. لا شيء من الأشباح هنا. يأخذ الفريق طريق الجدول."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shed-antlers"
+       }
+      ],
+      "fx": "sample",
+      "next": "stream-logs"
+     }
+    },
+    {
+     "id": "cross-circle",
+     "label": {
+      "en": "Walk right through the circle to the rocks",
+      "ar": "امشوا وسط الدائرة نحو الصخور"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team walks through the middle of the circle. Nothing happens at all, of course. The path climbs onto the big rocks.",
+       "ar": "يمشي الفريق وسط الدائرة. وطبعا لا يحدث أي شيء. ثم يصعد الطريق فوق الصخور الكبيرة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "lynx-rock"
+     }
+    },
+    {
+     "id": "map-glow",
+     "label": {
+      "en": "Check where the light is brightest",
+      "ar": "انظروا أين يكون الضوء أقوى"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The light is brightest on the side of the stream, where the ground is wet. That matches the old man’s clue: it glows most after rain. The team goes toward the stream.",
+       "ar": "الضوء أقوى في جهة الجدول، حيث الأرض رطبة. وهذا يوافق كلام الرجل الكبير: تضيء أكثر بعد المطر. يذهب الفريق نحو الجدول."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "wet-side"
+       }
+      ],
+      "fx": "scan",
+      "next": "stream-logs"
+     }
+    },
+    {
+     "id": "rest-together",
+     "label": {
+      "en": "Rest and share water with {duck}",
+      "ar": "استريحوا وتقاسموا الماء مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Everyone drinks, {duck} too. Rested, the team sees a dry path that goes around by the rocks, and takes it.",
+       "ar": "يشرب الجميع، ومنهم {duck}. بعد الراحة يرى الفريق طريقا جافا يمر بجانب الصخور، فيمشي فيه."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "lynx-rock"
+     }
+    },
+    {
+     "id": "dig-moss",
+     "label": {
+      "en": "Let {name} dig under the moss",
+      "ar": "دعوا {name} يحفر تحت الطحلب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} digs beside an old stump and pulls up thin black threads, like shoelaces. They run under the ground toward the stream and the glowing ring. They belong to a fungus.",
+       "ar": "يحفر {name} بجانب جذع قديم، ويخرج خيوطا سوداء رفيعة مثل أربطة الحذاء. تمتد هذه الخيوط تحت الأرض نحو الجدول وحلقة الضوء. إنها خيوط فطر."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "black-threads"
+       }
+      ],
+      "fx": "dig",
+      "next": "stream-logs"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "scan-rocks",
+     "label": {
+      "en": "Let {name} check the rocks",
+      "ar": "دعوا {name} يفحص الصخور"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} stops and stares at the rocks: something warm and large is sitting there, watching. The team goes closer, slowly and carefully.",
+       "ar": "يتوقف {name} وينظر إلى الصخور: شيء دافئ وكبير يجلس هناك ويراقب. يقترب الفريق ببطء وحذر."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "watcher-on-rocks"
+       }
+      ],
+      "fx": "scan",
+      "next": "lynx-rock"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "heatSense"
+      ]
+     }
+    }
+   ]
+  },
+  "lynx-rock": {
+   "kind": "challenge",
+   "biome": "forest",
+   "props": [],
+   "plate": "forest-lynx-watch",
+   "featured": "lynx",
+   "place": {
+    "en": "The big rocks",
+    "ar": "الصخور الكبيرة"
+   },
+   "text": {
+    "en": "On the big rocks sits a lynx: a wild cat with a short tail and black tufts of hair on its ears. Its eyes shine in the torch light. Lynxes are shy and stay away from people. Behind it, the green ring is very close now. Is the lynx part of the glow, and how can the team pass calmly?",
+    "ar": "فوق الصخور الكبيرة يجلس وشق: قط بري ذيله قصير، وعلى طرف أذنيه شعر أسود. عيناه تلمعان في ضوء المصباح. الوشق خجول ويبتعد عن الناس. وخلفه صارت حلقة الضوء الأخضر قريبة جدا. هل الوشق جزء من الضوء؟ وكيف يمر الفريق بهدوء؟"
+   },
+   "choices": [
+    {
+     "id": "back-slow",
+     "label": {
+      "en": "Stay calm and keep your distance",
+      "ar": "ابقوا هادئين وعلى مسافة بعيدة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The team stays calm and walks slowly. The lynx watches for a moment, then slips away between the rocks. The path to the ring is open.",
+       "ar": "يبقى الفريق هادئا ويمشي ببطء. يراقب الوشق لحظة، ثم يختفي بين الصخور. صار الطريق إلى الحلقة مفتوحا."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "torch-away",
+     "label": {
+      "en": "Point the torch away from the lynx",
+      "ar": "وجّهوا المصباح بعيدا عن الوشق"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Without the torch, the lynx’s eyes go dark. But the green ring behind it keeps glowing. The lynx is not the ghost light.",
+       "ar": "بدون ضوء المصباح تصبح عينا الوشق مظلمتين. لكن الحلقة الخضراء خلفه تبقى مضيئة. الوشق ليس ضوء الشبح."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "lynx-eyes-dark"
+       }
+      ],
+      "fx": "flash",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "check-tracks",
+     "label": {
+      "en": "Look at the tracks on the soft ground",
+      "ar": "افحصوا آثار الأقدام على الأرض الطرية"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The footprints are big and round, with no claw marks. Cats pull their claws in when they walk. A real animal, not a ghost, walks here every night to hunt hares.",
+       "ar": "آثار الأقدام كبيرة ومستديرة، وليس فيها آثار مخالب. القطط تخفي مخالبها حين تمشي. حيوان حقيقي يمشي هنا كل ليلة ليصطاد الأرانب البرية، وليس شبحا."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "lynx-tracks"
+       }
+      ],
+      "fx": "scan",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "give-space",
+     "label": {
+      "en": "Step aside with {duck} and let the lynx pass",
+      "ar": "تنحّوا جانبا مع {duck} واتركوا الوشق يمر"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team steps off the path, {duck} too. The lynx walks down from the rocks, passes them without a look, and goes on with its night.",
+       "ar": "يبتعد الفريق عن الطريق، ومنهم {duck}. ينزل الوشق عن الصخور، ويمر بجانبهم دون أن ينظر، ويكمل ليلته."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "hide-still",
+     "label": {
+      "en": "Let {name} hide and watch",
+      "ar": "دعوا {name} يختبئ ويراقب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Hidden, {name} watches the lynx walk past a glowing log. The lynx does not even sniff it. The light is not food and not a danger for animals.",
+       "ar": "من مكانه المخفي يراقب {name} الوشق وهو يمر بجانب جذع مضيء. الوشق لا يشمّه حتى. هذا الضوء ليس طعاما وليس خطرا على الحيوانات."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "lynx-ignores-glow"
+       }
+      ],
+      "fx": "camo",
+      "next": "glow-ring"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "rock-top",
+     "label": {
+      "en": "Let {name} climb to the top of the rocks",
+      "ar": "دعوا {name} يتسلّق إلى أعلى الصخور"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "From the top, {name} sees the whole ring. The living trees are dark. Only the old dead stumps and fallen logs glow green.",
+       "ar": "من الأعلى يرى {name} الحلقة كلها. الأشجار الحية مظلمة. فقط الجذوع القديمة الميتة والجذوع الساقطة تضيء باللون الأخضر."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "dead-wood-glows"
+       }
+      ],
+      "fx": "climb",
+      "next": "glow-ring"
+     },
+     "requires": {
+      "capAny": [
+       "climb",
+       "jump",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "stream-logs": {
+   "kind": "challenge",
+   "biome": "forest",
+   "props": [],
+   "plate": "forest-river-crossing",
+   "place": {
+    "en": "The stream crossing",
+    "ar": "معبر الجدول"
+   },
+   "text": {
+    "en": "The team crosses a small stream on slippery stones. On the other side the ground is wet. Old fallen logs lie half in the water and on the bank, and some of them glow a faint green. Why do only the wet logs glow?",
+    "ar": "يعبر الفريق جدولا صغيرا فوق حجارة زلقة. في الجهة الأخرى الأرض رطبة. جذوع قديمة ساقطة، بعضها نصفه في الماء وبعضها على الضفة، وبعضها يضيء بلون أخضر خفيف. لماذا تضيء الجذوع الرطبة فقط؟"
+   },
+   "choices": [
+    {
+     "id": "touch-log",
+     "label": {
+      "en": "Touch a glowing log with gloves",
+      "ar": "المسوا جذعا مضيئا بالقفازات"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The wood is soft and breaks into crumbs: it is rotting. The glowing part is not warm at all. It is a cold light, not fire.",
+       "ar": "الخشب طري ويتفتّت: إنه يتعفّن. والجزء المضيء ليس دافئا أبدا. هذا ضوء بارد، وليس نارا."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "cold-light"
+       }
+      ],
+      "fx": "sample",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "cross-log",
+     "label": {
+      "en": "Cross back over the stream on a fallen log",
+      "ar": "اعبروا الجدول على جذع ساقط"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Crack! The old log breaks a little under the team’s feet. Inside, the wood glows even brighter. The light comes from inside the wood, not from paint or a lamp.",
+       "ar": "طق! ينكسر الجذع القديم قليلا تحت أقدام الفريق. وفي داخله يضيء الخشب أكثر. الضوء يأتي من داخل الخشب، وليس من طلاء أو مصباح."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "glow-inside"
+       }
+      ],
+      "fx": "impact",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "wet-dry-test",
+     "label": {
+      "en": "Test a wet piece of wood and a dry one",
+      "ar": "جرّبوا قطعة خشب رطبة وقطعة جافة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The team puts the two pieces side by side in the dark. The wet piece glows clearly; the dry one only a little. Something living in the wood needs water to glow. That is why it glows most after rain.",
+       "ar": "يضع الفريق القطعتين جنبا إلى جنب في الظلام. القطعة الرطبة تضيء بوضوح، والجافة تضيء قليلا فقط. شيء حي في الخشب يحتاج إلى الماء ليضيء. ولهذا يضيء أكثر بعد المطر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "wet-glows-more"
+       }
+      ],
+      "fx": "sample",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "help-duck",
+     "label": {
+      "en": "Help {duck} over the slippery stones",
+      "ar": "ساعدوا {duck} على عبور الحجارة الزلقة"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Hand in hand, the team helps {duck} across. Nobody falls into the cold water, and everyone reaches the ring together.",
+       "ar": "يدا بيد يساعد الفريق {duck} على العبور. لا يقع أحد في الماء البارد، ويصل الجميع إلى الحلقة معا."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "glow-ring"
+     }
+    },
+    {
+     "id": "swim-check",
+     "label": {
+      "en": "Let {name} swim along the logs",
+      "ar": "دعوا {name} يسبح بجانب الجذوع"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} paddles along the logs and splashes back. The logs glow most just above the water line, where the wood is wet but still has air.",
+       "ar": "يسبح {name} بجانب الجذوع ثم يرجع وهو يرشّ الماء. الجذوع تضيء أكثر فوق سطح الماء مباشرة، حيث الخشب رطب لكن فيه هواء."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "waterline-glow"
+       }
+      ],
+      "fx": "chase",
+      "next": "glow-ring"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "breatheWater"
+      ]
+     }
+    },
+    {
+     "id": "sniff-log",
+     "label": {
+      "en": "Let {name} sniff the glowing logs",
+      "ar": "دعوا {name} يشمّ الجذوع المضيئة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs and paws at the bark. Under it there are thin threads, and on top grow tiny honey-coloured mushrooms. The glow belongs to a fungus.",
+       "ar": "يشمّ {name} اللحاء (قشرة الشجرة) ويحكّه بقدمه. تحته خيوط رفيعة، وفوقه تنمو أفطر صغيرة جدا بلون العسل. هذا الضوء من فطر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "tiny-mushrooms"
+       }
+      ],
+      "fx": "sniff",
+      "next": "glow-ring"
+     },
+     "requires": {
+      "capAny": [
+       "scent"
+      ]
+     }
+    }
+   ]
+  },
+  "glow-ring": {
+   "kind": "climax",
+   "biome": "forest",
+   "props": [],
+   "plate": "forest-fungus-ring",
+   "cinematic": "reveal",
+   "place": {
+    "en": "The glowing ring",
+    "ar": "الحلقة المضيئة"
+   },
+   "text": {
+    "en": "The team stands inside the ring. The “trees” here are old dead stumps and fallen logs, and they glow a soft green. Now the answer is clear. The light comes from a fungus that lives inside the rotting wood. Some fungi can make their own light, like fireflies, but their light stays on. People call it “foxfire”. The fungus slowly eats the dead wood and turns it back into soil. The ring is not haunted. How will the team share this with the village?",
+    "ar": "يقف الفريق داخل الحلقة. «الأشجار» هنا جذوع قديمة ميتة وجذوع ساقطة، وكلها تضيء بلون أخضر هادئ. الآن صار الجواب واضحا. الضوء يأتي من فطر يعيش داخل الخشب المتعفّن. بعض الفطريات تستطيع أن تصنع ضوءها بنفسها مثل اليراعات، لكن ضوءها يبقى مشتعلا ولا ينطفئ. ويسمّي الناس هذا الضوء «نار الثعلب». يأكل الفطر الخشب الميت ببطء، ويعيده ترابا. الحلقة ليست مسكونة. كيف سيشرح الفريق هذا لأهل القرية؟"
+   },
+   "choices": [
+    {
+     "id": "take-sample",
+     "label": {
+      "en": "Take a small piece of glowing wood to the club lab",
+      "ar": "خذوا قطعة صغيرة من الخشب المضيء إلى مختبر النادي"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The team puts a small piece in a jar with wet moss. In the dark lab it still glows, and under the microscope thin fungus threads fill the wood.",
+       "ar": "يضع الفريق قطعة صغيرة في وعاء فيه طحلب رطب. في المختبر المظلم ما زالت تضيء، وتحت المجهر تظهر خيوط فطر رفيعة تملأ الخشب."
+      },
+      "mood": "thinking",
+      "effects": [],
+      "fx": "sample",
+      "next": "end:foxfire-proof"
+     }
+    },
+    {
+     "id": "long-photo",
+     "label": {
+      "en": "Take a long photo of the glowing ring",
+      "ar": "التقطوا صورة طويلة للحلقة المضيئة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The camera stays open for thirty seconds. The photo shows the green ring clearly, with every glowing log and stump.",
+       "ar": "تبقى الكاميرا مفتوحة ثلاثين ثانية. تظهر في الصورة الحلقة الخضراء بوضوح، بكل جذع مضيء فيها."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "camera",
+      "next": "end:foxfire-proof"
+     }
+    },
+    {
+     "id": "bring-villagers",
+     "label": {
+      "en": "Bring the villagers to see it for themselves",
+      "ar": "أحضروا أهل القرية ليروا بأنفسهم"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The next night the team leads the villagers into the ring. They touch the cold glowing wood and smile. Nobody is afraid anymore.",
+       "ar": "في الليلة التالية يقود الفريق أهل القرية إلى الحلقة. يلمسون الخشب المضيء البارد ويبتسمون. لم يعد أحد خائفا."
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:village-walk"
+     }
+    },
+    {
+     "id": "fix-sign",
+     "label": {
+      "en": "Fix the village’s “Haunted” sign with the children",
+      "ar": "صحّحوا لوحة «مسكونة» في القرية مع الأطفال"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The children cross out “Haunted Ring” on the old sign and paint “Glowing Mushroom Ring”. The old man laughs: “So my ghost was a mushroom!”",
+       "ar": "يشطب الأطفال كلمة «الحلقة المسكونة» على اللوحة القديمة، ويكتبون «حلقة الفطر المضيء». ويضحك الرجل الكبير: «إذن الشبح الذي خفت منه كان فطرا!»"
+      },
+      "mood": "laughing",
+      "effects": [],
+      "fx": "stars",
+      "next": "end:mushroom-sign"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "foxfire-proof": {
+   "tone": "scientific",
+   "title": {
+    "en": "The Fungus That Glows",
+    "ar": "الفطر الذي يضيء"
+   },
+   "summary": {
+    "en": "The team proved that the green light was a glowing fungus living inside rotting wood, not a ghost.",
+    "ar": "أثبت الفريق أن الضوء الأخضر من فطر مضيء يعيش داخل الخشب المتعفّن، وليس من شبح."
+   },
+   "epilogue": {
+    "en": "The club kept the glowing wood in a dark box for its open day. Visitors line up to see it, and a photo of {name} beside the ring hangs next to it.",
+    "ar": "احتفظ النادي بالخشب المضيء في صندوق مظلم ليوم الزيارات المفتوح. يقف الزوار في صف ليروه، وبجانبه صورة {name} قرب الحلقة."
+   }
+  },
+  "village-walk": {
+   "tone": "wholesome",
+   "title": {
+    "en": "A Night Walk for Everyone",
+    "ar": "نزهة ليلية للجميع"
+   },
+   "summary": {
+    "en": "The team showed the villagers that the haunted ring was only a fungus that makes its own light.",
+    "ar": "أرى الفريق أهل القرية أن الحلقة المسكونة ليست إلا فطرا يصنع ضوءه بنفسه."
+   },
+   "epilogue": {
+    "en": "Now the village holds a quiet night walk to the ring after every big rain. The children lead the way, and they make sure nobody breaks the old logs.",
+    "ar": "صارت القرية تنظّم نزهة ليلية هادئة إلى الحلقة بعد كل مطر كبير. يمشي الأطفال في المقدمة، ويحرصون ألا يكسر أحد الجذوع القديمة."
+   }
+  },
+  "mushroom-sign": {
+   "tone": "comedic",
+   "title": {
+    "en": "The Ghost Was a Mushroom",
+    "ar": "الشبح كان فطرا"
+   },
+   "summary": {
+    "en": "The “ghost” of the ring turned out to be a glowing fungus, and the village changed its scary sign.",
+    "ar": "تبيّن أن «شبح» الحلقة فطر مضيء، فغيّرت القرية لوحتها المخيفة."
+   },
+   "epilogue": {
+    "en": "The new sign became the most photographed spot in the village. The team, with {duck}, brought a small copy of it back to hang on the club door.",
+    "ar": "صارت اللوحة الجديدة أكثر مكان يصوّره الناس في القرية. وأحضر الفريق نسخة صغيرة منها ليعلّقها على باب النادي، ومعهم {duck}."
+   }
+  }
+ }
+}

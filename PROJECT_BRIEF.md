@@ -133,3 +133,11 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
   - **Guests from the Marine Science Club: Misk and Faisal** (designer's art in `art-source/guests/`, sliced to `public/guests/`; data in `src/content/guests.ts`). Marine mode only: cards in the mission briefing (tap for the large card), and one line each the first time the team reaches a place — Misk near the surface, Faisal in the deep; both appear in the text of "The Drum in the Deep".
   - Archive-story endings use the story's own goal and scene names.
   - Readiness check: all 4 archive stories plus a generated land and sea journey played to the ending in the browser with no errors; no sideways overflow at 375 px; guest line and card verified by hit-testing. Screenshots were not available for the last phone check (pane hidden).
+
+### 2026-11-11 (more stories pass)
+Designer: four archive stories are too few; the story must actually change between plays.
+- Story Archive grew from 4 to 10 published stories (5 classic, 5 marine). New: `glowing-forest` (foxfire fungus), `giant-footprints` (melt-enlarged hare tracks), `quiet-cave` (bats driven deep by a lamp and music), `reef-queue` (cleaning station, comedy, Misk), `seagrass-trails` (dugong feeding trails, Misk), `false-seabed` (nightly lanternfish migration, Misk + Faisal). Each: 7 scenes, 2×2 paths, 3 endings, plain MSA.
+- Story nodes may now carry `place` (`BeatTemplate.place`): the HUD and the ending use the scene's own place name instead of the biome name. Keep place names as bare noun phrases (no leading preposition) because the ending writes "في <place>".
+- Ending: trailing punctuation is stripped from a story goal before it is put inside the mission sentence.
+- `scripts/factory/example-story-generator.py`: the Python pattern used to write a story package; new stories were each generated this way and checked with `publish.ts --check`.
+- Verified: 132 tests, build, and full browser playthroughs of reef-queue, quiet-cave and false-seabed to the ending screen. Not verified by ear/eye on the designer's devices.

@@ -217,7 +217,9 @@ export function composeEnding(s: GameState, recentEndings: string[] = []): Endin
   const partOf = (slot: string) => PART_BY_ID[(parts as unknown as Record<string, string>)[slot]];
   const base = PART_BY_ID[parts.base].name, limbs = PART_BY_ID[parts.limbs].name, adapt = PART_BY_ID[parts.adaptation].name;
   const hookFlag = s.flags.find((f) => f.startsWith('hook:'));
-  const goal = hookFlag ? HOOK_GOAL[hookFlag] : (BEAT_BY_ID[pb[0].template]?.goal ?? L('explore the unknown', 'استكشاف المجهول'));
+  const goal0 = hookFlag ? HOOK_GOAL[hookFlag] : (BEAT_BY_ID[pb[0].template]?.goal ?? L('explore the unknown', 'استكشاف المجهول'));
+  const noDot = (t: string) => t.replace(/[.!؟?\s]+$/u, '');
+  const goal = L(noDot(goal0.en), noDot(goal0.ar));
   const style = STYLE_WORD[dominantStyle(s)];
   const nm = iso(s.creature.name); const art = /^[aeiou]/i.test(base.en) ? 'an' : 'a';
   const who = s.player ? iso(s.player) : null;

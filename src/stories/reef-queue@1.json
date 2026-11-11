@@ -1,0 +1,1178 @@
+{
+ "id": "reef-queue",
+ "v": 1,
+ "status": "published",
+ "mode": "marine",
+ "source": "hand-written 2026-11-11",
+ "title": {
+  "en": "The Queue on the Reef",
+  "ar": "طابور في الشعاب"
+ },
+ "premise": {
+  "en": "Divers say that big fish, even a shark and a moray eel, wait in a line at one rock on the coral reef with their mouths open, as if they were ill.",
+  "ar": "يقول الغوّاصون إن أسماكاً كبيرة، ومنها قرش وثعبان موراي، تقف في طابور عند صخرة واحدة في الشعاب المرجانية وأفواهها مفتوحة، كأنها مريضة."
+ },
+ "tone": "comedy",
+ "tags": {
+  "themes": [
+   "symbiosis",
+   "parasites",
+   "reef-health"
+  ],
+  "locations": [
+   "reef"
+  ],
+  "twist": "cleaning-station",
+  "creatures": [
+   "reef-shark",
+   "moray-eel",
+   "parrotfish"
+  ]
+ },
+ "world": {},
+ "science": [
+  "reef-heat"
+ ],
+ "start": "reef-hook",
+ "nodes": {
+  "reef-hook": {
+   "kind": "hook",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-current-sweep",
+   "place": {
+    "en": "The boat above the reef",
+    "ar": "القارب فوق الشعاب"
+   },
+   "goal": {
+    "en": "Find out why big fish wait in a line at one rock on the reef.",
+    "ar": "اعرفوا لماذا تقف الأسماك الكبيرة في طابور عند صخرة واحدة في الشعاب."
+   },
+   "text": {
+    "en": "The team is on a small boat above the coral reef near Kubbar Island. Below, a strong current pulls sand across the reef. Divers told the club something strange: big fish, even a shark and a moray eel, wait in a line at one rock and float there with their mouths open, as if they were ill. Misk from the Marine Science Club holds up her magnifying glass and laughs: “A line of sick fish? Like a clinic? Let us find out!” {name} wears its small diving suit and looks down into the water.",
+    "ar": "الفريق على قارب صغير فوق الشعاب المرجانية قرب جزيرة كبّر. في الأسفل تيار قوي يسحب الرمل فوق الشعاب. أخبر بعض الغوّاصين النادي بشيء غريب: أسماك كبيرة، ومنها قرش وثعبان موراي، تقف في طابور عند صخرة واحدة، وتطفو هناك وأفواهها مفتوحة، كأنها مريضة. ترفع مسك من نادي علوم البحار عدستها المكبّرة وتضحك: «طابور أسماك مريضة؟ مثل عيادة؟ هيا نكتشف السر!» يلبس {name} بدلة الغوص الصغيرة وينظر إلى الماء في الأسفل."
+   },
+   "choices": [
+    {
+     "id": "jump-in",
+     "label": {
+      "en": "Dive in and follow the first big fish you see",
+      "ar": "اقفزوا في الماء واتبعوا أول سمكة كبيرة ترونها"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team jumps into the water. A reef shark swims past slowly. It is not hunting: it swims straight toward the middle of the reef, as if it has an appointment.",
+       "ar": "يقفز الفريق في الماء. يمرّ قرش شعاب ببطء. هو لا يصطاد: يسبح مباشرة نحو وسط الشعاب، كأن عنده موعداً."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-shark-trail"
+     }
+    },
+    {
+     "id": "check-water",
+     "label": {
+      "en": "Measure the temperature of the water first",
+      "ar": "قيسوا حرارة الماء أولاً"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The water is warm today. Misk frowns: “Maybe hot water is making the fish ill?” The team dives to check a part of the reef where the coral looks pale.",
+       "ar": "الماء دافئ اليوم. تقول مسك وهي تفكّر: «ربما الماء الحارّ يُمرض الأسماك؟» فيغوص الفريق ليفحص جزءاً من الشعاب يبدو فيه المرجان فاتح اللون."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "warm-water"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-pale-coral"
+     }
+    },
+    {
+     "id": "diver-photos",
+     "label": {
+      "en": "Look at the photos the divers took",
+      "ar": "انظروا إلى الصور التي التقطها الغوّاصون"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "In every photo the big fish wait at the same rock, and tiny striped fish swim around their faces. A reef shark in the photos always comes along the same path. The team decides to follow that path.",
+       "ar": "في كل صورة تنتظر الأسماك الكبيرة عند الصخرة نفسها، وأسماك صغيرة مخطّطة تسبح حول وجوهها. وفي الصور قرش شعاب يأتي دائماً من الطريق نفسه. فيقرّر الفريق أن يتبع هذا الطريق."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "diver-photos"
+       }
+      ],
+      "fx": "camera",
+      "next": "reef-shark-trail"
+     }
+    },
+    {
+     "id": "gear-duck",
+     "label": {
+      "en": "Help {duck} check the diving gear",
+      "ar": "ساعدوا {duck} على فحص معدّات الغوص"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Masks, fins and the small suit of {name}: all ready. While checking, the team sees a pale patch on the reef below the boat, and decides to look there first.",
+       "ar": "الأقنعة والزعانف وبدلة {name} الصغيرة: كلها جاهزة. وأثناء الفحص يرى الفريق بقعة فاتحة اللون في الشعاب تحت القارب، فيقرّر أن يبدأ بها."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "reef-pale-coral"
+     }
+    },
+    {
+     "id": "feel-water",
+     "label": {
+      "en": "Let {name} feel the movement in the water",
+      "ar": "دعوا {name} يحسّ بحركة الماء"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} points its nose at one place: many big bodies move slowly there, stop, and move again. A shark is swimming that way right now.",
+       "ar": "يوجّه {name} أنفه إلى مكان واحد: هناك أجسام كبيرة كثيرة تتحرّك ببطء، ثم تتوقّف، ثم تتحرّك من جديد. وقرش يسبح إلى هناك الآن."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "slow-crowd"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-shark-trail"
+     },
+     "requires": {
+      "capAny": [
+       "motionSense",
+       "echolocation"
+      ]
+     }
+    },
+    {
+     "id": "sniff-bucket",
+     "label": {
+      "en": "Let {name} sniff a bucket of seawater",
+      "ar": "دعوا {name} يشمّ دلواً من ماء البحر"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} sniffs and sneezes. The water smells normal: salty and clean, no poison. But the team still wants to check the pale coral below.",
+       "ar": "يشمّ {name} الماء ويعطس. رائحة الماء عادية: مالحة ونظيفة، ولا يوجد سمّ. لكن الفريق يريد أن يفحص المرجان الفاتح في الأسفل."
+      },
+      "mood": "laughing",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "clean-water"
+       }
+      ],
+      "fx": "sniff",
+      "next": "reef-pale-coral"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "heatSense"
+      ]
+     }
+    }
+   ]
+  },
+  "reef-shark-trail": {
+   "kind": "explore",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-shark-patrol",
+   "featured": "reef-shark",
+   "place": {
+    "en": "The reef wall",
+    "ar": "جدار الشعاب"
+   },
+   "text": {
+    "en": "The team swims along the reef behind a reef shark. Misk watches from the boat above with her magnifying glass. The shark swims slowly and does not even look at the small fish around it. On its grey skin there are tiny pale spots. Where is it going, and why is it not hunting?",
+    "ar": "يسبح الفريق بجانب الشعاب خلف قرش شعاب. ومسك تراقب من القارب في الأعلى بعدستها المكبّرة. القرش يسبح ببطء، ولا ينظر حتى إلى الأسماك الصغيرة حوله. وعلى جلده الرمادي نقاط صغيرة فاتحة اللون. إلى أين يذهب؟ ولماذا لا يصطاد؟"
+   },
+   "choices": [
+    {
+     "id": "photo-spots",
+     "label": {
+      "en": "Take a close photo of the pale spots",
+      "ar": "التقطوا صورة قريبة للنقاط الفاتحة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "In the photo, the spots have tiny legs! They are parasites (small creatures that live on the skin of a fish and harm it). The shark is carrying passengers it does not want.",
+       "ar": "في الصورة للنقاط أرجل صغيرة جداً! إنها طفيليات (كائنات صغيرة تعيش على جلد السمكة وتؤذيها). القرش يحمل ركّاباً لا يريدهم."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "skin-parasites"
+       }
+      ],
+      "fx": "camera",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "swim-fast",
+     "label": {
+      "en": "Swim fast to stay behind the shark",
+      "ar": "اسبحوا بسرعة لتبقوا خلف القرش"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team kicks hard with their fins. The shark stops at a big round rock, where other big fish are already waiting.",
+       "ar": "يضرب الفريق الماء بالزعانف بقوة. يتوقّف القرش عند صخرة كبيرة مستديرة، وعندها أسماك كبيرة أخرى تنتظر من قبله."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "watch-small",
+     "label": {
+      "en": "Watch how the small fish act near the shark",
+      "ar": "راقبوا ماذا تفعل الأسماك الصغيرة قرب القرش"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The small fish do not run away. The shark is not hunting right now, and they seem to know it. The team follows the shark to a big round rock.",
+       "ar": "الأسماك الصغيرة لا تهرب. القرش لا يصطاد الآن، وكأنها تعرف ذلك. ويتبع الفريق القرش إلى صخرة كبيرة مستديرة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "not-hunting"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "calm-distance",
+     "label": {
+      "en": "Stay a calm distance behind it, with {duck}",
+      "ar": "ابقوا على مسافة هادئة خلفه، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team stays far enough back so the shark is not bothered. A calm shark does not change its way, and it leads everyone to a big round rock.",
+       "ar": "يبقى الفريق بعيداً بما يكفي حتى لا ينزعج القرش. القرش الهادئ لا يغيّر طريقه، فيقود الجميع إلى صخرة كبيرة مستديرة."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "grip-rock",
+     "label": {
+      "en": "Let {name} hold on to a bare rock against the current",
+      "ar": "دعوا {name} يتمسّك بصخرة عارية ضد التيار"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} grips a bare rock and stays still. From there it sees the shark rub its side on the sand: its skin itches. Then the shark swims on to a big round rock.",
+       "ar": "يتمسّك {name} بصخرة عارية ويبقى ثابتاً. ومن هناك يرى القرش يحكّ جنبه بالرمل: جلده يحكّه. ثم يكمل القرش طريقه إلى صخرة كبيرة مستديرة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "itchy-shark"
+       }
+      ],
+      "fx": "climb",
+      "next": "reef-big-rock"
+     },
+     "requires": {
+      "capAny": [
+       "grip",
+       "climb"
+      ]
+     }
+    },
+    {
+     "id": "hide-follow",
+     "label": {
+      "en": "Let {name} hide in the colours of the reef",
+      "ar": "دعوا {name} يختبئ بألوان الشعاب"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Hidden, {name} follows the shark up close and sees it open its mouth wide near a big round rock. It is not biting anything: it is waiting.",
+       "ar": "وهو مختبئ يتبع {name} القرش من قريب، ويراه يفتح فمه واسعاً قرب صخرة كبيرة مستديرة. القرش لا يعضّ شيئاً: إنه ينتظر."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "open-mouth-wait"
+       }
+      ],
+      "fx": "camo",
+      "next": "reef-big-rock"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "mimic"
+      ]
+     }
+    }
+   ]
+  },
+  "reef-pale-coral": {
+   "kind": "explore",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-bleach-shadow",
+   "featured": "sea-turtle",
+   "place": {
+    "en": "The patch of pale coral",
+    "ar": "بقعة المرجان الفاتح"
+   },
+   "text": {
+    "en": "Here part of the coral has turned very pale, almost without colour. A sea turtle swims past the team. Misk calls on the radio: “Coral loses its colour when the water gets too hot. Maybe the heat is making the big fish ill too?” Is this the answer?",
+    "ar": "هنا صار جزء من المرجان فاتح اللون جداً، يكاد يكون بلا لون. تمرّ سلحفاة بحرية بجانب الفريق. تقول مسك في جهاز اللاسلكي: «المرجان يفقد لونه حين يصير الماء حاراً جداً. ربما الحرارة تُمرض الأسماك الكبيرة أيضاً؟» هل هذا هو الجواب؟"
+   },
+   "choices": [
+    {
+     "id": "check-fish",
+     "label": {
+      "en": "Look closely at the fish around the pale coral",
+      "ar": "افحصوا الأسماك حول المرجان الفاتح"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The fish here swim fast and eat well. They are not ill. So the heat hurts the coral, but it does not explain the line of big fish. The team swims on to the middle of the reef.",
+       "ar": "الأسماك هنا تسبح بسرعة وتأكل جيداً. هي ليست مريضة. إذن الحرارة تؤذي المرجان، لكنها لا تفسّر طابور الأسماك الكبيرة. ويسبح الفريق إلى وسط الشعاب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "heat-not-cause"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "follow-turtle",
+     "label": {
+      "en": "Follow the sea turtle",
+      "ar": "اتبعوا السلحفاة البحرية"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The turtle swims straight to a big round rock in the middle of the reef. It is not alone there: a line of big fish is already waiting.",
+       "ar": "تسبح السلحفاة مباشرة إلى صخرة كبيرة مستديرة في وسط الشعاب. وهي ليست وحدها هناك: طابور من الأسماك الكبيرة ينتظر من قبلها."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "compare-coral",
+     "label": {
+      "en": "Compare the pale coral with healthy coral",
+      "ar": "قارنوا المرجان الفاتح بالمرجان السليم"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Healthy coral is brown and green. Pale coral has lost the tiny algae (very small plants) that live inside it and feed it. That is a real problem, but a different one. The fish line is somewhere else, at a big round rock.",
+       "ar": "المرجان السليم لونه بني وأخضر. أما المرجان الفاتح فقد خسر الطحالب الصغيرة (نباتات صغيرة جداً) التي تعيش داخله وتطعمه. هذه مشكلة حقيقية، لكنها مشكلة أخرى. وطابور الأسماك في مكان آخر، عند صخرة كبيرة مستديرة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "pale-coral"
+       }
+      ],
+      "fx": "sample",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "room-turtle",
+     "label": {
+      "en": "Move aside to let the turtle pass, with {duck}",
+      "ar": "افسحوا الطريق للسلحفاة، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team moves aside and the turtle swims by calmly. It has small pale spots on its shell, like the shark in the photos, and it heads for a big round rock. The team follows.",
+       "ar": "يبتعد الفريق قليلاً فتمرّ السلحفاة بهدوء. على درعها نقاط صغيرة فاتحة، مثل القرش في الصور، وهي متّجهة إلى صخرة كبيرة مستديرة. فيتبعها الفريق."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "reef-big-rock"
+     }
+    },
+    {
+     "id": "feel-heat",
+     "label": {
+      "en": "Let {name} feel where the water is warmest",
+      "ar": "دعوا {name} يبحث عن أدفأ مكان في الماء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} finds warm water all over the reef, also far from the rock with the line. The heat is everywhere, so it cannot explain why the fish wait at one rock only.",
+       "ar": "يجد {name} أن الماء دافئ في كل الشعاب، حتى بعيداً عن صخرة الطابور. الحرارة في كل مكان، فلا يمكن أن تفسّر لماذا تنتظر الأسماك عند صخرة واحدة فقط."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "heat-everywhere"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-big-rock"
+     },
+     "requires": {
+      "capAny": [
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "swim-scout",
+     "label": {
+      "en": "Let {name} swim ahead to scout",
+      "ar": "دعوا {name} يسبح إلى الأمام ليستكشف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} swims fast past the pale coral and comes back, pointing with its nose: behind the pale patch there is a big rock with a crowd of big fish.",
+       "ar": "يسبح {name} بسرعة بعد المرجان الفاتح ثم يرجع، ويشير بأنفه: خلف البقعة الفاتحة صخرة كبيرة حولها أسماك كبيرة كثيرة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "crowd-seen"
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-big-rock"
+     },
+     "requires": {
+      "capAny": [
+       "swim",
+       "breatheWater"
+      ]
+     }
+    }
+   ]
+  },
+  "reef-big-rock": {
+   "kind": "challenge",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-strange-coral",
+   "place": {
+    "en": "The big round rock",
+    "ar": "الصخرة الكبيرة المستديرة"
+   },
+   "text": {
+    "en": "In the middle of the reef stands a strange, round rock covered with coral. Around it, big fish wait in a line: a reef shark, a grouper, a parrotfish, and a moray eel looking out of a hole. They float without moving, with their mouths and gills open. Small fish with a blue stripe dance in front of the rock. {name} quietly joins the end of the line, just in case. Why do big fish wait so calmly next to small fish they could eat?",
+    "ar": "في وسط الشعاب صخرة غريبة مستديرة يغطّيها المرجان. حولها تقف أسماك كبيرة في طابور: قرش شعاب، وسمكة هامور، وسمكة ببغاء، وثعبان موراي يطلّ من حفرة. كلها تطفو بلا حركة، وأفواهها وخياشيمها (الفتحات التي تتنفّس بها السمكة) مفتوحة. وأمام الصخرة أسماك صغيرة عليها خط أزرق ترقص. ويقف {name} بهدوء في آخر الطابور، احتياطاً. لماذا تنتظر أسماك كبيرة بهدوء قرب أسماك صغيرة تستطيع أن تأكلها؟"
+   },
+   "choices": [
+    {
+     "id": "watch-eel",
+     "label": {
+      "en": "Watch the moray eel in its hole",
+      "ar": "راقبوا ثعبان الموراي في حفرته"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The eel opens its mouth very wide, and a tiny shrimp walks straight in! The team holds its breath… and the eel does not bite. The team moves closer to the dark crack where the eel lives.",
+       "ar": "يفتح الثعبان فمه واسعاً جداً، فيدخل إليه روبيان صغير مشياً! يحبس الفريق أنفاسه… والثعبان لا يعضّ. فيقترب الفريق من الشقّ المظلم الذي يعيش فيه الثعبان."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shrimp-in-mouth"
+       }
+      ],
+      "fx": "binoculars",
+      "next": "reef-eel-crevice"
+     }
+    },
+    {
+     "id": "swim-front",
+     "label": {
+      "en": "Swim to the front of the line",
+      "ar": "اسبحوا إلى أول الطابور"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "At the front, the small striped fish are touching the face of the shark. The shark does not move at all.",
+       "ar": "في أول الطابور تلمس الأسماك الصغيرة المخطّطة وجه القرش. والقرش لا يتحرّك أبداً."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-cleaner-close"
+     }
+    },
+    {
+     "id": "time-turns",
+     "label": {
+      "en": "Time how long each fish stays at the rock",
+      "ar": "احسبوا كم تبقى كل سمكة عند الصخرة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Each big fish stays about one minute, swims away, and the next one comes. It works like a queue at a shop. The team goes to see what happens at the front.",
+       "ar": "تبقى كل سمكة كبيرة دقيقة تقريباً، ثم تبتعد، وتأتي التي بعدها. الأمر مثل طابور في دكّان. فيذهب الفريق ليرى ماذا يحدث في أول الطابور."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "one-minute-turns"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-cleaner-close"
+     }
+    },
+    {
+     "id": "wait-politely",
+     "label": {
+      "en": "Wait politely at the side, with {duck}",
+      "ar": "انتظروا بأدب على الجانب، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "From the side, the team can see into a dark crack under the rock, where the moray eel lives. Something small is moving near its teeth.",
+       "ar": "من الجانب يرى الفريق شقّاً مظلماً تحت الصخرة، يعيش فيه ثعبان الموراي. وشيء صغير يتحرّك قرب أسنانه."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "reef-eel-crevice"
+     }
+    },
+    {
+     "id": "feel-tickles",
+     "label": {
+      "en": "Let {name} feel the tiny movements near the big fish",
+      "ar": "دعوا {name} يحسّ بالحركات الصغيرة قرب الأسماك الكبيرة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} feels hundreds of tiny bites, soft as tickles, on the skin of the big fish. Something is eating there, but it is not eating the fish.",
+       "ar": "يحسّ {name} بمئات العضّات الصغيرة الخفيفة مثل الدغدغة على جلد الأسماك الكبيرة. شيء ما يأكل هناك، لكنه لا يأكل الأسماك نفسها."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "tiny-bites"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-cleaner-close"
+     },
+     "requires": {
+      "capAny": [
+       "motionSense",
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "look-crack",
+     "label": {
+      "en": "Let {name} look into the dark crack under the rock",
+      "ar": "دعوا {name} ينظر في الشقّ المظلم تحت الصخرة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} sees a moray eel in the dark, with a small striped shrimp sitting on its head like a hat.",
+       "ar": "يرى {name} في الظلام ثعبان موراي، وعلى رأسه روبيان صغير مخطّط يجلس مثل القبعة."
+      },
+      "mood": "laughing",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shrimp-hat"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-eel-crevice"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "glow"
+      ]
+     }
+    }
+   ]
+  },
+  "reef-eel-crevice": {
+   "kind": "challenge",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-dark-crevice",
+   "featured": "moray-eel",
+   "place": {
+    "en": "The dark crack under the rock",
+    "ar": "الشقّ المظلم تحت الصخرة"
+   },
+   "text": {
+    "en": "In a dark crack under the rock lives a big moray eel. It opens and closes its mouth slowly, because that is how it pushes water over its gills to breathe. Small shrimp with long, thin feelers walk over its head and even inside its mouth. Is the eel ill, or is something else going on?",
+    "ar": "في شقّ مظلم تحت الصخرة يعيش ثعبان موراي كبير. يفتح فمه ويغلقه ببطء، لأنه بهذه الطريقة يمرّر الماء على خياشيمه ليتنفّس. وروبيان صغير له قرون استشعار طويلة ورفيعة (خيوط يحسّ بها) يمشي فوق رأسه، بل يدخل إلى فمه أيضاً. هل الثعبان مريض؟ أم يحدث شيء آخر؟"
+   },
+   "choices": [
+    {
+     "id": "magnify-shrimp",
+     "label": {
+      "en": "Look at the shrimp with a magnifying glass",
+      "ar": "انظروا إلى الروبيان بعدسة مكبّرة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The shrimp picks tiny things from between the teeth of the eel and eats them: old bits of food and parasites. It is like a toothbrush that walks!",
+       "ar": "يلتقط الروبيان أشياء صغيرة من بين أسنان الثعبان ويأكلها: بقايا طعام قديمة وطفيليات. إنه مثل فرشاة أسنان تمشي!"
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shrimp-eats-parasites"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "move-closer",
+     "label": {
+      "en": "Move a little closer to the crack",
+      "ar": "اقتربوا قليلاً من الشقّ"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The eel shows its teeth, and the team moves back fast. The eel is not ill at all: it is strong and healthy. It only stays still for the shrimp.",
+       "ar": "يُظهر الثعبان أسنانه، فيرجع الفريق بسرعة. الثعبان ليس مريضاً أبداً: هو قوي وبصحة جيدة. هو يبقى ساكناً للروبيان فقط."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "impact",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "count-shrimp",
+     "label": {
+      "en": "Count the shrimp and see where they go",
+      "ar": "عُدّوا الروبيان وانظروا إلى أين يذهب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Five shrimp. When the eel is clean, they walk back onto the rock and wave their feelers, as if they were calling: “Next, please!”",
+       "ar": "خمسة. حين ينظف الثعبان يرجع الروبيان إلى الصخرة ويحرّك قرونه، كأنه ينادي: «التالي، من فضلكم!»"
+      },
+      "mood": "laughing",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shrimp-wave"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "stay-quiet",
+     "label": {
+      "en": "Stay quiet so the eel can finish",
+      "ar": "ابقوا هادئين حتى ينتهي الثعبان"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team waits without moving. The eel keeps its mouth open until every shrimp has walked out, then slides back into its hole. It never bites them.",
+       "ar": "ينتظر الفريق بلا حركة. يبقي الثعبان فمه مفتوحاً حتى يخرج كل الروبيان، ثم يرجع إلى حفرته. وهو لا يعضّها أبداً."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "listen-clicks",
+     "label": {
+      "en": "Let {name} listen closely to the crack",
+      "ar": "دعوا {name} يستمع جيداً إلى الشقّ"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} hears tiny clicks: the shrimp picking bits off the skin of the eel, click, click, like a busy kitchen.",
+       "ar": "يسمع {name} نقرات صغيرة: الروبيان يلتقط الفتات عن جلد الثعبان، تك، تك، مثل مطبخ مشغول."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "busy-clicks"
+       }
+      ],
+      "fx": "echo",
+      "next": "reef-reveal"
+     },
+     "requires": {
+      "capAny": [
+       "echolocation",
+       "motionSense"
+      ]
+     }
+    },
+    {
+     "id": "tough-skin",
+     "label": {
+      "en": "Let {name} hold out its tough skin to the shrimp",
+      "ar": "دعوا {name} يقرّب جلده القوي من الروبيان"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "A shrimp climbs onto {name} and starts cleaning it too! {name} wiggles, because it tickles. The shrimp cleans any animal that waits calmly.",
+       "ar": "يتسلّق روبيان على {name} ويبدأ بتنظيفه أيضاً! يتلوّى {name} لأن ذلك يدغدغه. الروبيان ينظّف أي حيوان ينتظر بهدوء."
+      },
+      "mood": "laughing",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "shrimp-cleans-name"
+       }
+      ],
+      "fx": "still",
+      "next": "reef-reveal"
+     },
+     "requires": {
+      "capAny": [
+       "armor",
+       "spines"
+      ]
+     }
+    }
+   ]
+  },
+  "reef-cleaner-close": {
+   "kind": "challenge",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-cleaning-station",
+   "featured": "reef-shark",
+   "place": {
+    "en": "The front of the line",
+    "ar": "أول الطابور"
+   },
+   "text": {
+    "en": "At the front of the line, small fish with a black and blue stripe swim a funny up-and-down dance. The reef shark stops in front of them and opens its mouth and gills, and the small fish swim right in! They are cleaner wrasses (small fish that eat dirt and parasites off other fish). But why does the shark not eat them?",
+    "ar": "في أول الطابور تسبح أسماك صغيرة عليها خط أسود وأزرق، وترقص رقصة مضحكة إلى الأعلى والأسفل. يقف قرش الشعاب أمامها ويفتح فمه وخياشيمه، فتدخل الأسماك الصغيرة إليه! هذه أسماك اللبّروس المنظِّفة (أسماك صغيرة تأكل الأوساخ والطفيليات عن الأسماك الأخرى). لكن لماذا لا يأكلها القرش؟"
+   },
+   "choices": [
+    {
+     "id": "film-dance",
+     "label": {
+      "en": "Film the dance of the small fish",
+      "ar": "صوّروا رقصة الأسماك الصغيرة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "In the video, the dance works like a sign over a shop: “Cleaning here!” Big fish see the dance from far away and come to wait.",
+       "ar": "في الفيديو تعمل الرقصة مثل لافتة فوق دكّان: «هنا تنظيف!» الأسماك الكبيرة ترى الرقصة من بعيد وتأتي لتنتظر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "dance-sign"
+       }
+      ],
+      "fx": "camera",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "see-gills",
+     "label": {
+      "en": "Swim to the side of the shark to see inside its gills",
+      "ar": "اسبحوا إلى جانب القرش لتروا داخل خياشيمه"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Inside, a little fish is eating the pale spots: the parasites from the skin of the shark! The shark gets clean, and the little fish gets a meal.",
+       "ar": "في الداخل سمكة صغيرة تأكل النقاط الفاتحة: إنها الطفيليات التي على جلد القرش! القرش يصير نظيفاً، والسمكة الصغيرة تحصل على وجبة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "wrasse-eats-parasites"
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "before-after",
+     "label": {
+      "en": "Compare the shark before and after cleaning",
+      "ar": "قارنوا القرش قبل التنظيف وبعده"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Before, there were many pale spots on its skin. After, almost none. Each animal helps the other. Scientists call this mutualism: two kinds of animals that help each other.",
+       "ar": "قبل التنظيف كانت على جلده نقاط فاتحة كثيرة. وبعده لم يبق منها شيء تقريباً. كل حيوان يساعد الآخر. ويسمّي العلماء هذا «التعايش النافع»: نوعان من الحيوانات يساعد كل منهما الآخر."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "cleaner-result"
+       }
+      ],
+      "fx": "scan",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "make-room",
+     "label": {
+      "en": "Move aside so the next fish can come, with {duck}",
+      "ar": "ابتعدوا قليلاً لتأتي السمكة التالية، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "A parrotfish swims into the free place and opens its mouth. Even the parrotfish waits for its turn, and the cleaners start at once.",
+       "ar": "تسبح سمكة ببغاء إلى المكان الفارغ وتفتح فمها. حتى سمكة الببغاء تنتظر دورها، والأسماك المنظِّفة تبدأ العمل فوراً."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "reef-reveal"
+     }
+    },
+    {
+     "id": "copy-dance",
+     "label": {
+      "en": "Let {name} copy the dance of the cleaner fish",
+      "ar": "دعوا {name} يقلّد رقصة الأسماك المنظِّفة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} wiggles up and down. A big grouper comes to it at once and opens its mouth wide! {name} does not know what to do, so the grouper swims back to the real cleaners. The dance really is a sign.",
+       "ar": "يتمايل {name} إلى الأعلى والأسفل. فتأتي إليه سمكة هامور كبيرة فوراً وتفتح فمها واسعاً! لا يعرف {name} ماذا يفعل، فترجع الهامور إلى الأسماك المنظِّفة الحقيقية. الرقصة فعلاً لافتة."
+      },
+      "mood": "laughing",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "dance-works"
+       }
+      ],
+      "fx": "swim",
+      "next": "reef-reveal"
+     },
+     "requires": {
+      "capAny": [
+       "mimic",
+       "swim"
+      ]
+     }
+    },
+    {
+     "id": "hide-watch",
+     "label": {
+      "en": "Let {name} hide by the rock and watch closely",
+      "ar": "دعوا {name} يختبئ قرب الصخرة ويراقب جيداً"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Hidden, {name} sees a cleaner bite the shark a little too hard. The shark shakes, and the little fish quickly goes back to gentle work. The deal only works if both play fair.",
+       "ar": "وهو مختبئ يرى {name} سمكة منظِّفة تعضّ القرش بقوة زائدة. يهتزّ القرش، فترجع السمكة الصغيرة بسرعة إلى العمل اللطيف. هذا الاتفاق ينجح فقط إذا كان الطرفان عادلين."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fair-deal"
+       }
+      ],
+      "fx": "camo",
+      "next": "reef-reveal"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "reef-reveal": {
+   "kind": "climax",
+   "biome": "reef",
+   "props": [],
+   "plate": "reef-reef-recovery",
+   "cinematic": "reveal",
+   "place": {
+    "en": "The healthy reef under the boat",
+    "ar": "الشعاب السليمة تحت القارب"
+   },
+   "text": {
+    "en": "The team swims up to a healthy part of the reef under the boat, where young coral is growing and fish are everywhere. Misk leans over the side with her magnifying glass, and the team explains: the fish are not ill at all! The rock is a cleaning station, like a car wash for fish. Small cleaner fish and shrimp eat the parasites and dead skin of the big fish. The big fish get clean, the small ones get food, and nobody eats the cleaners. {name} comes up last, with its mouth still open, as if it were still in the line. Misk laughs: “So, what do we do now?”",
+    "ar": "يسبح الفريق إلى جزء سليم من الشعاب تحت القارب، حيث ينمو مرجان صغير والأسماك في كل مكان. تنحني مسك من حافة القارب بعدستها المكبّرة، ويشرح لها الفريق: الأسماك ليست مريضة أبداً! الصخرة محطة تنظيف، مثل مغسلة سيارات ولكن للأسماك. الأسماك المنظِّفة الصغيرة والروبيان تأكل الطفيليات والجلد الميت عن الأسماك الكبيرة. الأسماك الكبيرة تصير نظيفة، والصغيرة تحصل على طعام، ولا أحد يأكل المنظِّفين. ويصعد {name} آخر الجميع وفمه ما زال مفتوحاً، كأنه ما زال في الطابور. تضحك مسك وتسأل: «إذن، ماذا نفعل الآن؟»"
+   },
+   "choices": [
+    {
+     "id": "show-misk",
+     "label": {
+      "en": "Show Misk all the photos and videos",
+      "ar": "أروا مسك كل الصور والفيديوهات"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Misk looks at the photo of the shrimp inside the mouth of the eel and shouts: “A dentist for eels! The whole club must see this!”",
+       "ar": "تنظر مسك إلى صورة الروبيان داخل فم الثعبان وتصرخ: «طبيب أسنان للثعابين! يجب أن يرى النادي كله هذا!»"
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "screen",
+      "next": "end:cleaning-explained"
+     }
+    },
+    {
+     "id": "count-visitors",
+     "label": {
+      "en": "Count every visitor of the station for one hour",
+      "ar": "عُدّوا كل زوّار المحطة لمدة ساعة"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "In one hour, 38 visitors come: sharks, groupers, parrotfish, a turtle, and one very confused {name}. Misk writes every number in her notebook.",
+       "ar": "في ساعة واحدة يأتي ٣٨ زائراً: أسماك قرش، وهامور، وأسماك ببغاء، وسلحفاة، و{name} محتار جداً. وتكتب مسك كل رقم في دفترها."
+      },
+      "mood": "thinking",
+      "effects": [],
+      "fx": "scan",
+      "next": "end:cleaning-explained"
+     }
+    },
+    {
+     "id": "protect-station",
+     "label": {
+      "en": "Put a buoy and a sign so divers keep their distance",
+      "ar": "ضعوا عوّامة ولافتة حتى يبقى الغوّاصون بعيدين"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team ties a buoy (a floating ball that marks a place) near the rock, with a sign: “Cleaning station. Please watch, but do not touch the fish.”",
+       "ar": "يربط الفريق عوّامة (كرة تطفو على الماء وتحدّد مكاناً) قرب الصخرة، ومعها لافتة: «محطة تنظيف. شاهدوا من فضلكم، لكن لا تلمسوا الأسماك.»"
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:station-open"
+     }
+    },
+    {
+     "id": "name-turn",
+     "label": {
+      "en": "Let {name} have its turn in the line",
+      "ar": "دعوا {name} يأخذ دوره في الطابور"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} swims back down and floats at the rock with its mouth open. A tiny shrimp climbs on and cleans the glass of its diving mask, very seriously.",
+       "ar": "يرجع {name} إلى الأسفل ويطفو عند الصخرة وفمه مفتوح. يتسلّق روبيان صغير عليه وينظّف زجاج قناع الغوص بكل جدّية."
+      },
+      "mood": "laughing",
+      "effects": [],
+      "fx": "stars",
+      "next": "end:next-in-line"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "cleaning-explained": {
+   "tone": "scientific",
+   "title": {
+    "en": "The Cleaning Station",
+    "ar": "محطة التنظيف"
+   },
+   "summary": {
+    "en": "The team found that the big fish were not ill: they were waiting at a cleaning station, where small fish and shrimp eat their parasites.",
+    "ar": "وجد الفريق أن الأسماك الكبيرة ليست مريضة: كانت تنتظر في محطة تنظيف، حيث تأكل الأسماك الصغيرة والروبيان الطفيليات التي عليها."
+   },
+   "epilogue": {
+    "en": "The Marine Science Club added the rock to its map of the reef as “Cleaning Station 1”. Misk now visits it every month with her magnifying glass.",
+    "ar": "أضاف نادي علوم البحار الصخرة إلى خريطة الشعاب باسم «محطة التنظيف رقم ١». ومسك الآن تزورها كل شهر بعدستها المكبّرة."
+   }
+  },
+  "station-open": {
+   "tone": "wholesome",
+   "title": {
+    "en": "The Station Stays Open",
+    "ar": "المحطة تبقى مفتوحة"
+   },
+   "summary": {
+    "en": "The team explained the fish queue and helped protect the cleaning station from curious divers.",
+    "ar": "شرح الفريق سرّ طابور الأسماك، وساعد على حماية محطة التنظيف من الغوّاصين الفضوليين."
+   },
+   "epilogue": {
+    "en": "Divers now stop at the buoy and watch from a distance. The big fish still come every day, and the little cleaners always have work.",
+    "ar": "الغوّاصون الآن يتوقّفون عند العوّامة ويشاهدون من بعيد. وما زالت الأسماك الكبيرة تأتي كل يوم، والمنظِّفون الصغار عندهم عمل دائماً."
+   }
+  },
+  "next-in-line": {
+   "tone": "comedic",
+   "title": {
+    "en": "Next in Line",
+    "ar": "التالي في الطابور"
+   },
+   "summary": {
+    "en": "The team solved the mystery of the fish queue, and {name} waited for its turn at the cleaning station too.",
+    "ar": "حلّ الفريق لغز طابور الأسماك، وانتظر {name} دوره في محطة التنظيف أيضاً."
+   },
+   "epilogue": {
+    "en": "A shrimp cleaned the mask of {name} until it shone. The photo now hangs on the club wall with the title “Our cleanest member”, signed by {duck}.",
+    "ar": "نظّف روبيان صغير قناع {name} حتى صار يلمع. والصورة الآن معلّقة على جدار النادي بعنوان «أنظف عضو عندنا»، ومعها توقيع {duck}."
+   }
+  }
+ }
+}

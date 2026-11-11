@@ -250,7 +250,7 @@ export function beatContext(s: GameState, idx = s.index): Ctx {
   const duck = DUCK_BY_ID[s.duck];
   const obstacle = r.pick(b.obstacles), predator = r.pick(b.predators), critter = r.pick(b.critters);
   return {
-    name: s.creature.name.replace(/-/g, '\u2060-\u2060'), player: s.player || '—', duck: duck?.name ?? { en: 'your companion', ar: 'رفيقكم' }, duckG: duck?.gender ?? 'm', place: SCENE_PLACE[pb.template] ?? b.name,
+    name: s.creature.name.replace(/-/g, '\u2060-\u2060'), player: s.player || '—', duck: duck?.name ?? { en: 'your companion', ar: 'رفيقكم' }, duckG: duck?.gender ?? 'm', place: SCENE_PLACE[pb.template] ?? BEAT_BY_ID[pb.template]?.place ?? b.name,
     obstacle, predator: { en: predator.en, ar: predator.ar }, critter: { en: critter.en, ar: critter.ar },
     predatorAnimal: predator.animal, critterAnimal: critter.animal,
     npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || NPC_BY_ID[BEAT_BY_ID[pb.template]?.npc ?? '']?.name || { en: 'a stranger', ar: 'شخصٌ غريب' },
