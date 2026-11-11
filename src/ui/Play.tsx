@@ -3,7 +3,7 @@ import { derive } from '../engine/creature';
 import { condHolds } from '../engine/story';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { sceneImage } from '../art/painter';
-import { platesForRun, plateUrl } from '../art/plates';
+import { ownPlateOf, platesForRun, plateUrl } from '../art/plates';
 import { BEAT_BY_ID } from '../engine/story';
 import { ambient } from '../audio';
 import { DUCK_BY_ID, resolveDuckId } from '../content/ducks';
@@ -16,7 +16,7 @@ import { CLUE_KIND, clueKind, moments } from '../engine/clues';
 import { BIOMES, FACT_BY_ID } from '../content/world';
 import { aiAvailable, narrate } from '../engine/ai';
 import { Rng } from '../engine/rng';
-import { MAX_ENERGY, advance, choose, currentBeat, fill } from '../engine/story';
+import { MAX_ENERGY, advance, beatContext, choose, currentBeat, fill } from '../engine/story';
 import type { BiomeId, DuckMood, GameState, Lang, Style } from '../engine/types';
 import type { Settings } from '../engine/storage';
 import { t } from '../i18n';
@@ -102,6 +102,18 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const [newFacts, setNewFacts] = useState<string[]>([]);
   const [confirmQuit, setConfirmQuit] = useState(false);
   const [zoom, setZoom] = useState<ZoomInfo | null>(null);
+  // Story log (backlog): every scene so far — where, what happened, what the team chose and how it went — rebuilt
+  // from the run itself, so it is complete after a refresh or a Passport scan too.
+  const [logOpen, setLogOpen] = useState(false);
+  const history = useMemo(() => game.log.map((l, i) => {
+    try {
+      const t = BEAT_BY_ID[l.beat]; const c = t?.choices.find((x) => x.id === l.choice);
+      const out = c && (l.success || !c.fail ? c.success : c.fail);
+      if (!t || !c || !out) return null;
+      const ctx = beatContext(game, i);
+      return { i, place: ctx.place, text: fill(t.text, ctx), choice: fill(c.label, ctx), out: fill(out.text, ctx), ok: l.success };
+    } catch { return null; }
+  }).filter((x): x is NonNullable<typeof x> => !!x), [game]);
   // Mission briefing before the first scene: premise, the run's goal and how to play (the marine collaboration is introduced here too).
   const [brief, setBrief] = useState(game.index === 0 && game.stage === 'beat' && game.log.length === 0);
   const recent = useRef<string[]>([]);
@@ -130,18 +142,18 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   // Keyboard: 1–4 pick a choice, Enter/Space continues.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!view || confirmQuit || brief || board || zoom || (e.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (!view || confirmQuit || brief || board || zoom || logOpen || (e.target as HTMLElement)?.tagName === 'INPUT') return;
       if (game.stage === 'beat' && typed) { const n = Number(e.key); if (n >= 1 && n <= view.choices.length) onChoose(view.choices[n - 1].choice.id); }
       else if (game.stage === 'outcome' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onContinue(); }
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
-  }, [view, game.stage, typed, confirmQuit, brief, board, zoom, onChoose, onContinue]);
+  }, [view, game.stage, typed, confirmQuit, brief, board, zoom, logOpen, onChoose, onContinue]);
 
   const autoPlate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
   // Story Archive scenes name their own plate, and Living World state swaps it (power restored, net removed…)
   const tpl = BEAT_BY_ID[game.plan.beats[game.index]?.template];
   const d0 = useMemo(() => derive(game.creature), [game.creature]);
-  const fixedPlate = tpl?.plate ? nodePlate(tpl, (c) => condHolds(c, d0, game, tpl.biomes[0])) : undefined;
+  const fixedPlate = (tpl && ownPlateOf(tpl.id, tpl.biomes[0])) ?? (tpl?.plate ? nodePlate(tpl, (c) => condHolds(c, d0, game, tpl.biomes[0])) : undefined);
   const plate = fixedPlate ? { id: fixedPlate } : autoPlate;
   const story = storyOf(game);
   // the world change this result just caused (shown as a banner; also kept in the journal)
@@ -200,8 +212,9 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           <span className="vn-progress">{game.index + 1}/{total}</span>
           <span className="chapter" aria-label={`${game.index + 1}/${total}`}>{Array.from({ length: total }, (_, i) => <i key={i} className={i < game.index ? 'done' : i === game.index ? 'now' : ''} />)}</span></>}
           <span className="pips" title={t('energy', lang)} aria-label={`${t('energy', lang)} ${game.energy}/${MAX_ENERGY}`}>{Array.from({ length: MAX_ENERGY }, (_, i) => <i key={i} className={i < game.energy ? 'on' : ''} />)}</span>
-          <button className="stat stat-btn" title={lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'} onClick={() => setBoard(true)}>◆ {game.evidence.length}</button>
-          <span className="stat" title={t('discoveries', lang)}>✦ {game.discoveries.length}</span>
+          <button key={`ev${game.evidence.length}`} className="stat stat-btn bump" title={lang === 'ar' ? 'لوحة الغموض' : 'Mystery Board'} onClick={() => setBoard(true)}>◆ {game.evidence.length}</button>
+          <span key={`di${game.discoveries.length}`} className="stat bump" title={t('discoveries', lang)}>✦ {game.discoveries.length}</span>
+          <button className="stat stat-btn log-btn" aria-label={lang === 'ar' ? 'سجل القصة' : 'Story log'} title={lang === 'ar' ? 'سجل القصة: اقرأ ما حدث حتى الآن' : 'Story log: read what happened so far'} onClick={() => setLogOpen(true)} disabled={!history.length}>📜</button>
           {onPassport && <button className="ghost-icon passport-btn" aria-label={lang === 'ar' ? 'جواز المستكشف' : 'Explorer Passport'} title={lang === 'ar' ? 'جواز المستكشف · امسح وأكمل من جوالك' : 'Explorer Passport · scan to continue on your phone'} onClick={onPassport}>▦</button>}
           <button className="ghost-icon" aria-label={t('quit', lang)} onClick={() => setConfirmQuit(true)}>✕</button>
         </div>
@@ -253,6 +266,23 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           </div>
         );
       })()}
+
+      {logOpen && (
+        <div className="mystery-board story-log" role="dialog" aria-modal="true" aria-label={lang === 'ar' ? 'سجل القصة' : 'Story log'} onClick={() => setLogOpen(false)}>
+          <div className="mb-inner" onClick={(e) => e.stopPropagation()}>
+            <header><p className="kicker">{lang === 'ar' ? 'سجل القصة' : 'Story log'}</p><h3>{lang === 'ar' ? 'ما حدث حتى الآن' : 'What has happened so far'}</h3></header>
+            <ol className="log-list">{history.map((h) => (
+              <li key={h.i} className={h.ok ? 'ok' : 'no'}>
+                <b className="log-place">{h.i + 1}. {h.place[lang]}</b>
+                <p className="log-text">{h.text[lang]}</p>
+                <p className="log-choice"><span>{lang === 'ar' ? 'اخترتم:' : 'You chose:'}</span> {h.choice[lang]}</p>
+                <p className="log-out"><em>{h.ok ? t('success', lang) : t('setback', lang)}</em> {h.out[lang]}</p>
+              </li>
+            ))}</ol>
+            <Btn variant="ghost" onClick={() => setLogOpen(false)}>{t('close', lang)}</Btn>
+          </div>
+        </div>
+      )}
 
       {confirmQuit && (
         <div className="vn-confirm" role="alertdialog">

@@ -221,6 +221,21 @@ export interface Ctx {
   predatorAnimal: string; critterAnimal: string;
 }
 
+/**
+ * Place labels for Story Archive scenes. Their place used to be the generic name of the scene's biome, so a mountain
+ * station's control room was labelled "the BSC Lab". Display only: not part of a story's locked content.
+ */
+const PL = (en: string, ar: string): L10n => ({ en, ar });
+const SCENE_PLACE: Record<string, L10n> = {
+  'silent-ridge@1:ridge': PL('The mountain ridge', 'حافّة الجبل'), 'silent-ridge@1:tracks': PL('The snowy path', 'الطريق الثلجي'),
+  'silent-ridge@1:station': PL('The research station', 'محطة الأبحاث'), 'silent-ridge@1:control': PL('The control room', 'غرفة التحكّم'),
+  'silent-ridge@1:cave-mouth': PL('The cave mouth', 'فم الكهف'), 'silent-ridge@1:pool': PL('The cave pool', 'بركة الكهف'),
+  'silent-ridge@1:pumphouse': PL('The pump room', 'غرفة المضخّات'),
+  'lantern-wreck@1:bay': PL('The bay at night', 'الخليج ليلاً'), 'lantern-wreck@1:reef': PL('The reef by the wreck', 'الشعاب قرب الحطام'),
+  'lantern-wreck@1:twilight': PL('The dim waters', 'المياه المعتمة'), 'lantern-wreck@1:hull': PL('Inside the sunken ship', 'داخل السفينة الغارقة'),
+  'lantern-wreck@1:wreck': PL('The wreck', 'الحطام'),
+};
+
 export function beatContext(s: GameState, idx = s.index): Ctx {
   const pb = s.plan.beats[idx];
   const b = BIOMES[pb.biome];
@@ -228,7 +243,7 @@ export function beatContext(s: GameState, idx = s.index): Ctx {
   const duck = DUCK_BY_ID[s.duck];
   const obstacle = r.pick(b.obstacles), predator = r.pick(b.predators), critter = r.pick(b.critters);
   return {
-    name: s.creature.name, player: s.player || '—', duck: duck?.name ?? { en: 'your companion', ar: 'رفيقكم' }, duckG: duck?.gender ?? 'm', place: b.name,
+    name: s.creature.name, player: s.player || '—', duck: duck?.name ?? { en: 'your companion', ar: 'رفيقكم' }, duckG: duck?.gender ?? 'm', place: SCENE_PLACE[pb.template] ?? b.name,
     obstacle, predator: { en: predator.en, ar: predator.ar }, critter: { en: critter.en, ar: critter.ar },
     predatorAnimal: predator.animal, critterAnimal: critter.animal,
     npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || { en: 'a stranger', ar: 'شخصٌ غريب' },

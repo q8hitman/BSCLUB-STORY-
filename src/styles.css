@@ -892,3 +892,29 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
   .part strong { font-size: .95rem; }
   .part .part-desc, .part .part-src { font-size: .78rem; }
 }
+
+/* ═══ story log (backlog) + small feedback on results ═══ */
+.log-btn { font-size: 1rem; line-height: 1; }
+.log-btn:disabled { opacity: .35; cursor: default; }
+.log-list { list-style: none; margin: 0 0 var(--s4); padding: 0; display: grid; gap: var(--s3); text-align: start; }
+.log-list li { border: 1px solid var(--line); border-inline-start: 3px solid var(--leaf); border-radius: 14px; padding: var(--s3) var(--s4); background: rgba(255, 255, 255, .03); display: grid; gap: 6px; }
+.log-list li.no { border-inline-start-color: #d0584e; }
+.log-place { color: var(--gold-2); font-size: 1rem; }
+.log-list p { margin: 0; line-height: 1.75; }
+.log-text { color: var(--paper-dim); font-size: .95rem; }
+.log-choice { color: var(--paper); font-size: 1rem; } .log-choice span { color: var(--gold-2); font-weight: 700; }
+.log-out { color: var(--paper); font-size: 1rem; }
+.log-out em { font-style: normal; font-size: .78rem; padding: 1px 9px; border-radius: 999px; border: 1px solid rgba(143, 207, 154, .45); color: var(--leaf); margin-inline-end: 6px; }
+.log-list li.no .log-out em { border-color: rgba(208, 88, 78, .5); color: #f09a90; }
+/* feedback scaled to the event: counters pop when they grow, a good result settles in, a setback gives one short nudge */
+@keyframes stat-pop { 0% { transform: scale(1.5); } 55% { transform: scale(.92); } 100% { transform: scale(1); } }
+@keyframes box-settle { 0% { transform: translateY(10px) scale(.985); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes box-nudge { 0% { transform: translateX(0); } 20% { transform: translateX(-7px); } 45% { transform: translateX(6px); } 70% { transform: translateX(-3px); } 100% { transform: translateX(0); } }
+.vn-meter .bump { animation: stat-pop .45s cubic-bezier(.34, 1.56, .64, 1) both; display: inline-block; }
+.vn-box.outcome.good { animation: box-settle .35s cubic-bezier(.22, 1, .36, 1) both; box-shadow: 0 20px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(143, 207, 154, .25), 0 0 34px rgba(143, 207, 154, .12); }
+.vn-box.outcome.bad { animation: box-nudge .32s ease-out both; }
+.btn-choice:active { transform: scale(.985); }
+
+/* phones: the scene bar keeps each counter on one line and wraps as a row when it runs out of room */
+.vn-meter .stat, .vn-meter .vn-progress { white-space: nowrap; }
+@media (max-aspect-ratio: 1/1) { .vn-meter { flex-wrap: wrap; row-gap: 4px; border-radius: 22px; justify-content: flex-end; } }

@@ -75,7 +75,7 @@ export function platesForRun(s: GameState, kinds: (i: number) => BeatTemplate['k
   for (let i = 0; i <= upto && i < s.plan.beats.length; i++) {
     const k = kinds(i);
     // Story Archive nodes name their own plate (Play swaps in the Living World variant for the current scene)
-    const own = fixedPlates?.(i);
+    const own = ownPlateOf(s.plan.beats[i].template, s.plan.beats[i].biome) ?? fixedPlates?.(i);
     const ownPlate = own ? PLATE_LIST.find((x) => x.id === own) ?? null : null;
     if (ownPlate) { used.add(ownPlate.id); shown.add(ownPlate.id); out.push(ownPlate); continue; }
     const p = k ? plateFor(s, i, k, s.plan.beats[i].biome, used, s.plan.beats[i].template, shown) : null;
