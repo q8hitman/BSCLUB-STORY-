@@ -882,3 +882,13 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
   .zoom-img img { max-height: calc(100dvh - 34px); height: 100%; }
   .zoom-text { justify-content: center; }
 }
+
+/* builder part pictures: show the whole animal (the short band used to cut heads off), a little brighter */
+.part-art { height: auto; aspect-ratio: 4 / 3; filter: brightness(1.1) contrast(1.03); }
+.part:hover .part-art, .part.on .part-art { filter: brightness(1.16) contrast(1.05); }
+@media (max-width: 480px) {
+  .part-list { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .part { padding: 8px; }
+  .part strong { font-size: .95rem; }
+  .part .part-desc, .part .part-src { font-size: .78rem; }
+}
