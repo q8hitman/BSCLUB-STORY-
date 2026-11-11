@@ -1,16 +1,16 @@
 {
  "id": "trench-whispers",
  "v": 1,
- "status": "review",
+ "status": "published",
  "mode": "marine",
- "source": "factory:gemini-3.5-flash-lite",
+ "source": "factory draft, rewritten by hand 2026-11-11",
  "title": {
-  "en": "Whispers of the Deep Trench",
-  "ar": "همسات الأخدود العميقة"
+  "en": "The Drum in the Deep",
+  "ar": "طبل في قاع البحر"
  },
  "premise": {
-  "en": "An automated deep-sea probe in the Mariana Trench started broadcasting rhythmic biological pulses before going offline. Something down there is generating complex acoustic signals.",
-  "ar": "بدأ مسبار بحري عميق وآلي في أخدود ماريانا ببث نبضات بيولوجية إيقاعية قبل أن ينقطع اتصاله. هناك شيء ما في الأسفل يولد إشارات صوتية معقدة."
+  "en": "A listening device at the bottom of a deep trench recorded a steady beat, like a drum, and then went silent. Something down there is drumming.",
+  "ar": "سجّل جهاز في قاع خندق عميق صوتاً منتظماً مثل الطبل، ثم سكت. شيء ما في الأسفل يدقّ."
  },
  "tone": "strange",
  "tags": {
@@ -32,8 +32,8 @@
  },
  "world": {
   "w:sonar": {
-   "en": "Sonar calibration active",
-   "ar": "معايرة السونار نشطة"
+   "en": "The depth scanner is locked on the beat",
+   "ar": "جهاز كشف الأعماق مضبوط على مصدر الصوت"
   }
  },
  "science": [
@@ -50,25 +50,25 @@
    ],
    "plate": "trench-edge-drop",
    "goal": {
-    "en": "Investigate the rhythmic pulses coming from the bottom of the deep trench.",
-    "ar": "استقصاء النبضات الإيقاعية القادمة من قاع الأخدود العميقة."
+    "en": "Find out what is making the drum sound at the bottom of the deep trench.",
+    "ar": "اعرفوا ما الذي يصدر صوت الطبل في قاع الخندق العميق."
    },
    "text": {
-    "en": "At the edge of the dark trench, {duck} {g:monitors|monitors} the silent sonar screen. A steady, rhythmic pulse echoes from five thousand meters down — not machinery, but something alive. {name} stares into the abyss.",
-    "ar": "على حافة الأخدود المظلم، {g:يراقب|تراقب} {duck} شاشة السونار الصامتة. صدى نبضة ثابتة وإيقاعية يتردد من عمق خمسة آلاف متر - ليست آلة، بل شيء حي. يحدق {name} في الهاوية."
+    "en": "The Marine Science Club left a listening device at the bottom of a deep trench. Last week it recorded a steady beat, like a drum: boom… boom… boom. Then the device went silent. Now the small submarine waits at the edge of the trench, with Faisal at the controls, and {name} looks through the glass at the dark water below.",
+    "ar": "وضع نادي علوم البحار جهازاً يسجّل الأصوات في قاع خندق عميق. في الأسبوع الماضي سجّل الجهاز صوتاً منتظماً مثل الطبل: دُم… دُم… دُم. ثم سكت الجهاز. الآن الغوّاصة الصغيرة عند حافة الخندق، وفيصل يقودها، و{name} ينظر من الزجاج إلى الماء المظلم في الأسفل."
    },
    "choices": [
     {
      "id": "descend-fast",
      "label": {
-      "en": "Dive straight down into the current",
-      "ar": "الغوص مباشرة نحو التيار"
+      "en": "Go straight down",
+      "ar": "انزلوا مباشرة إلى الأسفل"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "{name} tucks and plunges into the dark water, racing past the twilight zone.",
-       "ar": "{name} يثني جسمه ويغوص في الماء المظلم، مسابقاً منطقة الشفق."
+       "en": "Faisal points the submarine down. The water turns from blue to black, and the beat gets louder.",
+       "ar": "يوجّه فيصل الغوّاصة إلى الأسفل. يتحوّل الماء من الأزرق إلى الأسود، ويصير صوت الطبل أعلى."
       },
       "mood": "proud",
       "effects": [
@@ -84,14 +84,14 @@
     {
      "id": "scan-shelf",
      "label": {
-      "en": "Examine the rocky shelf for anchor points",
-      "ar": "فحص الرف الصخري بحثاً عن نقاط ارتكاز"
+      "en": "Look at the rocks at the edge first",
+      "ar": "افحصوا الصخور عند الحافة أولاً"
      },
      "style": "careful",
      "success": {
       "text": {
-       "en": "Scratches on the wall show that heavy equipment was recently dragged down.",
-       "ar": "تظهر خدوش على الجدار أن معدات ثقيلة سُحبت مؤخراً نحو الأسفل."
+       "en": "The searchlight finds the cable of the device on the rocks. It is cut, and its end hangs down into the trench.",
+       "ar": "يجد الكشّاف كابل الجهاز على الصخور. الكابل مقطوع، وطرفه ينزل إلى داخل الخندق."
       },
       "mood": "thinking",
       "effects": [
@@ -107,14 +107,14 @@
     {
      "id": "listen-sonar",
      "label": {
-      "en": "Calibrate the sonar frequency",
-      "ar": "معايرة تردد السونار"
+      "en": "Listen to the beat with the depth scanner",
+      "ar": "استمعوا إلى الصوت بجهاز كشف الأعماق"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "The sonar locks onto the pulse, revealing it pulses in sequences like biological communication.",
-       "ar": "يلتقط السونار النبضة، كاشفاً أنها تنبض بتسلسلات تشبه التواصل البيولوجي."
+       "en": "The scanner shows where the beat comes from: the very bottom of the trench. The beat never speeds up or slows down, like a clock.",
+       "ar": "يُظهر الجهاز مكان الصوت: أعمق نقطة في الخندق. والصوت لا يسرع ولا يبطئ، مثل دقات الساعة."
       },
       "mood": "thinking",
       "effects": [
@@ -134,14 +134,14 @@
     {
      "id": "comfort-duck",
      "label": {
-      "en": "Reassure {duck} before the descent",
-      "ar": "طمأنة {duck} قبل الهبوط"
+      "en": "Check that {duck} is ready to go down",
+      "ar": "تأكّدوا أن الجميع جاهز للنزول، ومنهم {duck}"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "{duck} smiles bravely, adjusting {g:his|her} dive gear as the pressure starts to rise.",
-       "ar": "تبتسم {duck} بشجاعة، معدلةً معدات الغوص الخاصة بها بينما يبدأ الضغط في الارتفاع."
+       "en": "The team checks the seat belts twice. There is a smile on the face of {duck}. Everyone is ready.",
+       "ar": "يفحص الفريق أحزمة المقاعد مرتين. وتظهر ابتسامة على وجه {duck}. الجميع جاهز."
       },
       "mood": "happy",
       "effects": [
@@ -157,14 +157,14 @@
     {
      "id": "echolocate",
      "label": {
-      "en": "Send out an acoustic ping",
-      "ar": "إرسال إشارة صوتية ارتدادية"
+      "en": "Let {name} send a sound into the dark",
+      "ar": "دعوا {name} يرسل صوتاً إلى الظلام"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "The biological echo bounces back instantly, confirming a massive cavern below.",
-       "ar": "يرتد الصدى البيولوجي على الفور، مؤكداً وجود كهف ضخم في الأسفل."
+       "en": "{name} makes a sharp sound. The echo comes back late: the trench is very deep, and there is something big at the bottom.",
+       "ar": "يصدر {name} صوتاً حاداً. يرجع الصدى متأخراً: الخندق عميق جداً، وفي قاعه شيء كبير."
       },
       "mood": "shocked",
       "effects": [
@@ -185,14 +185,14 @@
     {
      "id": "night-sense",
      "label": {
-      "en": "Scan the absolute darkness for motion",
-      "ar": "فحص الظلام الدامس بحثاً عن حركة"
+      "en": "Let {name} look for movement in the dark",
+      "ar": "دعوا {name} يبحث عن حركة في الظلام"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "Faint biological glows weave through the water column far below.",
-       "ar": "تتوهج أضواء بيولوجية خافتة عبر عمود الماء في الأسفل."
+       "en": "{name} stares at one spot. Far below, tiny lights move slowly: living animals that make their own light.",
+       "ar": "ينظر {name} إلى نقطة واحدة. في الأسفل البعيد أضواء صغيرة تتحرّك ببطء: حيوانات حيّة تصنع ضوءها بنفسها."
       },
       "mood": "thinking",
       "effects": [
@@ -219,21 +219,21 @@
    "props": [],
    "plate": "trench-cliff",
    "text": {
-    "en": "Descending along the sheer basalt cliff, {name} encounters swirling currents carrying strange metallic fragments from the lost probe.",
-    "ar": "أثناء الهبوط على طول الجرف البازلتي الحاد، يواجه {name} تيارات دوامية تحمل شظايا معدنية غريبة من المسبار المفقود."
+    "en": "The submarine goes down beside a wall of black rock. The cut cable of the lost device hangs along the wall. Small pieces of metal from the device are stuck in the cracks of the rock.",
+    "ar": "تنزل الغوّاصة بجانب جدار من الصخر الأسود. كابل الجهاز المقطوع ينزل على طول الجدار. وفي شقوق الصخر قطع معدنية صغيرة من الجهاز المفقود."
    },
    "choices": [
     {
      "id": "inspect-metal",
      "label": {
-      "en": "Collect a metal fragment",
-      "ar": "جمع شظية معدنية"
+      "en": "Pick up a piece of metal with the robot arm",
+      "ar": "التقطوا قطعة معدن بذراع الغوّاصة"
      },
      "style": "careful",
      "success": {
       "text": {
-       "en": "The fragment is deeply dented by crushing hydrostatic pressure.",
-       "ar": "الشظية متعرضة لانبعاج عميق بسبب الضغط الهيدروستاتيكي السحق."
+       "en": "The piece is bent inward, as if a giant hand squeezed it. That is what deep water does: it presses hard on everything.",
+       "ar": "القطعة منحنية إلى الداخل، كأن يداً ضخمة ضغطت عليها. هذا ما يفعله الماء العميق: يضغط بقوة على كل شيء."
       },
       "mood": "thinking",
       "effects": [
@@ -249,14 +249,14 @@
     {
      "id": "push-current",
      "label": {
-      "en": "Swim hard against the swirling eddy",
-      "ar": "السباحة بقوة عكس الدوامة"
+      "en": "Push through the strong current",
+      "ar": "اعبروا التيار القوي بسرعة"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "{name} cuts through the turbulence, saving energy for the deep floor.",
-       "ar": "يخترق {name} الاضطرابات، موفراً الطاقة للقاع العميق."
+       "en": "Faisal holds the controls tight. The submarine shakes, then passes the current safely.",
+       "ar": "يمسك فيصل أدوات القيادة بقوة. تهتزّ الغوّاصة، ثم تعبر التيار بسلام."
       },
       "mood": "proud",
       "effects": [
@@ -272,14 +272,14 @@
     {
      "id": "study-vents",
      "label": {
-      "en": "Observe mineral deposits on the wall",
-      "ar": "ملاحظة الترسبات المعدنية على الجدار"
+      "en": "Look at the yellow marks on the wall",
+      "ar": "افحصوا البقع الصفراء على الجدار"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "Thermal traces suggest active vents nearby, warming small pockets of water.",
-       "ar": "تشير الآثار الحرارية إلى وجود فتحات نشطة بالقرب، مما يدفيء جيوباً صغيرة من الماء."
+       "en": "The yellow marks are minerals left by hot water. So there is a hot spring somewhere below.",
+       "ar": "البقع الصفراء معادن تركها ماء حارّ. إذن يوجد ينبوع حارّ في مكان ما في الأسفل."
       },
       "mood": "thinking",
       "effects": [
@@ -295,14 +295,14 @@
     {
      "id": "calm-companion",
      "label": {
-      "en": "Share air bubbles with {duck}",
-      "ar": "مشاركة فقاعات الهواء مع {duck}"
+      "en": "Share a snack with {duck}",
+      "ar": "تقاسموا وجبة خفيفة مع {duck}"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "{duck} appreciates the teamwork as the cold presses in.",
-       "ar": "تقدر {duck} العمل الجماعي بينما يشتد البرد."
+       "en": "Everyone takes a biscuit, {duck} too. It is cold inside the submarine, but the team feels better.",
+       "ar": "يأخذ كل واحد بسكويتة، ومنهم {duck}. الجو بارد داخل الغوّاصة، لكن الفريق صار مرتاحاً."
       },
       "mood": "happy",
       "effects": [
@@ -318,14 +318,14 @@
     {
      "id": "resist-pressure",
      "label": {
-      "en": "Brace against the extreme pressure zone",
-      "ar": "الاستعداد لمنطقة الضغط الشديد"
+      "en": "Let {name} go out in its suit to check the cable",
+      "ar": "دعوا {name} يخرج ببدلته ليفحص الكابل"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "{name} uses sturdy anatomy to withstand the heavy water weight easily.",
-       "ar": "يستخدم {name} تشريحاً متيناً لتحمل وزن الماء الثقيل بسهولة."
+       "en": "The strong body of {name} handles the heavy water easily. It finds small teeth marks on the cable: small animals chewed it.",
+       "ar": "جسم {name} القوي يتحمّل ضغط الماء بسهولة. ويجد على الكابل آثار أسنان صغيرة: حيوانات صغيرة قرضته."
       },
       "mood": "proud",
       "effects": [
@@ -348,14 +348,14 @@
     {
      "id": "dig-crevice",
      "label": {
-      "en": "Squeeze through a narrow rock fissure",
-      "ar": "المرور عبر شق صخر ضيق"
+      "en": "Take the shortcut through a gap in the rock",
+      "ar": "اختصروا الطريق من فتحة بين الصخور"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "The shortcut bypasses the worst of the swirling current.",
-       "ar": "الاختصار يتجاوز أسوأ التيار الدوامي."
+       "en": "{name} goes ahead in its suit and shows the way. The gap leads down, away from the strong current.",
+       "ar": "يتقدّم {name} ببدلته ويدلّ الغوّاصة على الطريق. الفتحة تنزل بهم بعيداً عن التيار القوي."
       },
       "mood": "thinking",
       "effects": [
@@ -383,21 +383,21 @@
    "props": [],
    "plate": "trench-deep-ping",
    "text": {
-    "en": "Following the acoustic signals, {name} drifts into a silent zone where floating organic matter gathers in thick veils.",
-    "ar": "متبعاً الإشارات الصوتية، ينجرف {name} إلى منطقة صامتة حيث تتجمع المادة العضوية العائمة في ستائر سميكة."
+    "en": "The submarine follows the beat. Around it, white flakes fall slowly like snow. This is “marine snow”: tiny bits of dead plants and animals sinking to the seabed. The beat is louder here.",
+    "ar": "تتبع الغوّاصة صوت الطبل. حولها يتساقط فتات صغير ببطء مثل الثلج. اسمه «الثلج البحري»: بقايا صغيرة جداً من نباتات وحيوانات ميتة تنزل إلى القاع. وصوت الطبل هنا أعلى."
    },
    "choices": [
     {
      "id": "taste-water",
      "label": {
-      "en": "Sample the chemical composition of the veil",
-      "ar": "أخذ عينة من التركيب الكيميائي للستارة"
+      "en": "Take a sample of the water",
+      "ar": "خذوا عيّنة من الماء"
      },
      "style": "careful",
      "success": {
       "text": {
-       "en": "The water is rich in dissolved minerals and sulfur compounds.",
-       "ar": "الماء غني بالمعادن الذائبة والمركبات الكبريتية."
+       "en": "The sample smells like rotten eggs. That is the smell of sulfur, which comes out of hot springs on the seabed.",
+       "ar": "رائحة العيّنة مثل البيض الفاسد. هذه رائحة الكبريت، وهو يخرج من الينابيع الحارّة في قاع البحر."
       },
       "mood": "thinking",
       "effects": [
@@ -413,14 +413,14 @@
     {
      "id": "glide-silent",
      "label": {
-      "en": "Glide smoothly past the organic debris",
-      "ar": "الانزلاق بسلاسة متجاوزاً الحطام العضوي"
+      "en": "Move slowly so the water stays clear",
+      "ar": "تحرّكوا ببطء حتى لا يتعكّر الماء"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "Moving without disturbing the snow creates a clear path ahead.",
-       "ar": "التحرك دون إزعاج الثلج يخلق طريقاً واضحاً للأمام."
+       "en": "The submarine glides gently. The water stays clear, and the searchlight reaches far ahead.",
+       "ar": "تتحرّك الغوّاصة بهدوء. يبقى الماء صافياً، ويصل ضوء الكشّاف إلى مسافة بعيدة."
       },
       "mood": "proud",
       "effects": [
@@ -436,14 +436,14 @@
     {
      "id": "observe-creatures",
      "label": {
-      "en": "Watch tiny amphipods react to the sonar",
-      "ar": "مراقبة مزدوجات الأرجل الصغيرة وهي تتفاعل مع السونار"
+      "en": "Watch the small shrimp-like animals",
+      "ar": "راقبوا الحيوانات الصغيرة التي تشبه الروبيان"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "The tiny crustaceans synchronize their movements with the mysterious beat.",
-       "ar": "تزامن القشريات الصغيرة حركاتها مع النبضة الغامضة."
+       "en": "Hundreds of them swim toward the beat. Something down there attracts them: most likely food.",
+       "ar": "المئات منها تسبح نحو مصدر الصوت. شيء هناك يجذبها، والأغلب أنه طعام."
       },
       "mood": "thinking",
       "effects": [
@@ -459,14 +459,14 @@
     {
      "id": "encourage-duck",
      "label": {
-      "en": "Signal an all-clear to {duck}",
-      "ar": "إرسال إشارة خلو الجو إلى {duck}"
+      "en": "Tell {duck} that all is well",
+      "ar": "طمئنوا {duck} أن كل شيء بخير"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "{duck} flashes an encouraging light signal back.",
-       "ar": "تومض {duck} بإشارة ضوئية مشجعة بالمقابل."
+       "en": "Now {duck} looks calm, and the team writes the depth in the notebook.",
+       "ar": "تظهر على {duck} علامات الارتياح، ويكتب الفريق العمق في الدفتر."
       },
       "mood": "happy",
       "effects": [
@@ -482,14 +482,14 @@
     {
      "id": "heat-sense",
      "label": {
-      "en": "Detect thermal vents through the veil",
-      "ar": "الكشف عن الفتحات الحرارية عبر الستارة"
+      "en": "Let {name} feel for warm water",
+      "ar": "دعوا {name} يبحث عن ماء دافئ"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "A warm plume cuts through the freezing abyssal water nearby.",
-       "ar": "تيار دافئ يخترق ماء الأعماق المتجمد القريب."
+       "en": "{name} turns toward one direction: warm water is rising from the seabed there.",
+       "ar": "يلتفت {name} إلى جهة واحدة: من هناك يصعد ماء دافئ من القاع."
       },
       "mood": "thinking",
       "effects": [
@@ -510,14 +510,14 @@
     {
      "id": "biolum-flash",
      "label": {
-      "en": "Flash a greeting pattern with body light",
-      "ar": "إرسال نمط تحية ضوئي بضوء الجسم"
+      "en": "Let {name} flash its light at the dark",
+      "ar": "دعوا {name} يلمع بضوئه في الظلام"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "The rhythmic pulses pause briefly, as if surprised by the flash.",
-       "ar": "تتوقف النبضات الإيقاعية لفترة وجيزة، كما لو تفاجأت بالوميض."
+       "en": "Far away, small lights flash back. But the beat does not change: so it is not an animal answering.",
+       "ar": "في البعيد تلمع أضواء صغيرة كأنها تردّ. لكن صوت الطبل لا يتغيّر: إذن ليس حيواناً يجيب."
       },
       "mood": "shocked",
       "effects": [
@@ -550,27 +550,27 @@
       ]
      },
      "text": {
-      "en": "At the trench floor, a massive whale fall rests in the silt. The sonar calibration helps {name} pinpoint where the rhythm originates.",
-      "ar": "في قاع الأخدود، يرقب بقايا حوت عميق في الطمي. تساعد معايرة السونار {name} على تحديد مصدر الإيقاع بدقة."
+      "en": "The depth scanner points straight at the skeleton.",
+      "ar": "وجهاز كشف الأعماق يشير مباشرة إلى الهيكل."
      }
     }
    ],
    "text": {
-    "en": "At the trench floor, a massive whale fall rests in the silt. The rhythmic pulses are coming directly from inside the decaying skeletal ribs.",
-    "ar": "في قاع الأخدود، يرقب بقايا حوت عميق في الطمي. النبضات الإيقاعية تأتي مباشرة من داخل الأضلاع الهيكلية المتحللة."
+    "en": "The submarine reaches the bottom. In the searchlight lies the skeleton of a huge whale: it died long ago and sank here. The beat comes from under its bones: boom… boom… boom.",
+    "ar": "تصل الغوّاصة إلى القاع. في ضوء الكشّاف هيكل عظمي لحوت ضخم: مات منذ زمن ونزل إلى هنا. وصوت الطبل يخرج من تحت عظامه: دُم… دُم… دُم."
    },
    "choices": [
     {
      "id": "enter-skeleton",
      "label": {
-      "en": "Swim cautiously into the ribcage",
-      "ar": "السباحة بحذر داخل القفص الصدري"
+      "en": "Send {name} between the ribs in its suit",
+      "ar": "أرسلوا {name} ببدلته بين الأضلاع"
      },
      "style": "careful",
      "success": {
       "text": {
-       "en": "{name} slips between massive bones where the pulse is deafeningly loud.",
-       "ar": "ينزلق {name} بين العظام الضخمة حيث تكون النبضة عالية بشكل يصم الآذان."
+       "en": "{name} moves carefully between ribs taller than a person. Inside, the beat is very loud.",
+       "ar": "يتحرّك {name} بحذر بين أضلاع أطول من إنسان. وفي الداخل صوت الطبل عالٍ جداً."
       },
       "mood": "thinking",
       "effects": [
@@ -586,14 +586,14 @@
     {
      "id": "push-debris",
      "label": {
-      "en": "Clear away fallen sediment around the bones",
-      "ar": "إزالة الرواسب المتساقطة حول العظام"
+      "en": "Blow the mud away with the submarine’s fans",
+      "ar": "أبعدوا الطين بمراوح الغوّاصة"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "Clearing the silt reveals a series of pulsing natural vents beneath the spine.",
-       "ar": "إزالة الطمي يكشف عن سلسلة من الفتحات الطبيعية النابضة تحت العمود الفقري."
+       "en": "The mud clears. Something made of metal shines between the bones.",
+       "ar": "يبتعد الطين. ويلمع بين العظام شيء من المعدن."
       },
       "mood": "proud",
       "effects": [
@@ -609,14 +609,14 @@
     {
      "id": "study-source",
      "label": {
-      "en": "Analyze the resonance of the sound",
-      "ar": "تحليل صدى الصوت"
+      "en": "Measure where the beat is loudest",
+      "ar": "قيسوا أين يكون الصوت أعلى"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "The sound is created by superheated gas escaping through oscillating rock channels.",
-       "ar": "الصوت ناتج عن الغاز شديد السخونة الهارب عبر قنوات صخرية متذبذبة."
+       "en": "The beat is loudest at the tail of the skeleton, where bubbles rise from the seabed.",
+       "ar": "الصوت أعلى عند ذيل الهيكل، حيث تصعد فقاعات من القاع."
       },
       "mood": "thinking",
       "effects": [
@@ -632,14 +632,14 @@
     {
      "id": "reassure-team",
      "label": {
-      "en": "Communicate confidence to {duck}",
-      "ar": "توصيل الثقة إلى {duck}"
+      "en": "Stop for a minute so everyone calms down",
+      "ar": "توقّفوا دقيقة ليهدأ الجميع"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "{duck} smiles, ready to document whatever source is making the sound.",
-       "ar": "تبتسم {duck}، مستعدة توثيق أي مصدر يصدر الصوت."
+       "en": "The team breathes slowly. In the quiet, everyone, {duck} included, sees bubbles rising near the tail of the skeleton.",
+       "ar": "يتنفّس الفريق ببطء. وفي الهدوء يرى الجميع، ومنهم {duck}، فقاعات تصعد قرب ذيل الهيكل."
       },
       "mood": "happy",
       "effects": [
@@ -655,14 +655,14 @@
     {
      "id": "dig-bone",
      "label": {
-      "en": "Burrow under the ribcage to find an entrance",
-      "ar": "الحفر تحت القفص الصدري لإيجاد مدخل"
+      "en": "Let {name} dig under the ribs",
+      "ar": "دعوا {name} يحفر تحت الأضلاع"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "{name} tunnels under the heavy silt, uncovering a hidden chamber.",
-       "ar": "يحفر {name} تحت الطمي الثقيل، كاشفاً عن حجرة مخفية."
+       "en": "{name} digs in its suit and uncovers the corner of a metal box.",
+       "ar": "يحفر {name} ببدلته، فيظهر طرف صندوق معدني."
       },
       "mood": "proud",
       "effects": [
@@ -683,14 +683,14 @@
     {
      "id": "venom-sample",
      "label": {
-      "en": "Test the water chemistry inside the rib cavity",
-      "ar": "اختبار كيمياء الماء داخل التجويف العظمي"
+      "en": "Let {name} smell a water sample taken near the bones",
+      "ar": "دعوا {name} يشمّ عيّنة ماء من قرب العظام"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "Specialized sensors reveal unique mineral catalysts at work.",
-       "ar": "تكشف المستشعرات المتخصصة عن محفزات معدنية فريدة تعمل هناك."
+       "en": "{name} pulls away from the sample quickly: rotten eggs again. So hot spring water is coming up under the skeleton.",
+       "ar": "يبتعد {name} عن العيّنة بسرعة: رائحة بيض فاسد مرة أخرى. إذن ماء الينبوع الحارّ يصعد من تحت الهيكل."
       },
       "mood": "thinking",
       "effects": [
@@ -717,21 +717,21 @@
    "props": [],
    "plate": "trench-amphipods",
    "text": {
-    "en": "Inside the skeletal chamber, swarms of deep-sea amphipods crawl over a bizarre mechanical-biological hybrid device left by ancient researchers.",
-    "ar": "داخل الحجرة الهيكلية، تزحف أسراب من مزدوجات الأرجل في الأعماق على جهاز هجين ميكانيكي-بيولوجي غريب تركه باحثون قدامى."
+    "en": "Between the bones lies the lost listening device. Its cover is loose, and hundreds of small shrimp-like animals crawl over it, eating what is left of the whale. Every few seconds a bubble from below lifts the loose cover and drops it: boom.",
+    "ar": "بين العظام يوجد جهاز تسجيل الأصوات المفقود. غطاؤه مفكوك، وعليه مئات من الحيوانات الصغيرة التي تشبه الروبيان، تأكل ما بقي من الحوت. وكل بضع ثوانٍ تصعد فقاعة من الأسفل فترفع الغطاء المفكوك ثم يسقط: دُم."
    },
    "choices": [
     {
      "id": "touch-device",
      "label": {
-      "en": "Examine the strange control panel",
-      "ar": "فحص لوحة التحكم الغريبة"
+      "en": "Check the screen of the device",
+      "ar": "افحصوا شاشة الجهاز"
      },
      "style": "careful",
      "success": {
       "text": {
-       "en": "The panel hums back to life, displaying old logs about acoustic geothermal generators.",
-       "ar": "تعود اللوحة إلى الحياة مزمجرة، عارضة سجلات قديمة حول مولدات حرارية أرضية صوتية."
+       "en": "The screen still works. Its last note says: “Cable cut. Cover loose. Strong bubbles from below.”",
+       "ar": "الشاشة ما زالت تعمل. آخر ملاحظة فيها: «انقطع الكابل. الغطاء مفكوك. فقاعات قوية من الأسفل»."
       },
       "mood": "thinking",
       "effects": [
@@ -747,14 +747,14 @@
     {
      "id": "clear-creatures",
      "label": {
-      "en": "Gently herd the amphipods away",
-      "ar": "توجيه مزدوجات الأرجل برفق بعيداً"
+      "en": "Gently move the small animals away",
+      "ar": "أبعدوا الحيوانات الصغيرة بلطف"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "The tiny creatures scatter harmlessly, revealing the core mechanism.",
-       "ar": "تتفرق الكائنات الصغيرة دون إحداث ضرر، كاشفة عن الآلية الأساسية."
+       "en": "They swim off to the whale bones. Now the loose cover is easy to see, lifting and falling with each bubble.",
+       "ar": "تسبح الحيوانات الصغيرة إلى عظام الحوت. الآن يظهر الغطاء المفكوك بوضوح، يرتفع ويسقط مع كل فقاعة."
       },
       "mood": "happy",
       "effects": [
@@ -770,14 +770,14 @@
     {
      "id": "force-panel",
      "label": {
-      "en": "Force open the jammed housing unit",
-      "ar": "فتح وحدة الإسكان المستعصية بالقوة"
+      "en": "Open the cover of the device completely",
+      "ar": "افتحوا غطاء الجهاز كله"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "{name} pops the rusted latch, releasing a burst of trapped air and sound.",
-       "ar": "يفتح {name} المزلاج الصدئ، مطلقا تدفقاً من الهواء المحصور والصوت."
+       "en": "The cover opens and the loud knock stops at once. So part of the sound was this cover knocking.",
+       "ar": "ينفتح الغطاء فيتوقّف الدقّ العالي فوراً. إذن جزء من الصوت كان هذا الغطاء وهو يدقّ."
       },
       "mood": "proud",
       "effects": [
@@ -793,14 +793,14 @@
     {
      "id": "analyze-signal",
      "label": {
-      "en": "Record the harmonic frequency",
-      "ar": "تسجيل التردد التوافقي"
+      "en": "Count the seconds between beats",
+      "ar": "عُدّوا الثواني بين الدقّات"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "The rhythm matches the natural pulsing of the tectonic plates below.",
-       "ar": "يتطابق الإيقاع مع النبض الطبيعي للصفائح التكتونية في الأسفل."
+       "en": "Four seconds, every time. A bubble rises every four seconds, like a slow clock.",
+       "ar": "أربع ثوانٍ في كل مرة. كل أربع ثوانٍ تصعد فقاعة، مثل ساعة بطيئة."
       },
       "mood": "thinking",
       "effects": [
@@ -816,14 +816,14 @@
     {
      "id": "shock-panel",
      "label": {
-      "en": "Jumpstart the device with a mild electrical charge",
-      "ar": "إنعاش الجهاز بشحنة كهربائية خفيفة"
+      "en": "Let {name} give the device a small electric spark",
+      "ar": "دعوا {name} يعطي الجهاز شرارة كهربائية صغيرة"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "The electrical surge reactivates the ancient display screen completely.",
-       "ar": "تعمل النبضة الكهربائية على إعادة تنشيط شاشة العرض القديمة بالكامل."
+       "en": "The device wakes up and plays its recordings: weeks of the same beat, louder each week as the cover got looser.",
+       "ar": "يعمل الجهاز ويشغّل تسجيلاته: أسابيع من الصوت نفسه، وكان يعلو كل أسبوع لأن الغطاء ينفكّ أكثر."
       },
       "mood": "proud",
       "effects": [
@@ -844,14 +844,14 @@
     {
      "id": "grip-lever",
      "label": {
-      "en": "Pull the emergency shutdown lever",
-      "ar": "سحب ذراع الإيقاف الطارئ"
+      "en": "Let {name} hold the cover shut",
+      "ar": "دعوا {name} يمسك الغطاء ويغلقه"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "{name} secures the loose mechanical lever, stabilizing the sound output.",
-       "ar": "يثبت {name} الذراع الميكانيكي السائب، مما يثبت إخراج الصوت."
+       "en": "{name} holds the cover down. The loud knock stops, but a softer beat continues from under the bones.",
+       "ar": "يمسك {name} الغطاء ويثبّته. يتوقّف الدقّ العالي، لكن يبقى صوت أخفّ يخرج من تحت العظام."
       },
       "mood": "thinking",
       "effects": [
@@ -878,21 +878,21 @@
    "props": [],
    "plate": "trench-eruption",
    "text": {
-    "en": "Near the pulsing vents, mineral-rich bubbles surge upward, creating an eerie acoustic chamber that amplifies every sound in the deep trench.",
-    "ar": "بالقرب من الفتحات النابضة، ترتفع فقاعات غنية بالمعادن نحو الأعلى، مما يخلق غرفة صوتية مرعبة تضخم كل صوت في الأخدود العميقة."
+    "en": "At the tail of the skeleton, a hot spring in the seabed lets out a big bubble every few seconds. Each bubble passes through the hollow whale bones and makes a deep sound, like blowing across an empty bottle.",
+    "ar": "عند ذيل الهيكل ينبوع حارّ في القاع، يُخرج فقاعة كبيرة كل بضع ثوانٍ. تمرّ كل فقاعة داخل عظام الحوت المجوّفة فتصدر صوتاً عميقاً، مثل النفخ فوق زجاجة فارغة."
    },
    "choices": [
     {
      "id": "ride-bubbles",
      "label": {
-      "en": "Ride the ascending bubble current carefully",
-      "ar": "ركوب تيار الفقاعات الصاعدة بحذر"
+      "en": "Follow one bubble with the camera",
+      "ar": "تتبّعوا فقاعة واحدة بالكاميرا"
      },
      "style": "careful",
      "success": {
       "text": {
-       "en": "{name} navigates the thermal current without disturbing the vent structure.",
-       "ar": "يتنقل {name} عبر التيار الحراري دون إزعاج هيكل الفتحة."
+       "en": "The camera shows it all: the bubble enters a bone, the bone shakes, and the sound comes out. Boom.",
+       "ar": "تُظهر الكاميرا كل شيء: تدخل الفقاعة عظمة، فتهتزّ العظمة ويخرج الصوت. دُم."
       },
       "mood": "thinking",
       "effects": [
@@ -908,14 +908,14 @@
     {
      "id": "block-vent",
      "label": {
-      "en": "Stabilize the loose rock near the main vent",
-      "ar": "تثبيت الصخر السائب قرب الفتحة الرئيسية"
+      "en": "Cover the spring for a moment with the robot arm",
+      "ar": "غطّوا الينبوع لحظة بذراع الغوّاصة"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "Securing the rock stops the erratic screeching, leaving a pure rhythmic tone.",
-       "ar": "تثبيت الصخر يوقف الصراخ غير المنتظم، تاركاً نغمة إيقاعية نقية."
+       "en": "The beat stops. When the arm moves away, it starts again. So the spring is the drummer.",
+       "ar": "يتوقّف الصوت. وحين تبتعد الذراع يرجع من جديد. إذن الينبوع هو الذي يدقّ الطبل."
       },
       "mood": "proud",
       "effects": [
@@ -931,14 +931,14 @@
     {
      "id": "study-bubbles",
      "label": {
-      "en": "Collect gas samples from the rising plume",
-      "ar": "جمع عينات الغاز من التيار الصاعد"
+      "en": "Collect the gas in a jar",
+      "ar": "اجمعوا الغاز في وعاء"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "Analysis shows methane hydrates are feeding the resonant acoustic effect.",
-       "ar": "يُظهر التحليل أن هيدرات الميثان تغذي التأثير الصوتي الرنان."
+       "en": "The jar fills with gas that comes from inside the Earth. It is hot, so the team handles it with care.",
+       "ar": "يمتلئ الوعاء بغاز يخرج من باطن الأرض. الغاز حارّ، فيتعامل معه الفريق بحذر."
       },
       "mood": "thinking",
       "effects": [
@@ -954,14 +954,14 @@
     {
      "id": "help-companion",
      "label": {
-      "en": "Guide {duck} through the warm water pocket",
-      "ar": "توجيه {duck} عبر جيب الماء الدافئ"
+      "en": "Ask {duck} to record the sound",
+      "ar": "اطلبوا من {duck} تسجيل الصوت"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "{duck} records clear audio of the phenomenon with {g:his|her} gear.",
-       "ar": "تسجل {duck} صوتاً واضحاً للظاهرة بمعداتها."
+       "en": "The recording is clear: one deep note every four seconds. The file is now safe with {duck}.",
+       "ar": "التسجيل واضح: نغمة عميقة كل أربع ثوانٍ. والملف الآن محفوظ عند {duck}."
       },
       "mood": "happy",
       "effects": [
@@ -977,14 +977,14 @@
     {
      "id": "dig-channel",
      "label": {
-      "en": "Dig a diversion channel for the hot gas",
-      "ar": "حفر قناة تحويل للغاز الساخن"
+      "en": "Let {name} clear the mud around the spring",
+      "ar": "دعوا {name} يزيل الطين حول الينبوع"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "The new channel redirects the bubbles safely away from sensitive instruments.",
-       "ar": "توجه القناة الجديدة الفقاعات بعيداً عن الأدوات الحساسة بأمان."
+       "en": "With the mud gone, the bubbles rise straight into the bones, and the beat becomes clean and regular.",
+       "ar": "بعد إزالة الطين تصعد الفقاعات مباشرة إلى العظام، فيصير الصوت واضحاً ومنتظماً."
       },
       "mood": "proud",
       "effects": [
@@ -1005,14 +1005,14 @@
     {
      "id": "camouflage-vent",
      "label": {
-      "en": "Blend into the mineral background to observe undisturbed",
-      "ar": "الاندماج في الخلفية المعدنية للمراقبة دون إزعاج"
+      "en": "Let {name} hide and watch the animals",
+      "ar": "دعوا {name} يختبئ ويراقب الحيوانات"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "Remaining unseen lets {name} watch deep-sea fauna use the resonance.",
-       "ar": "البقاء غير مرئي يمكن {name} من مشاهدة حيوانات الأعماق وهي تستخدم الرنين."
+       "en": "{name} stays still. Fish and crabs come close to the warm spring: the beat does not scare them, they live with it.",
+       "ar": "يبقى {name} بلا حركة. تقترب أسماك وسرطانات من الينبوع الدافئ: الصوت لا يخيفها، فهي تعيش معه."
       },
       "mood": "thinking",
       "effects": [
@@ -1039,21 +1039,21 @@
    "props": [],
    "plate": "trench-snailfish-lander",
    "text": {
-    "en": "The mystery is fully revealed: the rhythmic pulses are a natural resonance created by geothermal vents interacting with ancient seismic structures, amplified by deep-sea fauna. {duck} prepares to transmit the final discovery.",
-    "ar": "ينكشف اللغز تماماً: النبضات الإيقاعية هي رنين طبيعي ناتج عن تفاعل الفتحات الحرارية الأرضية مع الهياكل الزلزالية القديمة، وتضخمها حيوانات الأعماق. تستعد {duck} لبث الاكتشاف النهائي."
+    "en": "Now the team understands the drum in the deep. Under the whale skeleton, a hot spring lets out a bubble every few seconds. The bubbles make the hollow bones sound, and they knock the loose cover of the lost device. It is not a monster: it is nature playing a drum. Misk calls from the ship: “What shall we do with this place?”",
+    "ar": "الآن فهم الفريق سرّ الطبل في القاع. تحت هيكل الحوت ينبوع حارّ يُخرج فقاعة كل بضع ثوانٍ. الفقاعات تجعل العظام المجوّفة تصدر صوتاً، وتدقّ غطاء الجهاز المفكوك. ليس وحشاً: إنها الطبيعة تدقّ الطبل. تتصل مسك من السفينة وتسأل: «ماذا نفعل بهذا المكان؟»"
    },
    "choices": [
     {
      "id": "publish-science",
      "label": {
-      "en": "Transmit complete geological data to surface labs",
-      "ar": "بث البيانات الجيولوجية الكاملة لمختبرات السطح"
+      "en": "Send everything you found to the ship",
+      "ar": "أرسلوا كل ما وجدتموه إلى السفينة"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "The data packet uploads successfully, solving the mystery of the deep trench signals once and for all.",
-       "ar": "يتم رفع حزمة البيانات بنجاح، مما يحل لغز إشارات الأخدود العميق مرة وإلى الأبد."
+       "en": "The photos, the recording and the measurements reach the ship. Misk answers: “This is the first time anyone has explained this sound!”",
+       "ar": "تصل الصور والتسجيل والقياسات إلى السفينة. وتردّ مسك: «هذه أول مرة يفسّر فيها أحد هذا الصوت!»"
       },
       "mood": "proud",
       "effects": [],
@@ -1064,14 +1064,14 @@
     {
      "id": "protect-habitat",
      "label": {
-      "en": "Leave the natural acoustic chamber untouched",
-      "ar": "ترك الغرفة الصوتية الطبيعية دون مساس"
+      "en": "Leave the place exactly as it is",
+      "ar": "اتركوا المكان كما هو تماماً"
      },
      "style": "kind",
      "success": {
       "text": {
-       "en": "{name} and {duck} secure the area without disturbing the delicate ecosystem.",
-       "ar": "يؤمن {name} و {duck} المنطقة دون إزعاج النظام البيئي الدقيق."
+       "en": "The team touches nothing. The submarine rises slowly, and the drum keeps beating behind it for the animals that live there.",
+       "ar": "لا يلمس الفريق شيئاً. تصعد الغوّاصة ببطء، ويبقى الطبل يدقّ خلفها للحيوانات التي تعيش هناك."
       },
       "mood": "happy",
       "effects": [],
@@ -1082,14 +1082,14 @@
     {
      "id": "record-rhythm",
      "label": {
-      "en": "Record a duet with the rhythmic pulse",
-      "ar": "تسجيل دويتو مع النبضة الإيقاعية"
+      "en": "Record a song with the beat",
+      "ar": "سجّلوا أغنية مع صوت الطبل"
      },
      "style": "clever",
      "success": {
       "text": {
-       "en": "A harmonious sound wave echoes through the trench, creating an unforgettable acoustic memory.",
-       "ar": "موجة صوتية متناغمة تتردد عبر الأخدود، مما يخلق ذكرى صوتية لا تُنسى."
+       "en": "Faisal taps on the wall of the submarine in time with the beat, and everyone sings. {name} joins in with a loud, happy sound.",
+       "ar": "يدقّ فيصل على جدار الغوّاصة مع صوت الطبل، ويغنّي الجميع. ويشارك {name} بصوت عالٍ وسعيد."
       },
       "mood": "laughing",
       "effects": [],
@@ -1100,14 +1100,14 @@
     {
      "id": "explore-further",
      "label": {
-      "en": "Venture deeper into uncharted abyssal rifts",
-      "ar": "المغامرة أعمق في الشقوق السحيقة غير المكتشفة"
+      "en": "Take one last look around the skeleton",
+      "ar": "خذوا جولة أخيرة حول الهيكل"
      },
      "style": "bold",
      "success": {
       "text": {
-       "en": "{name} pushes past the station into even deeper, unknown waters.",
-       "ar": "يخترق {name} المحطة متجهاً نحو مياه أعمق ومجهولة."
+       "en": "On the other side, the searchlight finds two more hot springs. The team draws a map of them and sends everything to the ship.",
+       "ar": "في الجهة الأخرى يجد الكشّاف ينبوعين حارّين آخرين. يرسم الفريق خريطة لهما ويرسل كل شيء إلى السفينة."
       },
       "mood": "proud",
       "effects": [],
@@ -1122,46 +1122,46 @@
   "scientific-triumph": {
    "tone": "scientific",
    "title": {
-    "en": "Abyssal Geophysics Solved",
-    "ar": "حل لغز جيوفيزياء الأعماق"
+    "en": "The Drum Explained",
+    "ar": "حُلّ لغز الطبل"
    },
    "summary": {
-    "en": "The team successfully mapped the natural geothermal resonance of the trench.",
-    "ar": "نجح الفريق في رسم خريطة الرنين الحراري الأرضي الطبيعي للأخدود."
+    "en": "The team found the cause of the beat in the deep: bubbles from a hot spring passing through the bones of a sunken whale.",
+    "ar": "وجد الفريق سبب الصوت في القاع: فقاعات من ينبوع حارّ تمرّ داخل عظام حوت غارق."
    },
    "epilogue": {
-    "en": "Surface researchers now understand that deep ocean trenches possess their own dynamic acoustic symphony.",
-    "ar": "يفهم باحثو السطح الآن أن أخدود المحيط العميقة تمتلك سمفونيتها الصوتية الديناميكية الخاصة."
+    "en": "The Marine Science Club put a new listening device beside the skeleton, with a stronger cable this time. The first thing it recorded was the same beat: boom… boom… boom.",
+    "ar": "وضع نادي علوم البحار جهازاً جديداً بجانب الهيكل، وبكابل أقوى هذه المرة. وأول ما سجّله كان الصوت نفسه: دُم… دُم… دُم."
    }
   },
   "ecological-harmony": {
    "tone": "wholesome",
    "title": {
-    "en": "Guardians of the Deep",
-    "ar": "حراس الأعماق"
+    "en": "The Drum Keeps Playing",
+    "ar": "الطبل يكمل عزفه"
    },
    "summary": {
-    "en": "The trench ecosystem remains protected and undisturbed by human intervention.",
-    "ar": "يبقى نظام الأخدود البيئي محمياً ودون إزعاج من التدخل البشري."
+    "en": "The team solved the mystery and left the whale skeleton and its hot spring untouched.",
+    "ar": "حلّ الفريق اللغز، وترك هيكل الحوت والينبوع الحارّ كما هما."
    },
    "epilogue": {
-    "en": "{duck} and {name} leave the abyss in peace, knowing nature keeps its own wondrous secrets.",
-    "ar": "تترك {duck} و {name} الهاوية بسلام، عالمين أن الطبيعة تحتفظ بأسرارها العجيبة."
+    "en": "{name} and {duck} went home with photos only. Down in the trench, the animals still live around the warm spring, and the drum still beats for them.",
+    "ar": "رجع {name} و{duck} بالصور فقط. وفي قاع الخندق ما زالت الحيوانات تعيش حول الينبوع الدافئ، وما زال الطبل يدقّ لها."
    }
   },
   "acoustic-melody": {
    "tone": "comedic",
    "title": {
-    "en": "Symphony of the Trenches",
-    "ar": "سفونية الأخدود"
+    "en": "The Song of the Trench",
+    "ar": "أغنية الخندق"
    },
    "summary": {
-    "en": "The strange biological signals turned out to be an incredible deep-sea concert.",
-    "ar": "تبين أن الإشارات البيولوجية الغريبة هي حفلة موسيقية بحرية عميقة لا تصدق."
+    "en": "The scary sound from the deep turned out to be a natural drum, and the team made a song with it.",
+    "ar": "تبيّن أن الصوت المخيف في القاع طبل طبيعي، فصنع الفريق معه أغنية."
    },
    "epilogue": {
-    "en": "Recorded tracks of the trench pulse become an instant viral hit back at the marine research club.",
-    "ar": "تصبح المقاطع المسجلة لنبض الأخدود ضجة واسعة الانتشار في نادي الأبحاث البحرية."
+    "en": "The recording became the favourite ringtone at the Marine Science Club. Faisal still taps the same beat on every table he sits at.",
+    "ar": "صار التسجيل نغمة الهاتف المفضّلة في نادي علوم البحار. وما زال فيصل يدقّ الإيقاع نفسه على كل طاولة يجلس عندها."
    }
   }
  }

@@ -217,7 +217,7 @@ export function composeEnding(s: GameState, recentEndings: string[] = []): Endin
   const partOf = (slot: string) => PART_BY_ID[(parts as unknown as Record<string, string>)[slot]];
   const base = PART_BY_ID[parts.base].name, limbs = PART_BY_ID[parts.limbs].name, adapt = PART_BY_ID[parts.adaptation].name;
   const hookFlag = s.flags.find((f) => f.startsWith('hook:'));
-  const goal = hookFlag ? HOOK_GOAL[hookFlag] : L('explore the unknown', 'استكشاف المجهول');
+  const goal = hookFlag ? HOOK_GOAL[hookFlag] : (BEAT_BY_ID[pb[0].template]?.goal ?? L('explore the unknown', 'استكشاف المجهول'));
   const style = STYLE_WORD[dominantStyle(s)];
   const nm = iso(s.creature.name); const art = /^[aeiou]/i.test(base.en) ? 'an' : 'a';
   const who = s.player ? iso(s.player) : null;
@@ -226,8 +226,11 @@ export function composeEnding(s: GameState, recentEndings: string[] = []): Endin
   lines.push(L(`${nm}, ${art} ${base.en} hybrid with ${limbs.en} and ${adapt.en}, set out with ${who ?? 'the team'} to ${goal.en}.`,
     `خرج ${nm} مع ${who ?? 'الفريق'} في رحلة. ${nm} مخلوق هجين: جسمه من ${base.ar}، وله ${limbs.ar} و${adapt.ar}. كانت المهمة: ${goal.ar}.`));
   // Route
-  const places = [...new Set(pb.slice(1).map((b) => b.biome).filter((b) => b !== 'openSea'))].map((b) => BIOMES[b].name);
-  lines.push(s.mode === 'marine'
+  const isStory = !!s.plan.story;
+  const places = isStory
+    ? pb.map((_b, i) => beatContext(s, i).place).filter((pl, i, a) => a.findIndex((x) => x.ar === pl.ar) === i)
+    : [...new Set(pb.slice(1).map((b) => b.biome).filter((b) => b !== 'openSea'))].map((b) => BIOMES[b].name);
+  lines.push(s.mode === 'marine' && !isStory
     ? L(`From the surface down into the dark, the trail led through ${joinList(places.map((p) => p.en), 'en')}, and the team’s choices were mostly ${style.en}.`,
       `بدأت الرحلة من سطح البحر ثم نزلت إلى الأعماق. الأماكن التي زارها الفريق: ${joinList(places.map((p) => p.ar), 'ar')}. أغلب قرارات الفريق كانت ${style.ar}.`)
     : L(`The trail led through ${joinList(places.map((p) => p.en), 'en')}, and the team’s choices were mostly ${style.en}.`,
@@ -285,7 +288,7 @@ export function composeEnding(s: GameState, recentEndings: string[] = []): Endin
     const out = ch && (fin.success || !ch.fail ? ch.success : ch.fail);
     const label = decisionAt(s, s.log.length - 1);
     const outText = out ? fill(out.text, beatContext(s, s.log.length - 1)) : null;
-    const where = BIOMES[fin.biome].name;
+    const where = beatContext(s, s.log.length - 1).place;
     if (label && outText) finale = L(`The last scene was in ${where.en}. The team chose: “${label.en}”. ${outText.en}`, `آخر مشهد كان في ${where.ar}. اختار الفريق: «${label.ar}». ${outText.ar}`);
     if (finTpl.kind === 'climax') {
       // kept in the one-paragraph summary (share card), but not repeated in the points list: the ending screen shows it first, on its own

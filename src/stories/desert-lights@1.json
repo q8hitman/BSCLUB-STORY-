@@ -1,0 +1,1146 @@
+{
+ "id": "desert-lights",
+ "v": 1,
+ "status": "published",
+ "mode": "classic",
+ "source": "hand-written 2026-11-11",
+ "title": {
+  "en": "Lights in the Desert",
+  "ar": "أضواء في الصحراء"
+ },
+ "premise": {
+  "en": "A family camping in the desert sees small lights moving around their tent every night, always in pairs. They think it is a ghost.",
+  "ar": "عائلة تخيّم في الصحراء ترى كل ليلة أضواء صغيرة تتحرّك حول خيمتها، دائماً اثنين اثنين. وتظن أنه شبح."
+ },
+ "tone": "comedy",
+ "tags": {
+  "themes": [
+   "night-camp",
+   "eye-shine",
+   "food-waste"
+  ],
+  "locations": [
+   "desert"
+  ],
+  "twist": "misidentified-animals",
+  "creatures": [
+   "jerboa",
+   "fennec",
+   "dhub"
+  ]
+ },
+ "world": {},
+ "science": [
+  "desert-heat",
+  "desert-dew"
+ ],
+ "start": "camp-hook",
+ "nodes": {
+  "camp-hook": {
+   "kind": "hook",
+   "biome": "desert",
+   "props": [],
+   "plate": "desert-night-glow",
+   "goal": {
+    "en": "Find out what the moving lights around the desert camp are.",
+    "ar": "اعرفوا ما هي الأضواء التي تتحرّك حول المخيّم في الصحراء."
+   },
+   "text": {
+    "en": "A family camping in the desert called the club for help. Every night, small lights move over the sand around their tent, always two by two, and something scratches near the food boxes. The family thinks it is a ghost. Tonight the team is at the camp with {name}. Far away, two small lights appear… then two more.",
+    "ar": "اتصلت عائلة تخيّم في الصحراء بالنادي وطلبت المساعدة. كل ليلة تتحرّك أضواء صغيرة فوق الرمل حول خيمتهم، ودائماً اثنين اثنين، وشيء يخدش قرب صناديق الطعام. العائلة تظن أنه شبح. الليلة وصل الفريق إلى المخيّم ومعه {name}. ومن بعيد يظهر ضوءان صغيران… ثم ضوءان آخران."
+   },
+   "choices": [
+    {
+     "id": "walk-toward",
+     "label": {
+      "en": "Walk toward the lights",
+      "ar": "امشوا نحو الأضواء"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The lights move away as fast as the team comes closer. But they leave small footprints in the sand.",
+       "ar": "كلما اقترب الفريق ابتعدت الأضواء بسرعة. لكنها تركت آثار أقدام صغيرة على الرمل."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "chase",
+      "next": "dunes-tracks"
+     }
+    },
+    {
+     "id": "read-tracks",
+     "label": {
+      "en": "Look for footprints in the sand",
+      "ar": "ابحثوا عن آثار أقدام على الرمل"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "There are many tiny footprints with a long line between them: an animal that hops and drags its tail.",
+       "ar": "على الرمل آثار أقدام صغيرة كثيرة وبينها خط طويل: حيوان يقفز ويجرّ ذيله خلفه."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "small-tracks"
+       }
+      ],
+      "fx": "scan",
+      "next": "dunes-tracks"
+     }
+    },
+    {
+     "id": "ask-family",
+     "label": {
+      "en": "Ask the family when the lights appear",
+      "ar": "اسألوا العائلة متى تظهر الأضواء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The father says: “They come only after we switch on the big lamp. And they always stay near the old well.”",
+       "ar": "يقول الوالد: «تظهر فقط بعد أن نشعل المصباح الكبير. وتبقى دائماً قرب البئر القديمة.»"
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "family-story"
+       }
+      ],
+      "fx": "scan",
+      "next": "old-well"
+     }
+    },
+    {
+     "id": "comfort-kids",
+     "label": {
+      "en": "Calm the children with {duck}",
+      "ar": "هدّئوا الأطفال مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team tells the children that scientists look for causes, not ghosts. The children point: the lights always come from the old well.",
+       "ar": "يقول الفريق للأطفال إن العلماء يبحثون عن السبب، ولا يخافون من الأشباح. يشير الأطفال بأيديهم: الأضواء تأتي دائماً من جهة البئر القديمة."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "old-well"
+     }
+    },
+    {
+     "id": "night-look",
+     "label": {
+      "en": "Let {name} look into the dark",
+      "ar": "دعوا {name} ينظر في الظلام"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} sees what the team cannot: small animals with big ears sitting on the dune, watching the camp.",
+       "ar": "يرى {name} ما لا يراه الفريق: حيوانات صغيرة آذانها كبيرة تجلس فوق الكثيب وتراقب المخيّم."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "watchers"
+       }
+      ],
+      "fx": "scan",
+      "next": "dunes-tracks"
+     },
+     "requires": {
+      "capAny": [
+       "nightVision",
+       "echolocation"
+      ]
+     }
+    },
+    {
+     "id": "sniff-air",
+     "label": {
+      "en": "Let {name} sniff the air",
+      "ar": "دعوا {name} يشمّ الهواء"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} turns toward the food boxes, then toward the old well: the smell of food leads there.",
+       "ar": "يلتفت {name} نحو صناديق الطعام، ثم نحو البئر القديمة: رائحة الطعام تصل إلى هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "food-smell"
+       }
+      ],
+      "fx": "sniff",
+      "next": "old-well"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "heatSense"
+      ]
+     }
+    }
+   ]
+  },
+  "dunes-tracks": {
+   "kind": "explore",
+   "biome": "desert",
+   "props": [],
+   "plate": "desert-dune-crossing",
+   "text": {
+    "en": "The footprints lead over the dunes. The sand is still warm from the day. Between the dunes there are many small holes, and the footprints go in and out of them.",
+    "ar": "تقود الآثار الفريق فوق الكثبان (تلال الرمل). الرمل ما زال دافئاً من حرارة النهار. وبين الكثبان حفر صغيرة كثيرة، والآثار تدخل إليها وتخرج منها."
+   },
+   "choices": [
+    {
+     "id": "measure-tracks",
+     "label": {
+      "en": "Measure the footprints",
+      "ar": "قيسوا آثار الأقدام"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The back feet are much longer than the front ones. This animal jumps like a tiny kangaroo.",
+       "ar": "القدمان الخلفيتان أطول كثيراً من الأماميتين. هذا الحيوان يقفز مثل كنغر صغير جداً."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "long-feet"
+       }
+      ],
+      "fx": "sample",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "climb-dune",
+     "label": {
+      "en": "Climb the dune to see farther",
+      "ar": "اصعدوا الكثيب لتروا من بعيد"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "From the top the team sees the whole camp, and many pairs of lights around it, not just one.",
+       "ar": "من فوق يرى الفريق المخيّم كله، وحوله أضواء كثيرة اثنين اثنين، وليس ضوءين فقط."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "climb",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "study-holes",
+     "label": {
+      "en": "Look at the holes in the sand",
+      "ar": "افحصوا الحفر في الرمل"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The holes are burrows: small homes under the sand, where it stays cool during the day.",
+       "ar": "هذه الحفر جحور: بيوت صغيرة تحت الرمل، يبقى داخلها بارداً في النهار."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "burrows"
+       }
+      ],
+      "fx": "scan",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "rest-duck",
+     "label": {
+      "en": "Share the water with {duck}",
+      "ar": "تقاسموا الماء مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Everyone drinks, {duck} too. In the desert, water comes first.",
+       "ar": "يشرب الجميع، ومنهم {duck}. في الصحراء الماء أهم شيء."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "dig-burrow",
+     "label": {
+      "en": "Let {name} dig beside a burrow",
+      "ar": "دعوا {name} يحفر بجانب جحر"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} digs carefully and finds seeds stored under the sand: the animal keeps its food here.",
+       "ar": "يحفر {name} بحذر فيجد بذوراً مخزّنة تحت الرمل: الحيوان يحفظ طعامه هنا."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "stored-seeds"
+       }
+      ],
+      "fx": "dig",
+      "next": "camp-site"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "fast-follow",
+     "label": {
+      "en": "Let {name} follow the footprints quickly",
+      "ar": "دعوا {name} يتتبّع الآثار بسرعة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} follows the footprints across the sand and stops at a burrow: they end there.",
+       "ar": "يتتبّع {name} الآثار فوق الرمل ويقف عند جحر: الآثار تنتهي هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "jump",
+      "next": "camp-site"
+     },
+     "requires": {
+      "capAny": [
+       "jump",
+       "climb",
+       "grip"
+      ]
+     }
+    }
+   ]
+  },
+  "old-well": {
+   "kind": "explore",
+   "biome": "desert",
+   "props": [],
+   "plate": "desert-mirage-oasis",
+   "text": {
+    "en": "Near the old well the ground is a little wet, and small plants grow. In the light of the torch, pairs of small lights shine for a second among the plants, then disappear.",
+    "ar": "قرب البئر القديمة الأرض رطبة قليلاً، وتنمو نباتات صغيرة. في ضوء المصباح اليدوي تلمع أضواء صغيرة بين النباتات لحظة، اثنين اثنين، ثم تختفي."
+   },
+   "choices": [
+    {
+     "id": "torch-test",
+     "label": {
+      "en": "Switch the torch off, then on",
+      "ar": "أطفئوا المصباح ثم أشعلوه"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "When the torch is off, the lights disappear. When it is on, they come back. So they do not make light: they send your light back.",
+       "ar": "حين ينطفئ المصباح تختفي الأضواء. وحين يشتعل ترجع. إذن هي لا تصنع ضوءاً: هي تعكس ضوء مصباحكم."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "eye-shine"
+       }
+      ],
+      "fx": "flash",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "go-around",
+     "label": {
+      "en": "Go around the well quietly",
+      "ar": "دوروا حول البئر بهدوء"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The team reaches the other side without a sound. Something small runs into the plants.",
+       "ar": "يصل الفريق إلى الجهة الأخرى دون أي صوت. وشيء صغير يهرب بين النباتات."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "look-plants",
+     "label": {
+      "en": "Look at the plants",
+      "ar": "افحصوا النباتات"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Some plants are bitten, and there are insects everywhere. For small animals, this place is full of food and water.",
+       "ar": "بعض النباتات مقضومة، والحشرات في كل مكان. هذا المكان مليء بالطعام والماء للحيوانات الصغيرة."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bitten-plants"
+       }
+      ],
+      "fx": "scan",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "wait-duck",
+     "label": {
+      "en": "Wait for {duck}",
+      "ar": "انتظروا {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The team waits until everyone is together, {duck} included. Nobody walks alone in the desert at night.",
+       "ar": "ينتظر الفريق حتى يجتمع الكل، ومنهم {duck}. لا أحد يمشي وحده في الصحراء ليلاً."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "camp-site"
+     }
+    },
+    {
+     "id": "feel-heat",
+     "label": {
+      "en": "Let {name} feel for warm bodies",
+      "ar": "دعوا {name} يبحث عن أجسام دافئة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} points with its head at five places in the plants: five small warm animals are hiding there.",
+       "ar": "يشير {name} برأسه إلى خمسة أماكن بين النباتات: خمسة حيوانات صغيرة دافئة تختبئ هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "five-hiding"
+       }
+      ],
+      "fx": "scan",
+      "next": "camp-site"
+     },
+     "requires": {
+      "capAny": [
+       "heatSense"
+      ]
+     }
+    },
+    {
+     "id": "soft-glow",
+     "label": {
+      "en": "Let {name} glow softly",
+      "ar": "دعوا {name} يضيء بضوء خفيف"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "In the soft light of {name}, a small fox with huge ears looks back for a moment, then runs.",
+       "ar": "في ضوء {name} الخفيف يظهر ثعلب صغير بأذنين كبيرتين جداً، ينظر لحظة ثم يهرب."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "big-ears-seen"
+       }
+      ],
+      "fx": "flash",
+      "next": "camp-site"
+     },
+     "requires": {
+      "capAny": [
+       "glow"
+      ]
+     }
+    }
+   ]
+  },
+  "camp-site": {
+   "kind": "challenge",
+   "biome": "desert",
+   "props": [],
+   "plate": "camp-desert-stars",
+   "text": {
+    "en": "Back at the camp. Beside the tent there are open food boxes and a bag of rubbish. The big lamp is on. Around the camp, in the dark, pairs of lights are waiting.",
+    "ar": "رجع الفريق إلى المخيّم. بجانب الخيمة صناديق طعام مفتوحة وكيس قمامة. المصباح الكبير مشتعل. وحول المخيّم، في الظلام، أضواء تنتظر اثنين اثنين."
+   },
+   "choices": [
+    {
+     "id": "sit-lamp",
+     "label": {
+      "en": "Sit quietly beside the lamp and wait",
+      "ar": "اجلسوا بهدوء قرب المصباح وانتظروا"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "After a few minutes the lights come closer, slowly, toward the lamp.",
+       "ar": "بعد دقائق تقترب الأضواء ببطء نحو المصباح."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": -1
+       }
+      ],
+      "fx": "still",
+      "next": "lamp-watch"
+     }
+    },
+    {
+     "id": "move-food",
+     "label": {
+      "en": "Move the food boxes into the car",
+      "ar": "انقلوا صناديق الطعام إلى السيارة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "Under the boxes there are small bite marks and seeds. Someone small has been eating here every night.",
+       "ar": "تحت الصناديق آثار قضم صغيرة وبذور. حيوان صغير يأكل هنا كل ليلة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bite-marks"
+       }
+      ],
+      "fx": "impact",
+      "next": "lamp-watch"
+     }
+    },
+    {
+     "id": "watch-holes",
+     "label": {
+      "en": "Watch the burrows near the tent",
+      "ar": "راقبوا الجحور القريبة من الخيمة"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "A small animal comes out of a burrow, sits up on two long legs, and looks at the lamp.",
+       "ar": "يخرج حيوان صغير من جحر، ويقف على رجلين طويلتين، وينظر إلى المصباح."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "burrow-near-tent"
+       }
+      ],
+      "fx": "scan",
+      "next": "burrow-watch"
+     }
+    },
+    {
+     "id": "tell-family",
+     "label": {
+      "en": "Tell the family what you found, with {duck}",
+      "ar": "أخبروا العائلة بما وجدتم، ومعكم {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The family listens carefully. The children want to see the burrows near the tent, so the team takes them there.",
+       "ar": "تستمع العائلة باهتمام. الأطفال يريدون أن يروا الجحور القريبة من الخيمة، فيأخذهم الفريق إليها."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "burrow-watch"
+     }
+    },
+    {
+     "id": "under-bag",
+     "label": {
+      "en": "Let {name} check under the rubbish bag",
+      "ar": "دعوا {name} يفحص تحت كيس القمامة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} pushes the bag aside: under it, the sand is full of tiny footprints.",
+       "ar": "يدفع {name} الكيس جانباً: الرمل تحته مليء بآثار أقدام صغيرة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "prints-under-bag"
+       }
+      ],
+      "fx": "dig",
+      "next": "lamp-watch"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "smell-trail",
+     "label": {
+      "en": "Let {name} follow the smell of food",
+      "ar": "دعوا {name} يتتبّع رائحة الطعام"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "{name} follows the smell from the boxes to the burrows: the food is being carried there.",
+       "ar": "يتتبّع {name} الرائحة من الصناديق إلى الجحور: الطعام يُنقل إلى هناك."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "food-to-burrows"
+       }
+      ],
+      "fx": "sniff",
+      "next": "burrow-watch"
+     },
+     "requires": {
+      "capAny": [
+       "scent",
+       "venom"
+      ]
+     }
+    }
+   ]
+  },
+  "lamp-watch": {
+   "kind": "challenge",
+   "biome": "desert",
+   "props": [],
+   "plate": "desert-jerboa-hat",
+   "featured": "jerboa",
+   "text": {
+    "en": "Beside the lamp, the lights finally come close enough to see. They are eyes! A small animal with a long tail and very long back legs hops into the light: a jerboa. Its eyes shine because they send the light of the lamp back.",
+    "ar": "قرب المصباح اقتربت الأضواء أخيراً حتى صارت واضحة. إنها عيون! يقفز إلى الضوء حيوان صغير له ذيل طويل ورجلان خلفيتان طويلتان جداً: إنه الجربوع. وعيناه تلمعان لأنهما تعكسان ضوء المصباح."
+   },
+   "choices": [
+    {
+     "id": "photo",
+     "label": {
+      "en": "Take a photo without a flash",
+      "ar": "التقطوا صورة بدون فلاش"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The photo shows the jerboa clearly, with two bright dots where its eyes are.",
+       "ar": "تظهر في الصورة صورة الجربوع بوضوح، ومكان عينيه نقطتان لامعتان."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "jerboa-photo"
+       }
+      ],
+      "fx": "camera",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "stay-still",
+     "label": {
+      "en": "Stay still so it is not afraid",
+      "ar": "ابقوا بلا حركة حتى لا يخاف"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The jerboa hops closer, takes a seed near a shoe, and hops away.",
+       "ar": "يقترب الجربوع قفزاً، يأخذ بذرة قرب أحد الأحذية، ثم يبتعد قفزاً."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "still",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "lamp-test",
+     "label": {
+      "en": "Switch the big lamp off for a moment",
+      "ar": "أطفئوا المصباح الكبير لحظة"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The shining eyes disappear at once. Lamp on: they shine again. The “ghost lights” are eyes sending back the light of the lamp.",
+       "ar": "تختفي العيون اللامعة فوراً. يشتعل المصباح فتلمع من جديد. إذن «أضواء الشبح» عيون تعكس ضوء المصباح."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "lamp-test"
+       }
+      ],
+      "fx": "flash",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "count-eyes",
+     "label": {
+      "en": "Count the pairs of eyes",
+      "ar": "عُدّوا العيون"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Nine pairs. Most are low, near the sand. Two are higher: a bigger animal is watching too.",
+       "ar": "تسعة أزواج من العيون. أغلبها منخفض قرب الرمل. وزوجان منها أعلى: حيوان أكبر يراقب أيضاً."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "nine-pairs"
+       }
+      ],
+      "fx": "scan",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "own-light",
+     "label": {
+      "en": "Let {name} make a small light of its own",
+      "ar": "دعوا {name} يصنع ضوءاً صغيراً من جسمه"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The eyes shine in the light of {name} too. Any light at night makes them shine.",
+       "ar": "تلمع العيون في ضوء {name} أيضاً. أي ضوء في الليل يجعلها تلمع."
+      },
+      "mood": "shocked",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "any-light"
+       }
+      ],
+      "fx": "flash",
+      "next": "dawn-answer"
+     },
+     "requires": {
+      "capAny": [
+       "shock",
+       "glow"
+      ]
+     }
+    },
+    {
+     "id": "lift-lamp",
+     "label": {
+      "en": "Let {name} lift the lamp higher",
+      "ar": "دعوا {name} يرفع المصباح إلى الأعلى"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "With the lamp higher, the light reaches the dune: a small fox with big ears sits there, its eyes shining.",
+       "ar": "حين يرتفع المصباح يصل ضوءه إلى الكثيب: هناك يجلس ثعلب صغير بأذنين كبيرتين، وعيناه تلمعان."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fox-on-dune"
+       }
+      ],
+      "fx": "climb",
+      "next": "dawn-answer"
+     },
+     "requires": {
+      "capAny": [
+       "grip",
+       "climb"
+      ]
+     }
+    }
+   ]
+  },
+  "burrow-watch": {
+   "kind": "challenge",
+   "biome": "desert",
+   "props": [],
+   "plate": "desert-dhub-standoff",
+   "featured": "fennec",
+   "text": {
+    "en": "Near the burrows, a small fox with huge ears comes out of the dark: a fennec fox. It is hunting the insects that fly around the lamp. Its eyes shine in the light. A sleepy lizard with a spiky tail watches from its hole.",
+    "ar": "قرب الجحور يخرج من الظلام ثعلب صغير بأذنين كبيرتين جداً: إنه ثعلب الفنك. جاء يصطاد الحشرات التي تطير حول المصباح. عيناه تلمعان في الضوء. ومن حفرة قريبة يراقب ضبّ نعسان (سحلية ذيلها مليء بالأشواك)."
+   },
+   "choices": [
+    {
+     "id": "watch-fox",
+     "label": {
+      "en": "Watch the fox from far away",
+      "ar": "راقبوا الثعلب من بعيد"
+     },
+     "style": "careful",
+     "success": {
+      "text": {
+       "en": "The fox catches a beetle near the lamp and eats it. The lamp brings insects, and insects bring the fox.",
+       "ar": "يصطاد الثعلب خنفساء قرب المصباح ويأكلها. المصباح يجذب الحشرات، والحشرات تجذب الثعلب."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "energy",
+        "d": 1
+       }
+      ],
+      "fx": "binoculars",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "stand-between",
+     "label": {
+      "en": "Stand between the fox and the food boxes",
+      "ar": "قفوا بين الثعلب وصناديق الطعام"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The fox stops, looks, and walks around the team. It is not afraid of the camp: it comes here every night.",
+       "ar": "يتوقف الثعلب وينظر، ثم يمشي حول الفريق. هو لا يخاف من المخيّم: يأتي إلى هنا كل ليلة."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "fox-not-afraid"
+       }
+      ],
+      "fx": "still",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "study-eyes",
+     "label": {
+      "en": "Look closely at how the eyes shine",
+      "ar": "افحصوا كيف تلمع العيون"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The shine is green. Many night animals have a layer at the back of the eye that sends light back, so they see better in the dark.",
+       "ar": "لون اللمعان أخضر. عند كثير من حيوانات الليل طبقة في آخر العين تعكس الضوء، فترى أفضل في الظلام."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "green-shine"
+       }
+      ],
+      "fx": "scan",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "notes-duck",
+     "label": {
+      "en": "Write everything down with {duck}",
+      "ar": "اكتبوا كل شيء في الدفتر مع {duck}"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "Every detail is now in the notebook that {duck} carries: the time, the place and the animals.",
+       "ar": "كل التفاصيل الآن في الدفتر الذي مع {duck}: الوقت والمكان والحيوانات."
+      },
+      "mood": "happy",
+      "effects": [
+       {
+        "t": "trust",
+        "d": 1
+       }
+      ],
+      "fx": "heart",
+      "next": "dawn-answer"
+     }
+    },
+    {
+     "id": "empty-burrow",
+     "label": {
+      "en": "Let {name} look into an empty burrow",
+      "ar": "دعوا {name} يفحص جحراً فارغاً"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "{name} finds an old burrow full of seeds and bits of bread: food taken from the camp.",
+       "ar": "يجد {name} جحراً قديماً فيه بذور وقطع خبز: طعام مأخوذ من المخيّم."
+      },
+      "mood": "proud",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "bread-in-burrow"
+       }
+      ],
+      "fx": "dig",
+      "next": "dawn-answer"
+     },
+     "requires": {
+      "capAny": [
+       "dig"
+      ]
+     }
+    },
+    {
+     "id": "hide-watch",
+     "label": {
+      "en": "Let {name} hide and watch",
+      "ar": "دعوا {name} يختبئ ويراقب"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "Hidden, {name} sees everything: jerboas near the boxes, the fox near the lamp, and no ghost anywhere.",
+       "ar": "من مكانه المخفي يرى {name} كل شيء: جرابيع قرب الصناديق، والثعلب قرب المصباح، ولا يوجد أي شبح."
+      },
+      "mood": "thinking",
+      "effects": [
+       {
+        "t": "evidence",
+        "id": "no-ghost"
+       }
+      ],
+      "fx": "camo",
+      "next": "dawn-answer"
+     },
+     "requires": {
+      "capAny": [
+       "camouflage",
+       "nightVision"
+      ]
+     }
+    }
+   ]
+  },
+  "dawn-answer": {
+   "kind": "climax",
+   "biome": "desert",
+   "props": [],
+   "plate": "desert-heat-haze",
+   "cinematic": "reveal",
+   "text": {
+    "en": "The sky turns light. Now the team knows the answer. The “ghost lights” are the eyes of night animals: jerboas that come for the food left outside, and a fennec fox that hunts the insects around the lamp. Their eyes shine because they send the light of the lamp back. The family asks: “So what should we do?”",
+    "ar": "بدأ ضوء الصباح يظهر. الآن عرف الفريق الجواب. «أضواء الشبح» هي عيون حيوانات الليل: جرابيع تأتي من أجل الطعام المتروك في الخارج، وثعلب فنك يصطاد الحشرات حول المصباح. وعيونها تلمع لأنها تعكس ضوء المصباح. تسأل العائلة: «وماذا نفعل الآن؟»"
+   },
+   "choices": [
+    {
+     "id": "show-photos",
+     "label": {
+      "en": "Show the family the photos and explain everything",
+      "ar": "أروا العائلة الصور واشرحوا كل شيء"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The family looks at the photos and laughs with relief. The children ask to give the fox a name.",
+       "ar": "تنظر العائلة إلى الصور وتضحك بارتياح. ويطلب الأطفال أن يختاروا اسماً للثعلب."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "screen",
+      "next": "end:eyes-explained"
+     }
+    },
+    {
+     "id": "tidy-camp",
+     "label": {
+      "en": "Help the family close the food away and turn the lamp down",
+      "ar": "ساعدوا العائلة على إغلاق الطعام وتخفيف ضوء المصباح"
+     },
+     "style": "kind",
+     "success": {
+      "text": {
+       "en": "The food goes into closed boxes and the lamp is turned down. That night only two pairs of eyes come, then they go back to the desert.",
+       "ar": "يوضع الطعام في صناديق مغلقة ويُخفَّف ضوء المصباح. في تلك الليلة يأتي زوجان فقط من العيون، ثم يرجعان إلى الصحراء."
+      },
+      "mood": "happy",
+      "effects": [],
+      "fx": "heart",
+      "next": "end:quiet-camp"
+     }
+    },
+    {
+     "id": "count-game",
+     "label": {
+      "en": "Wait one more night with the children",
+      "ar": "انتظروا ليلة أخرى مع الأطفال"
+     },
+     "style": "clever",
+     "success": {
+      "text": {
+       "en": "The children sit with torches and count the shining eyes like stars. They give every pair a funny name.",
+       "ar": "يجلس الأطفال ومعهم مصابيح يدوية، ويعدّون العيون اللامعة مثل النجوم. ويختارون لكل زوج اسماً مضحكاً."
+      },
+      "mood": "laughing",
+      "effects": [],
+      "fx": "stars",
+      "next": "end:ghost-counting"
+     }
+    },
+    {
+     "id": "night-camera",
+     "label": {
+      "en": "Set up a camera for the night",
+      "ar": "ضعوا كاميرا تصوّر طوال الليل"
+     },
+     "style": "bold",
+     "success": {
+      "text": {
+       "en": "The camera films jerboas, the fox, and a hedgehog nobody expected. The club now has a full list of the night visitors of the camp.",
+       "ar": "تصوّر الكاميرا الجرابيع والثعلب، وقنفذاً لم يتوقّعه أحد. صار عند النادي قائمة كاملة بزوّار المخيّم في الليل."
+      },
+      "mood": "proud",
+      "effects": [],
+      "fx": "camera",
+      "next": "end:eyes-explained"
+     }
+    }
+   ]
+  }
+ },
+ "endings": {
+  "eyes-explained": {
+   "tone": "scientific",
+   "title": {
+    "en": "The Lights Were Eyes",
+    "ar": "الأضواء كانت عيوناً"
+   },
+   "summary": {
+    "en": "The team proved that the moving lights were the eyes of night animals sending back the light of the camp lamp.",
+    "ar": "أثبت الفريق أن الأضواء المتحرّكة هي عيون حيوانات الليل وهي تعكس ضوء مصباح المخيّم."
+   },
+   "epilogue": {
+    "en": "The family kept the photos. The club used them in a small guide called “Night animals of the desert camp”, and {name} is on the cover.",
+    "ar": "احتفظت العائلة بالصور. واستعملها النادي في كتيّب صغير اسمه «حيوانات الليل في مخيّم الصحراء»، وصورة {name} على غلافه."
+   }
+  },
+  "quiet-camp": {
+   "tone": "wholesome",
+   "title": {
+    "en": "A Quiet Camp",
+    "ar": "مخيّم هادئ"
+   },
+   "summary": {
+    "en": "The team solved the mystery and helped the family camp without disturbing the animals.",
+    "ar": "حلّ الفريق اللغز، وساعد العائلة على التخييم دون إزعاج الحيوانات."
+   },
+   "epilogue": {
+    "en": "With the food closed away and the lamp turned down, the animals went back to finding their own food. The family still sees a pair of eyes sometimes, and now the children wave at it.",
+    "ar": "بعد إغلاق الطعام وتخفيف ضوء المصباح، رجعت الحيوانات تبحث عن طعامها بنفسها. ما زالت العائلة ترى زوجاً من العيون أحياناً، والأطفال الآن يلوّحون له."
+   }
+  },
+  "ghost-counting": {
+   "tone": "comedic",
+   "title": {
+    "en": "The Ghost Counters",
+    "ar": "عدّادو الأشباح"
+   },
+   "summary": {
+    "en": "The “ghosts” turned out to be jerboas and a fox, and counting their shining eyes became the favourite game of the camp.",
+    "ar": "تبيّن أن «الأشباح» جرابيع وثعلب، وصار عدّ عيونها اللامعة لعبة المخيّم المفضّلة."
+   },
+   "epilogue": {
+    "en": "The children made a list of “ghosts” with names like Jumper and Big Ears. A copy of it now hangs on the wall of the club, brought by {duck}.",
+    "ar": "كتب الأطفال قائمة «الأشباح» بأسماء مثل «القفّاز» و«ذو الأذنين». ونسخة منها معلّقة الآن على جدار النادي، ومعها توقيع {duck}."
+   }
+  }
+ }
+}

@@ -24,6 +24,12 @@ import { Btn, CreatureArt, Logos, Particles, Typewriter, ZoomCard, type ZoomInfo
 import { animalArt } from '../art/animalArt';
 import { ANIMAL_BY_ID, type Animal } from '../content/bestiary';
 import { ROLE_LABEL, u } from './uiText';
+import { GUESTS, guestLine, type Guest } from '../content/guests';
+
+/** The large card for a guest character: full picture, who they are, what they do. */
+function guestZoom(gs: Guest, lang: Lang): ZoomInfo {
+  return { img: `${import.meta.env.BASE_URL}guests/${gs.id}-full.webp`, kicker: lang === 'ar' ? 'ضيف من نادي علوم البحار' : 'Guest from the Marine Science Club', title: gs.name[lang], tags: [gs.role[lang]], lines: [{ text: gs.about[lang] }] };
+}
 
 const CATEGORY: Record<Animal['category'], [string, string]> = {
   mammal: ['A mammal', 'من الثدييات'], bird: ['A bird', 'من الطيور'], reptile: ['A reptile', 'من الزواحف'], amphibian: ['An amphibian (lives in water and on land)', 'من البرمائيات (تعيش في الماء وعلى اليابسة)'],
@@ -178,6 +184,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   }, [game.stage, game.index, story, tpl, game.log]);
 
   const lines = useMemo(() => (view ? radio(game, view.template.kind, view.biome) : []), [game, view]);
+  const guest = useMemo(() => guestLine(game), [game]);
   // seen-list is read once per run so the chosen sighting stays stable
   // pinned at the start of the run (same on every device); older saves fall back to this device's history
   const sighting = useMemo(() => {
@@ -256,6 +263,17 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
               <p className="brief-who">{nm(u('briefWho', lang))}</p>
               <p className="brief-animal">{nm(u('briefAnimal', lang))}</p>
               {game.mode === 'marine' && <p className="brief-sea"><b>{u('briefSeaQ', lang)}</b>{nm(u('briefSea', lang))}</p>}
+              {game.mode === 'marine' && (
+                <div className="brief-guests">
+                  <b>{lang === 'ar' ? 'ضيفا الرحلة من نادي علوم البحار' : 'Your guests from the Marine Science Club'}</b>
+                  <div className="guest-cards">{Object.values(GUESTS).map((gs) => (
+                    <button key={gs.id} type="button" className="guest-card" onClick={() => setZoom(guestZoom(gs, lang))}>
+                      <img src={`${import.meta.env.BASE_URL}guests/${gs.id}-full.webp`} alt={gs.name[lang]} />
+                      <strong>{gs.name[lang]}</strong><small>{gs.role[lang]}</small>
+                    </button>
+                  ))}</div>
+                </div>
+              )}
               {goal && <div className="brief-goal"><b>{u('briefGoal', lang)}</b><span>{nm(goal[lang])}</span></div>}
               <div className="brief-how"><b>{u('briefHow', lang)}</b><ol><li>{nm(u('briefHow1', lang))}</li><li>{u('briefHow2', lang)}</li><li>{u('briefHow3', lang)}</li></ol></div>
               <Btn onClick={() => setBrief(false)} autoFocus>{u('briefStart', lang)}</Btn>
@@ -317,6 +335,15 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
           <Typewriter key={`${game.index}${game.stage}`} text={isOutcome ? (aiText ?? o!.text[lang]) : view.text[lang]} speed={speed} onDone={() => setTyped(true)} />
           {isOutcome && o!.partLine && <p className="part-line">{o!.partLine[lang]}</p>}
         </div>
+
+        {guest && (
+          <div className="duck-radio guest-radio" aria-label={guest.guest.name[lang]}>
+            <div key={`g${game.index}`} className="radio-line kind-guest tappable" role="button" tabIndex={0} onClick={() => setZoom(guestZoom(guest.guest, lang))} onKeyDown={(e) => { if (e.key === 'Enter') setZoom(guestZoom(guest.guest, lang)); }}>
+              <img src={`${import.meta.env.BASE_URL}guests/${guest.guest.id}-${guest.face}.webp`} alt="" width={64} height={56} />
+              <div><b>{guest.guest.name[lang]}<em className="radio-tag guest-tag">{lang === 'ar' ? 'ضيف من نادي علوم البحار' : 'Guest · Marine Science Club'}</em></b><span>{guest.text[lang]}</span></div>
+            </div>
+          </div>
+        )}
 
         {lines.length > 0 && (
           <div className="duck-radio" aria-label="BSC Duck Radio">

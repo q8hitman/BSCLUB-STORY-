@@ -234,6 +234,13 @@ const SCENE_PLACE: Record<string, L10n> = {
   'lantern-wreck@1:bay': PL('The bay at night', 'الخليج ليلاً'), 'lantern-wreck@1:reef': PL('The reef by the wreck', 'الشعاب قرب الحطام'),
   'lantern-wreck@1:twilight': PL('The dim waters', 'المياه المعتمة'), 'lantern-wreck@1:hull': PL('Inside the sunken ship', 'داخل السفينة الغارقة'),
   'lantern-wreck@1:wreck': PL('The wreck', 'الحطام'),
+  'trench-whispers@1:trench-hook': PL('The edge of the trench', 'حافة الخندق'), 'trench-whispers@1:trench-path-a': PL('The trench wall', 'جدار الخندق'),
+  'trench-whispers@1:trench-path-b': PL('The falling snow', 'منطقة الثلج البحري'), 'trench-whispers@1:trench-middle': PL('The bottom of the trench', 'قاع الخندق'),
+  'trench-whispers@1:trench-path-c': PL('Inside the whale skeleton', 'داخل هيكل الحوت'), 'trench-whispers@1:trench-path-d': PL('The hot spring', 'الينبوع الحارّ'),
+  'trench-whispers@1:trench-climax': PL('The bottom of the trench', 'قاع الخندق'),
+  'desert-lights@1:camp-hook': PL('The desert camp', 'مخيّم الصحراء'), 'desert-lights@1:dunes-tracks': PL('The dunes', 'الكثبان'), 'desert-lights@1:old-well': PL('The old well', 'البئر القديمة'),
+  'desert-lights@1:camp-site': PL('Beside the tent', 'بجانب الخيمة'), 'desert-lights@1:lamp-watch': PL('By the lamp', 'قرب المصباح'), 'desert-lights@1:burrow-watch': PL('By the burrows', 'قرب الجحور'),
+  'desert-lights@1:dawn-answer': PL('The camp at dawn', 'المخيّم عند الفجر'),
 };
 
 export function beatContext(s: GameState, idx = s.index): Ctx {

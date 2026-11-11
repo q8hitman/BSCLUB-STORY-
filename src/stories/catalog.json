@@ -1,5 +1,63 @@
 [
  {
+  "id": "desert-lights",
+  "v": 1,
+  "status": "published",
+  "mode": "classic",
+  "tone": "comedy",
+  "title": {
+   "en": "Lights in the Desert",
+   "ar": "أضواء في الصحراء"
+  },
+  "premise": {
+   "en": "A family camping in the desert sees small lights moving around their tent every night, always in pairs. They think it is a ghost.",
+   "ar": "عائلة تخيّم في الصحراء ترى كل ليلة أضواء صغيرة تتحرّك حول خيمتها، دائماً اثنين اثنين. وتظن أنه شبح."
+  },
+  "locations": [
+   "desert"
+  ],
+  "themes": [
+   "night-camp",
+   "eye-shine",
+   "food-waste"
+  ],
+  "twist": "misidentified-animals",
+  "endings": {
+   "eyes-explained": {
+    "en": "The Lights Were Eyes",
+    "ar": "الأضواء كانت عيوناً"
+   },
+   "quiet-camp": {
+    "en": "A Quiet Camp",
+    "ar": "مخيّم هادئ"
+   },
+   "ghost-counting": {
+    "en": "The Ghost Counters",
+    "ar": "عدّادو الأشباح"
+   }
+  },
+  "world": {},
+  "nodes": 7,
+  "hash": "0g3k5sk",
+  "fingerprint": [
+   "mode:classic",
+   "tone:comedy",
+   "twist:misidentified-animals",
+   "theme:night-camp",
+   "theme:eye-shine",
+   "theme:food-waste",
+   "loc:desert",
+   "cr:jerboa",
+   "cr:fennec",
+   "cr:dhub",
+   "arc:hook>explore>challenge>challenge>climax",
+   "end:scientific",
+   "end:wholesome",
+   "end:comedic"
+  ],
+  "publishedAt": "2026-11-11"
+ },
+ {
   "id": "lantern-wreck",
   "v": 1,
   "status": "published",
@@ -155,16 +213,16 @@
  {
   "id": "trench-whispers",
   "v": 1,
-  "status": "review",
+  "status": "published",
   "mode": "marine",
   "tone": "strange",
   "title": {
-   "en": "Whispers of the Deep Trench",
-   "ar": "همسات الأخدود العميقة"
+   "en": "The Drum in the Deep",
+   "ar": "طبل في قاع البحر"
   },
   "premise": {
-   "en": "An automated deep-sea probe in the Mariana Trench started broadcasting rhythmic biological pulses before going offline. Something down there is generating complex acoustic signals.",
-   "ar": "بدأ مسبار بحري عميق وآلي في أخدود ماريانا ببث نبضات بيولوجية إيقاعية قبل أن ينقطع اتصاله. هناك شيء ما في الأسفل يولد إشارات صوتية معقدة."
+   "en": "A listening device at the bottom of a deep trench recorded a steady beat, like a drum, and then went silent. Something down there is drumming.",
+   "ar": "سجّل جهاز في قاع خندق عميق صوتاً منتظماً مثل الطبل، ثم سكت. شيء ما في الأسفل يدقّ."
   },
   "locations": [
    "trench",
@@ -178,26 +236,26 @@
   "twist": "natural-explanation",
   "endings": {
    "scientific-triumph": {
-    "en": "Abyssal Geophysics Solved",
-    "ar": "حل لغز جيوفيزياء الأعماق"
+    "en": "The Drum Explained",
+    "ar": "حُلّ لغز الطبل"
    },
    "ecological-harmony": {
-    "en": "Guardians of the Deep",
-    "ar": "حراس الأعماق"
+    "en": "The Drum Keeps Playing",
+    "ar": "الطبل يكمل عزفه"
    },
    "acoustic-melody": {
-    "en": "Symphony of the Trenches",
-    "ar": "سفونية الأخدود"
+    "en": "The Song of the Trench",
+    "ar": "أغنية الخندق"
    }
   },
   "world": {
    "w:sonar": {
-    "en": "Sonar calibration active",
-    "ar": "معايرة السونار نشطة"
+    "en": "The depth scanner is locked on the beat",
+    "ar": "جهاز كشف الأعماق مضبوط على مصدر الصوت"
    }
   },
   "nodes": 7,
-  "hash": "1vhn4ue",
+  "hash": "0nft65q",
   "fingerprint": [
    "mode:marine",
    "tone:strange",

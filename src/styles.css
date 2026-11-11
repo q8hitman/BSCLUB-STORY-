@@ -962,3 +962,17 @@ html[lang='en'] .ending-part h3 { font-family: inherit; }
 
 .ending-points { margin: 0; padding-inline-start: 1.2em; display: grid; gap: 8px; line-height: 1.8; font-size: 1.03rem; }
 .ending-points li::marker { color: var(--gold); }
+
+/* ═══ guests from the Marine Science Club (Misk and Faisal) ═══ */
+.brief-guests { width: 100%; text-align: start; padding: var(--s3) var(--s4); border-radius: 16px; border: 1px solid rgba(127, 210, 224, .4); background: rgba(127, 210, 224, .06); }
+.brief-guests > b { color: var(--sea); font-size: .95rem; }
+.guest-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); margin-top: var(--s2); }
+.guest-card { display: grid; justify-items: center; gap: 4px; padding: 10px 8px 12px; border-radius: 14px; border: 1px solid var(--line); background: rgba(8, 10, 12, .55); color: var(--paper); cursor: zoom-in; font: inherit; text-align: center; }
+.guest-card:hover { border-color: var(--sea); }
+.guest-card img { width: 100%; max-width: 150px; height: auto; border-radius: 12px; }
+.guest-card strong { font-size: 1.15rem; color: var(--gold-2); }
+.guest-card small { color: var(--paper-dim); font-size: .82rem; line-height: 1.5; }
+.radio-line.kind-guest { border-color: rgba(127, 210, 224, .55); cursor: zoom-in; pointer-events: auto; }
+.radio-line.kind-guest::before { background: var(--sea); }
+.radio-line.kind-guest img { width: 64px; height: 56px; object-fit: cover; object-position: center; border-radius: 12px; }
+.radio-tag.guest-tag { color: var(--sea); border-color: rgba(127, 210, 224, .45); }
