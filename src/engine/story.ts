@@ -246,7 +246,7 @@ export function beatContext(s: GameState, idx = s.index): Ctx {
     name: s.creature.name.replace(/-/g, '\u2060-\u2060'), player: s.player || '—', duck: duck?.name ?? { en: 'your companion', ar: 'رفيقكم' }, duckG: duck?.gender ?? 'm', place: SCENE_PLACE[pb.template] ?? b.name,
     obstacle, predator: { en: predator.en, ar: predator.ar }, critter: { en: critter.en, ar: critter.ar },
     predatorAnimal: predator.animal, critterAnimal: critter.animal,
-    npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || { en: 'a stranger', ar: 'شخصٌ غريب' },
+    npc: (pb.npc && NPC_BY_ID[pb.npc]?.name) || NPC_BY_ID[BEAT_BY_ID[pb.template]?.npc ?? '']?.name || { en: 'a stranger', ar: 'شخصٌ غريب' },
   };
 }
 
@@ -260,23 +260,33 @@ export function featuredAnimal(t: BeatTemplate, ctx: Ctx): string | null {
 
 const DEEP_ZONE = new Set<BiomeId>(['twilight', 'midnight', 'vents', 'trench']);
 const B = (en: string, ar: string): L10n => ({ en, ar });
+// Short, plain links between scenes. Sea runs have their own set: nobody "walks on" inside a boat or a submarine.
 const AFTER_WIN: L10n[] = [
-  B('Still riding that success, the team presses on.', 'ما زال أثر ذلك النجاح حاضراً، فيمضي الفريق قُدُماً.'),
-  B('With that behind them, {name} moves on, more sure-footed now.', 'بعد ما جرى، يتقدّم {name} بخطى أثبت من ذي قبل.'),
-  B('The team allows itself a quick smile, then walks on.', 'يسمح الفريق لنفسه بابتسامةٍ سريعة، ثم يواصل السير.'),
-  B('{name} looks back once, then leads the way.', 'يلتفت {name} إلى الخلف مرةً واحدة، ثم يتقدّم الجميع.'),
-  B('Spirits are high, and the path ahead looks a little less strange.', 'المعنويات مرتفعة، والطريق أمامكم يبدو أقلّ غرابةً بقليل.'),
+  B('The team is happy with that success and carries on.', 'الفريق سعيد بهذا النجاح، ويكمل طريقه.'),
+  B('After that success, {name} moves with more confidence.', 'بعد هذا النجاح، صار {name} يتحرّك بثقة أكبر.'),
+  B('The team smiles for a moment, then carries on.', 'يبتسم الفريق لحظة، ثم يكمل طريقه.'),
+  B('{name} looks back once, then goes ahead of the team.', 'ينظر {name} خلفه مرة واحدة، ثم يتقدّم أمام الفريق.'),
+  B('Everyone feels good, and the way ahead looks easier.', 'الجميع متحمّس، والطريق يبدو أسهل الآن.'),
 ];
 const AFTER_LOSS: L10n[] = [
-  B('Still shaking off that setback, {name} keeps going.', 'ما زال {name} ينفض عنه أثر تلك العثرة، لكنه يواصل الطريق.'),
-  B('Bruised but not beaten, the team regroups and carries on.', 'يجمع الفريق شتاته بعد تلك الانتكاسة ويمضي، متعَباً لكن غير مهزوم.'),
-  B('Nobody mentions what just happened. {name} sets off again, more carefully.', 'لا أحد يذكر ما حدث قبل قليل. يتحرّك {name} من جديد، بحذرٍ أكبر هذه المرة.'),
-  B('A deep breath, a quick check of the gear, and the team moves on.', 'نَفَسٌ عميق، وفحصٌ سريع للمعدّات، ثم يمضي الفريق.'),
+  B('That did not go well, but {name} keeps going.', 'لم تنجح المحاولة السابقة، لكن {name} يكمل الطريق.'),
+  B('The team is tired after that setback, but does not give up.', 'تعب الفريق بعد تلك المحاولة الفاشلة، لكنه لا يستسلم.'),
+  B('Nobody talks about what just happened. {name} moves again, more carefully.', 'لا أحد يتكلم عمّا حدث قبل قليل. يتحرّك {name} من جديد بحذر أكبر.'),
+  B('A deep breath, a quick check of the gear, and the team carries on.', 'يأخذ الفريق نفَساً عميقاً، يفحص المعدّات بسرعة، ثم يكمل.'),
+];
+const AFTER_WIN_SEA: L10n[] = [
+  B('The team is happy with that success, and the trip goes on.', 'الفريق سعيد بهذا النجاح، والرحلة مستمرة.'),
+  B('After that success, {name} looks more confident.', 'بعد هذا النجاح، يبدو {name} أكثر ثقة.'),
+  B('The team smiles for a moment, then gets back to work.', 'يبتسم الفريق لحظة، ثم يعود إلى العمل.'),
+];
+const AFTER_LOSS_SEA: L10n[] = [
+  B('That did not go well, but the trip goes on.', 'لم تنجح المحاولة السابقة، لكن الرحلة مستمرة.'),
+  B('A deep breath, a quick check of the gear, and the team carries on.', 'يأخذ الفريق نفَساً عميقاً، يفحص المعدّات بسرعة، ثم يكمل.'),
 ];
 const CLUE_SAVED: L10n[] = [
-  B('The new clue is safely in the field notebook.', 'والدليل الجديد محفوظٌ الآن في الدفتر الميداني.'),
-  B('One more clue has been added to the notebook.', 'وقد أُضيف دليلٌ آخر إلى الدفتر.'),
-  B('The notebook is a page heavier now.', 'وازداد الدفتر الميداني صفحةً جديدة.'),
+  B('The new clue is written in the notebook.', 'سجّل الفريق الدليل الجديد في الدفتر.'),
+  B('One more clue is now in the notebook.', 'صار في الدفتر دليل جديد.'),
+  B('The team adds a new page to the notebook.', 'أضاف الفريق صفحة جديدة إلى الدفتر.'),
 ];
 
 /**
@@ -294,10 +304,10 @@ export function bridgeLine(s: GameState, idx = s.index): L10n | null {
   if (prevBiome !== pb.biome && prevBiome !== 'openSea') {
     const from = BIOMES[prevBiome].name, to = BIOMES[pb.biome].name;
     parts.push(DEEP_ZONE.has(prevBiome) && DEEP_ZONE.has(pb.biome)
-      ? B(`The sub sinks on, from ${from.en} down into ${to.en}.`, `تواصل الغوّاصة هبوطها من ${from.ar} إلى ${to.ar}.`)
-      : B(`Leaving ${from.en} behind, the team reaches ${to.en}.`, `يترك الفريق ${from.ar} خلفه ويصل إلى ${to.ar}.`));
+      ? B(`The submarine goes down from ${from.en} to ${to.en}.`, `تنزل الغوّاصة من ${from.ar} إلى ${to.ar}.`)
+      : B(`The team moves from ${from.en} to ${to.en}.`, `ينتقل الفريق من ${from.ar} إلى ${to.ar}.`));
   } else if (prevBiome === pb.biome) {
-    parts.push(r.pick(prev.success ? AFTER_WIN : AFTER_LOSS));
+    parts.push(r.pick(s.mode === 'marine' ? (prev.success ? AFTER_WIN_SEA : AFTER_LOSS_SEA) : (prev.success ? AFTER_WIN : AFTER_LOSS)));
   }
   const prevTpl = BEAT_BY_ID[prev.beat];
   const prevChoice = prevTpl?.choices.find((c) => c.id === prev.choice);
@@ -306,10 +316,10 @@ export function bridgeLine(s: GameState, idx = s.index): L10n | null {
     parts.push(r.pick(CLUE_SAVED));
   }
   if (t.kind === 'twist' && s.evidence.length >= 2) {
-    parts.push(B('And then the clues gathered so far begin to fit together.', 'ثم تبدأ الأدلة التي جمعتموها حتى الآن بالتكامل.'));
+    parts.push(B('Now the clues you collected start to make sense together.', 'والآن بدأت الأدلة التي جمعتموها تتّضح معاً.'));
   }
   if (t.kind === 'climax') {
-    parts.push(B('Everything has led to this moment.', 'كل ما مرّ بكم قادكم إلى هذه اللحظة.'));
+    parts.push(B('This is the most important moment of the trip.', 'هذه أهم لحظة في الرحلة.'));
     if (s.evidence.length) parts.push(B(`Clues in the notebook so far: ${s.evidence.length}.`, `عدد الأدلة في الدفتر حتى الآن: ${s.evidence.length}.`));
   }
   if (!parts.length) return null;

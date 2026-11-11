@@ -9,7 +9,7 @@ import { DUCKS, DUCK_BY_ID, MOOD_EXPRESSION, resolveDuckId, type Expression } fr
 import { APPROACH, FIELD_NOTES, HELP, RADIO, TEMPERAMENT, type FieldNote, type RadioCue } from '../content/duckRadio';
 import { FACTS } from '../content/world';
 import { Rng } from './rng';
-import { currentBeat } from './story';
+import { BEAT_BY_ID, currentBeat } from './story';
 import type { BeatTemplate, BiomeId, DuckMood, GameState, L10n } from './types';
 
 export interface RadioLine { duck: string; expression: Expression; text: L10n; kind: 'chat' | 'hunch' | 'praise' | 'fact' | 'note'; hunchChoice?: string; noteId?: string }
@@ -62,6 +62,8 @@ export function fieldNotes(s: GameState): Record<number, FieldNote> {
   for (let i = 1; i < upto; i++) {
     const r = Rng.from(s.seed, `note${i}`);
     if (!r.chance(NOTE_CHANCE)) continue;
+    // a field note about gloves or soil would break the moment at a twist or the climax
+    const bk = BEAT_BY_ID[s.plan.beats[i].template]?.kind; if (bk === 'twist' || bk === 'climax') continue;
     const duck = r.chance(0.6) ? team[0] : r.pick(team.slice(1));
     const realm = SEA_BIOMES.has(s.plan.beats[i].biome) ? 'sea' : 'land';
     const pool = FIELD_NOTES.filter((n) => n.duck === duck && (n.realm === 'any' || n.realm === realm) && !used.has(n.id));
@@ -105,7 +107,7 @@ export function radio(s: GameState, kind: BeatTemplate['kind'], biome: BiomeId):
   if (note) { const h = HELP[note.duck]; return [{ duck: note.duck, expression: 'curious', text: { en: `${h.note.en} ${note.text.en}`, ar: `${h.note.ar} ${note.text.ar}` }, kind: 'note', noteId: note.id }]; }
   if (thriving(s) && r.chance(0.7)) {
     const h = HELP[speaker]; if (!h) return [];
-    const fact = r.chance(0.5) ? factFor(s, biome, r) : null;
+    const fact = kind !== 'twist' && kind !== 'climax' && r.chance(0.5) ? factFor(s, biome, r) : null;
     if (fact) return [{ duck: speaker, expression: 'happy', text: { en: `${h.fact.en} ${fact.en}`, ar: `${h.fact.ar} ${fact.ar}` }, kind: 'fact' }];
     return [{ duck: speaker, expression: 'laughing', text: r.pick(h.praise), kind: 'praise' }];
   }

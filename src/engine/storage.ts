@@ -7,13 +7,13 @@ import { emptyJournal, sanitizeJournal, type Journal } from './journal';
 const KEY = 'bsc-biolab:v1';
 const MAX_RUNS = 40;
 
-export interface Settings { lang: Lang; textSpeed: number; muted: boolean; reducedMotion: boolean; ai: boolean }
+export interface Settings { lang: Lang; textSpeed: number; muted: boolean; reducedMotion: boolean; ai: boolean; /** 2 = the player has seen the sound-on default (music added 2026-11-11) */ soundV?: number }
 export interface RunRecord extends RunMemory { at: number; title: Ending['title']; creature: CreatureConfig; player: string; duck: string }
 export interface SaveData { settings: Settings; current: GameState | null; runs: RunRecord[]; endingsSeen: string[]; legendsSeen: string[]; journal: Journal }
 
 export function defaultSettings(): Settings {
   const reduced = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  return { lang: 'ar', textSpeed: 60, muted: true, reducedMotion: reduced, ai: false };
+  return { lang: 'ar', textSpeed: 60, muted: false, reducedMotion: reduced, ai: false, soundV: 2 };
 }
 
 function empty(): SaveData { return { settings: defaultSettings(), current: null, runs: [], endingsSeen: [], legendsSeen: [], journal: emptyJournal() }; }
@@ -30,7 +30,7 @@ export function load(storage: Storage | undefined = globalThis.localStorage): Sa
     const settings: Settings = {
       lang: s.lang === 'en' ? 'en' : 'ar',
       textSpeed: typeof s.textSpeed === 'number' ? Math.max(0, Math.min(100, s.textSpeed)) : 60,
-      muted: !!s.muted, reducedMotion: !!s.reducedMotion, ai: !!s.ai,
+      muted: s.soundV === 2 ? !!s.muted : false, reducedMotion: !!s.reducedMotion, ai: !!s.ai, soundV: 2,
     };
     let current: GameState | null = null;
     if (d.current?.plan?.story && isValidConfig(d.current.creature)) current = d.current;

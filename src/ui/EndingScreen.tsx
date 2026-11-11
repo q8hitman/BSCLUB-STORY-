@@ -71,8 +71,10 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unl
             <ul className="chips">{SLOTS.map((s) => { const p = PART_BY_ID[(game.creature as unknown as Record<string, string>)[s]]; return p ? <li key={s}>{p.name[lang]}</li> : null; })}</ul>
           </aside>
           <div className="ending-story">
-            <p className="summary">{ending.summary[lang]}</p>
-            <p className="epilogue">{ending.epilogue[lang]}</p>
+            <p className="ending-over">{lang === 'ar' ? 'انتهت القصة. هذا ما حدث:' : 'The story is over. Here is what happened:'}</p>
+            {ending.finale && <section className="ending-part"><h3>{lang === 'ar' ? 'كيف انتهت القصة؟' : 'How did the story end?'}</h3><p>{ending.finale[lang]}</p></section>}
+            <section className="ending-part"><h3>{lang === 'ar' ? 'وماذا حدث بعدها؟' : 'And what happened next?'}</h3><p className="epilogue">{ending.epilogue[lang]}</p></section>
+            <section className="ending-part"><h3>{lang === 'ar' ? 'ملخّص رحلتكم' : 'Your trip in short'}</h3><p className="summary">{ending.summary[lang]}</p></section>
             <ul className="highlights">{ending.highlights.map((h, i) => <li key={i} className={i < 2 ? 'stat' : 'sci'}>{h[lang]}</li>)}</ul>
           </div>
         </div>

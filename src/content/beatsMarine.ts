@@ -20,7 +20,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
     id: 'hm-reef', mode: 'marine', kind: 'hook', biomes: ['lab'], phase: 'surface', props: ['lab', 'boat'],
     goal: L('Find out what is bleaching the reef near Kubbar Island.', 'اكتشفوا ما الذي يُبيّض شعاب جزيرة كبّر.'),
     text: L('The Marine Science Club bursts into the BSC lab: patches of reef near Kubbar Island are turning bone-white, fast. They need a field partner that can go where divers can’t — and every head turns toward {name}.',
-      'اندفع أعضاء نادي علوم البحار إلى مختبر النادي: أجزاء من شعاب جزيرة كبّر تبيضّ كالعظم، وبسرعة. إنهم يحتاجون إلى شريك ميداني يبلغ أماكن لا يصلها الغواصون — فالتفتت الرؤوس كلها نحو {name}.'),
+      'جاء أعضاء نادي علوم البحار إلى مختبر النادي ومعهم خبر سيّئ: المرجان قرب جزيرة كبّر يفقد لونه ويصير أبيض بسرعة، ولا أحد يعرف السبب. هم يحتاجون إلى من يصل إلى أماكن لا يصلها الغوّاصون… فنظر الجميع إلى {name}.'),
     choices: [
       C('go', L('Pack the boat and go', 'جهّزوا القارب وانطلقوا'), 'bold',
         O('By sunrise you’re speeding south across the Gulf, {name} leaning into the spray.', 'مع شروق الشمس كنتم تشقّون الخليج جنوباً، و{name} يميل نحو رذاذ الموج مستمتعاً.', 'happy', [fl('hook:reef'), ev('water-temp-log')], 'boat')),
@@ -30,14 +30,14 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('call', L('Call the Kubbar fishermen first', 'اتصلوا بصيادي كبّر أولاً'), 'careful',
         O('An old fisherman confirms it: near the island the water “feels like bathwater” after dark. He won’t say more on the phone.', 'أكّد صياد عجوز الأمر: قرب الجزيرة يصبح الماء بعد الغروب «دافئاً كماء الحمّام». ورفض أن يقول المزيد عبر الهاتف.', 'thinking', [fl('hook:reef'), ev('fisher-call')], 'phone')),
       C('vest', L('Fit {name} with a tiny life jacket', 'ألبسوا {name} سترة نجاة صغيرة'), 'silly',
-        O('{name} hates the life jacket for nine whole seconds, then refuses to ever take it off. Safety first.', 'كره {name} السترة تسع ثوانٍ كاملة، ثم رفض أن يخلعها إلى الأبد. السلامة أولاً.', 'laughing', [fl('hook:reef'), tr(1)], 'heart')),
+        O('{name} hates the life jacket for nine whole seconds, then refuses to ever take it off. Safety first.', 'كره {name} السترة تسع ثوان كاملة، ثم رفض أن يخلعها إلى الأبد. السلامة أولاً.', 'laughing', [fl('hook:reef'), tr(1)], 'heart')),
     ],
   },
   {
     id: 'hm-sound', mode: 'marine', kind: 'hook', biomes: ['lab'], phase: 'surface', props: ['lab', 'hydrophone'],
     goal: L('Find the source of the mysterious deep-sea sound.', 'اعثروا على مصدر الصوت الغامض في أعماق البحر.'),
     text: L('The Marine Science Club’s underwater microphone caught a sound no one can identify: long, low, enormous, like a door slowly opening at the bottom of the sea. They play it in the BSC lab — and {name} lets out a long, low call of its own.',
-      'التقط الميكروفون المائي لنادي علوم البحار صوتاً لم يتعرّف عليه أحد: طويلاً، عميقاً، هائلاً، كبابٍ يُفتح ببطء في قاع البحر. شغّلوه في مختبر النادي… فأطلق {name} نداءً طويلاً عميقاً يشبهه.'),
+      'سجّل ميكروفون نادي علوم البحار تحت الماء صوتاً غريباً: صوت طويل وعميق وقوي جداً، ولا أحد يعرف مصدره. شغّل الفريق التسجيل في مختبر النادي… فأصدر {name} صوتاً طويلاً يشبهه تماماً!'),
     choices: [
       C('record', L('Record {name}’s reply', 'سجّلوا ردّ {name}'), 'clever',
         O('The two waveforms line up in a way nobody can explain. Whatever made that sound, {name} recognises it.', 'تطابقت الموجتان بطريقة لا يفسّرها أحد. أيّاً كان مصدر ذلك الصوت، فإن {name} يعرفه.', 'shocked', [fl('hook:sound'), ev('sound-match')], 'radio')),
@@ -51,9 +51,9 @@ export const MARINE_BEATS: BeatTemplate[] = [
   },
   {
     id: 'hm-nets', mode: 'marine', kind: 'hook', biomes: ['lab'], phase: 'surface', props: ['lab', 'net'],
-    goal: L('Find out which creature left the strange cold scales in the ghost net.', 'اكتشفوا أيّ كائنٍ ترك الحراشف الباردة الغريبة في الشبكة المهجورة.'),
+    goal: L('Find out which creature left the strange cold scales in the ghost net.', 'اكتشفوا أيّ كائن ترك الحراشف الباردة الغريبة في الشبكة المهجورة.'),
     text: L('A fisherman brought the Marine Science Club a ghost net — an abandoned fishing net — with strange scales caught in it. Big scales, cold to the touch even in the sun. The clubs team up, and {name} cannot stop sniffing them.',
-      'أحضر صياد إلى نادي علوم البحار شبكة صيد مهجورة علقت فيها حراشف غريبة: حراشف كبيرة، باردة الملمس حتى تحت الشمس. تعاون الناديان، ولم يكفّ {name} عن شمّها.'),
+      'أحضر صيّاد إلى نادي علوم البحار شبكة صيد قديمة وجدها في البحر. في الشبكة قشور سمك غريبة: كبيرة جداً، وباردة حتى تحت الشمس. لا أحد يعرف أيّ حيوان تركها. و{name} لا يتوقّف عن شمّها.'),
     choices: [
       C('scale', L('Analyse the scales', 'حلّلوا الحراشف'), 'clever',
         O('The scales match no species in any database. They also smell like… adventure.', 'لا تطابق الحراشف أيّ نوع في أيّ قاعدة بيانات. ورائحتها… رائحة مغامرة.', 'thinking', [fl('hook:nets'), ev('mystery-scale')], 'sample')),
@@ -70,11 +70,11 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'em-reef', mode: 'marine', kind: 'explore', biomes: ['reef'], phase: 'surface', props: ['coral', 'fish'], fact: 'reef-heat', featured: 'sea-turtle',
     text: L('Sunlight dances over {place}: parrotfish, sweetlips, a turtle cruising by like it owns the place. But some corals are bone-white. And past the edge of the reef, where it drops away, the blue turns darker than it should.',
-      'يرقص ضوء الشمس فوق {place}: أسماك ببغاء، وأسماك فرش، وسلحفاة تمرّ كأنها صاحبة المكان. لكن بعض المرجان أبيض كالعظم. وخلف حافة الشعاب، حيث ينحدر القاع، يصبح الأزرق أدكن مما ينبغي.'),
+      'الفريق الآن عند {place}. الماء صاف ومليء بالأسماك الملوّنة، وسلحفاة تسبح بهدوء. لكن جزءاً من المرجان صار أبيض مثل العظم. وبعد حافة الشعاب ينزل القاع فجأة، والماء هناك أغمق من الطبيعي.'),
     variants: [
-      { when: { capAny: ['breatheWater'] }, text: L('{name} can stay down as long as it likes. Show-off.', 'يستطيع {name} البقاء تحت الماء ما شاء. يا له من متباهٍ!') },
+      { when: { capAny: ['breatheWater'] }, text: L('{name} can stay down as long as it likes. Show-off.', 'يستطيع {name} البقاء تحت الماء ما شاء. يا له من متباه!') },
       { when: { evidenceAny: HEAT_CLUES }, text: L('Somewhere here is the warm patch from the club’s data. The water on your skin already feels too warm.',
-        'في مكانٍ ما هنا تقع البقعة الدافئة التي ظهرت في بيانات النادي. والماء على الجلد يبدو أدفأ مما ينبغي.') },
+        'في مكان ما هنا تقع البقعة الدافئة التي ظهرت في بيانات النادي. والماء على الجلد يبدو أدفأ مما ينبغي.') },
     ],
     choices: [
       C('survey', L('Do a careful coral survey', 'أجروا مسحاً دقيقاً للمرجان'), 'careful',
@@ -93,7 +93,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'em-mudflat', mode: 'marine', kind: 'explore', biomes: ['mudflat'], phase: 'surface', props: ['mud', 'mudskipper'], fact: 'mud-skipper', featured: 'mudskipper',
     text: L('At low tide, the mud of {place} shines like wet silver. Mudskippers skip about and flex their fins at each other like tiny wrestlers.',
-      'عند الجزر يلمع طين {place} كالفضة المبلّلة. تقفز أسماك نطّاط الطين هنا وهناك، وتستعرض زعانفها بعضها أمام بعض كمصارعين صغار.'),
+      'نزل ماء البحر عن {place} فظهر الطين اللامع. فوق الطين أسماك صغيرة غريبة تقفز خارج الماء، اسمها «نطّاط الطين»، وكل سمكة ترفع زعنفتها لتخيف الأخرى.'),
     choices: [
       C('watch', L('Watch a mudskipper duel', 'شاهدوا نزالاً بين أسماك نطّاط الطين'), 'careful',
         O('They puff up and raise their back fins to defend their puddles. Adorable territorial drama.', 'تنتفخ وترفع زعانفها الظهرية دفاعاً عن بِركها. دراما حدودية لطيفة.', 'laughing', [di('mud-skipper'), ev('skipper-behaviour')], 'binoculars')),
@@ -109,7 +109,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'em-seagrass', mode: 'marine', kind: 'explore', biomes: ['seagrass'], phase: 'surface', props: ['seagrass', 'dugong'], fact: 'seagrass-dugong', featured: 'dugong',
     text: L('Long green meadows sway in {place}. Something large and gentle is grazing through them: a dugong, munching like a sleepy cow.',
-      'تتمايل أعشاب خضراء طويلة في {place}. وبينها يرعى كائن ضخم وديع: إنه أطوم، يمضغ العشب كبقرة ناعسة.'),
+      'الفريق الآن في {place}، وهي أعشاب خضراء طويلة تنمو تحت الماء. بين الأعشاب حيوان كبير وهادئ يأكل العشب ببطء: إنه الأطوم، ويسمّى أيضاً «بقرة البحر».'),
     choices: [
       C('distance', L('Watch from a respectful distance', 'راقبوا من مسافة لائقة'), 'careful',
         O('The dugong keeps grazing, unbothered. You record the feeding trails it leaves in the seagrass.', 'واصل الأطوم رعيه دون أن ينزعج. وسجّلتم مسارات الرعي التي يتركها في العشب البحري.', 'happy', [di('seagrass-dugong'), ev('dugong-trails')], 'binoculars')),
@@ -126,7 +126,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   // ───────────── SURFACE ENCOUNTERS ─────────────
   {
     id: 'nm-diver', mode: 'marine', kind: 'encounter', biomes: ['reef', 'seagrass'], phase: 'surface', props: ['diver'], npc: 'diver',
-    text: L('A Marine Science Club diver surfaces beside you: {npc}. “Is that thing on our permit?” she asks, eyeing {name}.', 'ظهرت إلى جانبكم غوّاصة من نادي علوم البحار: {npc}. وسألت وهي تتأمّل {name}: «هل هذا الكائن مسجّل في تصريحنا؟»'),
+    text: L('A Marine Science Club diver surfaces beside you: {npc}. “Is that thing on our permit?” she asks, eyeing {name}.', 'ظهرت بجانبكم في الماء غوّاصة من نادي علوم البحار، اسمها {npc}. نظرت إلى {name} باستغراب وسألت: «هل معكم تصريح لهذا الحيوان؟»'),
     choices: [
       C('team', L('Invite her to dive together', 'ادعوها إلى الغوص معكم'), 'kind',
         O('She teaches {name} proper dive signals. It learns “OK” and “shark” immediately.', 'علّمت {name} إشارات الغوص الصحيحة، فتعلّم إشارتَي «تمام» و«قرش» فوراً.', 'happy', [fl('met:diver'), rel('diver', 2)], 'heart')),
@@ -135,12 +135,12 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('night', L('Ask about her night dives', 'اسألوها عن غوصاتها الليلية'), 'careful',
         O('She hesitates. “At night, past the drop-off, the lights in the water aren’t always plankton.”', 'تردّدت ثم قالت: «في الليل، بعد حافة المنحدر، ليست كل الأضواء في الماء كائنات صغيرة مضيئة.»', 'worried', [fl('met:diver'), rel('diver', 1), ev('night-dive-notes')], 'still')),
       C('signals', L('Let {name} show off its dive signals', 'دعوا {name} يستعرض إشارات الغوص'), 'silly',
-        O('{name} copies her slow hand movements with its own limbs — badly — then swims a happy loop around her. She laughs into her regulator.', 'قلّد {name} حركات يديها البطيئة بأطرافه… بشكلٍ مضحك، ثم دار حولها دورةً مرحة. فضحكت في منظِّم التنفّس.', 'laughing', [fl('met:diver'), rel('diver', 1)], 'heart')),
+        O('{name} copies her slow hand movements with its own limbs — badly — then swims a happy loop around her. She laughs into her regulator.', 'قلّد {name} حركات يديها البطيئة بأطرافه… بشكل مضحك، ثم دار حولها دورةً مرحة. فضحكت في منظِّم التنفّس.', 'laughing', [fl('met:diver'), rel('diver', 1)], 'heart')),
     ],
   },
   {
     id: 'nm-fisher', mode: 'marine', kind: 'encounter', biomes: ['mudflat', 'seagrass', 'reef'], phase: 'surface', props: ['dhow'], npc: 'fisher',
-    text: L('A wooden dhow drifts nearby. {npc} waves you over. “Careful out there. The sea’s been strange lately.”', 'سفينة خشبية تنجرف قريباً منكم، و{npc} يلوّح لكم: «احذروا هناك. البحر غريب هذه الأيام.»'),
+    text: L('A wooden dhow drifts nearby. {npc} waves you over. “Careful out there. The sea’s been strange lately.”', 'اقترب منكم قارب صيد خشبي. فيه {npc}، يلوّح لكم ويقول: «انتبهوا هناك. البحر غريب هذه الأيام.»'),
     choices: [
       C('listen', L('Ask what he has seen', 'اسألوه عمّا رآه'), 'kind',
         O('Fish acting oddly, warm patches, and once, at dusk, a shadow longer than his boat passing underneath it.', 'أسماك تتصرّف بغرابة، وبقع دافئة، وذات مرة عند الغروب ظلّ أطول من قاربه مرّ من تحته.', 'thinking', [fl('met:fisher'), rel('fisher', 2), ev('fisher-report')], 'heart')),
@@ -150,7 +150,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('log', L('Trade a weather forecast for his catch log', 'بادلوه توقعات الطقس بسجلّ صيده'), 'clever',
         O('His log shows deep-water fish turning up in his nets — fish that should never come this close to the surface.', 'يُظهر سجلّه أسماك أعماق علقت في شباكه — أسماكاً لا ينبغي أن تقترب من السطح أبداً.', 'thinking', [fl('met:fisher'), rel('fisher', 1), ev('catch-log')], 'map')),
       C('sort', L('Let {name} help sort the catch', 'دعوا {name} يساعد في فرز الصيد'), 'silly',
-        O('{name} sniffs every fish in the crate and growls at just one of them. Yousef checks it: it is the only one caught near the warm water.', 'شمّ {name} كل سمكة في الصندوق، وزمجر عند واحدةٍ فقط. فحصها يوسف: إنها الوحيدة التي اصطيدت قرب الماء الدافئ.', 'laughing', [fl('met:fisher'), rel('fisher', 1)], 'sample')),
+        O('{name} sniffs every fish in the crate and growls at just one of them. Yousef checks it: it is the only one caught near the warm water.', 'شمّ {name} كل سمكة في الصندوق، وزمجر عند واحدة فقط. فحصها يوسف: إنها الوحيدة التي اصطيدت قرب الماء الدافئ.', 'laughing', [fl('met:fisher'), rel('fisher', 1)], 'sample')),
     ],
   },
 
@@ -158,7 +158,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'lm-tale', mode: 'marine', kind: 'legend', biomes: ['mudflat', 'reef', 'seagrass'], phase: 'surface', props: ['sailor', 'dhow'], npc: 'sailor', fact: 'pearl-history', featured: 'deep-giant',
     text: L('On the harbour wall, mending a net, sits {npc}. “When I was a young pearl diver,” he says, “I saw something in the deep water. An eye as big as a plate. A body longer than our boom. Nobody believed me.” (This is his story — the game never claims it’s fact.)',
-      'على جدار الميناء يجلس {npc} يرتق شبكة. يقول: «حين كنت غوّاصاً شاباً أبحث عن اللؤلؤ، رأيت شيئاً في الماء العميق: عيناً بحجم الصحن، وجسداً أطول من سفينتنا. لم يصدّقني أحد.» (هذه حكايته — واللعبة لا تزعم أنها حقيقة.)'),
+      'على جدار الميناء يجلس {npc} ويصلح شبكته. يقول: «حين كنت شاباً كنت أغوص لأبحث عن اللؤلؤ. وفي الماء العميق رأيت شيئاً لا أنساه: عين بحجم الصحن، وجسم أطول من سفينتنا. لم يصدّقني أحد.» (هذه حكايته فقط، واللعبة لا تقول إنها حقيقة.)'),
     variants: [
       { when: { evidenceAny: SCALE_CLUES }, text: L('When you show him the plate-sized scale, his hands stop moving on the net.', 'وحين أريتموه الحرشفة التي بحجم الصحن، توقّفت يداه عن الشبكة.') },
       { when: { evidenceAny: SOUND_CLUES }, text: L('You play him the recording from the lab. He closes his eyes. “That is the sound,” he whispers.', 'أسمعتموه التسجيل من المختبر، فأغمض عينيه وهمس: «هذا هو الصوت.»') },
@@ -179,10 +179,10 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'pm-descend', mode: 'marine', kind: 'phase', biomes: ['openSea'], phase: 'deep', props: ['ship', 'sub'],
     text: L('Phase two: The Deep. The research ship stops where the Arabian Sea turns from blue to ink, and the seafloor falls away for kilometres. The submersible BSC Abyss-1 swings from the crane, its single searchlight dark — and inside, {name} watches the last of the sunlight slide off the glass.',
-      'المرحلة الثانية: الأعماق. توقّفت سفينة الأبحاث حيث يتحوّل بحر العرب من الأزرق إلى لون الحبر، وينحدر القاع كيلومترات. تتأرجح الغوّاصة «أبيس-١» على الرافعة وكشّافها الوحيد مطفأ — وفي داخلها يراقب {name} آخر خيوط الشمس وهي تنزلق عن الزجاج.'),
+      'المرحلة الثانية: الأعماق. توقّفت سفينة الأبحاث في مكان يصير فيه البحر عميقاً جداً ولونه أزرق غامق. الغوّاصة الصغيرة «أبيس-١» معلّقة فوق الماء وجاهزة للنزول، والفريق و{name} داخلها ينظرون من الزجاج إلى آخر ضوء للشمس.'),
     variants: [
       { when: { flag: ['legend:heard'] }, text: L('{name} holds on to the old sailor’s story like a map. Or a warning.', 'يتمسّك {name} بحكاية البحّار العجوز كأنها خريطة… أو تحذير.') },
-      { when: { evidenceAny: SHADOW_CLUES }, text: L('Somewhere below is whatever cast the long shadow seen from the surface.', 'في مكانٍ ما في الأسفل يكمن صاحب الظلّ الطويل الذي رأيتموه من السطح.') },
+      { when: { evidenceAny: SHADOW_CLUES }, text: L('Somewhere below is whatever cast the long shadow seen from the surface.', 'في مكان ما في الأسفل يكمن صاحب الظلّ الطويل الذي رأيتموه من السطح.') },
     ],
     choices: [
       C('check', L('Run full safety checks', 'أجروا فحص سلامة شاملاً'), 'careful',
@@ -203,7 +203,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'em-twilight', mode: 'marine', kind: 'explore', biomes: ['twilight'], phase: 'deep', props: ['lanternfish', 'jelly'], fact: 'twilight-dvm', featured: 'lanternfish',
     text: L('Two hundred metres down, the water in {place} is the colour of a bruise. Lanternfish hang in silver clouds, waiting for night. Something long and thin drifts across the searchlight — far too slowly to be a fish.',
-      'على عمق مئتي متر، لون الماء في {place} كلون الكدمة. تتعلّق أسماك الفانوس في سُحب فضية تنتظر الليل. وشيء طويل رفيع ينجرف عبر ضوء الكشّاف — أبطأ بكثير من أن يكون سمكة.'),
+      'نزلت الغوّاصة إلى عمق مئتي متر، في {place}. الضوء هنا ضعيف جداً. أمام الزجاج آلاف الأسماك الصغيرة اللامعة، اسمها «أسماك الفانوس». وفي ضوء الكشّاف يمرّ شيء طويل ورفيع ببطء… وهو ليس سمكة.'),
     variants: [
       { when: { capAny: ['glow'] }, text: L('{name}’s own lights flicker on by themselves, as if answering something.', 'اشتعلت أضواء {name} من تلقاء نفسها، كأنها تجيب شيئاً ما.') },
       { when: { evidenceAny: SOUND_CLUES }, text: L('The hydrophone hums: the long, low sound from the lab again — closer now.', 'يطنّ الميكروفون المائي: إنه الصوت الطويل العميق الذي سُمع في المختبر — لكنه الآن أقرب.') },
@@ -217,7 +217,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
         O('{name} flashes. The fish flash back. Is this… a conversation?', 'أومض {name}، فأومضت الأسماك ردّاً عليه. أهذه… محادثة؟', 'laughing', [ev('flash-dialogue'), fl('light-talk')], 'flash'),
         { requires: { capAny: ['glow'] }, check: chk('charm', 4, ['glow']), fail: O('The fish scatter. Then, far below, a single much larger light flashes back.', 'تفرّقت الأسماك. ثم، بعيداً في الأسفل، ردّ ضوء واحد أكبر بكثير بومضة.', 'shocked', [], 'flash') }),
       C('follow', L('Follow the long drifting shape', 'اتبعوا الشكل الطويل المنجرف'), 'bold',
-        O('It’s a siphonophore: a colony of tiny animals strung together, longer than a bus, trailing stinging threads like a curtain. Beautiful and terrifying at the same time.', 'إنه كائن اسمه «السيفونوفور»: مستعمرة من كائنات صغيرة متّصلة ببعضها، أطول من حافلة، تجرّ خلفها خيوطاً لاسعة كالستارة. جميل ومرعب في آنٍ واحد.', 'shocked', [ev('siphonophore-footage')], 'camera'),
+        O('It’s a siphonophore: a colony of tiny animals strung together, longer than a bus, trailing stinging threads like a curtain. Beautiful and terrifying at the same time.', 'إنه كائن اسمه «السيفونوفور»: مستعمرة من كائنات صغيرة متّصلة ببعضها، أطول من حافلة، تجرّ خلفها خيوطاً لاسعة كالستارة. جميل ومرعب في آن واحد.', 'shocked', [ev('siphonophore-footage')], 'camera'),
         { check: chk('swim', 4), fail: O('The shape folds in on itself and vanishes upward. Whatever it was, it was longer than the sub.', 'انطوى الشكل على نفسه واختفى صعوداً. أيّاً كان، فقد كان أطول من الغوّاصة.', 'shocked', [], 'still') }),
       C('hatchet', L('Guide a lost hatchetfish out of the beam', 'أرشدوا سمكة فأس تائهة إلى خارج الضوء'), 'kind',
         O('A hatchetfish — all silver mirror and huge upturned eyes — is trapped in your beam. You dim it, and the little fish slips back into the blue.', 'سمكة فأس — مرآة فضية وعينان كبيرتان متّجهتان إلى الأعلى — عالقة في ضوء الكشّاف. خفّفتم الضوء، فانسلّت السمكة الصغيرة عائدة إلى الزرقة.', 'happy', [tr(1), ev('hatchetfish-notes')], 'still')),
@@ -226,7 +226,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'em-midnight', mode: 'marine', kind: 'explore', biomes: ['midnight'], phase: 'deep', props: ['angler', 'snow'], fact: 'midnight-light', featured: 'anglerfish',
     text: L('A thousand metres down in {place}, sunlight is only a rumour. Marine snow drifts through the searchlight like ash. At the very edge of the beam, a row of needle teeth hangs in the black, perfectly still — and then it is gone.',
-      'على عمق ألف متر في {place}، لم يعد ضوء الشمس سوى إشاعة. يتساقط الثلج البحري عبر ضوء الكشّاف كالرماد. وعند طرف الضوء تماماً، صفّ من أسنان كالإبر معلّق في السواد، ساكن تماماً… ثم يختفي.'),
+      'الغوّاصة الآن على عمق ألف متر، في {place}. ضوء الشمس لا يصل إلى هنا أبداً. في ضوء الكشّاف يتساقط فتات أبيض صغير مثل الثلج. وعند آخر الضوء ظهر صفّ من الأسنان الرفيعة… ثم اختفى.'),
     variants: [
       { when: { capAny: ['nightVision', 'echolocation'] }, text: L('{name} can sense shapes out there that no camera can see — and it has gone very quiet.', 'يستشعر {name} أشكالاً في الخارج لا تراها أيّ كاميرا — وقد صمت تماماً.') },
       { when: { evidenceAny: ['light-patterns', 'flash-dialogue'] }, text: L('Some of the paired lights from above seem to have followed you down.', 'ويبدو أن بعض الأضواء المزدوجة التي رأيتموها في الأعلى قد تبعتكم إلى هنا.') },
@@ -250,7 +250,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'em-vents', mode: 'marine', kind: 'explore', biomes: ['vents'], phase: 'deep', props: ['smokers', 'tubeworms'], fact: 'vents-chemo', featured: 'tube-worms',
     text: L('The searchlight finds the chimneys first: black towers coughing out smoke-dark water hot enough to melt lead. Around their roots in {place}, life that has never seen the sun crowds together — blood-red tube worms swaying as if breathing, and white crabs that all turn to look at you at once.',
-      'وجد الكشّاف المداخن أولاً: أبراج سوداء تنفث ماءً داكناً كالدخان، حارّاً بما يكفي لإذابة الرصاص. وحول قواعدها في {place} تتزاحم حياة لم ترَ الشمس قط — ديدان أنبوبية حمراء كالدم تتمايل كأنها تتنفّس، وسرطانات بيضاء تلتفت كلها إليكم في اللحظة نفسها.'),
+      'وصلت الغوّاصة إلى {place}. في القاع أعمدة سوداء تشبه المداخن، يخرج منها ماء حارّ جداً وداكن مثل الدخان. وحولها حيوانات لم ترَ الشمس أبداً: ديدان حمراء طويلة تتمايل، وسرطانات بيضاء تنظر كلها إليكم.'),
     variants: [
       { when: { evidenceAny: HEAT_CLUES }, text: L('The warm patch near Kubbar was a faint whisper of heat like this. Down here, it shouts.', 'لم تكن البقعة الدافئة قرب كبّر إلا همساً خافتاً لحرارة كهذه. أما هنا فهي تصرخ.') },
     ],
@@ -272,7 +272,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'tm-squid', mode: 'marine', kind: 'twist', biomes: ['twilight', 'midnight'], phase: 'deep', props: ['squid'], fact: 'squid-eye', featured: 'giant-squid',
     text: L('Something taps the window. Once. Twice. Then an eye fills the glass — silver, wet, bigger than a dinner plate — and it is not looking at the camera. It is looking at {name}.',
-      'شيء يطرق النافذة. مرة. مرتين. ثم تملأ عينٌ الزجاج — فضية، لامعة، أكبر من صحن العشاء — وهي لا تنظر إلى الكاميرا. إنها تنظر إلى {name}.'),
+      'شيء يدقّ على زجاج الغوّاصة. مرة… ثم مرة ثانية. ثم تظهر أمام الزجاج عين كبيرة جداً ولامعة، أكبر من صحن الطعام. والعين لا تنظر إلى الكاميرا… إنها تنظر إلى {name}.'),
     variants: [
       { when: { evidenceAny: SHADOW_CLUES }, text: L('Everyone thinks of the long dark shape seen from the surface. Was it this, all along?', 'تذكّر الجميع الظلّ الطويل الداكن الذي رأوه من السطح. أكان هذا هو منذ البداية؟') },
       { when: { flagAny: ['light-talk', 'deep-party'] }, text: L('{name}’s glow flickers in the same pattern it flashed at the small lights earlier. The eye does not move away.', 'يومض ضوء {name} بالنمط نفسه الذي ردّ به على الأضواء الصغيرة من قبل. والعين لا تبتعد.') },
@@ -282,7 +282,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('still', L('Stay still and film', 'اثبتوا وصوّروا'), 'careful',
         O('Thirty seconds of footage: the eye, then a tentacle sliding slowly along the hull, then nothing. A living giant squid, filmed in the deep.', 'ثلاثون ثانية من التصوير: العين، ثم لامسة تنزلق ببطء على الهيكل، ثم لا شيء. حبّار عملاق حيّ، مصوَّر في الأعماق.', 'shocked', [fl('twist:squid'), di('squid-eye'), ev('squid-footage')], 'camera')),
       C('wave', L('Have {name} raise a limb to the glass', 'دعوا {name} يرفع أحد أطرافه إلى الزجاج'), 'kind',
-        O('{name} presses a limb to the glass. On the other side, a tentacle tip touches the same spot. Then the eye slides away into the dark, unhurried.', 'وضع {name} أحد أطرافه على الزجاج. ومن الجهة الأخرى لمس طرفُ لامسةٍ الموضعَ نفسه. ثم انسحبت العين إلى الظلام على مهل.', 'happy', [fl('twist:squid'), di('squid-eye'), fl('squid-wave')], 'heart')),
+        O('{name} presses a limb to the glass. On the other side, a tentacle tip touches the same spot. Then the eye slides away into the dark, unhurried.', 'وضع {name} أحد أطرافه على الزجاج. ومن الجهة الأخرى لمس طرفُ لامسة الموضعَ نفسه. ثم انسحبت العين إلى الظلام على مهل.', 'happy', [fl('twist:squid'), di('squid-eye'), fl('squid-wave')], 'heart')),
       C('flood', L('Hit it with full floodlights', 'سلّطوا عليه الكشّافات بكامل قوتها'), 'bold',
         O('For one frame you see all of it: arms like ship’s cables, a body longer than the sub. Then a cloud of ink swallows everything, and when it clears, you are alone.', 'في لقطة واحدة رأيتموه كاملاً: أذرع كحبال السفن، وجسد أطول من الغوّاصة. ثم ابتلعت سحابة حبر كل شيء، وحين انقشعت كنتم وحدكم.', 'shocked', [fl('twist:squid'), di('squid-eye'), ev('squid-still')], 'flash')),
       C('measure', L('Measure the eye with the laser scale', 'قيسوا العين بمسطرة الليزر'), 'clever',
@@ -293,7 +293,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'tm-probe', mode: 'marine', kind: 'twist', biomes: ['midnight', 'vents', 'twilight'], phase: 'deep', props: ['probe'],
     text: L('Half-buried in the silt, an old probe blinks a tired green light. The label is faded but readable: “Marine Science Club, 1998.” Its casing is scored with long, parallel scratches.',
-      'مجسّ قديم نصف مدفون في الطين الناعم يومض بضوء أخضر واهن. الملصق باهت لكنه مقروء: «نادي علوم البحار، ١٩٩٨». وعلى غلافه خدوش طويلة متوازية.'),
+      'في ضوء الكشّاف يظهر جهاز قياس قديم، نصفه مدفون في طين القاع، وما زال فيه ضوء أخضر ضعيف. مكتوب عليه: «نادي علوم البحار، ١٩٩٨». وعلى غطائه خدوش طويلة… كأن شيئاً كبيراً أمسك به.'),
     variants: [
       { when: { evidenceAny: SOUND_CLUES }, text: L('If this probe heard the sound the lab caught, it has been listening down here for decades.', 'إن كان هذا المجسّ قد سمع الصوت الذي التقطه المختبر، فهو يُصغي هنا منذ عقود.') },
       { when: { evidenceAny: ['catch-log', 'fisher-report', 'night-dive-notes'] }, text: L('Deep fish in the fishermen’s nets, strange lights on the night dives: this probe may have recorded the cause.', 'أسماك أعماق في شباك الصيادين، وأضواء غريبة في الغوصات الليلية: لعلّ هذا المجسّ سجّل السبب.') },
@@ -315,15 +315,15 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'tm-whalefall', mode: 'marine', kind: 'twist', biomes: ['midnight', 'trench'], phase: 'deep', props: ['whalefall'], fact: 'whalefall', featured: 'whale-fall',
     text: L('The searchlight slides over something pale and curved, then another, then dozens: ribs, each one taller than a person. A whale fall. Hagfish knot themselves through the bones, and the whole skeleton seems to move.',
-      'ينزلق ضوء الكشّاف على شيء شاحب مقوّس، ثم على آخر، ثم على العشرات: أضلاع، كلٌّ منها أطول من إنسان. إنها جثة حوت هوت إلى القاع. أسماك قاعٍ طويلة تشبه الثعابين تلتفّ بين العظام، فيبدو الهيكل كله كأنه يتحرّك.'),
+      'يمرّ ضوء الكشّاف على عظام بيضاء كبيرة جداً في القاع، كل عظمة أطول من إنسان. إنه هيكل حوت مات منذ زمن ونزل إلى القاع. بين العظام أسماك طويلة تشبه الثعابين تتحرّك، فيبدو الهيكل كأنه يتحرّك.'),
     variants: [
       { when: { evidenceAny: SOUND_CLUES }, text: L('For a moment everyone wonders: is this where the sound came from — a whale’s last song?', 'تساءل الجميع للحظة: أمن هنا جاء الصوت… أهو آخر أغنية لحوت؟') },
       { when: { evidenceAny: ['snow-sample', 'creature-census'] }, text: L('The marine snow you sampled ends its journey in places like this: everything that sinks feeds someone.', 'الثلج البحري الذي أخذتم عيّنته ينتهي في أماكن كهذه: كل ما يغرق يصير غذاءً لكائن ما.') },
       { when: { evidenceAny: SHADOW_CLUES }, text: L('Was this the long shadow seen from the surface? No — this whale has been dead for years.', 'أكان هذا هو الظلّ الطويل الذي رأيتموه من السطح؟ لا — فهذا الحوت ميت منذ سنوات.') },
     ],
     choices: [
-      C('study', L('Document the ecosystem', 'وثّقوا النظام البيئي'), 'careful',
-        O('Crabs, hagfish, bone-eating worms: a whole community living on one whale. You document every species.', 'سرطانات، وأسماك جريث، وديدان تأكل العظام: مجتمع كامل يعيش على حوت واحد. وثّقتم كل الأنواع.', 'thinking', [fl('twist:whalefall'), di('whalefall'), ev('whalefall-survey')], 'camera')),
+      C('study', L('Document the ecosystem', 'سجّلوا النظام البيئي'), 'careful',
+        O('Crabs, hagfish, bone-eating worms: a whole community living on one whale. You document every species.', 'سرطانات، وأسماك جريث، وديدان تأكل العظام: مجتمع كامل يعيش على حوت واحد. سجّلتم كل الأنواع.', 'thinking', [fl('twist:whalefall'), di('whalefall'), ev('whalefall-survey')], 'camera')),
       C('respect', L('Pause for a moment of respect', 'توقّفوا لحظة احترام'), 'kind',
         O('Everyone goes quiet. {name} gently touches a bone. Even the hagfish seem to pause.', 'صمت الجميع. ولمس {name} عظمة برفق. حتى أسماك القاع بدت كأنها توقّفت.', 'thinking', [fl('twist:whalefall'), di('whalefall'), tr(1)], 'still')),
       C('song', L('Compare it with the mystery sound', 'قارنوه بالصوت الغامض'), 'clever',
@@ -339,7 +339,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'km-leviathan', mode: 'marine', kind: 'climax', biomes: ['trench', 'midnight'], phase: 'deep', requires: { flag: ['legend:heard'] }, props: ['leviathan'], featured: 'deep-giant',
     text: L('The sonar fills edge to edge with a single shape, longer than the ship above. Grey, scarred skin slides past the glass for far too long — then an eye opens in the dark, as big as a plate, just as the old sailor said. It settles on {name}. (Legend or undiscovered animal? The game leaves it a mystery.)',
-      'امتلأت شاشة السونار من طرف إلى طرف بشكل واحد، أطول من السفينة في الأعلى. جلد رماديّ مليء بالندوب يمرّ أمام الزجاج وقتاً طويلاً… طويلاً جداً — ثم تنفتح في الظلام عينٌ بحجم الصحن، تماماً كما قال البحّار العجوز. وتستقرّ نظرتها على {name}. (أسطورة أم حيوان لم يُكتشف بعد؟ تترك اللعبة الأمر لغزاً.)'),
+      'فجأة امتلأت شاشة جهاز كشف الأعماق بشكل واحد كبير جداً، أطول من السفينة التي في الأعلى. يمرّ أمام الزجاج جلد رمادي مليء بالجروح القديمة، ويستمرّ في المرور وقتاً طويلاً. ثم تنفتح في الظلام عين بحجم الصحن، كما قال البحّار العجوز تماماً، وتنظر إلى {name}. (هل هو حيوان لم يكتشفه العلماء أم مجرد أسطورة؟ اللعبة لا تجيب.)'),
     variants: [
       { when: { evidenceAny: SCALE_CLUES }, text: L('Along its scars, plate-sized scales catch the light — the same as the one pulled from the ghost net.', 'وعلى امتداد ندوبه تلمع حراشف بحجم الصحن — مثل الحرشفة التي انتُزعت من الشبكة المهجورة تماماً.') },
       { when: { evidenceAny: SOUND_CLUES }, text: L('The hydrophone picks up the long, low sound from the lab — coming from right outside the glass.', 'يلتقط الميكروفون المائي الصوت الطويل العميق الذي سُمع في المختبر — وهو يأتي من خلف الزجاج مباشرة.') },
@@ -356,14 +356,14 @@ export const MARINE_BEATS: BeatTemplate[] = [
       C('leave', L('Back away and leave it in peace', 'تراجعوا واتركوه بسلام'), 'careful',
         O('The team backed away and let it pass. Some mysteries deserve to stay in the deep, and Abyss-1 surfaced without a word.', 'تراجع الفريق وتركه يمرّ. بعض الألغاز تستحق أن تبقى في الأعماق، وصعدت «أبيس-١» إلى السطح دون كلمة.', 'thinking', [fl('saw-leviathan'), fl('left-in-peace'), tr(1)], 'still')),
       C('hold', L('Hold the searchlight on the eye', 'ثبّتوا الكشّاف على العين'), 'bold',
-        O('The team held the light steady and did not look away — and neither did the eye. After a long, long minute it closed, and the giant was simply gone.', 'ثبّت الفريق الضوء ولم يُشح بنظره — ولم تُشح العين بنظرها أيضاً. وبعد دقيقة طويلة جداً انغلقت، واختفى العملاق ببساطة.', 'shocked', [fl('saw-leviathan'), ev('eye-footage')], 'still'),
+        O('The team held the light steady and did not look away — and neither did the eye. After a long, long minute it closed, and the giant was simply gone.', 'ثبّت الفريق الضوء ولم ينظر بعيداً — ولم تنظر بعيداً العين بنظرها أيضاً. وبعد دقيقة طويلة جداً انغلقت، واختفى العملاق ببساطة.', 'shocked', [fl('saw-leviathan'), ev('eye-footage')], 'still'),
         { check: chk('charm', 5), fail: O('The searchlight flickered. When it steadied, the eye was gone, and the sonar showed only empty water — empty, and very deep.', 'ارتعش ضوء الكشّاف. وحين استقرّ كانت العين قد اختفت، ولم يُظهر السونار إلا ماءً فارغاً… فارغاً، وعميقاً جداً.', 'worried', [fl('saw-leviathan')], 'flash') }),
     ],
   },
   {
     id: 'km-eruption', mode: 'marine', kind: 'climax', biomes: ['vents', 'trench', 'midnight'], phase: 'deep', props: ['eruption'], featured: 'tube-worms',
     text: L('The seafloor shudders. A new vent tears open beside the tube-worm field, spewing black water, and the alarm begins to scream. Power is dropping — and outside, in the churning dark, shapes are fleeing past the glass.',
-      'يرتجف القاع. تنشقّ فتحة جديدة بجوار حقل الديدان الأنبوبية وتقذف ماءً أسود، ويبدأ الإنذار بالصراخ. الطاقة تتناقص — وفي الخارج، وسط الظلام المضطرب، أشكال تفرّ أمام الزجاج.'),
+      'يهتزّ قاع البحر بقوة. تنفتح فتحة جديدة في القاع قرب الديدان الحمراء ويخرج منها ماء أسود حارّ. يرنّ جرس الإنذار في الغوّاصة، والطاقة تقلّ. وخارج الزجاج حيوانات كثيرة تهرب في كل اتجاه.'),
     variants: [
       { when: { evidenceAny: HEAT_CLUES }, text: L('On the monitor, the same heat pulse from the Kubbar data appears — a hundred times stronger.', 'تظهر على الشاشة نبضة الحرارة نفسها التي رصدتها بيانات كبّر — لكنها أقوى مئة مرة.') },
       { when: { evidenceAny: ['worm-sample', 'vent-temp', 'iron-snail', 'crab-behaviour'] }, text: L('The colony you studied earlier lies right in the path of the plume.', 'المستعمرة التي درستموها قبل قليل تقع في طريق العمود الحارّ مباشرة.') },
@@ -386,7 +386,7 @@ export const MARINE_BEATS: BeatTemplate[] = [
   {
     id: 'km-tether', mode: 'marine', kind: 'climax', biomes: ['twilight', 'midnight', 'trench'], phase: 'deep', props: ['tether'],
     text: L('A bang. The tether to the ship goes slack, and Abyss-1 begins to sink, its lights dying one by one. Something large drifts across the last working camera. Only {name} can reach the emergency beacon outside.',
-      'دويّ مفاجئ. ارتخى الحبل الذي يربطكم بالسفينة، وبدأت «أبيس-١» تغوص وأضواؤها تنطفئ واحداً تلو الآخر. شيء ضخم ينجرف أمام آخر كاميرا تعمل. ولا يستطيع بلوغ منارة الطوارئ في الخارج إلا {name}.'),
+      'صوت قوي مفاجئ! انقطع الكابل الذي يربط الغوّاصة بالسفينة. بدأت «أبيس-١» تنزل وحدها، وأضواؤها تنطفئ واحداً بعد الآخر. وأمام آخر كاميرا تعمل يمرّ شيء كبير. جهاز طلب النجدة موجود خارج الغوّاصة، ولا يستطيع الوصول إليه إلا {name}.'),
     variants: [
       { when: { flag: ['sub-checked'] }, text: L('The safety checks at the surface pay off: the backup battery is exactly where it should be.', 'آتى فحص السلامة على السطح ثماره: البطارية الاحتياطية في مكانها تماماً.') },
       { when: { flag: ['rode-outside'] }, text: L('{name} has been outside this hull before. It already knows the way to the beacon.', 'سبق لـ{name} أن ركب خارج هذا الهيكل، وهو يعرف الطريق إلى المنارة.') },

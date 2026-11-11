@@ -924,3 +924,34 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
 .vn.peek .painted-img { filter: none; }
 .peek-back { position: fixed; inset: 0; z-index: 40; display: grid; place-items: end center; padding: 0 16px calc(28px + env(safe-area-inset-bottom)); background: none; border: 0; color: var(--paper); font: inherit; font-size: 1rem; cursor: pointer; text-shadow: 0 2px 10px #000, 0 0 3px #000; }
 .vn.peek .creature-panel, .vn.peek .featured, .vn.peek .vn-panel { display: none; }
+
+/* ═══ booth pass 3 (2026-11-11) ═══ */
+/* the scene card ignored clicks (pointer-events: none from its first version), so the magnifier did nothing */
+.featured.tappable { pointer-events: auto; z-index: 7; }
+.creature-panel.tappable { pointer-events: auto; }
+/* whole picture in the card, never a cropped corner of it */
+.featured-img { background: #07090b; }
+.featured-img img, .featured.kind-plate .featured-img img, .featured.kind-painter .featured-img img, .featured.same-as-scene .featured-img img { object-fit: contain; transform: none; filter: none; }
+/* a creature the story has not revealed yet */
+.featured-unknown .featured-img { display: grid; place-items: center; background: radial-gradient(circle at 50% 45%, #1b1730, #07090b 75%); }
+.unknown-mark { font-size: 4.2rem; line-height: 1; color: #c9a8ff; text-shadow: 0 0 26px rgba(201, 168, 255, .55); font-weight: 700; }
+@media (max-aspect-ratio: 1/1) { .unknown-mark { font-size: 2.4rem; } }
+/* "see the painting" shows all of it */
+.vn.peek .painted-img { object-fit: contain; transform: none !important; animation: none !important; background: #000; }
+/* mode cards: the whole painting sits in the top of the card instead of a cropped full-bleed */
+.mode-card .painted { inset: 0 0 auto 0; height: auto; aspect-ratio: 16 / 9; }
+.mode-card .painted-img { object-fit: contain; object-position: center top; transform: none !important; animation: none !important; }
+.mode-card .painted::after { background: linear-gradient(rgba(4, 6, 9, .45), transparent 30%, transparent 62%, #000 100%); }
+.mode-card { min-height: 0; justify-content: flex-start; background: #000; }
+.mode-brand { min-height: 0; }
+.mode-brand .logos img { height: 72px; }
+.mode-text { margin-top: clamp(40px, 16vw, 150px); background: linear-gradient(transparent, #000 34%); padding-top: var(--s6); }
+@media (max-width: 480px) { .mode-card { min-height: 0; } .mode-brand .logos img { height: 52px; } .mode-text { margin-top: 70px; } }
+
+/* ending: say it is over, then how it ended, what happened next, and the trip in short */
+.ending-over { margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--gold-2); text-align: start; }
+.ending-part { display: grid; gap: 6px; text-align: start; }
+.ending-part h3 { margin: 0; font-size: 1.02rem; color: var(--sea); font-family: var(--body-ar); font-weight: 700; }
+html[lang='en'] .ending-part h3 { font-family: inherit; }
+.ending-part p { margin: 0; line-height: 1.9; font-size: 1.05rem; }
+.ending-part .epilogue { font-style: normal; }

@@ -118,7 +118,24 @@ export default function App() {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.classList.toggle('reduced-motion', reduced);
   }, [lang, reduced]);
-  useEffect(() => { if (data.settings.muted) ambient.stop(); }, [data.settings.muted]);
+  // Music: menus have their own theme, the ending has one, and the story screen picks music by place (see Play).
+  // Browsers only start sound after a tap or key press, so the first one anywhere wakes the music up.
+  const muted = data.settings.muted;
+  useEffect(() => {
+    if (muted) { ambient.stop(); return; }
+    if (screen === 'ending') { ambient.theme('ending'); ambient.fanfare(); }
+    else if (screen !== 'play') ambient.theme('menu');
+  }, [screen, muted]);
+  useEffect(() => {
+    const wake = (e: Event) => {
+      if (muted) return;
+      ambient.resume();
+      if (screen !== 'play' && screen !== 'ending') ambient.theme('menu');
+      if (e.type === 'pointerdown' && (e.target as HTMLElement | null)?.closest?.('button, [role="button"], a, label')) ambient.tap();
+    };
+    window.addEventListener('pointerdown', wake); window.addEventListener('keydown', wake);
+    return () => { window.removeEventListener('pointerdown', wake); window.removeEventListener('keydown', wake); };
+  }, [screen, muted]);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [screen]);
 
   const setSettings = (patch: Partial<SaveData['settings']>) => setData((d) => ({ ...d, settings: { ...d.settings, ...patch } }));
@@ -167,7 +184,7 @@ export default function App() {
     if (g.plan.story && !(await loadStory(g.plan.story.id, g.plan.story.v).catch(() => null))) { setData((d) => ({ ...d, current: null })); return; }
     setGame(g); setDuck(g.duck); setCreature(g.creature); setScreen('play');
   };
-  const quit = () => { setData((d) => ({ ...d, current: null })); setGame(null); setScreen('title'); ambient.stop(); };
+  const quit = () => { setData((d) => ({ ...d, current: null })); setGame(null); setScreen('title'); };
   const selectedDuck = DUCKS.find((d) => d.id === duck)!;
   // an archive story belongs to one mode: the other mode's card is switched off instead of silently playing something else
   const pickMode = currentStories().find((x) => x.id === pick)?.mode;

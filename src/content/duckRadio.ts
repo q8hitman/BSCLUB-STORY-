@@ -48,7 +48,7 @@ export const HELP: Record<string, DuckHelp> = {
 export interface FieldNote { id: string; duck: string; realm: 'land' | 'sea' | 'any'; text: L10n }
 const N = (duck: string, n: number, realm: FieldNote['realm'], en: string, ar: string): FieldNote => ({ id: `${duck}-${n}`, duck, realm, text: L(en, ar) });
 export const FIELD_NOTES: FieldNote[] = [
-  N('abdullah', 1, 'land', 'A single gram of soil can hold around a billion bacteria.', 'قد يحتوي غرامٌ واحد من التربة على نحو مليار خلية بكتيرية.'),
+  N('abdullah', 1, 'land', 'A single gram of soil can hold around a billion bacteria.', 'قد يحتوي غرام واحد من التربة بشكل مليار خلية بكتيرية.'),
   N('abdullah', 2, 'sea', 'Prochlorococcus, an ocean bacterium too small to see, is thought to be the most abundant photosynthetic organism on Earth.', 'يُعتقد أن بكتيريا «بروكلوروكوكس» البحرية، التي لا تُرى بالعين، هي أكثر الكائنات القادرة على البناء الضوئي عدداً على الأرض.'),
   N('abdullah', 3, 'any', 'In ideal conditions some bacteria divide about every 20 minutes — that is why a lab culture can grow overnight.', 'في الظروف المثالية تنقسم بعض البكتيريا كل ٢٠ دقيقة تقريباً، ولهذا تنمو المزرعة البكتيرية في المختبر خلال ليلة واحدة.'),
   N('abdullah', 4, 'sea', 'Around deep-sea vents, bacteria make food from chemicals instead of sunlight. This is called chemosynthesis.', 'حول الينابيع الحارّة في أعماق البحر تصنع البكتيريا غذاءها من مواد كيميائية بدلاً من ضوء الشمس، وتُسمّى هذه العملية «التخليق الكيميائي».'),
@@ -59,7 +59,7 @@ export const FIELD_NOTES: FieldNote[] = [
   N('ahmed', 4, 'land', 'Many desert animals are nocturnal: they come out at night to avoid the heat of the day.', 'كثير من حيوانات الصحراء ليلية النشاط، فهي تخرج ليلاً لتتجنّب حرارة النهار.'),
   N('ahmed', 5, 'any', 'Good field notes record the date, time, place and weather — details that keep an observation useful for decades.', 'تسجّل الملاحظات الميدانية الجيدة التاريخ والوقت والمكان والطقس، وهي تفاصيل تُبقي الملاحظة مفيدة لعقود.'),
   N('camel', 1, 'any', 'Almost every cell in your body carries the same DNA — about two metres of it, folded tightly.', 'تحمل كل خلية تقريباً في جسمك الحمض النووي نفسه، وطوله نحو مترين مطويّين بإحكام.'),
-  N('camel', 2, 'sea', 'The green glow of the jellyfish Aequorea comes from green fluorescent protein (GFP), now a key tool in labs worldwide.', 'يأتي الوهج الأخضر لقنديل البحر «إيكوريا» من البروتين الفلوري الأخضر، الذي صار أداة أساسية في مختبرات العالم.'),
+  N('camel', 2, 'sea', 'The green glow of the jellyfish Aequorea comes from green fluorescent protein (GFP), now a key tool in labs worldwide.', 'يأتي الضوء الأخضر لقنديل البحر «إيكوريا» من البروتين الفلوري الأخضر، الذي صار أداة أساسية في مختبرات العالم.'),
   N('camel', 3, 'any', 'Many of the genes that build bodies are similar in flies, fish and people.', 'كثير من الجينات المسؤولة عن بناء الجسم متشابهة في الذباب والأسماك والبشر.'),
   N('camel', 4, 'any', 'DNA barcoding reads one short standard gene to tell apart species that look almost identical.', 'يعتمد «الترميز الشريطي للحمض النووي» على قراءة جين قصير معياري للتمييز بين أنواع تكاد تتطابق في الشكل.'),
   N('camel', 5, 'land', 'PCR lets a lab copy a tiny piece of DNA millions of times in a few hours.', 'تتيح تقنية «تفاعل البوليميراز المتسلسل» نسخ قطعة صغيرة من الحمض النووي ملايين المرات خلال ساعات قليلة.'),
@@ -122,7 +122,7 @@ export const RADIO: Record<string, Partial<Record<RadioCue, L10n[]>>> = {
   },
   bassam: {
     arrive: [L('Goggles on. Just in case.', 'النظارات الواقية على الأعين… احتياطاً.'), L('Nice view. Where’s the emergency exit?', 'منظر جميل… أين مخرج الطوارئ؟')],
-    danger: [L('Nobody touch anything. I mean it.', 'لا يلمس أحدٌ شيئاً. أنا جادّ.'), L('Slow movements. Breathe.', 'حركات بطيئة… وتنفّسوا.')],
+    danger: [L('Nobody touch anything. I mean it.', 'لا يلمس أحد شيئاً. أنا جادّ.'), L('Slow movements. Breathe.', 'حركات بطيئة… وتنفّسوا.')],
     deep: [L('One window between us and all that water. I’m fine. Totally fine.', 'نافذة واحدة بيننا وبين كل هذا الماء… أنا بخير… بخير تماماً.')],
     success: [L('No injuries. I’ll take it.', 'لا إصابات… ممتاز.'), L('Smooth. Coffee break earned.', 'بسلاسة… نستحق استراحة قهوة.')],
     fail: [L('Everyone okay? Count your fingers.', 'هل الجميع بخير؟ عدّوا أصابعكم.'), L('That’s going in the incident report.', 'هذه ستُسجَّل في تقرير الحوادث.')],

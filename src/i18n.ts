@@ -54,7 +54,7 @@ const S = {
   language: { en: 'Language', ar: 'اللغة' },
   textSpeed: { en: 'Text speed', ar: 'سرعة النص' },
   instant: { en: 'Instant', ar: 'فوري' },
-  sound: { en: 'Ambient sound', ar: 'أصوات الأجواء' },
+  sound: { en: 'Music and sound', ar: 'الموسيقى والأصوات' },
   reducedMotion: { en: 'Reduce motion', ar: 'تقليل الحركة' },
   aiNarration: { en: 'AI narration (optional)', ar: 'سرد بالذكاء الاصطناعي (اختياري)' },
   aiOff: { en: 'Not configured — the game uses its built-in story text.', ar: 'غير مفعّل — اللعبة تستخدم نصوصها المدمجة.' },

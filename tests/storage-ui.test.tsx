@@ -68,8 +68,8 @@ describe('UI: language and direction', () => {
     expect(screen.getByText('Build your hybrid')).toBeTruthy();
     await act(async () => { fireEvent.click(screen.getByText('Next')); });
     await act(async () => { fireEvent.click(screen.getByText('Next')); });
-    expect(screen.getByText('Creature Test Lab')).toBeTruthy();
-    await act(async () => { fireEvent.click(screen.getByText('The smooth wall')); });
+    expect(screen.getByText('Try out your creature')).toBeTruthy();
+    await act(async () => { fireEvent.click(screen.getByText('Climbing test')); });
     await act(async () => { fireEvent.click(screen.getByText('Run the test')); });
     expect(document.querySelector('.lab-result')).toBeTruthy();
     expect(screen.getByText('Fiction')).toBeTruthy();

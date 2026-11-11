@@ -81,9 +81,9 @@ describe('scene-to-scene coherence', () => {
     let travel = 0;
     for (const { s, texts } of RUNS) {
       const last = texts[texts.length - 1];
-      expect(last.en.startsWith('Everything has led') || /Everything has led/.test(last.en), `seed ${s.seed}`).toBe(true);
-      expect(last.ar).toContain('كل ما مرّ بكم قادكم إلى هذه اللحظة');
-      travel += texts.filter((t) => t.en.includes('Leaving ') || t.en.includes('The sub sinks on')).length;
+      expect(/This is the most important moment of the trip/.test(last.en), `seed ${s.seed}`).toBe(true);
+      expect(last.ar).toContain('هذه أهم لحظة في الرحلة');
+      travel += texts.filter((t) => t.en.includes('The team moves from ') || t.en.includes('The submarine goes down from ')).length;
       for (const t of texts) expect(t.en + t.ar).not.toMatch(LEFTOVER);
     }
     expect(travel).toBeGreaterThan(RUNS.length);

@@ -42,7 +42,7 @@ function animalZoom(animal: Animal, src: string, lang: Lang): ZoomInfo {
 }
 
 /** The animal the story is talking about, shown as an inset specimen card over the scene. Tap it for a large picture and a description. Null/unknown id → nothing. */
-function FeaturedAnimal({ id, biome, seed, lang, scene, onOpen }: { id: string | null | undefined; biome: BiomeId; seed: number; lang: Lang; scene?: string | null; onOpen?: (z: ZoomInfo) => void }) {
+function FeaturedAnimal({ id, biome, seed, lang, scene, onOpen, hidden = false }: { id: string | null | undefined; biome: BiomeId; seed: number; lang: Lang; scene?: string | null; onOpen?: (z: ZoomInfo) => void; hidden?: boolean }) {
   const animal = id ? ANIMAL_BY_ID[id] : undefined;
   const art = useMemo(() => { try { return animalArt(id); } catch { return null; } }, [id]);
   const src = useMemo(() => {
@@ -53,6 +53,17 @@ function FeaturedAnimal({ id, biome, seed, lang, scene, onOpen }: { id: string |
   const [broken, setBroken] = useState<string | null>(null);
   if (!animal || !art || !src || broken === src) return null;
   const role = animal.roles?.[0];
+  // a creature the story has not revealed yet keeps its mystery: no picture and no name until the team finds out
+  if (hidden) return (
+    <figure className="featured featured-unknown" aria-label={lang === 'ar' ? 'كائن مجهول' : 'Unknown creature'}>
+      <div className="featured-img"><span className="unknown-mark" aria-hidden="true">؟</span></div>
+      <figcaption>
+        <span className="kicker">{u('inScene', lang)}</span>
+        <b>{lang === 'ar' ? 'كائن مجهول' : 'Unknown creature'}</b>
+        <span className="featured-tags"><em className="role-mystery">{lang === 'ar' ? 'يظهر بعد قراركم' : 'Revealed after your choice'}</em></span>
+      </figcaption>
+    </figure>
+  );
   return (
     <figure className={`featured tappable kind-${art.kind} ${src === scene ? 'same-as-scene' : ''}`} aria-label={`${u('inScene', lang)}: ${animal.name[lang]}`} role="button" tabIndex={0}
       onClick={() => onOpen?.(animalZoom(animal, src, lang))} onKeyDown={(e) => { if (e.key === 'Enter') onOpen?.(animalZoom(animal, src, lang)); }}>
@@ -124,13 +135,13 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
 
   useEffect(() => { setTyped(false); if (typeof window !== 'undefined' && window.scrollY > 0) window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); }, [game.index, game.stage]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (!settings.muted && view) ambient.play(view.biome); else ambient.stop(); }, [view?.biome, settings.muted]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => () => ambient.stop(), []);
 
   const onChoose = useCallback((id: string) => {
     const before = new Set(game.discoveries);
     const next = choose(game, id);
-    setNewFacts(next.discoveries.filter((d) => !before.has(d)));
-    if (!settings.muted) ambient.blip(!!next.lastOutcome?.success);
+    const found = next.discoveries.filter((d) => !before.has(d));
+    setNewFacts(found);
+    if (!settings.muted) { ambient.blip(!!next.lastOutcome?.success); if (found.length || next.evidence.length > game.evidence.length) setTimeout(() => ambient.reveal(), 520); }
     setGame(next);
     if (settings.ai && aiAvailable() && next.lastOutcome) {
       const base = next.lastOutcome.text[lang];
@@ -190,6 +201,8 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const phaseLabel = game.mode === 'marine' ? t(isDeep ? 'deep' : 'surface', lang) : null;
   const total = game.plan.beats.length;
   const cine = game.stage === 'beat' ? view.template.cinematic : undefined;
+  // is the result on screen the story's last one? (the button then says so, instead of a plain "continue")
+  let lastScene = false; if (game.stage === 'outcome') { try { lastScene = advance(game).stage === 'ending'; } catch { lastScene = false; } }
   // the result screen repeats the decision it answers, so nobody has to remember what they tapped
   const lastLog = game.log[game.log.length - 1];
   const chosenTpl = isOutcome ? view.template.choices.find((c) => c.id === lastLog?.choice) : undefined;
@@ -225,7 +238,8 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
       </header>
 
       <CreaturePanel game={game} lang={lang} onOpen={setZoom} />
-      <FeaturedAnimal key={featuredId ?? "none"} id={featuredId} biome={view.biome} seed={game.seed + game.index} lang={lang} scene={plate ? plateUrl(plate.id) : null} onOpen={setZoom} />
+      <FeaturedAnimal key={featuredId ?? "none"} id={featuredId} biome={view.biome} seed={game.seed + game.index} lang={lang} scene={plate ? plateUrl(plate.id) : null} onOpen={setZoom}
+        hidden={(() => { const a = featuredId ? ANIMAL_BY_ID[featuredId] : undefined; const secret = !!a && (a.roles?.[0] === 'mystery' || a.kind === 'fictional'); return secret && !(isOutcome && view.template.kind !== 'legend'); })()} />
       {zoom && <ZoomCard info={zoom} lang={lang} onClose={() => setZoom(null)} />}
 
       {brief && (() => {
@@ -363,7 +377,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
                 <p>{FACT_BY_ID[id].text[lang]}</p>
               </aside>
             ))}
-            <button className="continue btn btn-primary" onClick={onContinue}>{t('continue', lang)}</button>
+            <button className="continue btn btn-primary" onClick={onContinue}>{lastScene ? (lang === 'ar' ? 'شاهد نهاية القصة' : 'See how the story ends') : t('continue', lang)}</button>
           </>
         )}
       </div>

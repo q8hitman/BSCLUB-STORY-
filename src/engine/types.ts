@@ -203,4 +203,6 @@ export interface Ending {
   summary: L10n;
   epilogue: L10n;
   highlights: L10n[];
+  /** How the story ended: the team's last decision and what it led to, in one plain passage (shown first on the ending screen). */
+  finale?: L10n;
 }
