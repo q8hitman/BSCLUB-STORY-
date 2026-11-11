@@ -44,6 +44,7 @@ export function Builder({ lang, value, onChange, onNext, onBack }: { lang: Lang;
           <Stage>
             <CreatureArt creature={value} className="specimen bob" expression={mood} />
           </Stage>
+          <p className="kicker mood-label">{u('moodHint', lang)}</p>
           <div className="mood-strip" role="radiogroup" aria-label={u('reactions', lang)}>
             {PREVIEW_MOODS.map((m) => (
               <button key={m} role="radio" aria-checked={mood === m} className={`mood ${mood === m ? 'on' : ''}`} onClick={() => setMood(m)} title={u(`mood_${m}`, lang)}>

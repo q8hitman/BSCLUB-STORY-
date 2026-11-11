@@ -340,10 +340,17 @@ const MAX_SPECIAL = 2;
  * story state come first (max 2) so the body you built matters; open choices fill the rest.
  * Deterministic per (seed, beat), displayed in the template's order.
  */
+/** True when a choice's condition is only about the place (on land / in water), not about the creature or the story so far. */
+export const placeOnly = (c: Choice): boolean => !!c.requires && Object.keys(c.requires).every((k) => k === 'wet' || k === 'biome');
+/** The choices anyone can take in this place: ungated ones plus the land-only / water-only ones that fit it. */
+export function openChoices(t: BeatTemplate, biome: BiomeId): Choice[] {
+  return t.choices.filter((c) => !c.requires || (placeOnly(c) && (c.requires!.wet === undefined || BIOMES[biome].wet === c.requires!.wet) && (!c.requires!.biome || c.requires!.biome.includes(biome))));
+}
+
 export function pickChoices(t: BeatTemplate, s: GameState, d: DerivedCreature, biome: BiomeId): Choice[] {
   const rng = Rng.from(s.seed, `choices${s.index}`);
-  const special = rng.shuffle(t.choices.filter((c) => c.requires && condHolds(c.requires, d, s, biome))).slice(0, MAX_SPECIAL);
-  const open = rng.shuffle(t.choices.filter((c) => !c.requires)).slice(0, CHOICES_PER_SCENE - special.length);
+  const special = rng.shuffle(t.choices.filter((c) => c.requires && !placeOnly(c) && condHolds(c.requires, d, s, biome))).slice(0, MAX_SPECIAL);
+  const open = rng.shuffle(openChoices(t, biome)).slice(0, CHOICES_PER_SCENE - special.length);
   const keep = new Set([...special, ...open]);
   return t.choices.filter((c) => keep.has(c));
 }
@@ -396,7 +403,7 @@ export function choose(s: GameState, choiceId: string): GameState {
       if (p) { usedPart = p.slot; partLine = { en: `${iso(capStr(s.creature.name))} ${p.action.en}.`, ar: `${iso(s.creature.name)} ${p.action.ar}.` }; }
     } else {
       const p = weakestPartForStat(d, c.check.stat);
-      if (p) { usedPart = p.slot; partLine = { en: `Weak spot — ${p.name.en}: ${p.tradeoff.en}`, ar: `نقطة ضعف — ${p.name.ar}: ${p.tradeoff.ar}` }; }
+      if (p) { usedPart = p.slot; partLine = { en: `What held it back here: ${p.name.en}.`, ar: `الذي لم يساعده هنا: ${p.name.ar}.` }; }
     }
   }
   const out: Outcome = success || !c.fail ? c.success : c.fail;

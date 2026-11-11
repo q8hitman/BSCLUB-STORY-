@@ -124,7 +124,7 @@ export async function renderPassport(s: GameState, lang: Lang, showName: boolean
   g.save(); rr(g, 90, wy, PASS_W - 180, wh, 40); g.clip(); g.fillStyle = 'rgba(6,10,10,.55)'; g.fillRect(90, wy, PASS_W - 180, wh); g.fillStyle = glow; g.fillRect(90, wy, PASS_W - 180, wh); g.restore();
   g.strokeStyle = 'rgba(233,199,123,.55)'; g.lineWidth = 2; rr(g, 90, wy, PASS_W - 180, wh, 40); g.stroke();
   const svgUrl = URL.createObjectURL(new Blob([creatureSvg(s.creature, { width: 760, expression: pc.done ? 'happy' : 'confident' })], { type: 'image/svg+xml' }));
-  try { const im = await loadImage(svgUrl); const w = 700, h = w * (im.height / im.width); g.save(); g.shadowColor = 'rgba(0,0,0,.7)'; g.shadowBlur = 40; g.drawImage(im, (PASS_W - w) / 2, wy + wh - h - 6, w, h); g.restore(); } finally { URL.revokeObjectURL(svgUrl); }
+  try { const im = await loadImage(svgUrl); const sc = Math.min(700 / im.width, (wh - 76) / im.height); const w = im.width * sc, h = im.height * sc; g.save(); g.shadowColor = 'rgba(0,0,0,.7)'; g.shadowBlur = 40; g.drawImage(im, (PASS_W - w) / 2, wy + wh - h - 14, w, h); g.restore(); } finally { URL.revokeObjectURL(svgUrl); }
   g.fillStyle = 'rgba(233,199,123,.9)'; g.font = F(700, 22, '"Segoe UI", sans-serif'); g.direction = 'ltr'; g.textAlign = 'left'; g.fillText(pc.id, 120, wy + 44);
   g.direction = pc.rtl ? 'rtl' : 'ltr'; g.textAlign = 'center';
 

@@ -55,7 +55,7 @@ describe('Explorer Passport card', () => {
       expect(c.anatomy).toHaveLength(7);
       expect(c.player).toBe('Guest 7');
       expect(passportContent(s, 'ar', false, null, SITE).player).toBeNull();
-      const res = decodeSave(saveFromHash(new URL(c.url).hash)!);
+      const res = decodeSave(saveFromHash(c.url)!);
       expect(res.ok && res.state).toEqual(s);
     }
   });

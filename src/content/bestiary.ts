@@ -94,7 +94,7 @@ export const BESTIARY: Animal[] = [
   { id: 'fiddler-crab', name: L('Fiddler crab', 'السرطان العازف'), kind: 'real', category: 'invertebrate', biomes: ['mudflat'], roles: ['rescue', 'comic'], tags: ['one-big-claw'], art: { plates: [] } },
   { id: 'flamingo', name: L('Greater flamingo', 'الفلامنغو الكبير'), kind: 'real', category: 'bird', biomes: ['mudflat'], roles: ['rescue'], tags: ['Kuwait', 'Sulaibikhat'], art: { plates: [] } },
   { id: 'barracuda', name: L('Barracuda', 'الباراكودا'), kind: 'real', category: 'fish', biomes: ['seagrass', 'reef'], roles: ['predator'], tags: ['fast', 'silver'], art: { plates: [] } },
-  { id: 'stingray', name: L('Stingray', 'اللُّخم'), kind: 'real', category: 'fish', biomes: ['seagrass'], roles: ['predator'], tags: ['buried', 'barb'], art: { plates: [] } },
+  { id: 'stingray', name: L('Stingray', 'اللخمة (سمكة الراي)'), kind: 'real', category: 'fish', biomes: ['seagrass'], roles: ['predator'], tags: ['buried', 'barb'], art: { plates: [] } },
   { id: 'tiger-shark', name: L('Tiger shark', 'قرش النمر'), kind: 'real', category: 'fish', biomes: ['openSea'], roles: ['predator'], tags: ['stripes'], art: { plates: [] } },
   { id: 'whale-shark', name: L('Whale shark', 'القرش الحوتي'), kind: 'real', category: 'fish', biomes: ['openSea'], roles: ['guide'], tags: ['Gulf', 'filter-feeder'], art: { plates: [] }, fact: 'sea-whaleshark' },
   { id: 'dolphin', name: L('Humpback dolphin', 'الدلفين الأحدب'), kind: 'real', category: 'mammal', biomes: ['openSea'], roles: ['guide', 'ally'], tags: ['Gulf', 'pod'], art: { plates: [] } },
@@ -105,7 +105,7 @@ export const BESTIARY: Animal[] = [
   { id: 'pompeii-worm', name: L('Pompeii worm', 'دودة بومبي'), kind: 'real', category: 'invertebrate', biomes: ['vents'], roles: ['rescue', 'mystery'], tags: ['heat-proof', 'bacteria-fleece'], art: { plates: [] } },
   { id: 'cusk-eel', name: L('Hadal cusk-eel', 'ثعبان الأعماق الشبحي'), kind: 'real', category: 'fish', biomes: ['trench'], roles: ['predator', 'mystery'], tags: ['deep', 'ghostly'], art: { plates: [] } },
   { id: 'sea-pig', name: L('Sea pig', 'خنزير البحر'), kind: 'real', category: 'invertebrate', biomes: ['trench'], roles: ['comic', 'rescue'], tags: ['sea-cucumber', 'walks'], art: { plates: [] } },
-  { id: 'deep-giant', name: L('The unknown giant', 'العملاق المجهول'), kind: 'fictional', category: 'cryptid', biomes: ['openSea', 'trench', 'midnight'], roles: ['mystery'], tags: ['legend', 'plate-sized-eye'], art: { plates: ['opensea-sailor-tale'], painter: 'leviathan' } },
+  { id: 'deep-giant', name: L('The unknown giant', 'العملاق المجهول'), kind: 'fictional', category: 'cryptid', biomes: ['openSea', 'trench', 'midnight'], roles: ['mystery'], tags: ['legend', 'plate-sized-eye'], art: { plates: ['legend-bu-sahn'], painter: 'leviathan' } },
 ];
 
 // Specimen close-ups painted for an animal are named `specimen-<id>`: attach any that shipped in plates.json.

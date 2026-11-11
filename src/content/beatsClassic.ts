@@ -196,7 +196,7 @@ export const CLASSIC_BEATS: BeatTemplate[] = [
       C('wade', L('Wade into the reeds', 'الخوض بين القصب'), 'bold',
         O('Hidden in the reeds: a nest of eggs with a BSC tag on it.', 'مخبّأٌ بين القصب: عشٌّ من البيض عليه بطاقة النادي.', 'shocked', [ev('tagged-nest')], 'splash'),
         { check: chk('swim', 4, ['swim', 'jump']), fail: O('Leeches. Several. You leave.', 'علَق… كثير منه. تغادرون.', 'worried', [en(-1)], 'splash') }),
-      C('peat', L('Take a peat core', 'أخذ عيّنة من الخثّ'), 'careful',
+      C('peat', L('Take a peat core', 'أخذ عيّنة من طين المستنقع'), 'careful',
         O('The core shows thousands of years of stored carbon, layer on layer. Beautiful.', 'تكشف العيّنة آلاف السنين من الكربون المخزّن، طبقةً فوق طبقة. منظرٌ بديع.', 'thinking', [di('swamp-carbon'), ev('peat-core')], 'sample')),
       C('ghosts', L('Politely ask the ghosts to leave', 'مطالبة الأشباح بالرحيل بأدب'), 'silly',
         O('{duck} clears {g:his|her} throat and asks the ghosts to leave. A breeze blows the gas away. {duck} takes full credit.', '{g:يتنحنح|تتنحنح} {duck} و{g:يطلب|تطلب} من الأشباح أن ترحل. تهبّ نسمةٌ فتبدّد الغاز، و{g:ينسب|تنسب} {duck} الفضل كلّه {g:لنفسه|لنفسها}.', 'laughing', [tr(1)], 'flash')),

@@ -6,7 +6,7 @@ The story engine is **deterministic**. Every scene, outcome, Duck Radio line, fi
 ending is a pure function of a few inputs. So the QR does not store the story text. It stores the inputs, and the
 phone that scans it **replays the same decisions through the same engine**, then validates the rebuilt state.
 
-Code: `src/engine/save.ts`. Card: `src/share/passport.ts`. Restore screen: `App.tsx` (`#s=` link).
+Code: `src/engine/save.ts`. Card: `src/share/passport.ts`. Restore screen: `App.tsx` (`?s=` link; `#s=` on cards made before 2026-11-11). Since 2026-11-11 codes use the compact v2 format (positions + content stamp); v1 still decodes.
 
 ### What the QR link contains (and nothing else)
 

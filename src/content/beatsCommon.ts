@@ -1,4 +1,4 @@
-import type { BeatTemplate } from '../engine/types';
+import type { BeatTemplate, Choice } from '../engine/types';
 import { C, L, O, chk, di, en, ev, fl, tr } from './dsl';
 
 const ALL_LAND = ['forest', 'desert', 'mountain', 'cave', 'snow', 'swamp', 'ruins'] as const;
@@ -260,7 +260,7 @@ export const COMMON_BEATS: BeatTemplate[] = [
         O('Metre by metre. The creaking settles into a slow rhythm, almost like breathing, and the sub sinks gently into the dark.', 'متراً بعد متر. تهدأ الطقطقة وتصير إيقاعاً بطيئاً يشبه التنفّس، وتغوص الغوّاصة بهدوءٍ في الظلام.', 'thinking', [], 'still'),
         { check: chk('intellect', 5), fail: O('A red warning light. For one long hour you wait in silence while the systems recheck — and something taps the hull, once.', 'ضوء تحذيرٍ أحمر. تنتظرون ساعةً كاملة في صمت حتى يُعاد فحص الأنظمة… ثم يطرق شيءٌ هيكل الغوّاصة. طرقةً واحدة.', 'worried', [en(-1)], 'flash') }),
       C('fast', L('Go full speed down', 'النزول بأقصى سرعة'), 'bold',
-        O('Gutsy. The sub plunges, the depth counter blurs, and you hit bottom early in a cloud of silt.', 'يا للجرأة! تهوي الغوّاصة، وتتلاحق أرقام عدّاد العمق، وتبلغون القاع مبكراً وسط سحابةٍ من الطمي.', 'shocked', [fl('reckless')], 'impact'),
+        O('Gutsy. The sub plunges, the depth counter blurs, and you hit bottom early in a cloud of silt.', 'يا للجرأة! تهوي الغوّاصة، وتتلاحق أرقام عدّاد العمق، وتبلغون القاع مبكراً وسط سحابةٍ من الطين الناعم.', 'shocked', [fl('reckless')], 'impact'),
         { check: chk('swim', 7), fail: O('Something bangs. Something else beeps. Something outside answers with a bang of its own.', 'شيءٌ ما يرتطم. وشيءٌ آخر يُطلق صفيراً. وشيءٌ في الخارج يردّ بارتطامٍ من عنده.', 'shocked', [en(-1), fl('reckless')], 'impact') }),
       C('listen', L('Kill the floodlights and listen', 'إطفاء الكشّافات والإنصات'), 'clever',
         O('Darkness. Then the sounds: clicks, a long groan, a patter like rain on the hull. The hydrophone records every one.', 'ظلام. ثم الأصوات: نقرات، وأنينٌ طويل، وطرقاتٌ كالمطر على الهيكل. ويسجّلها الميكروفون المائي كلها.', 'thinking', [ev('deep-soundscape')], 'echo'),
@@ -270,3 +270,46 @@ export const COMMON_BEATS: BeatTemplate[] = [
     ],
   },
 ];
+
+// ── Land and sea versions of the shared scenes ─────────────────────────────────────────────────────────────
+// The shared challenge scenes run on land and under water. Some of their choices only make sense on land (running
+// away, stretching a rope, building a windbreak), so those are offered on land only, and under water the team gets
+// choices that fit a boat, a diving suit or the submarine. Place-only conditions count as ordinary open choices.
+const LAND_ONLY: Record<string, string[]> = { cross: ['think', 'rope', 'carry'], hide: ['flee'], cold: ['shelter'], dark: ['wall'], heat: ['night'] };
+const WET = { requires: { wet: true } };
+const SEA_CHOICES: Record<string, Choice[]> = {
+  cross: [
+    C('sea-around', L('Go around it slowly', 'الدوران حول العقبة بهدوء'), 'careful',
+      O('The team circles the obstacle slowly while {name} keeps watch. It takes longer, but nobody gets hurt.', 'يدور الفريق حول العقبة ببطء، و{name} يراقب الطريق. يطول المسار قليلاً، لكن أحداً لا يتأذّى.', 'happy'), WET),
+    C('sea-light', L('Light the way first', 'إنارة الطريق بالكشّاف أولاً'), 'clever',
+      O('The beam shows a gap nobody had noticed. The team slips through it calmly.', 'يكشف الضوء فتحةً لم ينتبه إليها أحد، فيعبرها الفريق بهدوء.', 'proud', [ev('water-sample')]), WET),
+    C('sea-wait', L('Wait for the right moment', 'انتظار اللحظة المناسبة'), 'careful',
+      O('The team waits until the water settles, then crosses in one clean move.', 'ينتظر الفريق حتى يهدأ الماء، ثم يعبر في اللحظة المناسبة.', 'happy'), WET),
+    C('sea-fish', L('Follow the fish', 'اللحاق بالأسماك'), 'silly',
+      O('The fish know the way better than any map. The team follows them to a safe passage.', 'الأسماك تعرف الطريق أفضل من أي خريطة. يلحق بها الفريق، فتقوده إلى ممرّ آمن.', 'laughing'), WET),
+  ],
+  hide: [
+    C('sea-back', L('Back away slowly', 'التراجع ببطء'), 'careful',
+      O('The team backs away with no sudden moves. After a long moment, the danger loses interest and drifts off.', 'يتراجع الفريق ببطء ودون حركات مفاجئة. وبعد لحظة طويلة يزول الخطر ويبتعد.', 'happy'), WET),
+    C('sea-dark', L('Switch off the lights', 'إطفاء الأضواء'), 'clever',
+      O('Lights off. The team becomes part of the dark, and after a few long breaths the danger moves on.', 'تنطفئ الأضواء، فيصير الفريق جزءاً من الظلام. وبعد أنفاس طويلة يبتعد الخطر.', 'proud'), WET),
+  ],
+  cold: [
+    C('sea-heater', L('Turn on the heater', 'تشغيل المدفأة'), 'clever',
+      O('The small heater hums, and warmth creeps back little by little. {name} sits right in front of it.', 'تطنّ المدفأة الصغيرة، ويعود الدفء شيئاً فشيئاً. ويجلس {name} أمامها مباشرة.', 'happy'), WET),
+  ],
+  dark: [
+    C('sea-sonar', L('Use the depth scanner', 'استخدام جهاز كشف الأعماق'), 'clever',
+      O('Dot by dot, the scanner draws the shape of the seabed on the screen, and the team moves on with confidence.', 'يرسم الجهاز شكل القاع على الشاشة نقطةً بعد نقطة، فيتقدّم الفريق بثقة.', 'proud'), WET),
+  ],
+  heat: [
+    C('sea-away', L('Move away from the hot water', 'الابتعاد عن الماء الحارّ'), 'careful',
+      O('The team pulls back to cooler water, and the heat eases. {name} stops panting.', 'يتراجع الفريق إلى ماءٍ أبرد، فتخفّ الحرارة ويتوقف {name} عن اللهاث.', 'happy'), WET),
+    C('sea-cool', L('Turn the cooling up', 'تشغيل التبريد بأقصى قوة'), 'clever',
+      O('The cooling system roars, and the cabin slowly becomes bearable again.', 'يهدر جهاز التبريد، وتعود الحرارة في الداخل محتملةً شيئاً فشيئاً.', 'proud'), WET),
+  ],
+};
+for (const b of COMMON_BEATS) {
+  for (const c of b.choices) if (LAND_ONLY[b.id]?.includes(c.id)) c.requires = { wet: false };
+  b.choices.push(...(SEA_CHOICES[b.id] ?? []));
+}

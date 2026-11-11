@@ -11,7 +11,7 @@ export type Feeling = 'curious' | 'calm' | 'confident' | 'afraid' | 'excited' | 
 
 export const MARK_LABEL: Record<Mark, L10n> = {
   mud: L('Mud-caked', 'مغطّى بالطين'), frost: L('Frosted', 'يكسوه الصقيع'), dust: L('Dusty', 'يعلوه الغبار'), wet: L('Soaked', 'مبتلّ'),
-  glow: L('Glowing algae', 'طحالب مضيئة'), soot: L('Vent soot', 'سخام الفتحات'), scratches: L('Scratched', 'مخدوش'), fatigue: L('Exhausted', 'مُنهَك'),
+  glow: L('Glowing algae', 'طحالب مضيئة'), soot: L('Vent soot', 'سخام الينابيع الحارّة'), scratches: L('Scratched', 'مخدوش'), fatigue: L('Exhausted', 'مُنهَك'),
 };
 export const FEELING_LABEL: Record<Feeling, L10n> = {
   curious: L('Curious', 'فضولي'), calm: L('Calm', 'هادئ'), confident: L('Confident', 'واثق'), afraid: L('Afraid', 'خائف'),

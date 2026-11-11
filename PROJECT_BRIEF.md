@@ -99,3 +99,13 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
   - Bridge lines between scenes: more variants (the same sentence used to repeat 3–4 times in one run). Display text only; saves replay the same.
   - Arabic: «انضافت لكتاب الأساطير» → «أُضيفت هذه الأسطورة إلى كتاب الأساطير». Briefing background made opaque (HUD text showed through).
   - Still open: a real phone-camera scan of the Passport QR; auto-names can wrap at the hyphen ("R-" / "32") in narrow choice cards.
+- 2026-11-11 — **Booth pass 2 (designer feedback with screenshots, event on 2026-11-12).** 132 tests green.
+  - **QR opened as plain text on a Samsung S21 FE.** The link was ~450 characters with the save in `#s=`. Now: compact save format v2 (`src/engine/save.ts`: list positions instead of ids, default names packed, a 2-character content stamp so a content change still fails safely) and an ordinary link `?s=…` (~130–160 characters, much bigger QR modules). Old `#s=` / v1 codes still open (tested). The code is removed from the address bar after reading. NOT yet confirmed on the designer's phone.
+  - Passport card: the creature is scaled to fit its window (tall creatures covered the header). Restore screen has a "save picture" button.
+  - Tap-to-enlarge (`ZoomCard` in `ui/common.tsx`): scene animal card, rare encounter, legend glimpse and the player's creature panel open a large picture with plain-language lines (what it is, where it lives, real fact, real/fictional; for the creature: every part with its description).
+  - Scenes show what the text talks about: `TEMPLATE_PLATES` in `src/art/plates.ts` names a plate per template (per place where needed); the unknown giant's climax shows `legend-bu-sahn` and its card uses the same art (it used to show a random deep-sea fish and a ship).
+  - Result screens repeat the decision ("You chose: …"). Rare/legend cards are bigger.
+  - Plain words: place names simplified (Muddy Shore, Dim Waters, Dark Depths, Hot Springs of the Seabed, Deepest Trench, Frozen Plains…), hard terms replaced or explained.
+  - Sea logic: the marine briefing explains the diving suit and the submarine; shared challenge scenes offer land-only choices on land and new sea choices under water (`LAND_ONLY` / `SEA_CHOICES` at the end of `beatsCommon.ts`; `placeOnly` / `openChoices` in `story.ts`). The failure line no longer quotes a part's land-specific trade-off.
+  - Builder: mood faces labelled; clipping fix from pass 1 confirmed at 1024×768.
+  - Still open: archive stories (`src/stories/*`) were not reworded (versions are locked); builder part pictures that are greyscale crops (camel, octopus) need new art.

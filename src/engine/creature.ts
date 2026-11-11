@@ -47,6 +47,20 @@ export function randomName(rng: Rng, lang: 'ar' | 'en', base = 'fennec'): string
   return lang === 'ar' ? `هجين ${s.ar} ${code}` : `${s.en} Hybrid ${code}`;
 }
 
+/** A default lab designation packed small for QR saves ("هجين فنك D-42" on a fennec gives ['a', 'D-42']); null for a typed name. */
+export function autoNameParts(name: string, base: string): ['a' | 'e', string] | null {
+  const b = SHORT[base]; if (!b) return null;
+  const ar = /^هجين (.+) ([A-Z]-[0-9]{1,3})$/.exec(name);
+  if (ar && ar[1] === b.ar) return ['a', ar[2]];
+  const en = /^(.+) Hybrid ([A-Z]-[0-9]{1,3})$/.exec(name);
+  if (en && en[1] === b.en) return ['e', en[2]];
+  return null;
+}
+export function autoName(lang: 'a' | 'e', base: string, code: string): string {
+  const b = SHORT[base] ?? SHORT.fennec;
+  return lang === 'a' ? `هجين ${b.ar} ${code}` : `${b.en} Hybrid ${code}`;
+}
+
 /** Keep an untouched lab designation in step with the base animal (a name the player typed is never changed). */
 export function renameForBase(name: string, from: string, to: string): string {
   const a = SHORT[from], b = SHORT[to];

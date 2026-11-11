@@ -74,3 +74,26 @@ export function Particles({ kind = 'spores', count = 26 }: { kind?: 'spores' | '
     </div>
   );
 }
+
+/** What a tapped picture opens: a large image (or the creature's own drawing), a title, tags and plain-language lines. */
+export interface ZoomInfo { img?: string; svg?: string; kicker?: string; title: string; tags?: string[]; lines: { label?: string; text: string }[] }
+
+export function ZoomCard({ info, lang, onClose }: { info: ZoomInfo; lang: Lang; onClose: () => void }) {
+  useEffect(() => { const k = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); }; window.addEventListener('keydown', k); return () => window.removeEventListener('keydown', k); }, [onClose]);
+  return (
+    <div className="zoom" role="dialog" aria-modal="true" aria-label={info.title} onClick={onClose}>
+      <article className="zoom-card" onClick={(e) => e.stopPropagation()}>
+        <button className="zoom-x ghost-icon" onClick={onClose} aria-label={lang === 'ar' ? 'إغلاق' : 'Close'}>✕</button>
+        {info.img && <div className="zoom-img"><img src={info.img} alt={info.title} /></div>}
+        {info.svg && <div className="zoom-img zoom-svg creature-art specimen" dangerouslySetInnerHTML={{ __html: info.svg }} />}
+        <div className="zoom-text">
+          {info.kicker && <span className="kicker">{info.kicker}</span>}
+          <h3>{info.title}</h3>
+          {info.tags && info.tags.length > 0 && <p className="zoom-tags">{info.tags.map((x) => <em key={x}>{x}</em>)}</p>}
+          {info.lines.map((l, i) => <p key={i} className="zoom-line">{l.label && <b>{l.label}</b>}{l.text}</p>)}
+          <Btn onClick={onClose}>{lang === 'ar' ? 'رجوع إلى القصة' : 'Back to the story'}</Btn>
+        </div>
+      </article>
+    </div>
+  );
+}

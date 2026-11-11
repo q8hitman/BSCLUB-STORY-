@@ -13,7 +13,7 @@ const SITE = 'https://q8hitman.github.io/BSCLUB-STORY-/';
 function playthrough(seed: number, mode: Mode, history: RunMemory[] = [], opts?: PlanOpts): GameState[] {
   const r = new Rng(seed * 7 + 1);
   let s = startGame({ mode, seed, duck: r.pick(DUCKS).id, player: r.chance(0.5) ? 'مستكشف ٧' : '', creature: randomCreature(r, 'ar'), history, opts });
-  s = { ...s, pins: { sighting: r.chance(0.3) ? [3, 'bu-sahn'] : null, recentEndings: r.chance(0.5) ? ['heroic-rescue'] : [] } };
+  s = { ...s, pins: { sighting: r.chance(0.3) ? [3, 'bu-sahn'] : null, recentEndings: r.chance(0.5) ? ['guardian'] : [] } };
   const out = [s];
   while (s.stage !== 'ending') {
     s = s.stage === 'beat' ? choose(s, r.pick(currentBeat(s).choices).choice.id) : advance(s);
@@ -106,7 +106,7 @@ describe('Explorer Passport save codes', () => {
     const link = saveLink(big, SITE);
     expect(link.url.length).toBeLessThanOrEqual(MAX_LINK_CHARS);
     expect(link.aiDropped).toBe(true);
-    const res = decodeSave(saveFromHash(new URL(link.url).hash)!);
+    const res = decodeSave(saveFromHash(link.url)!);
     expect(res.ok && res.state.log).toEqual(big.log);
   });
 
@@ -122,11 +122,37 @@ describe('Explorer Passport save codes', () => {
     expect(forge([9, ...payload.slice(1)])).toMatchObject({ ok: false, reason: 'newer' });
     expect(forge([0, ...payload.slice(1)])).toMatchObject({ ok: false, reason: 'version' });
     // a choice id that no longer exists in this game version: the creature is kept, the story is NOT replaced
-    const stale = [...payload]; stale[8] = ['no-such-choice'];
+    const old = JSON.parse(decodeURIComponent(escape(atob(encodeSave(s, { legacy: true }).split('.')[0].replace(/-/g, '+').replace(/_/g, '/')))));
+    const stale = [...old]; stale[8] = ['no-such-choice'];
     const r = forge(stale);
     expect(r).toMatchObject({ ok: false, reason: 'content' });
     expect(!r.ok && r.creature?.name).toBe(s.creature.name);
+    // compact codes store positions: a position that now means another choice is caught by the content stamp
+    const moved = [...payload]; moved[6] = (moved[6][0] === '0' ? '1' : '0') + moved[6].slice(1);
+    const r2 = forge(moved);
+    expect(r2).toMatchObject({ ok: false });
+    expect(!r2.ok && ['content', 'replay'].includes(r2.reason)).toBe(true);
+    expect(!r2.ok && r2.creature?.name).toBe(s.creature.name);
     expect(saveFromHash('#c=abc')).toBeNull();
+  });
+
+  it('compact links: short enough for a QR every phone reads as a web link, and cards made before still open', () => {
+    let longest = 0; let n = 0;
+    for (const mode of ['classic', 'marine'] as Mode[]) for (let seed = 1; seed <= 30; seed++) {
+      const run = playthrough(seed * 17, mode, boothHistory(mode, 4));
+      for (const st of [run[1], run[Math.floor(run.length / 2)], run[run.length - 1]]) {
+        const { url } = saveLink(st, SITE); longest = Math.max(longest, url.length); n++;
+        expect(url.startsWith(`${SITE}?s=`)).toBe(true);
+        expect(/^https:\/\/[\w./?=-]+$/.test(url)).toBe(true);
+        const viaLink = decodeSave(saveFromHash(url)!);
+        expect(viaLink.ok && viaLink.state).toEqual(st);
+        // the older, longer format (and the old #s= link) keeps working
+        const legacy = decodeSave(saveFromHash(`${SITE}#s=${encodeSave(st, { legacy: true })}`)!);
+        expect(legacy.ok && legacy.state).toEqual(st);
+      }
+    }
+    expect(n).toBeGreaterThan(150);
+    expect(longest).toBeLessThan(230);
   });
 });
 

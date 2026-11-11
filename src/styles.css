@@ -830,3 +830,55 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
 /* booth pass (2026-11-10) */
 .mode-card:disabled { opacity: .32; filter: grayscale(.7); cursor: not-allowed; }
 .ending-actions .new-visitor { justify-self: center; grid-column: 1 / -1; }
+
+/* ═══ booth pass 2 (2026-11-11): tap-to-enlarge cards, clearer encounters, "you chose" line ═══ */
+.tappable { cursor: zoom-in; }
+.tappable:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.zoom-hint { position: absolute; inset-block-end: 6px; inset-inline-end: 6px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: rgba(8, 10, 12, .78); border: 1px solid rgba(216, 180, 106, .55); font-size: .9rem; pointer-events: none; }
+.featured-img, .cp-portrait { position: relative; }
+.zoom { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 16px; background: rgba(2, 3, 5, .86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: fade-in .25s both; overflow-y: auto; }
+.zoom-card { position: relative; width: min(100%, 760px); max-height: calc(100dvh - 32px); overflow-y: auto; display: grid; background: #0b0e11; border: 1px solid rgba(216, 180, 106, .5); border-radius: 22px; box-shadow: 0 30px 90px rgba(0, 0, 0, .7); cursor: default; }
+.zoom-x { position: absolute; top: 10px; inset-inline-end: 10px; z-index: 2; background: rgba(8, 10, 12, .8); }
+.zoom-img { background: #000; display: grid; place-items: center; border-radius: 22px 22px 0 0; overflow: hidden; }
+.zoom-img img { display: block; width: 100%; max-height: 56dvh; object-fit: contain; }
+.zoom-svg { padding: 18px 24px 8px; background: radial-gradient(70% 70% at 50% 35%, rgba(255, 236, 196, .12), #07090b 75%); }
+.zoom-svg svg { width: min(100%, 460px); height: auto; max-height: 46dvh; margin: 0 auto; overflow: hidden; }
+.zoom-text { padding: var(--s4) var(--s5) var(--s5); display: flex; flex-direction: column; gap: var(--s2); text-align: start; }
+.zoom-text h3 { margin: 0; font-size: clamp(1.6rem, 4.5vw, 2.2rem); color: var(--gold-2); line-height: 1.25; }
+.zoom-tags { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.zoom-tags em { font-style: normal; font-size: .9rem; padding: 2px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--paper-dim); }
+.zoom-line { margin: 0; font-size: 1.08rem; line-height: 1.8; color: var(--paper); }
+.zoom-line b { color: var(--gold-2); font-weight: 700; }
+.zoom-text .btn { align-self: center; margin-top: var(--s3); }
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) { .zoom-card.wide { grid-template-columns: 1fr 1fr; } }
+
+/* rare encounters and legends: big enough to see and read, and they open the large card */
+.glimpse { grid-template-columns: minmax(150px, 220px) 1fr; padding: 10px; gap: 14px; }
+.glimpse img { filter: none; }
+.glimpse p { font-size: 1.04rem; line-height: 1.7; }
+.glimpse small { font-size: .9rem; }
+.glimpse .glimpse-name { display: block; color: var(--gold-2); font-size: 1.1rem; margin-top: 4px; }
+@media (max-width: 480px) { .glimpse { grid-template-columns: 1fr; } .glimpse img { max-height: 220px; object-fit: cover; } }
+
+/* the decision this result answers */
+.chose { margin: 0 0 6px; font-size: .92rem; color: var(--paper-dim); border-inline-start: 2px solid var(--gold); padding-inline-start: 10px; line-height: 1.6; }
+.chose span { color: var(--gold-2); font-weight: 700; }
+
+/* marine briefing: how a land creature goes to sea */
+.brief-sea { width: 100%; margin: 0; text-align: start; padding: var(--s3) var(--s4); border-radius: 16px; border: 1px solid rgba(127, 210, 224, .4); background: rgba(127, 210, 224, .07); color: var(--paper); line-height: 1.75; font-size: .98rem; }
+.brief-sea b { color: var(--sea); display: block; margin-bottom: 2px; }
+.restore-capture { justify-content: center; }
+
+.mood-label { margin: 4px 0 0; font-size: .82rem; letter-spacing: 0; text-transform: none; }
+@media (max-width: 899px) { .builder-preview .mood-label { order: 2; } }
+.mood-strip .mood { padding: 6px 4px 8px; min-height: 64px; }
+.mood-strip .mood.on { background: rgba(216, 180, 106, .14); box-shadow: 0 0 0 1px var(--gold) inset; }
+.mood-strip small { font-size: .8rem; }
+@media (max-width: 520px) { .mood-strip small { font-size: .7rem; } }
+/* wide screens (iPad landscape, laptops): picture beside the text, so nothing needs scrolling */
+@media (min-width: 860px) and (min-aspect-ratio: 1/1) {
+  .zoom-card { width: min(100%, 1040px); grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: stretch; }
+  .zoom-img { border-radius: 0; min-height: 320px; }
+  .zoom-img img { max-height: calc(100dvh - 34px); height: 100%; }
+  .zoom-text { justify-content: center; }
+}

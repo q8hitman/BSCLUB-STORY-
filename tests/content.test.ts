@@ -6,7 +6,7 @@ import { INTEGRATED, PAINT_PROPS, PH, PW, paintScene } from '../src/art/painter'
 import { DUCKS, MOOD_LINES } from '../src/content/ducks';
 import { PARTS } from '../src/content/parts';
 import { BIOMES, FACTS, FACT_BY_ID, NPC_BY_ID } from '../src/content/world';
-import { ALL_BEATS } from '../src/engine/story';
+import { ALL_BEATS, openChoices } from '../src/engine/story';
 import { Rng } from '../src/engine/rng';
 import type { BiomeId, L10n } from '../src/engine/types';
 
@@ -63,7 +63,8 @@ describe('story content integrity', () => {
     }
   });
   it('every beat has at least 4 open choices, so the player always gets exactly 4', () => {
-    for (const b of ALL_BEATS) expect(b.choices.filter((c) => !c.requires).length, b.id).toBeGreaterThanOrEqual(4);
+    // open = ungated, plus land-only / water-only choices in the places they fit
+    for (const b of ALL_BEATS) for (const biome of b.biomes) expect(openChoices(b, biome).length, `${b.id} @ ${biome}`).toBeGreaterThanOrEqual(4);
   });
   it('every checked choice has a failure outcome (no silent auto-success)', () => {
     for (const b of ALL_BEATS) for (const c of b.choices) if (c.check) expect(c.fail, `${b.id}.${c.id}`).toBeTruthy();

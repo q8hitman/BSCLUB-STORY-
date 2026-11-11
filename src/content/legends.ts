@@ -40,7 +40,7 @@ export const LEGENDS: Legend[] = [
   { id: 'katib-almad', realm: 'sea', biomes: ['mudflat', 'reef'], art: 'legend-katib-almad',
     name: L('Katib Al-Mad', 'كاتب المد'), epithet: L('The Tide Clerk', 'كاتب الجَزْر'),
     lore: L('At the lowest tides, a thin pale figure walks the mudflats on long fingers, picking up shells and counting them with soft clicks, always in sevens. It is said to be keeping a ledger of everything the sea has taken back.',
-      'في أدنى الجَزْر، يمشي على السبخات كائن نحيل شاحب على أصابع طويلة، يلتقط الأصداف ويعدّها بنقرات خفيفة… سبعاً سبعاً دائماً. ويُقال إنه يدوّن سجلّاً لكل ما استردّه البحر لنفسه.'),
+      'في أدنى الجَزْر، يمشي على الشاطئ الطيني كائن نحيل شاحب على أصابع طويلة، يلتقط الأصداف ويعدّها بنقرات خفيفة… سبعاً سبعاً دائماً. ويُقال إنه يدوّن سجلّاً لكل ما استردّه البحر لنفسه.'),
     signs: L('Clicks in groups of seven; neat rows of shells left on the mud.', 'نقرات في مجموعات من سبع، وصفوف مرتّبة من الأصداف على الطين.'),
     rule: L('Leave before the seventh click, or the tide will count you too.', 'غادِر قبل النقرة السابعة… وإلا عدّك المدّ معها.'),
     glimpse: L('On the mud, someone has laid shells in perfect rows of seven. Something clicks, out of sight.', 'على الطين، رصّ أحدهم الأصداف في صفوف متقنة من سبع. وشيء ما ينقر… في مكان لا تراه العين.') },

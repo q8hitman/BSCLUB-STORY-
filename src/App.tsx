@@ -6,7 +6,7 @@ import { composeEnding } from './engine/ending';
 import { Rng, newSeed } from './engine/rng';
 import { load, newVisitor, recordRun, save, type SaveData } from './engine/storage';
 import { BEAT_BY_ID, startGame, type PlanOpts } from './engine/story';
-import { decodeSave, peekStory, saveFromHash, type DecodeResult } from './engine/save';
+import { decodeSave, peekStory, saveFromUrl, type DecodeResult } from './engine/save';
 import { startStory } from './engine/archive';
 import { pickAdventure } from './engine/memory';
 import { currentStories, loadStory } from './stories/index';
@@ -20,7 +20,7 @@ import { Particles } from './ui/common';
 import type { CreatureConfig, Ending, GameState, Lang, Mode } from './engine/types';
 import { t } from './i18n';
 import { Builder, NameCreature } from './ui/Builder';
-import { Btn, CreatureArt, Logos } from './ui/common';
+import { Btn, CaptureCreature, CreatureArt, Logos } from './ui/common';
 import { EndingScreen } from './ui/EndingScreen';
 import { PaintedScene, Play } from './ui/Play';
 import { plateUrl } from './art/plates';
@@ -37,12 +37,12 @@ function sharedFromHash(): CreatureConfig | null {
   return m ? decodeCreature(m[1]) : null;
 }
 
-/** A Passport QR link (#s=…). Read once, then removed from the address bar so a shared booth device does not keep it. */
+/** A Passport QR link (?s=…, or #s=… on older cards). Read once, then removed from the address bar so a shared booth device does not keep it. */
 async function restoreFromHash(): Promise<DecodeResult | null> {
   if (typeof location === 'undefined') return null;
-  const code = saveFromHash(location.hash);
+  const code = saveFromUrl(location.search) ?? saveFromUrl(location.hash);
   if (!code) return null;
-  try { history.replaceState(null, '', location.pathname + location.search); } catch { /* ignore */ }
+  try { const q = new URLSearchParams(location.search); q.delete('s'); const rest = q.toString(); history.replaceState(null, '', location.pathname + (rest ? `?${rest}` : '')); } catch { /* ignore */ }
   // a Story Archive save needs that exact published version: fetch its chunk first (refused if it is missing)
   const need = peekStory(code);
   if (need) await loadStory(need.id, need.v).catch(() => null);
@@ -59,6 +59,7 @@ export function runPlate(g: GameState): string | null {
 const R = {
   restoreTitle: { en: 'Explorer Passport scanned', ar: 'تمّ مسح جواز المستكشف' },
   restoreLead: { en: 'This adventure will open exactly where it was left: the same creature, the same story, the same decisions.', ar: 'ستُفتح هذه المغامرة من النقطة نفسها التي توقّفت عندها: المخلوق نفسه، والقصة نفسها، والقرارات نفسها.' },
+  restorePic: { en: 'Want to post your creature? Save its picture here.', ar: 'تريد أن تنشر مخلوقك؟ احفظ صورته من هنا.' },
   restoreGo: { en: 'Continue the adventure', ar: 'تابع المغامرة' },
   restoreKeep: { en: 'Keep it in my journal', ar: 'احفظها في دفتري' },
   restoreReplace: { en: 'This device already has an adventure in progress. Continuing will replace it here (the other adventure’s own QR still works).', ar: 'على هذا الجهاز مغامرة جارية. المتابعة ستستبدلها هنا (ويبقى رمز تلك المغامرة صالحاً).' },
@@ -227,6 +228,7 @@ export default function App() {
                 <p className="restore-meta">{restored.state.player ? `${restored.state.player} · ` : ''}{DUCKS.find((d) => d.id === restored.state.duck)?.name[lang]} · {t(restored.state.mode === 'marine' ? 'marine' : 'classic', lang)}</p>
                 <p className="restore-meta">{restored.state.stage === 'ending' ? (lang === 'ar' ? 'مغامرة مكتملة' : 'Completed adventure') : (lang === 'ar' ? `المشهد ${restored.state.index + 1} من ${restored.state.plan.beats.length}` : `Scene ${restored.state.index + 1} of ${restored.state.plan.beats.length}`)} · ◆ {restored.state.evidence.length} · ✦ {restored.state.discoveries.length}</p>
                 <p className="lead">{r('restoreLead', lang)}</p>
+                <div className="capture-row restore-capture"><p>{r('restorePic', lang)}</p><CaptureCreature creature={restored.state.creature} lang={lang} /></div>
                 {data.current && restored.state.stage !== 'ending' && <p className="notice warn">{r('restoreReplace', lang)}</p>}
                 <div className="title-actions"><Btn onClick={acceptRestore} autoFocus>{restored.state.stage === 'ending' ? r('restoreKeep', lang) : r('restoreGo', lang)}</Btn><Btn variant="ghost" onClick={() => setScreen('title')}>{r('home', lang)}</Btn></div>
               </> : <>

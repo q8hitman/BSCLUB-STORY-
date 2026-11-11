@@ -16,17 +16,33 @@ import { CLUE_KIND, clueKind, moments } from '../engine/clues';
 import { BIOMES, FACT_BY_ID } from '../content/world';
 import { aiAvailable, narrate } from '../engine/ai';
 import { Rng } from '../engine/rng';
-import { MAX_ENERGY, advance, choose, currentBeat } from '../engine/story';
+import { MAX_ENERGY, advance, choose, currentBeat, fill } from '../engine/story';
 import type { BiomeId, DuckMood, GameState, Lang, Style } from '../engine/types';
 import type { Settings } from '../engine/storage';
 import { t } from '../i18n';
-import { Btn, CreatureArt, Logos, Particles, Typewriter } from './common';
+import { Btn, CreatureArt, Logos, Particles, Typewriter, ZoomCard, type ZoomInfo } from './common';
 import { animalArt } from '../art/animalArt';
-import { ANIMAL_BY_ID } from '../content/bestiary';
+import { ANIMAL_BY_ID, type Animal } from '../content/bestiary';
 import { ROLE_LABEL, u } from './uiText';
 
-/** The animal the story is talking about, shown as an inset specimen card over the scene. Null/unknown id → nothing. */
-function FeaturedAnimal({ id, biome, seed, lang, scene }: { id: string | null | undefined; biome: BiomeId; seed: number; lang: Lang; scene?: string | null }) {
+const CATEGORY: Record<Animal['category'], [string, string]> = {
+  mammal: ['A mammal', 'من الثدييات'], bird: ['A bird', 'من الطيور'], reptile: ['A reptile', 'من الزواحف'], amphibian: ['An amphibian (lives in water and on land)', 'من البرمائيات (تعيش في الماء وعلى اليابسة)'],
+  fish: ['A fish', 'من الأسماك'], invertebrate: ['An animal without a backbone', 'حيوان بلا عمود فقري'], cryptid: ['A creature from stories', 'كائن من الحكايات'],
+};
+/** Plain-language card for a story animal: what it is, where it lives, a real fact when we have one, and whether it is real. */
+function animalZoom(animal: Animal, src: string, lang: Lang): ZoomInfo {
+  const ar = lang === 'ar'; const role = animal.roles?.[0];
+  const lines: ZoomInfo['lines'] = [
+    { label: ar ? 'ما هو؟ ' : 'What is it? ', text: CATEGORY[animal.category][ar ? 1 : 0] },
+    { label: ar ? 'أين يعيش؟ ' : 'Where it lives: ', text: animal.biomes.map((b) => BIOMES[b].name[lang]).join(ar ? '، ' : ', ') },
+  ];
+  if (animal.fact && FACT_BY_ID[animal.fact]) lines.push({ label: `${t('realScience', lang)}: `, text: FACT_BY_ID[animal.fact].text[lang] });
+  lines.push({ text: animal.kind === 'fictional' ? (ar ? 'هذا كائن خيالي من قصة اللعبة، وليس حيواناً حقيقياً.' : 'This is a fictional creature from the game’s story, not a real animal.') : (ar ? 'هذا حيوان حقيقي موجود في الطبيعة.' : 'This is a real animal that exists in nature.') });
+  return { img: src, kicker: u('inScene', lang), title: animal.name[lang], tags: [...(role && ROLE_LABEL[role] ? [ROLE_LABEL[role][lang]] : []), animal.kind === 'fictional' ? u('fictional', lang) : u('realAnimal', lang)], lines };
+}
+
+/** The animal the story is talking about, shown as an inset specimen card over the scene. Tap it for a large picture and a description. Null/unknown id → nothing. */
+function FeaturedAnimal({ id, biome, seed, lang, scene, onOpen }: { id: string | null | undefined; biome: BiomeId; seed: number; lang: Lang; scene?: string | null; onOpen?: (z: ZoomInfo) => void }) {
   const animal = id ? ANIMAL_BY_ID[id] : undefined;
   const art = useMemo(() => { try { return animalArt(id); } catch { return null; } }, [id]);
   const src = useMemo(() => {
@@ -38,8 +54,9 @@ function FeaturedAnimal({ id, biome, seed, lang, scene }: { id: string | null | 
   if (!animal || !art || !src || broken === src) return null;
   const role = animal.roles?.[0];
   return (
-    <figure className={`featured kind-${art.kind} ${src === scene ? 'same-as-scene' : ''}`} aria-label={`${u('inScene', lang)}: ${animal.name[lang]}`}>
-      <div className="featured-img"><img src={src} alt={animal.name[lang]} onError={() => setBroken(src)} /></div>
+    <figure className={`featured tappable kind-${art.kind} ${src === scene ? 'same-as-scene' : ''}`} aria-label={`${u('inScene', lang)}: ${animal.name[lang]}`} role="button" tabIndex={0}
+      onClick={() => onOpen?.(animalZoom(animal, src, lang))} onKeyDown={(e) => { if (e.key === 'Enter') onOpen?.(animalZoom(animal, src, lang)); }}>
+      <div className="featured-img"><img src={src} alt={animal.name[lang]} onError={() => setBroken(src)} /><span className="zoom-hint" aria-hidden="true">🔍</span></div>
       <figcaption>
         <span className="kicker">{u('inScene', lang)}</span>
         <b>{animal.name[lang]}</b>
@@ -84,6 +101,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const [board, setBoard] = useState(false);
   const [newFacts, setNewFacts] = useState<string[]>([]);
   const [confirmQuit, setConfirmQuit] = useState(false);
+  const [zoom, setZoom] = useState<ZoomInfo | null>(null);
   // Mission briefing before the first scene: premise, the run's goal and how to play (the marine collaboration is introduced here too).
   const [brief, setBrief] = useState(game.index === 0 && game.stage === 'beat' && game.log.length === 0);
   const recent = useRef<string[]>([]);
@@ -112,12 +130,12 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   // Keyboard: 1–4 pick a choice, Enter/Space continues.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!view || confirmQuit || brief || board || (e.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (!view || confirmQuit || brief || board || zoom || (e.target as HTMLElement)?.tagName === 'INPUT') return;
       if (game.stage === 'beat' && typed) { const n = Number(e.key); if (n >= 1 && n <= view.choices.length) onChoose(view.choices[n - 1].choice.id); }
       else if (game.stage === 'outcome' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onContinue(); }
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
-  }, [view, game.stage, typed, confirmQuit, brief, board, onChoose, onContinue]);
+  }, [view, game.stage, typed, confirmQuit, brief, board, zoom, onChoose, onContinue]);
 
   const autoPlate = useMemo(() => platesForRun(game, (i) => BEAT_BY_ID[game.plan.beats[i].template]?.kind ?? null, game.index)[game.index] ?? null, [game.seed, game.index, game.plan]); // eslint-disable-line react-hooks/exhaustive-deps
   // Story Archive scenes name their own plate, and Living World state swaps it (power restored, net removed…)
@@ -158,6 +176,10 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
   const phaseLabel = game.mode === 'marine' ? t(isDeep ? 'deep' : 'surface', lang) : null;
   const total = game.plan.beats.length;
   const cine = game.stage === 'beat' ? view.template.cinematic : undefined;
+  // the result screen repeats the decision it answers, so nobody has to remember what they tapped
+  const lastLog = game.log[game.log.length - 1];
+  const chosenTpl = isOutcome ? view.template.choices.find((c) => c.id === lastLog?.choice) : undefined;
+  const chosen = chosenTpl ? fill(chosenTpl.label, view.ctx)[lang] : null;
   const CINE: Record<string, [string, string]> = { reveal: ['A reveal', 'لحظة كشف'], discovery: ['A discovery', 'اكتشاف'], passage: ['Into the unknown', 'نحو المجهول'], phenomenon: ['A rare phenomenon', 'ظاهرة نادرة'], climax: ['The decisive moment', 'اللحظة الحاسمة'] };
 
   return (
@@ -185,8 +207,9 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         </div>
       </header>
 
-      <CreaturePanel game={game} lang={lang} />
-      <FeaturedAnimal key={featuredId ?? "none"} id={featuredId} biome={view.biome} seed={game.seed + game.index} lang={lang} scene={plate ? plateUrl(plate.id) : null} />
+      <CreaturePanel game={game} lang={lang} onOpen={setZoom} />
+      <FeaturedAnimal key={featuredId ?? "none"} id={featuredId} biome={view.biome} seed={game.seed + game.index} lang={lang} scene={plate ? plateUrl(plate.id) : null} onOpen={setZoom} />
+      {zoom && <ZoomCard info={zoom} lang={lang} onClose={() => setZoom(null)} />}
 
       {brief && (() => {
         const nm = (x: string) => x.replace(/\{name\}/g, game.creature.name);
@@ -201,6 +224,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
               <div className="brief-creature"><CreatureArt creature={game.creature} expression="curious" /></div>
               <p className="brief-who">{nm(u('briefWho', lang))}</p>
               <p className="brief-animal">{nm(u('briefAnimal', lang))}</p>
+              {game.mode === 'marine' && <p className="brief-sea"><b>{u('briefSeaQ', lang)}</b>{nm(u('briefSea', lang))}</p>}
               {goal && <div className="brief-goal"><b>{u('briefGoal', lang)}</b><span>{nm(goal[lang])}</span></div>}
               <div className="brief-how"><b>{u('briefHow', lang)}</b><ol><li>{nm(u('briefHow1', lang))}</li><li>{u('briefHow2', lang)}</li><li>{u('briefHow3', lang)}</li></ol></div>
               <Btn onClick={() => setBrief(false)} autoFocus>{u('briefStart', lang)}</Btn>
@@ -241,6 +265,7 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         <div className={`vn-box ${isOutcome ? (o!.success ? 'outcome good' : 'outcome bad') : 'narration'}`}>
           {isOutcome && <span className={`tag ${o!.success ? 'ok' : 'no'}`}>{o!.success ? t('success', lang) : t('setback', lang)}</span>}
           {aiText && <span className="tag ai">{t('aiBadge', lang)}</span>}
+          {chosen && <p className="chose"><span>{lang === 'ar' ? 'اخترتم:' : 'You chose:'}</span> {chosen}</p>}
           <Typewriter key={`${game.index}${game.stage}`} text={isOutcome ? (aiText ?? o!.text[lang]) : view.text[lang]} speed={speed} onDone={() => setTyped(true)} />
           {isOutcome && o!.partLine && <p className="part-line">{o!.partLine[lang]}</p>}
         </div>
@@ -272,22 +297,29 @@ export function Play({ game, setGame, settings, lang, onQuit, legendsSeen = [], 
         ) : (
           <>
             {rareNow && (
-              <aside className="glimpse rare-glimpse" aria-label={rareNow.name[lang]}>
+              <aside className="glimpse rare-glimpse tappable" aria-label={rareNow.name[lang]} role="button" tabIndex={0}
+                onClick={() => setZoom({ img: `${import.meta.env.BASE_URL}scenes/${rareArt(rareNow.id)}.webp`, kicker: lang === 'ar' ? 'لقاء نادر' : 'Rare encounter', title: rareNow.name[lang],
+                  tags: [lang === 'ar' ? (rareNow.kind === 'real' ? 'حيوان حقيقي' : rareNow.kind === 'myth' ? 'مستوحى من الأساطير' : 'كائن خيالي') : (rareNow.kind === 'real' ? 'Real animal' : rareNow.kind === 'myth' ? 'Myth-inspired' : 'Fantasy')],
+                  lines: [{ text: rareNow.glimpse[lang].replace(/\{name\}/g, game.creature.name) }, { label: `${t('realScience', lang)}: `, text: rareNow.echo[lang] },
+                    { text: lang === 'ar' ? 'لقاء نادر لا يظهر في كل رحلة. سُجّل في دفتر المستكشف.' : 'A rare encounter that does not appear in every run. It is now in your Explorer Journal.' }] })}>
                 <img src={`${import.meta.env.BASE_URL}scenes/${rareArt(rareNow.id)}.webp`} alt="" width={512} height={512} />
                 <div>
                   <span className={`tag fiction-tag kind-${rareNow.kind}`}>{lang === 'ar' ? (rareNow.kind === 'real' ? 'لقاء نادر · حيوان حقيقي' : rareNow.kind === 'myth' ? 'لقاء نادر · مستوحى من الأساطير' : 'لقاء نادر · كائن خيالي') : (rareNow.kind === 'real' ? 'Rare encounter · real animal' : rareNow.kind === 'myth' ? 'Rare encounter · myth-inspired' : 'Rare encounter · fantasy')}</span>
                   <p>{rareNow.glimpse[lang].replace(/\{name\}/g, game.creature.name)}</p>
-                  <small>{lang === 'ar' ? `${rareNow.name.ar}، لاحظه ${game.creature.name} بحواسّه. سيُسجَّل في الدفتر.` : `${rareNow.name.en} — ${game.creature.name}’s senses noticed it. It will go into the journal.`}</small>
+                  <b className="glimpse-name">{rareNow.name[lang]}</b>
+                  <small>{lang === 'ar' ? `لاحظه ${game.creature.name} بحواسّه. اضغط للتكبير والوصف 🔍` : `${game.creature.name}’s senses noticed it. Tap to enlarge and read more 🔍`}</small>
                 </div>
               </aside>
             )}
             {glimpse && (
-              <aside className="glimpse" aria-label={glimpse.name[lang]}>
+              <aside className="glimpse tappable" aria-label={glimpse.name[lang]} role="button" tabIndex={0}
+                onClick={() => setZoom({ img: `${import.meta.env.BASE_URL}scenes/${glimpse.art}.webp`, kicker: lang === 'ar' ? 'أسطورة (حكاية خيالية)' : 'Legend (a fictional tale)', title: glimpse.name[lang], tags: [glimpse.epithet[lang]],
+                  lines: [{ text: glimpse.glimpse[lang] }, { label: lang === 'ar' ? 'الحكاية: ' : 'The tale: ', text: glimpse.lore[lang] }, { label: lang === 'ar' ? 'علاماته: ' : 'Signs: ', text: glimpse.signs[lang] }] })}>
                 <img src={`${import.meta.env.BASE_URL}scenes/${glimpse.art}.webp`} alt="" width={672} height={384} />
                 <div>
                   <span className="tag fiction-tag">{lang === 'ar' ? 'أسطورة' : 'Legend'}</span>
                   <p>{glimpse.glimpse[lang]}</p>
-                  <small>{lang === 'ar' ? `${glimpse.name.ar}؟ أُضيفت هذه الأسطورة إلى كتاب الأساطير.` : `${glimpse.name.en}? Added to the Book of Legends.`}</small>
+                  <small>{lang === 'ar' ? `${glimpse.name.ar}؟ أُضيفت هذه الأسطورة إلى كتاب الأساطير. اضغط للتكبير 🔍` : `${glimpse.name.en}? Added to the Book of Legends.`}</small>
                 </div>
               </aside>
             )}
