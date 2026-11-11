@@ -226,6 +226,7 @@ export default function App() {
                 <Btn variant="ghost" onClick={() => setScreen('lore')}>{lang === 'ar' ? 'كتاب الأساطير' : 'Book of Legends'}</Btn>
               </div>
               <button className="new-visitor" onClick={() => setAskNew(true)}>↺ {r('newVisitor', lang)}</button>
+              <p className="title-credit">{t('credit', lang)}</p>
             </div>
           </section>
         )}

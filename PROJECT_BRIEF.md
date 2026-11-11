@@ -123,3 +123,8 @@ React + Vite + TS, PWA (works offline), no backend, localStorage only. 67 tests 
   - **Music and sound** (`src/audio.ts`): generated live with WebAudio, no files — moods for menus, land, cold places, caves/ruins, sea surface, deep sea and the ending, cross-faded; effects for buttons, results, discoveries and the ending. Sound is ON by default (`Settings.soundV` switches devices that saved the old default); starts on the first tap because browsers require it.
   - Lighter Arabic everywhere: heavy case endings removed and a list of literary words replaced (`المذياع`→`الراديو`, `يحدّق`→`ينظر`, …).
   - Still open: choice labels and result texts were only lightened, not rewritten one by one; a real phone scan of the QR is still unconfirmed by the designer.
+- 2026-11-11 (quality pass after designer review) —
+  - Creature v3 polished: soft gradient shading, outline tinted with the creature's own dark colour, bigger head and eyes with sparkle, blush, rounded tapered legs; chameleon turret simplified; pressure rings removed.
+  - **Music is now composed, not random** (`src/audio.ts`): written chords, bass and melodies (harp arpeggios, flute/celesta leads, soft strings, hall echo), A/B sections and a quiet repeat so a loop lasts 1–2 minutes. Themes: menu, land, cold, caves/ruins, sea, deep, ending. Still no audio files.
+  - Designer credit shown on the title screen itself (`.title-credit`). "Lantern eyes" part got its picture (`public/parts/glowEyes.webp`, cropped from `specimen-lanternfish`).
+  - Arabic of all choice labels, results, variants and ending texts rewritten for plain coherence (done by helper agents per file; see git log for the commit).

@@ -73,8 +73,9 @@ export function EndingScreen({ game, ending, lang, reduced, onNew, onReplay, unl
           <div className="ending-story">
             <p className="ending-over">{lang === 'ar' ? 'انتهت القصة. هذا ما حدث:' : 'The story is over. Here is what happened:'}</p>
             {ending.finale && <section className="ending-part"><h3>{lang === 'ar' ? 'كيف انتهت القصة؟' : 'How did the story end?'}</h3><p>{ending.finale[lang]}</p></section>}
+            {ending.mission && <section className="ending-part"><h3>{lang === 'ar' ? 'ماذا حقّق الفريق؟' : 'What did the team achieve?'}</h3><p>{ending.mission[lang]}</p></section>}
             <section className="ending-part"><h3>{lang === 'ar' ? 'وماذا حدث بعدها؟' : 'And what happened next?'}</h3><p className="epilogue">{ending.epilogue[lang]}</p></section>
-            <section className="ending-part"><h3>{lang === 'ar' ? 'ملخّص رحلتكم' : 'Your trip in short'}</h3><p className="summary">{ending.summary[lang]}</p></section>
+            <section className="ending-part"><h3>{lang === 'ar' ? 'ملخّص رحلتكم' : 'Your trip in short'}</h3>{ending.points?.length ? <ul className="ending-points">{ending.points.map((x, i) => <li key={i}>{x[lang]}</li>)}</ul> : <p className="summary">{ending.summary[lang]}</p>}</section>
             <ul className="highlights">{ending.highlights.map((h, i) => <li key={i} className={i < 2 ? 'stat' : 'sci'}>{h[lang]}</li>)}</ul>
           </div>
         </div>

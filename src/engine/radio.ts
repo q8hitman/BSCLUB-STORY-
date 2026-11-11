@@ -96,7 +96,7 @@ export function radio(s: GameState, kind: BeatTemplate['kind'], biome: BiomeId):
       if (h) return [{ duck: speaker, expression: 'sly', text: h.text, kind: 'hunch', hunchChoice: h.choice }];
     }
     const tense = kind === 'challenge' || kind === 'climax' || kind === 'twist';
-    if (!r.chance(tense ? 0.5 : 0.35)) return [];
+    if (!r.chance(tense ? 0.34 : 0.24)) return [];
     const cue: RadioCue = deep && r.chance(0.6) ? 'deep' : tense ? 'danger' : r.chance(0.18) ? 'theory' : 'arrive';
     const t = line(r, speaker, cue); if (!t) return [];
     return [{ duck: speaker, expression: cue === 'danger' || cue === 'deep' ? 'worried' : cue === 'theory' ? 'sly' : 'curious', text: t, kind: 'chat' }];
@@ -111,7 +111,7 @@ export function radio(s: GameState, kind: BeatTemplate['kind'], biome: BiomeId):
     if (fact) return [{ duck: speaker, expression: 'happy', text: { en: `${h.fact.en} ${fact.en}`, ar: `${h.fact.ar} ${fact.ar}` }, kind: 'fact' }];
     return [{ duck: speaker, expression: 'laughing', text: r.pick(h.praise), kind: 'praise' }];
   }
-  if (!r.chance(0.65)) return [];
+  if (!r.chance(0.42)) return [];
   const out: RadioLine[] = [];
   const last = s.log[s.log.length - 1];
   const found = s.evidence.length + s.discoveries.length > 0 && r.chance(0.3);

@@ -20,7 +20,8 @@ export function escapeXml(s: string) {
 
 // ───────────── drawing helpers ─────────────
 const W = 400, H = 320, GROUND = 272;
-const INK = '#241a16', IVORY = '#f6ecd4', PINK = '#f39ab2', GLOW = '#ffe36b', CYAN = '#74f0e4';
+let INK = '#241a16';
+const IVORY = '#f6ecd4', PINK = '#f39ab2', GLOW = '#ffe36b', CYAN = '#74f0e4';
 const n = (v: number) => (Math.round(v * 10) / 10).toString();
 const SK = (w = 4.5) => `stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 const ell = (cx: number, cy: number, rx: number, ry: number, fill: string, extra = SK()) => `<ellipse cx="${n(cx)}" cy="${n(cy)}" rx="${n(Math.max(0.1, rx))}" ry="${n(Math.max(0.1, ry))}" fill="${fill}" ${extra}/>`;
@@ -74,7 +75,12 @@ export function creatureSvg(c: CreatureConfig, opts: CreatureSvgOpts = {}): stri
   const far = mix(dark, '#000000', 0.12);
   const p0 = PLANS[base];
   const fat = c.adaptation === 'blubber' ? 1.14 : 1;
-  const pl: Plan = { ...p0, brx: p0.brx * fat, bry: p0.bry * fat };
+  // friendlier proportions: a bigger head and bigger eyes than the body plan's own
+  const pl: Plan = { ...p0, brx: p0.brx * fat, bry: p0.bry * fat, hrx: p0.hrx * 1.12, hry: p0.hry * 1.12, hy: p0.hy - p0.hry * 0.06, eyeR: p0.eyeR * 1.12 };
+  INK = mix(dark, '#1c1410', 0.7);
+  const gBody = `url(#${id}-g)`, gFar = `url(#${id}-d)`;
+  const defs = `<defs><radialGradient id="${id}-g" cx=".36" cy=".28" r=".85"><stop offset="0" stop-color="${mix(body, '#ffffff', 0.34)}"/><stop offset=".55" stop-color="${body}"/><stop offset="1" stop-color="${mix(body, dark, 0.62)}"/></radialGradient>`
+    + `<radialGradient id="${id}-d" cx=".36" cy=".28" r=".85"><stop offset="0" stop-color="${mix(far, '#ffffff', 0.18)}"/><stop offset="1" stop-color="${mix(far, '#000000', 0.2)}"/></radialGradient></defs>`;
   const { bx, by, brx, bry, hx, hy, hrx, hry } = pl;
   const hr = Math.min(hrx, hry);
   const back: string[] = [], mid: string[] = [], front: string[] = [], fx: string[] = [];
@@ -90,10 +96,10 @@ export function creatureSvg(c: CreatureConfig, opts: CreatureSvgOpts = {}): stri
   const hipY = by + bry * 0.45;
   const hips = pl.upright ? [bx - 14, bx + 18] : [bx - brx * 0.5, bx + brx * 0.45];
   if (c.limbs === 'wings') back.push(wing(bx + brx * 0.25 + 26, by - bry * 0.72 - 8, far, mix(far, '#000000', 0.15)));
-  back.push(limbs(c.limbs, hips.map((x) => x + 15), hipY, pl, far, far, true));
+  back.push(limbs(c.limbs, hips.map((x) => x + 15), hipY, pl, c.limbs === 'tentacles' ? far : gFar, far, true));
 
   // ── hump sits behind the body's top edge ──
-  if (c.adaptation === 'hump') back.push(pl.upright ? ell(bx - brx * 0.78, by - bry * 0.25, brx * 0.42, bry * 0.4, body) : ell(bx - brx * 0.12, by - bry * 0.92, brx * 0.42, bry * 0.6, body));
+  if (c.adaptation === 'hump') back.push(pl.upright ? ell(bx - brx * 0.78, by - bry * 0.25, brx * 0.42, bry * 0.4, gBody) : ell(bx - brx * 0.12, by - bry * 0.92, brx * 0.42, bry * 0.6, gBody));
   // ── spikes / fur along the back, also behind the body edge ──
   const arc = pl.upright ? [165, 255] : [205, 320];
   const onBack = (t: number, out = 0): [number, number] => { const a = ((arc[0] + (arc[1] - arc[0]) * t) * Math.PI) / 180; return [bx + Math.cos(a) * (brx + out), by + Math.sin(a) * (bry + out)]; };
@@ -101,20 +107,24 @@ export function creatureSvg(c: CreatureConfig, opts: CreatureSvgOpts = {}): stri
   if (c.adaptation === 'thickFur') for (let i = 0; i < 8; i++) { const t = i / 7; const [x, y] = onBack(t, 2); back.push(ell(x, y, 15, 13, mix(body, '#ffffff', 0.25), SK(3.5))); }
 
   // ── neck + body ──
-  mid.push(pth(`M${P(bx + brx * 0.35, by - bry * 0.75)} L${P(hx - hrx * 0.55, hy + hry * 0.45)} L${P(hx + hrx * 0.25, hy + hry * 0.8)} L${P(bx + brx * 0.9, by + bry * 0.15)} Z`, body));
-  mid.push(ell(bx, by, brx, bry, body));
+  mid.push(pth(`M${P(bx + brx * 0.35, by - bry * 0.75)} L${P(hx - hrx * 0.55, hy + hry * 0.45)} L${P(hx + hrx * 0.25, hy + hry * 0.8)} L${P(bx + brx * 0.9, by + bry * 0.15)} Z`, gBody));
+  mid.push(ell(bx, by, brx, bry, gBody));
+  mid.push(ell(bx - brx * 0.28, by - bry * 0.48, brx * 0.34, bry * 0.2, '#ffffff', 'stroke="none" opacity=".16"'));
   mid.push(ell(bx + brx * 0.12, by + bry * 0.42, brx * 0.6, bry * 0.44, belly, 'stroke="none"'));
   mid.push(basePattern(base, pl, body, dark, belly, rnd));
   mid.push(adaptation(c.adaptation, pl, body, dark, belly, rnd, fx));
 
   // ── near limbs + near wing ──
-  mid.push(limbs(c.limbs, hips, hipY, pl, body, belly, false));
+  mid.push(limbs(c.limbs, hips, hipY, pl, c.limbs === 'tentacles' ? body : gBody, belly, false));
   if (c.limbs === 'wings') mid.push(wing(bx + brx * 0.25, by - bry * 0.72, dark, mix(dark, '#000000', 0.2)));
 
   // ── head: back pieces, skull, face, front pieces ──
   const hb = headPart(c.head, pl, body, dark, belly, base);
   front.push(hb.back);
-  front.push(ell(hx, hy, hrx, hry, body));
+  front.push(ell(hx, hy, hrx, hry, gBody));
+  front.push(ell(hx - hrx * 0.3, hy - hry * 0.52, hrx * 0.36, hry * 0.2, '#ffffff', 'stroke="none" opacity=".18"'));
+  // a little blush under the eyes
+  front.push(ell(hx - hrx * 0.28, hy + hry * 0.34, hrx * 0.17, hry * 0.11, PINK, 'stroke="none" opacity=".55"'));
   front.push(snout(pl, body, dark, belly, c.ability));
   front.push(headPattern(base, pl, body, dark, belly));
   // eyes: near and far, both visible (three-quarter face) so feelings read at any size
@@ -133,11 +143,11 @@ export function creatureSvg(c: CreatureConfig, opts: CreatureSvgOpts = {}): stri
   // ── journey marks ──
   fx.push(marks(opts.marks ?? [], pl, rnd));
 
-  const shadow = opts.ground === false ? '' : `<ellipse cx="${n(bx + 20)}" cy="${GROUND + 6}" rx="${n(brx * 1.25 + 30)}" ry="11" fill="#000" opacity=".28"/>`;
+  const shadow = opts.ground === false ? '' : `<ellipse cx="${n(bx + 20)}" cy="${GROUND + 6}" rx="${n(brx * 1.15 + 26)}" ry="10" fill="#000" opacity=".22"/>`;
   let viewBox = `0 0 ${W} ${H}`;
   if (opts.crop === 'face') { const top = c.eyes === 'stalkEyes' ? hy - hry * 2.1 : hy - hry * 1.7; const fh = Math.max(hry * 3.1, hy + hry * 1.25 - top), fw = fh * 1.25; viewBox = `${n(hx + hrx * 0.2 - fw / 2)} ${n(top)} ${n(fw)} ${n(fh)}`; }
   const size = opts.width ? ` width="${opts.width}" height="${Math.round(opts.width * 0.8)}"` : '';
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}"${size} role="img" aria-label="${escapeXml(c.name)}" data-id="${id}">${shadow}<g>${back.join('')}${mid.join('')}${front.join('')}${fx.join('')}</g></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}"${size} role="img" aria-label="${escapeXml(c.name)}" data-id="${id}">${defs}${shadow}<g>${back.join('')}${mid.join('')}${front.join('')}${fx.join('')}</g></svg>`;
 }
 
 // ───────────── parts ─────────────
@@ -168,8 +178,8 @@ function wing(ax: number, ay: number, fill: string, bone: string): string {
 
 function limbs(kind: string, hips: number[], hipY: number, pl: Plan, fill: string, pad: string, isFar: boolean): string {
   const g = GROUND, w = pl.lw;
-  const leg = (x: number, top: number, bottom = g - 5, lw = w) => pth(`M${P(x - lw / 2, top)} L${P(x - lw / 2, bottom)} Q${P(x, bottom + 7)} ${P(x + lw / 2, bottom)} L${P(x + lw / 2, top)} Z`, fill);
-  const paw = (x: number) => ell(x + 5, g - 3, w * 0.72, 8, fill);
+  const leg = (x: number, top: number, bottom = g - 5, lw = w) => pth(`M${P(x - lw * 0.56, top)} Q${P(x - lw * 0.6, (top + bottom) / 2)} ${P(x - lw * 0.42, bottom)} Q${P(x, bottom + 8)} ${P(x + lw * 0.42, bottom)} Q${P(x + lw * 0.6, (top + bottom) / 2)} ${P(x + lw * 0.56, top)} Z`, fill);
+  const paw = (x: number) => ell(x + 4, g - 3, w * 0.78, 8.5, fill);
   const out: string[] = [];
   if (kind === 'tentacles') {
     hips.forEach((x, i) => { const dir = i === 0 ? -1 : 1; const d = `M${P(x, hipY)} C${P(x + dir * 4, hipY + 34)} ${P(x + dir * 30, g - 14)} ${P(x + dir * 46, g - 6)} C${P(x + dir * 60, g)} ${P(x + dir * 66, g - 20)} ${P(x + dir * 54, g - 22)}`;
@@ -261,7 +271,7 @@ function eye(kind: string, x: number, y: number, r: number, ex: Ex, body: string
   if (kind === 'chameleon') {
     // a turret: a cone of skin with a small eye at its tip, each eye pointing its own way
     const dx = isFar ? r * 0.35 : -r * 0.1, dy = isFar ? -r * 0.4 : r * 0.15;
-    out.push(ell(x, y, r * 1.15, r * 1.15, mix(body, '#ffffff', 0.12)), ell(x + dx * 0.5, y + dy * 0.5, r * 0.78, r * 0.78, body, SK(2.6)), ell(x + dx, y + dy, r * 0.42, r * 0.42, '#ffffff', SK(2.6)), ell(x + dx + gx * 0.3, y + dy, r * 0.2 * ex.pupil, r * 0.2 * ex.pupil, INK, 'stroke="none"'));
+    out.push(ell(x, y, r * 1.15, r * 1.15, mix(body, '#ffffff', 0.18)), ell(x + dx, y + dy, r * 0.5, r * 0.5, '#ffffff', SK(2.6)), ell(x + dx + gx * 0.3, y + dy, r * 0.26 * ex.pupil, r * 0.26 * ex.pupil, INK, 'stroke="none"'), ell(x + dx - r * 0.1, y + dy - r * 0.12, r * 0.08, r * 0.08, '#ffffff', 'stroke="none"'));
   } else if (kind === 'compound') {
     out.push(ell(x, y, r, ry, '#b3262b'));
     for (let i = 0; i < 7; i++) { const a = (i / 7) * Math.PI * 2; out.push(ell(x + Math.cos(a) * r * 0.5, y + Math.sin(a) * ry * 0.5, r * 0.17, r * 0.17, '#e86a5c', 'stroke="none"')); }
@@ -274,7 +284,8 @@ function eye(kind: string, x: number, y: number, r: number, ex: Ex, body: string
     out.push(ell(x, y, r, ry, white));
     out.push(ell(x + gx, y + gy, r * 0.62, r * 0.62, iris, 'stroke="none"'));
     out.push(kind === 'glowEyes' ? ell(x + gx, y + gy, r * 0.14 * ex.pupil, r * 0.5 * ex.pupil, INK, 'stroke="none"') : ell(x + gx, y + gy, r * 0.36 * ex.pupil, r * 0.36 * ex.pupil, INK, 'stroke="none"'));
-    out.push(ell(x + gx - r * 0.2, y + gy - r * 0.22, r * 0.15, r * 0.15, '#ffffff', 'stroke="none"'));
+    out.push(ell(x + gx - r * 0.22, y + gy - r * 0.24, r * 0.2, r * 0.2, '#ffffff', 'stroke="none"'));
+    out.push(ell(x + gx + r * 0.2, y + gy + r * 0.2, r * 0.09, r * 0.09, '#ffffff', 'stroke="none" opacity=".85"'));
   }
   // eyelid: a cap of skin from the top; fully closed for a happy squint
   if (kind !== 'tinyEyes' && kind !== 'chameleon') {
@@ -343,7 +354,7 @@ function ability(kind: string, pl: Plan): string {
     case 'mimicry': [[mx + 8, my - 30], [mx + 30, my - 12]].forEach(([x, y]) => out.push(ell(x, y + 16, 6.5, 5, INK, 'stroke="none"') + line(`M${P(x + 5.5, y + 16)} L${P(x + 5.5, y - 6)} q10 2 10 12`, 3.2))); break;
     case 'heatPits': for (let i = 0; i < 3; i++) out.push(line(`M${P(mx + 8 + i * 11, my - 22)} q7 8 0 15 q-7 8 0 15`, 3.2, '#ff7a55')); break;
     case 'smell': for (let i = 0; i < 2; i++) out.push(line(`M${P(mx + 6, my - 4 + i * 12)} q12 -12 22 0 q8 10 20 -2`, 3.2, '#a6e08a')); break;
-    case 'pressure': out.push(line(`M${P(bx - brx * 0.35, by - bry * 0.92)} Q${P(bx - brx * 0.5, by)} ${P(bx - brx * 0.35, by + bry * 0.9)} M${P(bx + brx * 0.3, by - bry * 0.94)} Q${P(bx + brx * 0.16, by)} ${P(bx + brx * 0.3, by + bry * 0.92)}`, 3.4, mix('#ffffff', INK, 0.55)));
+    case 'pressure':
       [[hx + hrx * 0.9, hy - hry * 1.3, 7], [hx + hrx * 1.25, hy - hry * 1.7, 4.5], [hx + hrx * 0.6, hy - hry * 1.85, 3.5]].forEach(([x, y, r]) => out.push(`<circle cx="${n(x)}" cy="${n(Math.max(8, y))}" r="${r}" fill="none" stroke="#bfe9ff" stroke-width="2.6"/>`)); break;
   }
   return out.join('');

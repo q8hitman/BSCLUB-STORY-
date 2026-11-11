@@ -205,4 +205,8 @@ export interface Ending {
   highlights: L10n[];
   /** How the story ended: the team's last decision and what it led to, in one plain passage (shown first on the ending screen). */
   finale?: L10n;
+  /** The trip summary as separate short points (the same sentences as `summary`, minus the finale), for an easy-to-read list. */
+  points?: L10n[];
+  /** Did the mission succeed? Restates the goal and gives a plain verdict from the clues collected. */
+  mission?: L10n;
 }

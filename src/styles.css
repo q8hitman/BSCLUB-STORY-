@@ -955,3 +955,10 @@ html[lang="ar"] .cine-caption span { font-family: var(--display-ar); letter-spac
 html[lang='en'] .ending-part h3 { font-family: inherit; }
 .ending-part p { margin: 0; line-height: 1.9; font-size: 1.05rem; }
 .ending-part .epilogue { font-style: normal; }
+
+/* the designer's credit, on the first screen where everyone sees it */
+.title-credit { margin: 10px 0 0; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(216, 180, 106, .45); background: rgba(8, 10, 12, .55); color: var(--gold-2); font-family: var(--body-ar); font-weight: 700; font-size: 1rem; direction: rtl; }
+.screen-title .credit { display: none; }
+
+.ending-points { margin: 0; padding-inline-start: 1.2em; display: grid; gap: 8px; line-height: 1.8; font-size: 1.03rem; }
+.ending-points li::marker { color: var(--gold); }
