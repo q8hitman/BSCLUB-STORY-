@@ -51,8 +51,8 @@ export const DUCKS: Duck[] = [
   mk('zahra', { edge: '#4a3430', gender: 'f', bg: '#30292a', name: L('Dr. Zahra', 'دكتورة زهراء'), role: L('Bioinformatics lead', 'قائدة فريق المعلوماتية الحيوية'),
     voice: 'Calm, confident bioinformatics lead in a grey hijab with a tablet. Thinks in data and probabilities, dry wit, the voice of reason.' }),
   mk('najdi', { edge: '#38272f', gender: 'm', bg: '#2f2229', name: L('Al-Najdi', 'النجدي'), role: L('Microbiology student · the club’s artist and comedian', 'طالب أحياء دقيقة · فنّان النادي وكوميديّه'),
-    about: L('The club’s artist, and the reason everyone is laughing. He studies microbiology and draws bacteria as cartoon characters. He never takes off his dinosaur suit, and he says his chakra (the hero energy from anime) never runs out. If you hear laughter in the lab, Al-Najdi is there.',
-      'فنّان النادي، وسبب ضحك الجميع. يدرس الأحياء الدقيقة، ويرسم البكتيريا كأنها شخصيات كرتونية. لا يخلع زيّ الديناصور أبداً، ويقول إن «التشاكرا» عنده (طاقة الأبطال في الأنمي) لا تنتهي. إذا سمعتم ضحكاً في المختبر، فالنجدي هناك.'),
+    about: L('The club’s artist, and the reason everyone is laughing. He studies microbiology and draws bacteria as cartoon characters. He says his chakra (the hero energy from anime) never runs out. If you hear laughter in the lab, Al-Najdi is there.',
+      'فنّان النادي، وسبب ضحك الجميع. يدرس الأحياء الدقيقة، ويرسم البكتيريا كأنها شخصيات كرتونية. ويقول إن «التشاكرا» عنده (طاقة الأبطال في الأنمي) لا تنتهي. إذا سمعتم ضحكاً في المختبر، فالنجدي هناك.'),
     voice: 'Microbiology student in a green dinosaur onesie with a backpack. The club artist and comedian: jokes first, then a real observation. Loves anime chakra talk ("my chakra is full"), sketches everything he sees, turns microbes into cartoon characters. Warm, loud, never mean.' }),
 ];
 
