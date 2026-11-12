@@ -10,7 +10,7 @@ import { BEAT_BY_ID, advance, choose, currentBeat, startGame } from '../src/engi
 
 describe('BSC characters', () => {
   it('roster is the final approved cast; Ali is gone and Camel took his slot', () => {
-    expect(DUCKS.map((d) => d.id)).toEqual(['abdullah', 'ahmed', 'camel', 'bassam', 'kiraz', 'roaa', 'zahra']);
+    expect(DUCKS.map((d) => d.id)).toEqual(['abdullah', 'ahmed', 'camel', 'bassam', 'kiraz', 'roaa', 'zahra', 'najdi']);
     expect(DUCKS.some((d) => /ali|علي/i.test(d.name.en + d.name.ar))).toBe(false);
     const camel = DUCK_BY_ID.camel;
     expect(camel.name).toEqual({ en: 'Camel', ar: 'الجمل' });

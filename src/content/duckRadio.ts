@@ -22,7 +22,7 @@ export const APPROACH: Record<string, L10n> = {
 
 /** The way of acting each companion personally leans towards (flavour only — it says nothing about the real odds). */
 export const TEMPERAMENT: Record<string, keyof typeof APPROACH> = {
-  abdullah: 'clever', ahmed: 'bold', camel: 'clever', bassam: 'careful', kiraz: 'silly', roaa: 'kind', zahra: 'careful',
+  abdullah: 'clever', ahmed: 'bold', camel: 'clever', bassam: 'careful', kiraz: 'silly', roaa: 'kind', zahra: 'careful', najdi: 'silly',
 };
 
 export const HELP: Record<string, DuckHelp> = {
@@ -39,7 +39,9 @@ export const HELP: Record<string, DuckHelp> = {
   roaa: { hunch: L('I might be wrong, but… {approach}?', 'قد أكون مخطئة، لكن… {approach}؟'),
     praise: [L('That was lovely work. Thank you.', 'عمل جميل جداً… شكراً لكم.'), L('You’re doing beautifully.', 'أنتم تُبدعون.')], fact: L('Look closer — something real:', 'اقتربوا… هذه حقيقة علمية:'), note: L('Under the microscope:', 'تحت المجهر:') },
   zahra: { hunch: L('Not enough data to be sure, but I lean towards: {approach}.', 'البيانات لا تكفي للجزم، لكنني أميل إلى: {approach}.'),
-    praise: [L('Consistent results. I like it.', 'نتائج ثابتة… تعجبني.'), L('That’s above the expected curve.', 'هذا أعلى من المنحنى المتوقَّع.')], fact: L('A data point worth keeping:', 'معلومة تستحق الحفظ:'), note: L('Bioinformatics note:', 'ملاحظة في المعلوماتية الحيوية:') },
+    praise: [L('Consistent results. I like it.', 'نتائج ثابتة… تعجبني.'), L('That’s above the expected curve.', 'هذا أعلى من المنحنى المتوقَّع.')], fact: L('A data point worth keeping:', 'معلومة تستحق الحفظ:'), note: L('Bioinformatics note:', 'ملاحظة في المعلوماتية الحيوية:') },  najdi: { hunch: L('My chakra says: {approach}. My chakra is often wrong.', 'التشاكرا عندي تقول: {approach}. والتشاكرا عندي تخطئ كثيراً.'),
+    praise: [L('A masterpiece! I am drawing this moment.', 'تحفة فنية! سأرسم هذه اللحظة.'), L('Chakra level: full!', 'مستوى التشاكرا: ممتلئ!')], fact: L('Joke aside, this one is real:', 'بعيداً عن المزاح، هذه معلومة حقيقية:'), note: L('From the sketchbook of a microbiology student:', 'من دفتر رسم طالب أحياء دقيقة:') },
+
 };
 
 /** Specialty Field Notes: each companion notices real science from their own field. They go into the Explorer
@@ -83,6 +85,11 @@ export const FIELD_NOTES: FieldNote[] = [
   N('zahra', 3, 'any', 'Biologists use statistics to tell a real pattern from luck: one observation is a story, many are data.', 'يستخدم علماء الأحياء الإحصاء للتمييز بين النمط الحقيقي والمصادفة؛ فالملاحظة الواحدة حكاية، والملاحظات الكثيرة بيانات.'),
   N('zahra', 4, 'sea', 'Satellite tags on sea turtles and sharks send back locations, letting researchers map migrations across oceans.', 'ترسل أجهزة التتبّع عبر الأقمار الصناعية مواقع السلاحف البحرية وأسماك القرش، فيرسم الباحثون خرائط هجرتها عبر المحيطات.'),
   N('zahra', 5, 'land', 'Public databases such as GenBank hold DNA sequences from hundreds of thousands of species, free for anyone to search.', 'تضمّ قواعد البيانات العامة مثل «جين بانك» تسلسلات الحمض النووي لمئات الآلاف من الأنواع، ويمكن لأي شخص البحث فيها مجاناً.'),
+  N('najdi', 1, 'any', 'Alexander Fleming, who discovered penicillin, also painted pictures using living bacteria of different colours.', 'ألكسندر فلمنغ، مكتشف البنسلين، كان يرسم لوحات ببكتيريا حيّة مختلفة الألوان.'),
+  N('najdi', 2, 'land', 'The smell of rain on dry soil comes from geosmin, a substance made by soil bacteria.', 'رائحة المطر على التراب الجاف تأتي من مادة اسمها «جيوسمين» تصنعها بكتيريا تعيش في التربة.'),
+  N('najdi', 3, 'sea', 'The bobtail squid keeps glowing bacteria in its body and uses their light to hide its shadow at night.', 'يحتفظ الحبّار القصير الذيل ببكتيريا مضيئة داخل جسمه، ويستعمل ضوءها ليخفي ظله في الليل.'),
+  N('najdi', 4, 'any', 'Your body carries about as many bacterial cells as human cells, and most of them are helpful.', 'في جسمك عدد من خلايا البكتيريا يقارب عدد خلاياك أنت، وأغلبها مفيد.'),
+  N('najdi', 5, 'any', 'Yogurt and bread are made with the help of microbes: bacteria make the yogurt and yeast makes the bread rise.', 'اللبن الرائب والخبز يُصنعان بمساعدة كائنات دقيقة: البكتيريا تصنع اللبن، والخميرة تجعل الخبز ينتفخ.'),
 ];
 export const NOTE_BY_ID: Record<string, FieldNote> = Object.fromEntries(FIELD_NOTES.map((n) => [n.id, n]));
 
@@ -163,5 +170,16 @@ export const RADIO: Record<string, Partial<Record<RadioCue, L10n[]>>> = {
     theory: [L('The pattern repeats every few hours. Could be tidal. Could be something else.', 'النمط يتكرّر كل بضع ساعات… ربما المدّ والجزر… وربما شيء آخر.')],
     comic: [L('Adding this to the group chat. For science.', 'سأنشرها في مجموعة النادي… من أجل العلم.')],
     disagree: [L('The numbers say otherwise.', 'الأرقام تقول غير ذلك.')],
+  },
+  najdi: {
+    arrive: [L('What a view. Nobody move, I am sketching it.', 'ما أجمل هذا المنظر. لا يتحرّك أحد، سأرسمه.'), L('New place, full chakra. Let’s go!', 'مكان جديد، والتشاكرا ممتلئة. هيا بنا!')],
+    danger: [L('I am not scared. This suit just shakes on its own.', 'أنا لست خائفاً. هذا الزيّ يرتجف وحده.'), L('Careful. I only have one dinosaur suit.', 'انتبهوا. عندي زيّ ديناصور واحد فقط.')],
+    deep: [L('So dark down here. Luckily my jokes glow.', 'الظلام شديد هنا. من حسن الحظ أن نكاتي تضيء.')],
+    success: [L('And the crowd goes wild!', 'والجمهور يصفّق بحرارة!'), L('That deserves a drawing on the club wall.', 'هذه تستحق رسمة على جدار النادي.')],
+    fail: [L('We will call that a rehearsal.', 'سنسمّي هذه تجربة أداء.'), L('My chakra dropped a little. Give me a second.', 'نزلت التشاكرا قليلاً. أعطوني لحظة.')],
+    discovery: [L('Hold still! This goes straight into my sketchbook.', 'لا تتحرّكوا! هذا يدخل دفتر الرسم فوراً.')],
+    theory: [L('I bet tiny microbes are behind this. They are behind everything.', 'أراهن أن كائنات دقيقة صغيرة وراء هذا. هي وراء كل شيء.')],
+    comic: [L('I am the comedian here, and even I could not write that.', 'أنا كوميديّ النادي، وحتى أنا لا أستطيع أن أكتب مثل هذا.')],
+    disagree: [L('As an artist, I see it differently.', 'بصفتي فنّاناً، أرى الأمر بشكل مختلف.')],
   },
 };

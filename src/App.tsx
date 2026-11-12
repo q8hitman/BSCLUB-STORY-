@@ -271,6 +271,7 @@ export default function App() {
                   <span className="kicker">{u('companion', lang)}</span>
                   <h3>{selectedDuck.name[lang]}</h3>
                   <p className="role">{selectedDuck.role[lang]}</p>
+                  {selectedDuck.about && <p className="duck-about">{selectedDuck.about[lang]}</p>}
                   <div className="duck-moods" aria-hidden="true">
                     {(['happy', 'curious', 'shocked', 'sly'] as const).map((e) => <img key={e} src={`${BASE}ducks/${selectedDuck.expressions[e]}`} alt="" loading="lazy" />)}
                   </div>

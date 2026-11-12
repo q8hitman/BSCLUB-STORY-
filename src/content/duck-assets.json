@@ -147,5 +147,28 @@
    "back": "ducks/zahra/pose-back.webp",
    "sitting": "ducks/zahra/pose-sitting.webp"
   }
+ },
+ "najdi": {
+  "sheet": "art-source/ducks-final/najdi.png",
+  "size": [
+   1199,
+   1312
+  ],
+  "expressions": {
+   "happy": "ducks/najdi/expr-happy.webp",
+   "laughing": "ducks/najdi/expr-laughing.webp",
+   "sly": "ducks/najdi/expr-sly.webp",
+   "shocked": "ducks/najdi/expr-shocked.webp",
+   "curious": "ducks/najdi/expr-curious.webp",
+   "worried": "ducks/najdi/expr-worried.webp"
+  },
+  "poses": {
+   "front": "ducks/najdi/pose-front.webp",
+   "disc": "ducks/najdi/pose-disc.webp",
+   "binoculars": "ducks/najdi/pose-binoculars.webp",
+   "dig": "ducks/najdi/pose-dig.webp",
+   "reading": "ducks/najdi/pose-reading.webp",
+   "skull": "ducks/najdi/pose-skull.webp"
+  }
  }
 }
