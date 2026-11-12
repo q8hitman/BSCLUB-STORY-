@@ -145,3 +145,4 @@ Designer: four archive stories are too few; the story must actually change betwe
 
 ### 2026-11-12 (new member)
 - New club member companion: Al-Najdi / النجدي (designer's sheet, `art-source/ducks-final/najdi.png`, sliced by `scripts/art/slice-najdi.py` because his sheet has a different layout). Microbiology student, the club's artist and comedian, loves anime "chakra" talk. Added last in `DUCKS` so save-code duck indexes stay valid. He has HELP, 5 field notes, radio lines for every cue, and an `about` text (new optional `Duck.about`, shown under the role on the companion screen; the other members have none yet).
+- Every club member now has an `about` description on the companion screen (plain MSA, about personality and specialty only; no remarks on clothing or looks — designer found a line about Al-Najdi's dinosaur suit embarrassing, it was removed).
