@@ -1,16 +1,16 @@
-# Story Factory — last run 2026-11-20 17:36 UTC
+# Story Factory — last run 2026-11-21 16:38 UTC
 
 | Attempt | Story | Editor scores | Result |
 |---|---|---|---|
-| classic · strange | — | — | failed: Gemini HTTP 503 |
-| classic · strange | frozen-echoes | science 4, arabic 5, age 10, coherence 5, variety 5 | editor: Science tags ('forest-myco', 'ruins-dna', 'snow-frog') are treated as decorative text mentions rather than explainable biological mechanisms (e.g., how the snow frog survives freezing via glucose/antifreeze proteins or how mycelial networks transfer chemical/electrical signals).; Arabic tran |
-| classic · comedy | — | — | failed: Gemini HTTP 503 |
+| classic · mystery | frozen-echo | science 3, arabic 4, age 9, coherence 4, variety 4 | editor: Declared creatures (pika, snowy-owl, mountain-wolf) never appear in the text.; Declared science topics (snow-frog freeze tolerance mechanisms, mountain-o2 adaptations) are completely missing from the narrative body and only used as generic ending tags. |
+| classic · comedy | desert-snow-socks | — | validator: d: colloquial word in Arabic (use Modern Standard Arabic) |
+| classic · mystery | frozen-specimen | — | validator: climax.guide-researchers: colloquial word in Arabic (use Modern Standard Arabic) |
 
-_Gemini requests this step: 7, tokens ≈ 61699_
+_Gemini requests this step: 11, tokens ≈ 169209_
 
-| marine · suspense | — | — | failed: Gemini HTTP 503 |
-| marine · adventure | trench-pulse | science 6, arabic 5, age 10, coherence 5, variety 6 | failed: Gemini HTTP 503 |
-| marine · mystery | twilight-echo | science 8, arabic 5, age 9, coherence 8, variety 7 | editor: hook text: Incorrect grammatical gender agreement in Arabic ('تهتز طنين عميق' should be 'يهتز طنين عميق').; node d choice d-5: Unearthing soft silt in deep sediment requires clearer benthic context. |
+| marine · suspense | trench-pulse | science 5, arabic 6, age 10, coherence 6, variety 6 | editor: Science issue: Hydrothermal vents emit superheated water, not steam bubbles (water cannot become gas steam under Mariana Trench pressures). The physical mechanism of 'steam thump' in deep ocean is scientifically incorrect.; Arabic issue: Grammar mismatch in node 'middle' ('تظهر مصدر' should  |
+| marine · investigation | vent-mysteries | — | validator: middle: condition flag w is never set; middle: condition flag : is never set |
+| marine · strange | seagrass-whispers | science 6, arabic 5, age 7, coherence 5, variety 6 | editor: e3 title contains a typo/corrupted text ('پل'); Ending e3 summary and epilogue are generic ('ancient secrets', 'interconnected ecosystem') rather than specifically resolving choices made. |
 
-_Gemini requests this step: 9, tokens ≈ 80864_
+_Gemini requests this step: 11, tokens ≈ 152323_
 
